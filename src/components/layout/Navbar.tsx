@@ -7,20 +7,6 @@ export function Navbar() {
   const { side } = useSide();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Base items available in both
-  const baseItems = [
-    { label: 'About', href: '#about' },
-    // In formal, Skills is a section. In curiosity, passions are the main thing, but maybe we keep generic names?
-    // User said: "los aspectos del roadmap deben quedarse en la parte de curiosity"
-    // "quita el my roadmap de la parte de formal"
-    { label: 'Skills', href: '#skills' }, // Formal has skills. Curiosity doesn't explicitly have "skills" section in same way, but let's keep it or conditionalize.
-    // Curiosity has "Curiosity" section (passions).
-    // Let's check CuriosityView.tsx. It has AboutCuriosity, Passions Grid (#projects?), Roadmap.
-    // FormalView has AboutFormal, Experience, Roadmap (to be removed), Education, Skills, Projects, Organizations, Contact.
-    
-    // Let's adapt links based on side.
-  ];
-
   const formalItems = [
     { label: 'About', href: '#about' },
     { label: 'Experience', href: '#experience' },
