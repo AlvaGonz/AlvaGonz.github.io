@@ -25,7 +25,7 @@ export function CuriosityView(): JSX.Element {
               width: '0',
               videoId: 'KCAXDAvmCWs', // BMW M3 GTR Straight Cut Gears Sound
               playerVars: {
-                'autoplay': 0,
+                'autoplay': 1,
                 'controls': 0,
                 'start': 0, // Start from beginning
                 'end': 15, // Play for 15 seconds
