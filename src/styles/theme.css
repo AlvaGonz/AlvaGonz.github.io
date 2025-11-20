@@ -1,7 +1,7 @@
 /* Axiforma Font Face Declarations */
 @font-face {
   font-family: 'Axiforma';
-  src: url('/fonts/axiforma/Axiforma-Regular.woff2') format('woff2');
+  src: url('/fonts/axiforma/Axiforma-Regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -9,7 +9,7 @@
 
 @font-face {
   font-family: 'Axiforma';
-  src: url('/fonts/axiforma/Axiforma-Medium.woff2') format('woff2');
+  src: url('/fonts/axiforma/Axiforma-Medium.otf') format('opentype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -17,7 +17,7 @@
 
 @font-face {
   font-family: 'Axiforma';
-  src: url('/fonts/axiforma/Axiforma-SemiBold.woff2') format('woff2');
+  src: url('/fonts/axiforma/Axiforma-SemiBold.otf') format('opentype');
   font-weight: 600;
   font-style: normal;
   font-display: swap;

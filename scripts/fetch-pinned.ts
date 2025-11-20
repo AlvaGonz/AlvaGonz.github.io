@@ -87,6 +87,11 @@ async function fetchPinnedReposGraphQL(): Promise<Project[]> {
 
     const nodes = data.data?.user?.pinnedItems?.nodes || [];
     
+    if (nodes.length === 0) {
+      console.log('No pinned items found, falling back to latest repositories via REST...');
+      return fetchPinnedReposREST();
+    }
+    
     return nodes.map((repo) => ({
       name: repo.name,
       description: repo.description || '',

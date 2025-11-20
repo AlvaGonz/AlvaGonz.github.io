@@ -70,15 +70,17 @@ pnpm test:e2e:ui
 ## Fonts
 
 Place Axiforma font files in `public/fonts/axiforma/`:
-- `Axiforma-Regular.woff2`
-- `Axiforma-Medium.woff2`
-- `Axiforma-SemiBold.woff2`
+- `Axiforma-Regular.otf`
+- `Axiforma-Medium.otf`
+- `Axiforma-SemiBold.otf`
 
 ## GitHub Token (Optional)
 
 To fetch pinned repositories via GraphQL API:
 
 1. Create a GitHub Personal Access Token
+   - **Classic Token**: Select `public_repo` scope.
+   - **Fine-grained Token**: "Read-only" access to "Contents" and "Metadata" for the specific repository.
 2. Set `GITHUB_TOKEN` environment variable
 3. Run `pnpm fetch-pinned` before build
 

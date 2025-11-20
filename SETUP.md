@@ -11,11 +11,11 @@ pnpm install
 ### 2. Add Axiforma Fonts
 
 Place the following font files in `public/fonts/axiforma/`:
-- `Axiforma-Regular.woff2`
-- `Axiforma-Medium.woff2`
-- `Axiforma-SemiBold.woff2`
+- `Axiforma-Regular.otf`
+- `Axiforma-Medium.otf`
+- `Axiforma-SemiBold.otf`
 
-**Note**: If you don't have these fonts yet, the site will fall back to system fonts. You can obtain Axiforma from your font provider or purchase it separately.
+**Note**: If you don't have these fonts yet, the site will fall back to system fonts.
 
 ### 3. (Optional) Set GitHub Token
 
@@ -23,7 +23,8 @@ To fetch your pinned repositories automatically:
 
 1. Create a GitHub Personal Access Token:
    - Go to GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)
-   - Generate a new token with `public_repo` scope
+   - **Required Scope**: `public_repo` (for reading your public pinned repos)
+   - Or use a Fine-grained token with "Read-only" access to public repositories.
 
 2. Set the token as an environment variable:
    ```bash
