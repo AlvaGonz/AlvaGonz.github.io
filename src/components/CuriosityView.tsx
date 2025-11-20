@@ -3,6 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import clsx from 'clsx';
 import { PSPBackground } from './PSPBackground';
 import { PassionModal, PassionContent } from './PassionModal';
+import { Navbar } from './layout/Navbar';
+import { AboutCuriosity } from './sections/AboutCuriosity';
+import { Roadmap } from './sections/Roadmap';
 
 export function CuriosityView(): JSX.Element {
   const [clicks, setClicks] = useState(0);
@@ -19,14 +22,14 @@ export function CuriosityView(): JSX.Element {
             bmwSoundRef.current = new window.YT.Player('bmw-sound-player', {
               height: '0',
               width: '0',
-        videoId: 'KCAXDAvmCWs', // BMW M3 GTR Straight Cut Gears Sound
-        playerVars: {
-          'autoplay': 0,
-          'controls': 0,
-          'start': 0, // Start from beginning
-          'end': 15, // Play for 15 seconds
-          'playsinline': 1
-        },
+              videoId: 'KCAXDAvmCWs', // BMW M3 GTR Straight Cut Gears Sound
+              playerVars: {
+                'autoplay': 0,
+                'controls': 0,
+                'start': 0, // Start from beginning
+                'end': 15, // Play for 15 seconds
+                'playsinline': 1
+              },
               events: {
                 'onReady': (e: any) => e.target.setVolume(100)
               }
@@ -103,24 +106,27 @@ export function CuriosityView(): JSX.Element {
   ];
 
   const handleCardClick = (passion: PassionContent) => {
-    // Tech Tinkering Easter Egg (BSOD)
+    setSelectedPassion(passion);
+
+    // Tech Tinkering Easter Egg
     if (passion.id === 'pc') {
       const newClicks = clicks + 1;
       setClicks(newClicks);
       if (newClicks >= 5) {
         triggerBSOD();
         setClicks(0);
-        return; // Don't open modal if BSOD triggers
       }
     }
 
     // BMW Sound Easter Egg
     if (passion.id === 'bmw') {
-      // Try to play sound regardless of player state logic complexity
       if (bmwSoundRef.current && typeof bmwSoundRef.current.playVideo === 'function') {
         try {
           bmwSoundRef.current.seekTo(0);
-          bmwSoundRef.current.playVideo();
+          // Slight delay to ensure modal interaction doesn't block audio context (though click usually enough)
+          setTimeout(() => {
+             bmwSoundRef.current.playVideo();
+          }, 100);
         } catch (e) {
           console.error("Error playing BMW sound", e);
         }
@@ -128,9 +134,6 @@ export function CuriosityView(): JSX.Element {
          console.warn('BMW Sound Player not ready yet');
       }
     }
-
-    // Open Modal
-    setSelectedPassion(passion);
   };
 
   const triggerBSOD = () => {
@@ -140,6 +143,7 @@ export function CuriosityView(): JSX.Element {
 
   return (
     <div className="min-h-screen p-8 md:p-16 relative">
+      <Navbar />
       <PSPBackground />
       <div id="bmw-sound-player" className="hidden" />
       
@@ -165,65 +169,74 @@ export function CuriosityView(): JSX.Element {
         )}
       </AnimatePresence>
 
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent mb-4">
-            Curiosity
-          </h2>
-          <p className="text-xl text-secondary-pistachio">
-            A glimpse into what drives me beyond code.
-          </p>
-        </motion.div>
+      <div className="max-w-7xl mx-auto space-y-24 pt-16">
+        {/* About Section */}
+        <AboutCuriosity />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {passions.map((passion, index) => (
-            <motion.div
-              key={passion.id}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-              whileHover={{ scale: 1.05, rotate: 1 }}
-              onClick={() => handleCardClick(passion)}
-              className={clsx(
-                "relative overflow-hidden rounded-2xl h-80 shadow-xl group cursor-pointer select-none",
-                (passion.isInteractive || passion.isSound) && "active:scale-95"
-              )}
-            >
-              {/* Background Image */}
-              <div className="absolute inset-0 bg-gray-800">
-                 <img 
-                  src={passion.image} 
-                  alt={passion.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  onError={(e) => {
-                    // Fallback if image load fails
-                    e.currentTarget.src = "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=800&auto=format&fit=crop";
-                  }}
-                />
-                <div className={`absolute inset-0 bg-gradient-to-t ${passion.color} opacity-90 group-hover:opacity-70 transition-opacity duration-500`} />
-              </div>
-              
-              <div className="relative z-10 p-8 h-full flex flex-col justify-end">
-                <div className="text-5xl mb-4 transform group-hover:-translate-y-2 transition-transform duration-300">{passion.icon}</div>
-                <h3 className="text-2xl font-bold text-white mb-2 transform group-hover:-translate-y-1 transition-transform duration-300">
-                  {passion.title}
-                </h3>
-                <p className="text-white/90 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-                  {passion.shortDesc}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-        
-        <p className="text-center text-secondary-stone mt-12 text-sm opacity-50">
-          Psst... try clicking the hammer a few times or revving the engine.
-        </p>
+        {/* Passions Grid */}
+        <section id="projects">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent mb-4">
+              Curiosity
+            </h2>
+            <p className="text-xl text-secondary-pistachio">
+              A glimpse into what drives me beyond code.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {passions.map((passion, index) => (
+              <motion.div
+                key={passion.id}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+                whileHover={{ scale: 1.05, rotate: 1 }}
+                onClick={() => handleCardClick(passion)}
+                className={clsx(
+                  "relative overflow-hidden rounded-2xl h-80 shadow-xl group cursor-pointer select-none",
+                  (passion.isInteractive || passion.isSound) && "active:scale-95"
+                )}
+              >
+                {/* Background Image */}
+                <div className="absolute inset-0 bg-gray-800">
+                   <img 
+                    src={passion.image} 
+                    alt={passion.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    onError={(e) => {
+                      // Fallback if image load fails
+                      e.currentTarget.src = "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=800&auto=format&fit=crop";
+                    }}
+                  />
+                  <div className={`absolute inset-0 bg-gradient-to-t ${passion.color} opacity-90 group-hover:opacity-70 transition-opacity duration-500`} />
+                </div>
+                
+                <div className="relative z-10 p-8 h-full flex flex-col justify-end">
+                  <div className="text-5xl mb-4 transform group-hover:-translate-y-2 transition-transform duration-300">{passion.icon}</div>
+                  <h3 className="text-2xl font-bold text-white mb-2 transform group-hover:-translate-y-1 transition-transform duration-300">
+                    {passion.title}
+                  </h3>
+                  <p className="text-white/90 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                    {passion.shortDesc}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+          
+          <p className="text-center text-secondary-stone mt-12 text-sm opacity-50">
+            Psst... try clicking the hammer a few times or revving the engine.
+          </p>
+        </section>
+
+        {/* Roadmap Section */}
+        <Roadmap variant="curiosity" />
       </div>
 
       <PassionModal 
