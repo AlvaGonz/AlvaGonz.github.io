@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { ScrollOrchestrator } from './components/ScrollOrchestrator';
-import { HeroLegacy } from './components/HeroLegacy';
 import { SplitLayout } from './components/SplitLayout';
 import { CreativeView } from './components/CreativeView';
 import { FormalView } from './components/FormalView';
@@ -18,7 +17,6 @@ function App(): JSX.Element {
   return (
     <div className="min-h-screen">
       <ScrollOrchestrator />
-      <HeroLegacy />
       <main id="main-content">
         <SplitLayout
           creative={<CreativeView />}

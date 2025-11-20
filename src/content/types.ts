@@ -24,5 +24,5 @@ export interface Profile {
 export interface Skill {
   name: string;
   category: 'language' | 'framework' | 'tool' | 'database';
+  iconId?: string; // ID for skillicons.dev
 }
-

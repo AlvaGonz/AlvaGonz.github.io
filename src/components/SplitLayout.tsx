@@ -50,8 +50,8 @@ export function SplitLayout({ creative, formal }: SplitLayoutProps): JSX.Element
   }, [activeSide]);
 
   return (
-    <div className="pt-48 md:pt-56 min-h-screen" onKeyDown={handleKeyDown}>
-      <div className="fixed top-20 right-4 z-50">
+    <div className="pt-24 md:pt-32 min-h-screen" onKeyDown={handleKeyDown}>
+      <div className="fixed top-4 right-4 z-50">
         <button
           onClick={toggleSide}
           className={clsx(

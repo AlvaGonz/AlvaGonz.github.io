@@ -30,12 +30,20 @@ export function SkillPills({ skills }: SkillPillsProps): JSX.Element {
           <h3 className="text-xl font-semibold text-primary-mountain-meadow mb-3 capitalize">
             {category}
           </h3>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-3">
             {groupedSkills[category].map((skill) => (
               <span
                 key={skill.name}
-                className={`px-4 py-2 rounded-full text-sm font-medium ${categoryColors[category]} transition-transform hover:scale-110`}
+                className={`pl-2 pr-4 py-1.5 rounded-full text-sm font-medium ${categoryColors[category]} transition-transform hover:scale-105 flex items-center gap-2 border border-white/10 shadow-sm`}
               >
+                {skill.iconId && (
+                  <img 
+                    src={`https://skillicons.dev/icons?i=${skill.iconId}`} 
+                    alt="" 
+                    className="w-6 h-6 rounded-sm"
+                    loading="lazy"
+                  />
+                )}
                 {skill.name}
               </span>
             ))}
@@ -45,4 +53,3 @@ export function SkillPills({ skills }: SkillPillsProps): JSX.Element {
     </div>
   );
 }
-
