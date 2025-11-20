@@ -8,9 +8,7 @@ import { CertificationsSection } from './CertificationsSection';
 import { OrganizationsSection } from './OrganizationsSection';
 import { Contact } from './Contact';
 import projectsData from '../data/generated/pinned.json';
-import { Navbar } from './layout/Navbar';
 import { AboutFormal } from './sections/AboutFormal';
-import { Roadmap } from './sections/Roadmap';
 import { useGitHubStats } from '@/hooks/useGitHubStats';
 
 export function FormalView(): JSX.Element {
@@ -19,10 +17,6 @@ export function FormalView(): JSX.Element {
   // Merge local project data with live GitHub data where possible
   const displayProjects = githubData?.repos.length 
     ? githubData.repos.slice(0, 6).map(repo => {
-        // Find matching local project to preserve manual descriptions/colors if we wanted, 
-        // but for "Formal" view, live data is usually better.
-        // However, our local data has specific descriptions we might like.
-        // Let's stick to the fetched data for freshness, but maybe map colors if we had a map.
         return {
           name: repo.name,
           description: repo.description || '',
@@ -37,8 +31,7 @@ export function FormalView(): JSX.Element {
 
   return (
     <div className="min-h-screen p-8 md:p-16 bg-primary-rich-black">
-      <Navbar />
-      <div className="max-w-5xl mx-auto space-y-24 pt-16">
+      <div className="max-w-5xl mx-auto space-y-24 pt-8">
         {/* Profile / Hero Section */}
         <section className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-8">
           <img
@@ -82,9 +75,6 @@ export function FormalView(): JSX.Element {
           <ExperienceTimeline />
         </section>
 
-        {/* Roadmap Section */}
-        <Roadmap variant="formal" />
-
         {/* Education Section */}
         <section id="education">
           <h2 className="text-3xl md:text-4xl font-bold mb-8 text-primary-anti-flash-white border-b-2 border-primary-mountain-meadow pb-2">
@@ -118,6 +108,21 @@ export function FormalView(): JSX.Element {
             {displayProjects.map((project, index) => (
               <ProjectCard key={index} project={project} />
             ))}
+          </div>
+        </section>
+
+        {/* Top Languages Section */}
+        <section id="languages">
+           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary-anti-flash-white border-b-2 border-primary-mountain-meadow pb-2">
+            Top Languages
+          </h2>
+          <div className="bg-primary-rich-black/40 rounded-2xl p-6 border border-white/5 backdrop-blur-sm flex justify-center md:justify-start">
+            <img 
+              src="https://github-readme-stats.vercel.app/api/top-langs/?username=AlvaGonz&layout=compact&langs_count=7&theme=dark"
+              alt="Top Languages"
+              className="max-w-full h-auto rounded-lg shadow-lg"
+              loading="lazy"
+            />
           </div>
         </section>
 

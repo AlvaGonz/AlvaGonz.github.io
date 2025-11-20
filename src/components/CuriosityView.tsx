@@ -1,9 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import clsx from 'clsx';
-import { PSPBackground } from './PSPBackground';
+import { PS2Background } from './PS2Background';
 import { PassionModal, PassionContent } from './PassionModal';
-import { Navbar } from './layout/Navbar';
 import { AboutCuriosity } from './sections/AboutCuriosity';
 import { Roadmap } from './sections/Roadmap';
 
@@ -15,6 +14,8 @@ export function CuriosityView(): JSX.Element {
 
   // Load BMW Sound (separate player)
   useEffect(() => {
+    let interval: NodeJS.Timeout;
+
     const initBmwPlayer = () => {
       // Ensure window.YT is available
       if (window.YT && window.YT.Player) {
@@ -28,14 +29,25 @@ export function CuriosityView(): JSX.Element {
                 'controls': 0,
                 'start': 0, // Start from beginning
                 'end': 15, // Play for 15 seconds
-                'playsinline': 1
+                'playsinline': 1,
+                'enablejsapi': 1,
+                'origin': window.location.origin // Fix for origin mismatch
               },
               events: {
-                'onReady': (e: any) => e.target.setVolume(100)
+                'onReady': (e: any) => {
+                  try {
+                    e.target.setVolume(100);
+                  } catch (err) {
+                    console.warn("BMW Player setVolume failed", err);
+                  }
+                },
+                'onError': (e: any) => {
+                  console.warn("BMW Player error:", e.data);
+                }
               }
             });
          } catch (e) {
-           console.error("BMW Player init failed", e);
+           console.warn("BMW Player init failed", e);
          }
       }
     };
@@ -45,14 +57,17 @@ export function CuriosityView(): JSX.Element {
       initBmwPlayer();
     } else {
       // Poll or wait for event (BackgroundMusic handles the script load)
-      const interval = setInterval(() => {
+      interval = setInterval(() => {
         if (window.YT && window.YT.Player) {
           initBmwPlayer();
-          clearInterval(interval);
+          if (interval) clearInterval(interval);
         }
       }, 500);
-      return () => clearInterval(interval);
     }
+
+    return () => {
+      if (interval) clearInterval(interval);
+    };
   }, []);
 
   const passions: PassionContent[] = [
@@ -125,7 +140,11 @@ export function CuriosityView(): JSX.Element {
           bmwSoundRef.current.seekTo(0);
           // Slight delay to ensure modal interaction doesn't block audio context (though click usually enough)
           setTimeout(() => {
-             bmwSoundRef.current.playVideo();
+             try {
+               bmwSoundRef.current.playVideo();
+             } catch (e) {
+               console.warn("Play video failed", e);
+             }
           }, 100);
         } catch (e) {
           console.error("Error playing BMW sound", e);
@@ -143,8 +162,7 @@ export function CuriosityView(): JSX.Element {
 
   return (
     <div className="min-h-screen p-8 md:p-16 relative">
-      <Navbar />
-      <PSPBackground />
+      <PS2Background />
       <div id="bmw-sound-player" className="hidden" />
       
       {/* BSOD Overlay */}
@@ -169,7 +187,7 @@ export function CuriosityView(): JSX.Element {
         )}
       </AnimatePresence>
 
-      <div className="max-w-7xl mx-auto space-y-24 pt-16">
+      <div className="max-w-7xl mx-auto space-y-24 pt-8">
         {/* About Section */}
         <AboutCuriosity />
 

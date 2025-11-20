@@ -1,7 +1,49 @@
+import { useState } from 'react';
 import { SideToggle } from '@/components/ui/SideToggle';
-import { NavModal } from './NavModal';
+import { useSide } from '@/hooks/useSide';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export function Navbar() {
+  const { side } = useSide();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Base items available in both
+  const baseItems = [
+    { label: 'About', href: '#about' },
+    // In formal, Skills is a section. In curiosity, passions are the main thing, but maybe we keep generic names?
+    // User said: "los aspectos del roadmap deben quedarse en la parte de curiosity"
+    // "quita el my roadmap de la parte de formal"
+    { label: 'Skills', href: '#skills' }, // Formal has skills. Curiosity doesn't explicitly have "skills" section in same way, but let's keep it or conditionalize.
+    // Curiosity has "Curiosity" section (passions).
+    // Let's check CuriosityView.tsx. It has AboutCuriosity, Passions Grid (#projects?), Roadmap.
+    // FormalView has AboutFormal, Experience, Roadmap (to be removed), Education, Skills, Projects, Organizations, Contact.
+    
+    // Let's adapt links based on side.
+  ];
+
+  const formalItems = [
+    { label: 'About', href: '#about' },
+    { label: 'Experience', href: '#experience' },
+    { label: 'Education', href: '#education' },
+    { label: 'Skills', href: '#skills' },
+    { label: 'Projects', href: '#projects' },
+    { label: 'Contact', href: '#contact' },
+  ];
+
+  const curiosityItems = [
+    { label: 'About', href: '#about' },
+    { label: 'Passions', href: '#projects' }, // Curiosity passions section has id="projects" in code I read earlier
+    { label: 'Roadmap', href: '#roadmap' },
+    // Curiosity doesn't seem to have contact section in the code I read?
+    // Let's check CuriosityView.tsx again. It ends with Roadmap.
+    // But Navbar usually stays same.
+  ];
+
+  // The user said: "hacer que toda la navegacion este disponible en el navbar"
+  // And "el navbar se debe adaptar segun en cual apartado este"
+  
+  const navItems = side === 'curiosity' ? curiosityItems : formalItems;
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-40 bg-primary-rich-black/80 backdrop-blur-md border-b border-white/5 transition-all duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -9,22 +51,21 @@ export function Navbar() {
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center gap-3">
             <a href="/" className="flex items-center gap-2 group">
-              <img src="/logo.svg" alt="AAG Logo" className="h-8 w-8 transition-transform group-hover:scale-110" />
-              <span className="font-bold text-lg text-primary-anti-flash-white font-axiforma tracking-tight group-hover:text-primary-mountain-meadow transition-colors">
-                AAG
-              </span>
+              <div className="bg-white rounded-full p-1.5 flex items-center justify-center transition-transform group-hover:scale-110 shadow-lg shadow-primary-mountain-meadow/20">
+                <img src="/logo.svg" alt="AAG Logo" className="h-6 w-6" />
+              </div>
             </a>
           </div>
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-8">
-            {['About', 'Skills', 'Projects', 'Roadmap', 'Contact'].map((item) => (
+            {navItems.map((item) => (
               <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
+                key={item.label}
+                href={item.href}
                 className="text-sm font-medium text-secondary-stone hover:text-primary-mountain-meadow transition-colors relative group"
               >
-                {item}
+                {item.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-mountain-meadow transition-all group-hover:w-full" />
               </a>
             ))}
@@ -48,11 +89,78 @@ export function Navbar() {
               </svg>
             </a>
 
-            <NavModal />
+            {/* Mobile Menu Button */}
+            <button
+              className="md:hidden p-2 text-primary-anti-flash-white hover:text-primary-mountain-meadow transition-colors"
+              onClick={() => setIsMobileMenuOpen(true)}
+              aria-label="Open menu"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm md:hidden"
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="fixed right-0 top-0 h-full w-64 bg-primary-rich-black border-l border-white/10 shadow-2xl z-50 p-6 flex flex-col md:hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex justify-end mb-8">
+                <button
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="p-2 text-secondary-stone hover:text-white transition-colors"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              <nav className="space-y-6 flex-1">
+                {navItems.map(item => (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    className="block text-xl font-medium text-primary-anti-flash-white hover:text-primary-mountain-meadow transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </nav>
+
+              <div className="border-t border-white/10 pt-6 mt-6">
+                <p className="text-sm text-secondary-stone mb-2">Current Mode:</p>
+                <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium ${
+                  side === 'curiosity' 
+                    ? 'bg-purple-900/30 text-purple-300 border border-purple-500/30' 
+                    : 'bg-primary-dark-green text-primary-mountain-meadow border border-primary-mountain-meadow/30'
+                }`}>
+                  <span>{side === 'curiosity' ? '✨' : '💼'}</span>
+                  <span className="capitalize">{side}</span>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
-

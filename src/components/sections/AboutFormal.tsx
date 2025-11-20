@@ -1,4 +1,3 @@
-import { GithubStats } from '@/components/github/GithubStats';
 
 export function AboutFormal() {
   return (
@@ -20,9 +19,6 @@ export function AboutFormal() {
           </p>
         </div>
       </div>
-
-      <GithubStats />
     </section>
   );
 }
-
