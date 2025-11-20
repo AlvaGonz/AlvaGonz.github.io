@@ -9,21 +9,39 @@ describe('SplitLayout', () => {
     window.history.replaceState({}, '', '/');
   });
 
-  it('should render creative view by default', () => {
+  it('should render landing selector by default', () => {
     render(
       <SplitLayout
-        creative={<div>Creative Content</div>}
+        curiosity={<div>Curiosity Content</div>}
         formal={<div>Formal Content</div>}
       />
     );
-    expect(screen.getByText('Creative Content')).toBeInTheDocument();
+    expect(screen.getByText('Select a Profile')).toBeInTheDocument();
+  });
+
+  it('should show curiosity content after selecting it', async () => {
+    const user = userEvent.setup();
+    render(
+      <SplitLayout
+        curiosity={<div>Curiosity Content</div>}
+        formal={<div>Formal Content</div>}
+      />
+    );
+
+    const curiosityButton = screen.getByText('Curiosity').closest('button');
+    expect(curiosityButton).toBeInTheDocument();
+    if (curiosityButton) await user.click(curiosityButton);
+
+    expect(screen.getByText('Curiosity Content')).toBeInTheDocument();
   });
 
   it('should toggle between views', async () => {
     const user = userEvent.setup();
+    window.history.replaceState({}, '', '/?side=curiosity'); // Start in curiosity mode
+    
     render(
       <SplitLayout
-        creative={<div>Creative Content</div>}
+        curiosity={<div>Curiosity Content</div>}
         formal={<div>Formal Content</div>}
       />
     );
@@ -32,14 +50,16 @@ describe('SplitLayout', () => {
     await user.click(toggleButton);
 
     expect(screen.getByText('Formal Content')).toBeInTheDocument();
-    expect(screen.queryByText('Creative Content')).not.toBeInTheDocument();
+    expect(screen.queryByText('Curiosity Content')).not.toBeInTheDocument();
   });
 
   it('should persist side preference to localStorage', async () => {
     const user = userEvent.setup();
+    window.history.replaceState({}, '', '/?side=curiosity');
+    
     render(
       <SplitLayout
-        creative={<div>Creative Content</div>}
+        curiosity={<div>Curiosity Content</div>}
         formal={<div>Formal Content</div>}
       />
     );
@@ -53,23 +73,13 @@ describe('SplitLayout', () => {
   it('should sync with URL query parameter', () => {
     window.history.replaceState({}, '', '/?side=formal');
     
-    const { rerender } = render(
+    render(
       <SplitLayout
-        creative={<div>Creative Content</div>}
-        formal={<div>Formal Content</div>}
-      />
-    );
-    
-    rerender(
-      <SplitLayout
-        creative={<div>Creative Content</div>}
+        curiosity={<div>Curiosity Content</div>}
         formal={<div>Formal Content</div>}
       />
     );
 
-    // Note: The component initializes from URL on mount
-    // This test verifies the component structure is correct
-    expect(screen.getByRole('button')).toBeInTheDocument();
+    expect(screen.getByText('Formal Content')).toBeInTheDocument();
   });
 });
-

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { ScrollOrchestrator } from './components/ScrollOrchestrator';
 import { SplitLayout } from './components/SplitLayout';
-import { CreativeView } from './components/CreativeView';
+import { CuriosityView } from './components/CuriosityView';
 import { FormalView } from './components/FormalView';
 
 function App(): JSX.Element {
@@ -19,7 +19,7 @@ function App(): JSX.Element {
       <ScrollOrchestrator />
       <main id="main-content">
         <SplitLayout
-          creative={<CreativeView />}
+          curiosity={<CuriosityView />}
           formal={<FormalView />}
         />
       </main>
@@ -28,4 +28,3 @@ function App(): JSX.Element {
 }
 
 export default App;
-

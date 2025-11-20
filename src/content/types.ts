@@ -8,6 +8,7 @@ export interface Project {
     name: string;
     color: string;
   } | null;
+  updatedAt?: string;
 }
 
 export interface Profile {

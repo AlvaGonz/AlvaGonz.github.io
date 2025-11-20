@@ -1,7 +1,7 @@
 import type { Profile } from './types';
 
 export const profile: Profile = {
-  name: 'Adrian A. A. González',
+  name: 'Adrian Alexander Alvarez Gonzalez',
   role: 'Software Engineer',
   tagline: 'Software Engineering student & self-taught developer. Passionate about creating robust software solutions, QA, and clean code.',
   location: 'Dominican Republic',
