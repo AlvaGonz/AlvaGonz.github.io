@@ -36,9 +36,6 @@ export async function getTopRepos(limit = 6) {
   const username = import.meta.env.VITE_GITHUB_USERNAME || 'AlvaGonz';
 
   try {
-    // First try to get pinned repos if we could (requires GraphQL), 
-    // but REST API only allows getting all repos.
-    // We'll get recent public repos as a fallback.
     const { data: repos } = await octokit.repos.listForUser({
       username,
       type: 'owner',
@@ -52,10 +49,10 @@ export async function getTopRepos(limit = 6) {
       name: repo.name,
       description: repo.description,
       url: repo.html_url,
-      stars: repo.stargazers_count,
-      forks: repo.forks_count,
+      stars: repo.stargazers_count || 0,
+      forks: repo.forks_count || 0,
       language: repo.language,
-      updatedAt: repo.updated_at,
+      updatedAt: repo.updated_at || new Date().toISOString(),
     }));
   } catch (error) {
     console.error('Error fetching repos:', error);
@@ -85,4 +82,3 @@ export async function getGithubStats() {
     };
   }
 }
-

@@ -10,7 +10,7 @@ export interface GithubData {
     url: string;
     stars: number;
     forks: number;
-    language: string | null;
+    language: string | null | undefined;
     updatedAt: string;
   }>;
   stats: {
@@ -67,4 +67,3 @@ export function useGitHubStats() {
 
   return { data, loading, error };
 }
-
