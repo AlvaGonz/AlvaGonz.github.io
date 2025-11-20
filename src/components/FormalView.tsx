@@ -4,9 +4,6 @@ import { ProjectCard } from './ProjectCard';
 import { SkillPills } from './SkillPills';
 import { Contact } from './Contact';
 import projectsData from '../data/generated/pinned.json';
-import type { PinnedData } from '../data/generated/pinned';
-
-const pinnedData = projectsData as PinnedData;
 
 export function FormalView(): JSX.Element {
   return (
@@ -52,7 +49,7 @@ export function FormalView(): JSX.Element {
             Featured Projects
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {pinnedData.projects.map((project, index) => (
+            {projectsData.projects.map((project, index) => (
               <ProjectCard key={index} project={project} />
             ))}
           </div>

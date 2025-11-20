@@ -38,11 +38,16 @@ export function SplitLayout({ creative, formal }: SplitLayoutProps): JSX.Element
   }, []);
 
   const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
-    if (e.key === 'Tab' && !e.shiftKey && document.activeElement === document.body) {
+    // Accessibility: Allow keyboard navigation but don't interfere with Tab
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
       e.preventDefault();
-      toggleSide();
+      if (e.key === 'ArrowLeft' && activeSide === 'formal') {
+        setActiveSide('creative');
+      } else if (e.key === 'ArrowRight' && activeSide === 'creative') {
+        setActiveSide('formal');
+      }
     }
-  }, [toggleSide]);
+  }, [activeSide]);
 
   return (
     <div className="pt-48 md:pt-56 min-h-screen" onKeyDown={handleKeyDown}>
