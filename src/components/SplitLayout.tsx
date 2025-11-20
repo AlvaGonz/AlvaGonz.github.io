@@ -91,10 +91,10 @@ export function SplitLayout({ curiosity, formal }: SplitLayoutProps): JSX.Elemen
           {activeSide === 'curiosity' ? (
             <motion.div
               key="curiosity"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 50 }}
-              transition={{ duration: 0.3 }}
+              initial={{ opacity: 0, filter: 'blur(10px)' }}
+              animate={{ opacity: 1, filter: 'blur(0px)' }}
+              exit={{ opacity: 0, filter: 'blur(10px)' }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
               className="w-full"
             >
               {curiosity}
@@ -102,10 +102,10 @@ export function SplitLayout({ curiosity, formal }: SplitLayoutProps): JSX.Elemen
           ) : (
             <motion.div
               key="formal"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.3 }}
+              initial={{ opacity: 0, filter: 'blur(10px)' }}
+              animate={{ opacity: 1, filter: 'blur(0px)' }}
+              exit={{ opacity: 0, filter: 'blur(10px)' }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
               className="w-full"
             >
               {formal}

@@ -2,10 +2,12 @@ import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import clsx from 'clsx';
 import { PSPBackground } from './PSPBackground';
+import { PassionModal, PassionContent } from './PassionModal';
 
 export function CuriosityView(): JSX.Element {
   const [clicks, setClicks] = useState(0);
   const [showBSOD, setShowBSOD] = useState(false);
+  const [selectedPassion, setSelectedPassion] = useState<PassionContent | null>(null);
   const bmwSoundRef = useRef<any>(null);
 
   // Load BMW Sound (separate player)
@@ -50,12 +52,13 @@ export function CuriosityView(): JSX.Element {
     }
   }, []);
 
-  const passions = [
+  const passions: PassionContent[] = [
     {
       id: 'jesus',
       title: 'Jesus',
       icon: '✝️',
-      desc: 'The foundation of my life and values.',
+      shortDesc: 'The foundation of my life and values.',
+      fullDesc: "My faith is not just a label, but the core of who I am. It guides my decisions, my work ethic, and how I treat others. I believe in coding with integrity and purpose, reflecting the creativity of the Creator in my own small way.",
       image: 'https://images.unsplash.com/photo-1504052434569-70ad5836ab65?q=80&w=800&auto=format&fit=crop',
       color: 'from-yellow-400/80 to-orange-500/80',
     },
@@ -63,7 +66,8 @@ export function CuriosityView(): JSX.Element {
       id: 'ai',
       title: 'AI & Ethics',
       icon: '🤖',
-      desc: 'Exploring the moral implications of artificial intelligence.',
+      shortDesc: 'Exploring the moral implications of artificial intelligence.',
+      fullDesc: "As we stand on the brink of the AI revolution, I'm fascinated not just by the 'how', but the 'should'. I delve into topics like algorithmic bias, the future of work, and the philosophical questions of machine consciousness. It's about building technology that elevates humanity rather than diminishing it.",
       image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop',
       color: 'from-cyan-400/80 to-blue-600/80',
     },
@@ -71,7 +75,8 @@ export function CuriosityView(): JSX.Element {
       id: 'bmw',
       title: 'BMW M3 GTR',
       icon: '🏎️',
-      desc: 'The legendary hero car from NFSMW. Pure engineering art.',
+      shortDesc: 'The legendary hero car from NFSMW. Pure engineering art.',
+      fullDesc: "The E46 M3 GTR is more than a car; it's a symbol of my childhood gaming peak. The straight-cut gears, the V8 whine, the iconic blue and silver livery. It represents the perfect fusion of aesthetics and raw performance that I aim for in my software engineering.",
       image: '/images/bmw-m3-gtr-nfs-hd-02.jpg',
       color: 'from-blue-700/80 to-blue-900/80',
       isSound: true,
@@ -80,7 +85,8 @@ export function CuriosityView(): JSX.Element {
       id: 'gaming',
       title: 'NFS: Most Wanted',
       icon: '🎮',
-      desc: 'More than a game, a masterpiece of chase and speed.',
+      shortDesc: 'More than a game, a masterpiece of chase and speed.',
+      fullDesc: "Need for Speed: Most Wanted (2005) taught me about risk, reward, and the thrill of the chase. It's a masterclass in game design—the open world, the police AI, the progression system. I still analyze its mechanics today to understand what makes a user experience truly gripping.",
       image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=800&auto=format&fit=crop',
       color: 'from-yellow-600/80 to-red-700/80',
     },
@@ -88,14 +94,17 @@ export function CuriosityView(): JSX.Element {
       id: 'pc',
       title: 'Tech Tinkering',
       icon: '🔨',
-      desc: 'Expert at "fixing" computers... sometimes by breaking them first (jk).',
+      shortDesc: 'Expert at "fixing" computers... sometimes by breaking them first (jk).',
+      fullDesc: "There's something satisfying about taking apart a machine to see how it ticks. From building custom rigs to diagnosing hardware failures, I love the hands-on aspect of tech. And yes, I've seen my fair share of Blue Screens of Death (try clicking this card 5 times...).",
       image: 'https://images.unsplash.com/photo-1588508065123-287b28e013da?q=80&w=800&auto=format&fit=crop',
       color: 'from-green-400/80 to-emerald-600/80',
       isInteractive: true,
     },
   ];
 
-  const handleCardClick = (passion: any) => {
+  const handleCardClick = (passion: PassionContent) => {
+    setSelectedPassion(passion);
+
     // Tech Tinkering Easter Egg
     if (passion.id === 'pc') {
       const newClicks = clicks + 1;
@@ -200,7 +209,7 @@ export function CuriosityView(): JSX.Element {
                   {passion.title}
                 </h3>
                 <p className="text-white/90 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-                  {passion.desc}
+                  {passion.shortDesc}
                 </p>
               </div>
             </motion.div>
@@ -211,6 +220,12 @@ export function CuriosityView(): JSX.Element {
           Psst... try clicking the hammer a few times or revving the engine.
         </p>
       </div>
+
+      <PassionModal 
+        isOpen={!!selectedPassion} 
+        onClose={() => setSelectedPassion(null)} 
+        passion={selectedPassion} 
+      />
     </div>
   );
 }

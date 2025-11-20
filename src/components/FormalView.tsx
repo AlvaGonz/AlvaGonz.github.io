@@ -2,6 +2,7 @@ import { profile } from '../content/profile';
 import { skills } from '../content/skills';
 import { ProjectCard } from './ProjectCard';
 import { SkillPills } from './SkillPills';
+import { ExperienceTimeline } from './ExperienceTimeline';
 import { Contact } from './Contact';
 import projectsData from '../data/generated/pinned.json';
 
@@ -33,6 +34,14 @@ export function FormalView(): JSX.Element {
               </p>
             </div>
           </div>
+        </section>
+
+        {/* Experience Section */}
+        <section className="mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-primary-anti-flash-white border-b-2 border-primary-mountain-meadow pb-2">
+            Experience
+          </h2>
+          <ExperienceTimeline />
         </section>
 
         {/* Skills Section */}
