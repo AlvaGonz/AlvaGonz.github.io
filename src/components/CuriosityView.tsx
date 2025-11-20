@@ -1,27 +1,52 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import clsx from 'clsx';
+import { PSPBackground } from './PSPBackground';
 
 export function CuriosityView(): JSX.Element {
   const [clicks, setClicks] = useState(0);
   const [showBSOD, setShowBSOD] = useState(false);
   const bmwSoundRef = useRef<any>(null);
 
-  // Load BMW Sound (using a YouTube embed for the specific sound effect)
+  // Load BMW Sound (separate player)
   useEffect(() => {
-    // We use a separate player for the sound effect
-    if (window.YT && window.YT.Player) {
-      bmwSoundRef.current = new window.YT.Player('bmw-sound-player', {
-        height: '0',
-        width: '0',
-        videoId: 'Jp0wT9xO9hI', // BMW M3 GTR Sound
+    const initBmwPlayer = () => {
+      // Ensure window.YT is available
+      if (window.YT && window.YT.Player) {
+         try {
+            bmwSoundRef.current = new window.YT.Player('bmw-sound-player', {
+              height: '0',
+              width: '0',
+        videoId: 'KCAXDAvmCWs', // BMW M3 GTR Straight Cut Gears Sound
         playerVars: {
           'autoplay': 0,
           'controls': 0,
-          'start': 5, // Start at a good rev point
-          'end': 10,
+          'start': 0, // Start from beginning
+          'end': 15, // Play for 15 seconds
+          'playsinline': 1
         },
-      });
+              events: {
+                'onReady': (e: any) => e.target.setVolume(100)
+              }
+            });
+         } catch (e) {
+           console.error("BMW Player init failed", e);
+         }
+      }
+    };
+
+    // Retry init if YT not ready immediately
+    if (window.YT && window.YT.Player) {
+      initBmwPlayer();
+    } else {
+      // Poll or wait for event (BackgroundMusic handles the script load)
+      const interval = setInterval(() => {
+        if (window.YT && window.YT.Player) {
+          initBmwPlayer();
+          clearInterval(interval);
+        }
+      }, 500);
+      return () => clearInterval(interval);
     }
   }, []);
 
@@ -47,7 +72,7 @@ export function CuriosityView(): JSX.Element {
       title: 'BMW M3 GTR',
       icon: '🏎️',
       desc: 'The legendary hero car from NFSMW. Pure engineering art.',
-      image: 'https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=800&auto=format&fit=crop',
+      image: '/images/bmw-m3-gtr-nfs-hd-02.jpg',
       color: 'from-blue-700/80 to-blue-900/80',
       isSound: true,
     },
@@ -82,9 +107,15 @@ export function CuriosityView(): JSX.Element {
     }
 
     // BMW Sound Easter Egg
-    if (passion.id === 'bmw' && bmwSoundRef.current) {
-      bmwSoundRef.current.seekTo(5); // Reset to start of rev
-      bmwSoundRef.current.playVideo();
+    if (passion.id === 'bmw') {
+      if (bmwSoundRef.current && typeof bmwSoundRef.current.playVideo === 'function') {
+        // If player is ready, play.
+        bmwSoundRef.current.seekTo(0);
+        bmwSoundRef.current.playVideo();
+      } else {
+         // Fallback: Just log error, don't redirect user
+         console.warn('BMW Sound Player not ready');
+      }
     }
   };
 
@@ -95,6 +126,7 @@ export function CuriosityView(): JSX.Element {
 
   return (
     <div className="min-h-screen p-8 md:p-16 relative">
+      <PSPBackground />
       <div id="bmw-sound-player" className="hidden" />
       
       {/* BSOD Overlay */}
@@ -149,11 +181,15 @@ export function CuriosityView(): JSX.Element {
               )}
             >
               {/* Background Image */}
-              <div className="absolute inset-0">
-                <img 
+              <div className="absolute inset-0 bg-gray-800">
+                 <img 
                   src={passion.image} 
                   alt={passion.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  onError={(e) => {
+                    // Fallback if image load fails
+                    e.currentTarget.src = "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=800&auto=format&fit=crop";
+                  }}
                 />
                 <div className={`absolute inset-0 bg-gradient-to-t ${passion.color} opacity-90 group-hover:opacity-70 transition-opacity duration-500`} />
               </div>
