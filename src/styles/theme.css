@@ -1,0 +1,138 @@
+/* Axiforma Font Face Declarations */
+@font-face {
+  font-family: 'Axiforma';
+  src: url('/fonts/axiforma/Axiforma-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Axiforma';
+  src: url('/fonts/axiforma/Axiforma-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Axiforma';
+  src: url('/fonts/axiforma/Axiforma-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Primary Colors from Palette 1 */
+:root {
+  --c-primary-rich-black: #002f1a;
+  --c-primary-dark-green: #032221;
+  --c-primary-bangladesh-green: #03624c;
+  --c-primary-mountain-meadow: #2cc295;
+  --c-primary-caribbean-green: #00df81;
+  --c-primary-anti-flash-white: #f1f7f6;
+
+  /* Secondary Colors from Palette 1 */
+  --c-secondary-pine: #06302b;
+  --c-secondary-basil: #0b453a;
+  --c-secondary-forest: #095544;
+  --c-secondary-frog: #17876d;
+  --c-secondary-mint: #2fa98c;
+  --c-secondary-stone: #707d7d;
+  --c-secondary-pistachio: #aacbc4;
+
+  /* Gradients from Palette 2 */
+  --c-gradient-1-from: #d6d9d8;
+  --c-gradient-1-to: #c7cee8;
+  --c-gradient-2-from: #c7cee8;
+  --c-gradient-2-to: #d0d34d;
+  --c-gradient-3-from: #c7cee8;
+  --c-gradient-3-to: #157954;
+  --c-gradient-4-from: #d0d34d;
+  --c-gradient-4-to: #21263a;
+  --c-gradient-5-from: #157954;
+  --c-gradient-5-to: #21263a;
+
+  /* Scroll Modernization Variables */
+  --scroll-progress: 0;
+  --border-radius-modern: 0.5rem;
+  --shadow-modern: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --blur-modern: 0px;
+  --gradient-intensity: 0;
+}
+
+/* Dynamic updates based on scroll progress */
+body[data-scroll-stage="0"] {
+  --border-radius-modern: 0.5rem;
+  --shadow-modern: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --blur-modern: 0px;
+  --gradient-intensity: 0;
+}
+
+body[data-scroll-stage="1"] {
+  --border-radius-modern: 1rem;
+  --shadow-modern: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.05);
+  --blur-modern: 2px;
+  --gradient-intensity: 0.3;
+}
+
+body[data-scroll-stage="2"] {
+  --border-radius-modern: 1.5rem;
+  --shadow-modern: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
+  --blur-modern: 4px;
+  --gradient-intensity: 0.6;
+}
+
+body[data-scroll-stage="3"] {
+  --border-radius-modern: 2rem;
+  --shadow-modern: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  --blur-modern: 8px;
+  --gradient-intensity: 1;
+}
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: 'Axiforma', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--c-primary-rich-black);
+  color: var(--c-primary-anti-flash-white);
+  overflow-x: hidden;
+}
+
+/* Skip link for accessibility */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--c-primary-caribbean-green);
+  color: var(--c-primary-rich-black);
+  padding: 8px;
+  text-decoration: none;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
