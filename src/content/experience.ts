@@ -10,18 +10,18 @@ export interface ExperienceItem {
 export const experience: ExperienceItem[] = [
   {
     id: 'qudif',
-    role: 'QA Analyst',
-    company: 'Q.U.D.I.F',
-    period: 'Jan 2022 - Present',
-    description: 'Leading quality assurance initiatives for enterprise software development. Responsible for designing comprehensive test plans, executing manual and automated test cases, and ensuring bug-free releases. Collaborating closely with developers to resolve critical issues and improve overall system stability.',
-    skills: ['Quality Assurance', 'Manual Testing', 'Bug Tracking', 'SQL', 'Agile Methodologies'],
+    role: 'TI Support',
+    company: 'QUDIF',
+    period: 'Jan 2022 - Apr 2024',
+    description: '-Brinde soporte técnico, diagnostico y resolución de incidentes relacionados con hardware, software y redes para usuarios.\n-Capacite a usuarios en el uso adecuado del programa.\n-Asistí en momentos requeridos dentro de la DB.',
+    skills: ['Databases', 'Trabajo en equipo', 'Support', 'Hardware/Software'],
   },
   {
     id: 'gritvap',
     role: 'QA Analyst',
     company: 'Gritvap',
-    period: 'Feb 2021 - Jan 2022',
-    description: 'Conducted rigorous testing of new software features, identifying and documenting defects to ensure product quality. Participated in the full software development lifecycle (SDLC), from requirement analysis to deployment, ensuring compliance with functional specifications.',
-    skills: ['Functional Testing', 'Regression Testing', 'Team Collaboration', 'Documentation'],
+    period: 'May 2021 - Jan 2022',
+    description: '-Colabore con el equipo de desarrollo para resolver problemas y mejorar la calidad del producto.\n-Identificar, documentar y reportar errores y defectos encontrados durante las pruebas.\n-Contribuí en la resolución de problemas en las DB.',
+    skills: ['Databases', 'Trabajo en equipo', 'QA', 'Bug Tracking'],
   },
 ];

@@ -103,29 +103,34 @@ export function CuriosityView(): JSX.Element {
   ];
 
   const handleCardClick = (passion: PassionContent) => {
-    setSelectedPassion(passion);
-
-    // Tech Tinkering Easter Egg
+    // Tech Tinkering Easter Egg (BSOD)
     if (passion.id === 'pc') {
       const newClicks = clicks + 1;
       setClicks(newClicks);
       if (newClicks >= 5) {
         triggerBSOD();
         setClicks(0);
+        return; // Don't open modal if BSOD triggers
       }
     }
 
     // BMW Sound Easter Egg
     if (passion.id === 'bmw') {
+      // Try to play sound regardless of player state logic complexity
       if (bmwSoundRef.current && typeof bmwSoundRef.current.playVideo === 'function') {
-        // If player is ready, play.
-        bmwSoundRef.current.seekTo(0);
-        bmwSoundRef.current.playVideo();
+        try {
+          bmwSoundRef.current.seekTo(0);
+          bmwSoundRef.current.playVideo();
+        } catch (e) {
+          console.error("Error playing BMW sound", e);
+        }
       } else {
-         // Fallback: Just log error, don't redirect user
-         console.warn('BMW Sound Player not ready');
+         console.warn('BMW Sound Player not ready yet');
       }
     }
+
+    // Open Modal
+    setSelectedPassion(passion);
   };
 
   const triggerBSOD = () => {

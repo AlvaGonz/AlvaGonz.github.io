@@ -3,6 +3,9 @@ import { skills } from '../content/skills';
 import { ProjectCard } from './ProjectCard';
 import { SkillPills } from './SkillPills';
 import { ExperienceTimeline } from './ExperienceTimeline';
+import { EducationSection } from './EducationSection';
+import { CertificationsSection } from './CertificationsSection';
+import { OrganizationsSection } from './OrganizationsSection';
 import { Contact } from './Contact';
 import projectsData from '../data/generated/pinned.json';
 
@@ -29,8 +32,16 @@ export function FormalView(): JSX.Element {
               <p className="text-lg text-secondary-pistachio max-w-2xl">
                 {profile.tagline}
               </p>
-              <p className="text-md text-secondary-stone mt-2">
-                📍 {profile.location}
+              <p className="text-md text-secondary-stone mt-2 flex items-center justify-center md:justify-start gap-2">
+                <img 
+                  src="https://flagcdn.com/w20/do.png" 
+                  srcSet="https://flagcdn.com/w40/do.png 2x" 
+                  width="20" 
+                  height="15" 
+                  alt="Dominican Republic Flag" 
+                  className="rounded-sm shadow-sm"
+                />
+                {profile.location}
               </p>
             </div>
           </div>
@@ -42,6 +53,22 @@ export function FormalView(): JSX.Element {
             Experience
           </h2>
           <ExperienceTimeline />
+        </section>
+
+        {/* Education Section */}
+        <section className="mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-primary-anti-flash-white border-b-2 border-primary-mountain-meadow pb-2">
+            Education
+          </h2>
+          <EducationSection />
+        </section>
+
+        {/* Certifications Section */}
+        <section className="mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-primary-anti-flash-white border-b-2 border-primary-mountain-meadow pb-2">
+            Licenses & Certifications
+          </h2>
+          <CertificationsSection />
         </section>
 
         {/* Skills Section */}
@@ -64,6 +91,14 @@ export function FormalView(): JSX.Element {
           </div>
         </section>
 
+        {/* Organizations Section (Penultimate) */}
+        <section className="mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary-anti-flash-white border-b-2 border-primary-mountain-meadow pb-2">
+            Organizations
+          </h2>
+          <OrganizationsSection />
+        </section>
+
         {/* Contact Section */}
         <section className="mb-16">
           <Contact profile={profile} />
@@ -72,4 +107,3 @@ export function FormalView(): JSX.Element {
     </div>
   );
 }
-
