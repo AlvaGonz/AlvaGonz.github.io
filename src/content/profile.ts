@@ -7,6 +7,6 @@ export const profile: Profile = {
   location: 'Dominican Republic',
   linkedin: 'https://www.linkedin.com/in/adrian-alexander-a-4a8842217/',
   github: 'https://github.com/AlvaGonz',
-  avatar: '/images/Opción_2__Sonrisa_Cálida_-_Traje_Azul.png',
+  avatar: '/images/Sitting.png',
 };
 

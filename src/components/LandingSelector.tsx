@@ -41,7 +41,7 @@ export function LandingSelector({ onSelect }: LandingSelectorProps): JSX.Element
             <div>
               <div className="w-20 h-20 rounded-full bg-primary-rich-black border-2 border-primary-mountain-meadow mb-6 overflow-hidden">
                 <img 
-                  src="/images/Opción_2__Sonrisa_Cálida_-_Traje_Azul.png" 
+                  src="/images/Sitting.png" 
                   alt="Formal"
                   className="w-full h-full object-cover"
                 />
