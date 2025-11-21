@@ -6,6 +6,7 @@ import { AboutCuriosity } from './sections/AboutCuriosity';
 import { Roadmap } from './sections/Roadmap';
 import { AnimatedBg } from './svg/AnimatedBg';
 import { HeroIcon } from './svg/HeroIcon';
+import { FloatingElements } from './svg/FloatingElements';
 import { HeroCuriosity } from './sections/HeroCuriosity';
 import { FadeInOnScroll } from './animations/FadeInOnScroll';
 
@@ -166,6 +167,9 @@ export function CuriosityView(): JSX.Element {
     <div className="min-h-screen p-0 md:p-0 relative overflow-hidden">
       {/* Dynamic SVG Background */}
       <AnimatedBg />
+      
+      {/* Floating Decorative Elements */}
+      <FloatingElements />
       
       <div id="bmw-sound-player" className="hidden" />
       
