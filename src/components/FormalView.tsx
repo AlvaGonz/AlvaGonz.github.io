@@ -16,15 +16,15 @@ export function FormalView(): JSX.Element {
   const { data: githubData } = useGitHubStats();
 
   // Merge local project data with live GitHub data where possible
-  const displayProjects = githubData?.repos.length 
-    ? githubData.repos.slice(0, 6).map(repo => {
+  const displayProjects = githubData?.topRepos.length 
+    ? githubData.topRepos.slice(0, 6).map(repo => {
         return {
           name: repo.name,
           description: repo.description || '',
           url: repo.url,
           stars: repo.stars,
           forks: repo.forks,
-          language: repo.language ? { name: repo.language, color: '#3178C6' } : null, // Default color
+          language: repo.language ? { name: repo.language.name, color: repo.language.color } : null,
           updatedAt: repo.updatedAt
         };
       })

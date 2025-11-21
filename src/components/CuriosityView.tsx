@@ -10,6 +10,9 @@ import { FloatingElements } from './svg/FloatingElements';
 import { HeroCuriosity } from './sections/HeroCuriosity';
 import { FadeInOnScroll } from './animations/FadeInOnScroll';
 
+// Global flag to prevent multiple script injections
+let apiLoadStarted = false;
+
 export function CuriosityView(): JSX.Element {
   const [clicks, setClicks] = useState(0);
   const [showBSOD, setShowBSOD] = useState(false);
@@ -18,18 +21,27 @@ export function CuriosityView(): JSX.Element {
 
   // Load BMW Sound (separate player)
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    // Inject YouTube API script if not present
+    if (!window.YT) {
+      if (!apiLoadStarted) {
+        apiLoadStarted = true;
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+      }
+    }
 
     const initBmwPlayer = () => {
       // Ensure window.YT is available
-      if (window.YT && window.YT.Player) {
+      if (window.YT && window.YT.Player && !bmwSoundRef.current) {
          try {
             bmwSoundRef.current = new window.YT.Player('bmw-sound-player', {
               height: '0',
               width: '0',
               videoId: 'KCAXDAvmCWs', // BMW M3 GTR Straight Cut Gears Sound
               playerVars: {
-                'autoplay': 1,
+                'autoplay': 0, // Disable autoplay
                 'controls': 0,
                 'start': 0, // Start from beginning
                 'end': 15, // Play for 15 seconds
@@ -60,18 +72,13 @@ export function CuriosityView(): JSX.Element {
     if (window.YT && window.YT.Player) {
       initBmwPlayer();
     } else {
-      // Poll or wait for event (BackgroundMusic handles the script load)
-      interval = setInterval(() => {
-        if (window.YT && window.YT.Player) {
-          initBmwPlayer();
-          if (interval) clearInterval(interval);
-        }
-      }, 500);
+      // Hook into API ready callback
+      const prevCallback = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = () => {
+        if (prevCallback) prevCallback();
+        initBmwPlayer();
+      };
     }
-
-    return () => {
-      if (interval) clearInterval(interval);
-    };
   }, []);
 
   const passions: PassionContent[] = [
