@@ -3,8 +3,12 @@ import { ScrollOrchestrator } from './components/ScrollOrchestrator';
 import { SplitLayout } from './components/SplitLayout';
 import { CuriosityView } from './components/CuriosityView';
 import { FormalView } from './components/FormalView';
+import { useTheme } from '@/hooks/useTheme';
+import { ScrollProgressBar } from './components/layout/ScrollProgressBar';
 
 function App(): JSX.Element {
+  const { theme } = useTheme();
+
   useEffect(() => {
     // Add skip link for accessibility
     const skipLink = document.createElement('a');
@@ -15,7 +19,8 @@ function App(): JSX.Element {
   }, []);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen" data-theme={theme}>
+      <ScrollProgressBar />
       <ScrollOrchestrator />
       <main id="main-content">
         <SplitLayout

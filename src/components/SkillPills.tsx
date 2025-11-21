@@ -1,17 +1,22 @@
 import type { Skill } from '../content/types';
+import { motion } from 'framer-motion';
+import { staggerContainer, scaleIn } from '@/lib/animation-variants';
+import { FadeInOnScroll } from './animations/FadeInOnScroll';
 
 interface SkillPillsProps {
   skills: Skill[];
+  animate?: boolean;
 }
 
 const categoryColors: Record<Skill['category'], string> = {
-  language: 'bg-primary-bangladesh-green text-primary-anti-flash-white',
-  framework: 'bg-primary-mountain-meadow text-primary-rich-black',
-  tool: 'bg-secondary-mint text-primary-rich-black',
-  database: 'bg-secondary-frog text-primary-anti-flash-white',
+  // Using theme-compatible opacities/colors where possible, or keeping distinct identity
+  language: 'bg-theme-surface border-theme-primary/30 text-theme-text',
+  framework: 'bg-theme-primary/10 border-theme-primary text-theme-primary',
+  tool: 'bg-theme-secondary/20 border-theme-secondary text-theme-text-secondary',
+  database: 'bg-theme-accent/10 border-theme-accent text-theme-accent',
 };
 
-export function SkillPills({ skills }: SkillPillsProps): JSX.Element {
+export function SkillPills({ skills, animate = true }: SkillPillsProps): JSX.Element {
   const groupedSkills = skills.reduce(
     (acc, skill) => {
       if (!acc[skill.category]) {
@@ -23,32 +28,47 @@ export function SkillPills({ skills }: SkillPillsProps): JSX.Element {
     {} as Record<Skill['category'], Skill[]>
   );
 
+  const Container = animate ? motion.div : 'div';
+  const Item = animate ? motion.span : 'span';
+
   return (
-    <div className="space-y-6">
-      {(Object.keys(groupedSkills) as Skill['category'][]).map((category) => (
-        <div key={category}>
-          <h3 className="text-xl font-semibold text-primary-mountain-meadow mb-3 capitalize">
-            {category}
-          </h3>
-          <div className="flex flex-wrap gap-3">
-            {groupedSkills[category].map((skill) => (
-              <span
-                key={skill.name}
-                className={`pl-2 pr-4 py-1.5 rounded-full text-sm font-medium ${categoryColors[category]} transition-transform hover:scale-105 flex items-center gap-2 border border-white/10 shadow-sm`}
-              >
-                {skill.iconId && (
-                  <img 
-                    src={`https://skillicons.dev/icons?i=${skill.iconId}`} 
-                    alt="" 
-                    className="w-6 h-6 rounded-sm"
-                    loading="lazy"
-                  />
-                )}
-                {skill.name}
-              </span>
-            ))}
+    <div className="space-y-8">
+      {(Object.keys(groupedSkills) as Skill['category'][]).map((category, catIndex) => (
+        <FadeInOnScroll key={category} delay={catIndex * 0.1} variant="fadeUp">
+          <div className="relative">
+            <h3 className="text-xl font-bold text-theme-primary mb-4 capitalize flex items-center gap-2">
+              {category}
+              <span className="h-px flex-1 bg-theme-border" />
+            </h3>
+            
+            <Container 
+              className="flex flex-wrap gap-3"
+              variants={animate ? staggerContainer : undefined}
+              initial={animate ? "hidden" : undefined}
+              whileInView={animate ? "visible" : undefined}
+              viewport={{ once: true }}
+            >
+              {groupedSkills[category].map((skill) => (
+                <Item
+                  key={skill.name}
+                  variants={animate ? scaleIn : undefined}
+                  whileHover={animate ? { scale: 1.05, y: -2 } : undefined}
+                  className={`pl-2 pr-4 py-2 rounded-full text-sm font-medium ${categoryColors[category]} transition-all flex items-center gap-2 border shadow-sm hover:shadow-md`}
+                >
+                  {skill.iconId && (
+                    <img 
+                      src={`https://skillicons.dev/icons?i=${skill.iconId}`} 
+                      alt="" 
+                      className="w-5 h-5 rounded-sm opacity-90"
+                      loading="lazy"
+                    />
+                  )}
+                  {skill.name}
+                </Item>
+              ))}
+            </Container>
           </div>
-        </div>
+        </FadeInOnScroll>
       ))}
     </div>
   );

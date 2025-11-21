@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useCallback, useContext, ReactNode } from 'react';
+import { createContext, useState, useCallback, useContext, ReactNode } from 'react';
 
 export type Side = 'curiosity' | 'formal';
 
@@ -10,21 +10,22 @@ interface SideContextType {
 
 const SideContext = createContext<SideContextType | undefined>(undefined);
 
+// Helper to get initial state synchronously
+const getInitialSide = (): Side | null => {
+  if (typeof window === 'undefined') return null;
+  
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlSide = urlParams.get('side') as Side | null;
+  if (urlSide === 'curiosity' || urlSide === 'formal') return urlSide;
+
+  const storedSide = localStorage.getItem('portfolio-side') as Side | null;
+  if (storedSide === 'curiosity' || storedSide === 'formal') return storedSide;
+  
+  return 'formal'; // Default fallback
+};
+
 export function SideProvider({ children }: { children: ReactNode }) {
-  const [side, setSideState] = useState<Side | null>(null);
-
-  // Initialize from URL or localStorage
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const urlSide = urlParams.get('side') as Side | null;
-    const storedSide = localStorage.getItem('portfolio-side') as Side | null;
-
-    if (urlSide === 'curiosity' || urlSide === 'formal') {
-      setSideState(urlSide);
-    } else if (storedSide === 'curiosity' || storedSide === 'formal') {
-      setSideState(storedSide);
-    }
-  }, []);
+  const [side, setSideState] = useState<Side | null>(getInitialSide);
 
   const setSide = useCallback((newSide: Side) => {
     setSideState(newSide);

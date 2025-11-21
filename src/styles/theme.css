@@ -53,12 +53,43 @@
   --c-gradient-5-from: #157954;
   --c-gradient-5-to: #21263a;
 
+  /* Palette 2 (Curiosity) Base Colors */
+  --c-curiosity-bg: #21263A;
+  --c-curiosity-primary: #D0D34D;
+  --c-curiosity-secondary: #C7CEE8;
+  --c-curiosity-accent: #157954;
+  --c-curiosity-highlight: #D6D9D8;
+  --c-curiosity-text: #F1F5F9;
+  --c-curiosity-text-secondary: #94A3B8;
+
+  /* Semantic Theme Variables (Defaults to Formal) */
+  --theme-background: var(--c-primary-rich-black);
+  --theme-surface: var(--c-primary-dark-green);
+  --theme-primary: var(--c-primary-mountain-meadow);
+  --theme-secondary: var(--c-secondary-stone);
+  --theme-accent: var(--c-primary-caribbean-green);
+  --theme-text: var(--c-primary-anti-flash-white);
+  --theme-text-secondary: var(--c-secondary-pistachio);
+  --theme-border: var(--c-secondary-basil);
+
   /* Scroll Modernization Variables */
   --scroll-progress: 0;
   --border-radius-modern: 0.5rem;
   --shadow-modern: 0 4px 6px -1px rgb(0 0 0 / 0.1);
   --blur-modern: 0px;
   --gradient-intensity: 0;
+}
+
+/* Curiosity Theme Override */
+[data-theme="curiosity"] {
+  --theme-background: var(--c-curiosity-bg);
+  --theme-surface: rgba(33, 38, 58, 0.8);
+  --theme-primary: var(--c-curiosity-primary);
+  --theme-secondary: var(--c-curiosity-secondary);
+  --theme-accent: var(--c-curiosity-highlight);
+  --theme-text: var(--c-curiosity-text);
+  --theme-text-secondary: var(--c-curiosity-text-secondary);
+  --theme-border: rgba(199, 206, 232, 0.2);
 }
 
 /* Dynamic updates based on scroll progress */
@@ -115,9 +146,10 @@ body {
   font-family: 'Axiforma', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--c-primary-rich-black);
-  color: var(--c-primary-anti-flash-white);
+  background-color: var(--theme-background);
+  color: var(--theme-text);
   overflow-x: hidden;
+  transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1), color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Skip link for accessibility */
@@ -125,8 +157,8 @@ body {
   position: absolute;
   top: -40px;
   left: 0;
-  background: var(--c-primary-caribbean-green);
-  color: var(--c-primary-rich-black);
+  background: var(--theme-primary);
+  color: var(--theme-background);
   padding: 8px;
   text-decoration: none;
   z-index: 100;
@@ -135,4 +167,3 @@ body {
 .skip-link:focus {
   top: 0;
 }
-

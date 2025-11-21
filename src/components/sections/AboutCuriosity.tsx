@@ -1,39 +1,62 @@
-import { GithubStats } from '@/components/github/GithubStats';
+import { motion } from 'framer-motion';
+import { profile } from '@/content/profile';
+import { FadeInOnScroll } from '@/components/animations/FadeInOnScroll';
 
 export function AboutCuriosity() {
   return (
-    <section id="about" className="space-y-12">
-      <div>
-        <h2 className="text-4xl font-bold mb-6 font-axiforma text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">The Debate</h2>
-        <div className="space-y-8 text-lg leading-relaxed max-w-3xl">
-          <p className="text-secondary-pistachio">
-            I exist in two worlds, and I've learned to love the tension between them.
-          </p>
-
-          <div className="border-l-4 border-purple-500 pl-6 py-2 bg-purple-500/5 rounded-r-lg">
-            <p className="italic text-primary-anti-flash-white">
-              "One side of me wants to paint beautiful interfaces, craft pixel-perfect designs,
-              and create digital experiences that delight the senses."
-            </p>
+    <section id="about" className="py-12 md:py-20">
+      <div className="grid md:grid-cols-2 gap-12 items-center">
+        <FadeInOnScroll variant="slideRight">
+          <div className="relative">
+            <motion.div 
+              className="absolute -inset-4 bg-gradient-to-r from-curiosity-primary to-curiosity-secondary rounded-xl opacity-20 blur-xl"
+              animate={{ 
+                scale: [1, 1.1, 1],
+                opacity: [0.2, 0.3, 0.2]
+              }}
+              transition={{ duration: 5, repeat: Infinity }}
+            />
+            <div className="relative bg-theme-surface p-8 rounded-xl border border-theme-border shadow-xl">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-curiosity-primary">
+                Who am I?
+              </h2>
+              <p className="text-lg text-theme-text-secondary leading-relaxed mb-4">
+                {profile.about}
+              </p>
+              <p className="text-lg text-theme-text-secondary leading-relaxed">
+                Beyond the syntax and logic, I'm driven by the "why" and "how" of digital creation. 
+                I believe that the best software feels like magic—effortless, intuitive, and alive.
+              </p>
+            </div>
           </div>
+        </FadeInOnScroll>
 
-          <div className="border-l-4 border-primary-mountain-meadow pl-6 py-2 bg-primary-mountain-meadow/5 rounded-r-lg">
-            <p className="italic text-primary-anti-flash-white">
-              "The other side lives for algorithms, system design, the elegant solutions hiding
-              in backend complexity, and the satisfaction of solving hard problems."
-            </p>
-          </div>
-
-          <p className="text-secondary-pistachio">
-            Instead of choosing between them, I'm learning to bridge them.
-            That's where the real innovation happens—where creativity meets logic,
-            where art collides with engineering.
-          </p>
+        <div className="space-y-6">
+          {[
+            { title: "Design", width: "90%", color: "bg-curiosity-primary" },
+            { title: "Development", width: "95%", color: "bg-curiosity-secondary" },
+            { title: "Strategy", width: "85%", color: "bg-curiosity-accent" }
+          ].map((item, i) => (
+            <FadeInOnScroll key={item.title} delay={i * 0.2} variant="slideLeft">
+              <div>
+                <div className="flex justify-between mb-2">
+                  <span className="font-bold text-theme-text">{item.title}</span>
+                  <span className="text-theme-text-secondary">{item.width}</span>
+                </div>
+                <div className="h-3 bg-white/5 rounded-full overflow-hidden">
+                  <motion.div 
+                    className={`h-full ${item.color}`}
+                    initial={{ width: 0 }}
+                    whileInView={{ width: item.width }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1, delay: 0.5 }}
+                  />
+                </div>
+              </div>
+            </FadeInOnScroll>
+          ))}
         </div>
       </div>
-
-      <GithubStats />
     </section>
   );
 }
-
