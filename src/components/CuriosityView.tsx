@@ -10,14 +10,20 @@ import { FloatingElements } from './svg/FloatingElements';
 import { HeroCuriosity } from './sections/HeroCuriosity';
 import { FadeInOnScroll } from './animations/FadeInOnScroll';
 import { SpotifyNowPlaying } from './curiosity/SpotifyNowPlaying';
-import { GamingShowcase } from './curiosity/GamingShowcase';
-import { GreenGallery } from './curiosity/GreenGallery';
 
 // Global flag to prevent multiple script injections
 let apiLoadStarted = false;
 
+// Declare window.YT for TypeScript
+declare global {
+  interface Window {
+    YT: any;
+    onYouTubeIframeAPIReady: (() => void) | undefined;
+  }
+}
+
 export function CuriosityView(): JSX.Element {
-  const [clicks, setClicks] = useState(0);
+
   const [showBSOD, setShowBSOD] = useState(false);
   const [selectedPassion, setSelectedPassion] = useState<PassionContent | null>(null);
   const bmwSoundRef = useRef<any>(null);
@@ -134,38 +140,45 @@ export function CuriosityView(): JSX.Element {
     },
   ];
 
+  const playBmwSound = () => {
+    if (bmwSoundRef.current && typeof bmwSoundRef.current.playVideo === 'function') {
+      try {
+        bmwSoundRef.current.seekTo(0);
+        bmwSoundRef.current.setVolume(100);
+        bmwSoundRef.current.playVideo();
+
+        // Fade out logic
+        const fadeOutStart = 12000; // Start fading at 12s
+        const fadeOutDuration = 3000; // Fade over 3s (ends at 15s)
+        const intervalTime = 100;
+        const steps = fadeOutDuration / intervalTime;
+        const volStep = 100 / steps;
+
+        setTimeout(() => {
+          let currentVol = 100;
+          const fadeInterval = setInterval(() => {
+            currentVol -= volStep;
+            if (currentVol <= 0) {
+              currentVol = 0;
+              clearInterval(fadeInterval);
+              try {
+                bmwSoundRef.current.pauseVideo();
+              } catch (e) { /* ignore */ }
+            }
+            try {
+              bmwSoundRef.current.setVolume(currentVol);
+            } catch (e) { /* ignore */ }
+          }, intervalTime);
+        }, fadeOutStart);
+
+      } catch (e) {
+        console.error("Error playing BMW sound", e);
+      }
+    }
+  };
+
   const handleCardClick = (passion: PassionContent) => {
     setSelectedPassion(passion);
-
-    // Tech Tinkering Easter Egg
-    if (passion.id === 'pc') {
-      const newClicks = clicks + 1;
-      setClicks(newClicks);
-      if (newClicks >= 5) {
-        triggerBSOD();
-        setClicks(0);
-      }
-    }
-
-    // BMW Sound Easter Egg
-    if (passion.id === 'bmw') {
-      if (bmwSoundRef.current && typeof bmwSoundRef.current.playVideo === 'function') {
-        try {
-          bmwSoundRef.current.seekTo(0);
-          setTimeout(() => {
-            try {
-              bmwSoundRef.current.playVideo();
-            } catch (e) {
-              console.warn("Play video failed", e);
-            }
-          }, 100);
-        } catch (e) {
-          console.error("Error playing BMW sound", e);
-        }
-      } else {
-        console.warn('BMW Sound Player not ready yet');
-      }
-    }
   };
 
   const triggerBSOD = () => {
@@ -190,7 +203,7 @@ export function CuriosityView(): JSX.Element {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-[#0078d7] text-white font-mono p-10 md:p-20 flex flex-col justify-center items-start cursor-none"
+            className="fixed inset-0 z-[200] bg-[#0078d7] text-white font-mono p-10 md:p-20 flex flex-col justify-center items-start cursor-none"
           >
             <div className="text-8xl mb-8">:(</div>
             <h2 className="text-2xl md:text-4xl mb-8">
@@ -271,23 +284,69 @@ export function CuriosityView(): JSX.Element {
                 </FadeInOnScroll>
               ))}
             </div>
-
-            <p className="text-center text-theme-text-secondary mt-12 text-sm opacity-50">
-              Psst... try clicking the hammer a few times or revving the engine.
-            </p>
           </section>
 
-          {/* Gaming Section */}
-          <section id="gaming" className="space-y-8">
+          {/* Creative Languages Section */}
+          <section id="languages" className="space-y-8">
             <FadeInOnScroll variant="fadeUp">
-              <GamingShowcase />
-            </FadeInOnScroll>
-          </section>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {/* Spanish - Native */}
+                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-orange-500 to-yellow-500 p-1 shadow-xl transform hover:scale-[1.02] transition-transform duration-300">
+                  <div className="bg-primary-rich-black h-full w-full rounded-xl p-6 relative overflow-hidden">
+                    <div className="absolute top-0 right-0 p-4 opacity-20">
+                      <span className="text-9xl">ñ</span>
+                    </div>
+                    <div className="relative z-10 flex flex-col h-full justify-between">
+                      <div>
+                        <div className="flex items-center gap-3 mb-4">
+                          <span className="text-4xl">🇩🇴</span>
+                          <h3 className="text-2xl font-bold text-white">Spanish</h3>
+                        </div>
+                        <p className="text-gray-300">
+                          My mother tongue. The language of my thoughts, passion, and culture.
+                        </p>
+                      </div>
+                      <div className="mt-6">
+                        <div className="inline-block px-4 py-2 rounded-full bg-orange-500/20 text-orange-400 font-bold border border-orange-500/30">
+                          Native Speaker
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-          {/* Aesthetic Section */}
-          <section id="aesthetic" className="space-y-8">
-            <FadeInOnScroll variant="fadeUp">
-              <GreenGallery />
+                {/* English - Duolingo Style */}
+                <div className="relative overflow-hidden rounded-2xl bg-[#58cc02] p-1 shadow-[0_8px_0_0_#46a302] transform hover:translate-y-1 hover:shadow-[0_4px_0_0_#46a302] transition-all duration-200">
+                  <div className="bg-[#58cc02] h-full w-full rounded-xl p-6 relative">
+                    <div className="flex items-center gap-4 mb-6">
+                      <img
+                        src="https://d35aaqx5ub95lt.cloudfront.net/images/duo-2024.svg"
+                        alt="Duo Owl"
+                        className="w-16 h-16 animate-bounce"
+                      />
+                      <div>
+                        <h3 className="text-2xl font-bold text-white">English</h3>
+                        <p className="text-white/80 font-medium">Learning Streak 🔥</p>
+                      </div>
+                    </div>
+
+                    <div className="bg-white/20 rounded-2xl p-4 backdrop-blur-sm">
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="font-bold text-white">Current Level</span>
+                        <span className="font-bold text-white">B2</span>
+                      </div>
+                      <div className="w-full bg-black/20 rounded-full h-4 overflow-hidden">
+                        <div className="bg-yellow-400 h-full rounded-full w-[70%] relative overflow-hidden">
+                          <div className="absolute top-0 left-0 w-full h-full bg-white/30 animate-[shimmer_2s_infinite]"></div>
+                        </div>
+                      </div>
+                      <p className="text-white/90 text-sm mt-3 italic">
+                        "I can communicate effectively in most situations."
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </FadeInOnScroll>
           </section>
 
@@ -300,6 +359,8 @@ export function CuriosityView(): JSX.Element {
         isOpen={!!selectedPassion}
         onClose={() => setSelectedPassion(null)}
         passion={selectedPassion}
+        onPlaySound={selectedPassion?.id === 'bmw' ? playBmwSound : undefined}
+        onTriggerBSOD={triggerBSOD}
       />
 
       {/* Floating Spotify Player */}

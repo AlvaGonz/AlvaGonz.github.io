@@ -36,8 +36,18 @@ export function GithubActivity() {
                                     {event.repo.name}
                                 </a>
                             </div>
-                            <div className="text-gray-400 text-xs mt-1">
-                                {event.payload.commits?.[0]?.message || 'New repository created'}
+                            <div className="text-gray-400 text-xs mt-1 line-clamp-2">
+                                {(() => {
+                                    if (event.type === 'PushEvent') {
+                                        const message = event.payload.commits?.[0]?.message;
+                                        if (message) return message;
+                                        return `Pushed ${event.payload.size || event.payload.commits?.length || 1} commit(s)`;
+                                    }
+                                    if (event.type === 'CreateEvent') {
+                                        return `Created ${event.payload.ref_type || 'repository'} ${event.payload.ref || ''}`;
+                                    }
+                                    return 'Activity detected';
+                                })()}
                             </div>
                             <time className="text-[10px] text-gray-500 block mt-1">
                                 {new Date(event.created_at).toLocaleDateString(undefined, {

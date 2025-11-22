@@ -83,10 +83,7 @@ export function FormalView(): JSX.Element {
         {/* About Section */}
         <AboutFormal />
 
-        {/* GitHub Activity Section */}
-        <section id="activity">
-          <GithubActivity />
-        </section>
+
 
         {/* Experience Section */}
         <section id="experience">
@@ -186,6 +183,11 @@ export function FormalView(): JSX.Element {
               loading="lazy"
             />
           </div>
+        </section>
+
+        {/* GitHub Activity Section */}
+        <section id="activity">
+          <GithubActivity />
         </section>
 
         {/* Organizations Section (Penultimate) */}

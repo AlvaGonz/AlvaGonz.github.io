@@ -15,6 +15,9 @@ export interface GitHubEvent {
             sha: string;
         }>;
         action?: string;
+        ref_type?: string;
+        ref?: string;
+        size?: number;
     };
 }
 

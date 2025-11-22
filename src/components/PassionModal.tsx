@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export interface PassionContent {
@@ -17,9 +17,13 @@ interface PassionModalProps {
   isOpen: boolean;
   onClose: () => void;
   passion: PassionContent | null;
+  onPlaySound?: () => void;
+  onTriggerBSOD?: () => void;
 }
 
-export function PassionModal({ isOpen, onClose, passion }: PassionModalProps): JSX.Element {
+export function PassionModal({ isOpen, onClose, passion, onPlaySound, onTriggerBSOD }: PassionModalProps): JSX.Element {
+  const [clickCount, setClickCount] = useState(0);
+
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -27,6 +31,22 @@ export function PassionModal({ isOpen, onClose, passion }: PassionModalProps): J
     window.addEventListener('keydown', handleEsc);
     return () => window.removeEventListener('keydown', handleEsc);
   }, [onClose]);
+
+  // Reset clicks when modal opens/closes
+  useEffect(() => {
+    if (!isOpen) setClickCount(0);
+  }, [isOpen]);
+
+  const handleIconClick = () => {
+    if (passion?.id === 'pc' && onTriggerBSOD) {
+      const newCount = clickCount + 1;
+      setClickCount(newCount);
+      if (newCount >= 5) {
+        onTriggerBSOD();
+        setClickCount(0);
+      }
+    }
+  };
 
   if (!isOpen || !passion) return <></>;
 
@@ -60,9 +80,14 @@ export function PassionModal({ isOpen, onClose, passion }: PassionModalProps): J
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
-            
+
             <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10">
-              <div className="text-6xl mb-4">{passion.icon}</div>
+              <div
+                className={`text-6xl mb-4 ${passion.id === 'pc' ? 'cursor-pointer active:scale-90 transition-transform select-none' : ''}`}
+                onClick={handleIconClick}
+              >
+                {passion.icon}
+              </div>
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-2 drop-shadow-lg">
                 {passion.title}
               </h2>
@@ -74,7 +99,7 @@ export function PassionModal({ isOpen, onClose, passion }: PassionModalProps): J
             <p className="text-xl md:text-2xl text-primary-anti-flash-white font-medium mb-6 leading-relaxed">
               {passion.shortDesc}
             </p>
-            
+
             <div className="prose prose-invert max-w-none text-secondary-pistachio">
               <p className="text-lg leading-relaxed whitespace-pre-line">
                 {passion.fullDesc}
@@ -82,11 +107,14 @@ export function PassionModal({ isOpen, onClose, passion }: PassionModalProps): J
             </div>
 
             {passion.isSound && (
-              <div className="mt-8 p-4 bg-white/5 rounded-lg border border-white/10 flex items-center gap-4">
-                <div className="text-3xl">🔊</div>
+              <div
+                onClick={onPlaySound}
+                className="mt-8 p-4 bg-white/5 rounded-lg border border-white/10 flex items-center gap-4 cursor-pointer hover:bg-white/10 transition-colors group"
+              >
+                <div className="text-3xl group-hover:scale-110 transition-transform">🔊</div>
                 <div>
-                  <p className="font-bold text-white">Sound Enabled</p>
-                  <p className="text-sm text-gray-400">You experienced the legendary sound when opening this card.</p>
+                  <p className="font-bold text-white">Hear the Engine</p>
+                  <p className="text-sm text-gray-400">Click here to unleash the straight-cut gears.</p>
                 </div>
               </div>
             )}
@@ -96,4 +124,3 @@ export function PassionModal({ isOpen, onClose, passion }: PassionModalProps): J
     </AnimatePresence>
   );
 }
-
