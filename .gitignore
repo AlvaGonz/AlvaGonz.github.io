@@ -40,3 +40,7 @@ coverage
 # Generated data
 src/data/generated/
 
+# Proprietary Fonts
+public/fonts/axiforma/*.otf
+public/fonts/axiforma/*.woff2
+!public/fonts/axiforma/.gitkeep
