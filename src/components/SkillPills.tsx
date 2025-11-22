@@ -46,7 +46,7 @@ export function SkillPills({ skills, animate = true }: SkillPillsProps): JSX.Ele
               variants={animate ? staggerContainer : undefined}
               initial={animate ? "hidden" : undefined}
               whileInView={animate ? "visible" : undefined}
-              viewport={{ once: true }}
+              viewport={animate ? { once: true } : undefined}
             >
               {groupedSkills[category].map((skill) => (
                 <Item

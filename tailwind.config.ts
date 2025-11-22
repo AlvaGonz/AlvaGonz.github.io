@@ -32,6 +32,8 @@ export default {
           secondary: 'var(--c-curiosity-secondary)',
           accent: 'var(--c-curiosity-accent)',
           highlight: 'var(--c-curiosity-highlight)',
+          text: 'var(--c-curiosity-text)',
+          'text-secondary': 'var(--c-curiosity-text-secondary)',
         },
 
         // Legacy Formal Colors (Palette 1) - Kept for backward compatibility
