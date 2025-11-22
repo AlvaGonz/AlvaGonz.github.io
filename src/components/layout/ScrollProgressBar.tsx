@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll } from 'framer-motion';
 import { useTheme } from '@/hooks/useTheme';
 
 export function ScrollProgressBar() {

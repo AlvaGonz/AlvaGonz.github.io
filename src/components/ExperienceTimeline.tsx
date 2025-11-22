@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { experience } from '../content/experience';
 import { FadeInOnScroll } from './animations/FadeInOnScroll';
 

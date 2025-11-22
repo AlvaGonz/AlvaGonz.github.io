@@ -6,7 +6,7 @@ import { useTheme } from '@/hooks/useTheme';
 
 export function Navbar() {
   const { side, setSide } = useSide();
-  const { theme } = useTheme(); // Ensure theme effect is applied
+  useTheme(); // Ensure theme effect is applied
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const formalItems = [
