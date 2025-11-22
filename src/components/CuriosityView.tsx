@@ -9,6 +9,9 @@ import { HeroIcon } from './svg/HeroIcon';
 import { FloatingElements } from './svg/FloatingElements';
 import { HeroCuriosity } from './sections/HeroCuriosity';
 import { FadeInOnScroll } from './animations/FadeInOnScroll';
+import { SpotifyNowPlaying } from './curiosity/SpotifyNowPlaying';
+import { GamingShowcase } from './curiosity/GamingShowcase';
+import { GreenGallery } from './curiosity/GreenGallery';
 
 // Global flag to prevent multiple script injections
 let apiLoadStarted = false;
@@ -35,36 +38,36 @@ export function CuriosityView(): JSX.Element {
     const initBmwPlayer = () => {
       // Ensure window.YT is available
       if (window.YT && window.YT.Player && !bmwSoundRef.current) {
-         try {
-            bmwSoundRef.current = new window.YT.Player('bmw-sound-player', {
-              height: '0',
-              width: '0',
-              videoId: 'KCAXDAvmCWs', // BMW M3 GTR Straight Cut Gears Sound
-              playerVars: {
-                'autoplay': 0, // Disable autoplay
-                'controls': 0,
-                'start': 0, // Start from beginning
-                'end': 15, // Play for 15 seconds
-                'playsinline': 1,
-                'enablejsapi': 1,
-                'origin': window.location.origin // Fix for origin mismatch
-              },
-              events: {
-                'onReady': (e: any) => {
-                  try {
-                    e.target.setVolume(100);
-                  } catch (err) {
-                    console.warn("BMW Player setVolume failed", err);
-                  }
-                },
-                'onError': (e: any) => {
-                  console.warn("BMW Player error:", e.data);
+        try {
+          bmwSoundRef.current = new window.YT.Player('bmw-sound-player', {
+            height: '0',
+            width: '0',
+            videoId: 'KCAXDAvmCWs', // BMW M3 GTR Straight Cut Gears Sound
+            playerVars: {
+              'autoplay': 0, // Disable autoplay
+              'controls': 0,
+              'start': 0, // Start from beginning
+              'end': 15, // Play for 15 seconds
+              'playsinline': 1,
+              'enablejsapi': 1,
+              'origin': window.location.origin // Fix for origin mismatch
+            },
+            events: {
+              'onReady': (e: any) => {
+                try {
+                  e.target.setVolume(100);
+                } catch (err) {
+                  console.warn("BMW Player setVolume failed", err);
                 }
+              },
+              'onError': (e: any) => {
+                console.warn("BMW Player error:", e.data);
               }
-            });
-         } catch (e) {
-           console.warn("BMW Player init failed", e);
-         }
+            }
+          });
+        } catch (e) {
+          console.warn("BMW Player init failed", e);
+        }
       }
     };
 
@@ -150,17 +153,17 @@ export function CuriosityView(): JSX.Element {
         try {
           bmwSoundRef.current.seekTo(0);
           setTimeout(() => {
-             try {
-               bmwSoundRef.current.playVideo();
-             } catch (e) {
-               console.warn("Play video failed", e);
-             }
+            try {
+              bmwSoundRef.current.playVideo();
+            } catch (e) {
+              console.warn("Play video failed", e);
+            }
           }, 100);
         } catch (e) {
           console.error("Error playing BMW sound", e);
         }
       } else {
-         console.warn('BMW Sound Player not ready yet');
+        console.warn('BMW Sound Player not ready yet');
       }
     }
   };
@@ -174,12 +177,12 @@ export function CuriosityView(): JSX.Element {
     <div className="min-h-screen p-0 md:p-0 relative overflow-hidden">
       {/* Dynamic SVG Background */}
       <AnimatedBg />
-      
+
       {/* Floating Decorative Elements */}
       <FloatingElements />
-      
+
       <div id="bmw-sound-player" className="hidden" />
-      
+
       {/* BSOD Overlay */}
       <AnimatePresence>
         {showBSOD && (
@@ -210,6 +213,11 @@ export function CuriosityView(): JSX.Element {
           {/* About Section */}
           <AboutCuriosity />
 
+          {/* Vibe Check Section */}
+          <section className="max-w-md mx-auto">
+            <SpotifyNowPlaying />
+          </section>
+
           {/* Passions Grid */}
           <section id="projects">
             <FadeInOnScroll variant="fadeUp">
@@ -228,9 +236,9 @@ export function CuriosityView(): JSX.Element {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {passions.map((passion, index) => (
-                <FadeInOnScroll 
-                  key={passion.id} 
-                  delay={index * 0.1} 
+                <FadeInOnScroll
+                  key={passion.id}
+                  delay={index * 0.1}
                   variant="scale"
                   className="h-full"
                 >
@@ -244,8 +252,8 @@ export function CuriosityView(): JSX.Element {
                   >
                     {/* Background Image */}
                     <div className="absolute inset-0 bg-gray-800">
-                       <img 
-                        src={passion.image} 
+                      <img
+                        src={passion.image}
                         alt={passion.title}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         onError={(e) => {
@@ -254,7 +262,7 @@ export function CuriosityView(): JSX.Element {
                       />
                       <div className={`absolute inset-0 bg-gradient-to-t ${passion.color} opacity-90 group-hover:opacity-70 transition-opacity duration-500`} />
                     </div>
-                    
+
                     <div className="relative z-10 p-8 h-full flex flex-col justify-end">
                       <div className="text-5xl mb-4 transform group-hover:-translate-y-2 transition-transform duration-300">{passion.icon}</div>
                       <h3 className="text-2xl font-bold text-white mb-2 transform group-hover:-translate-y-1 transition-transform duration-300">
@@ -268,10 +276,24 @@ export function CuriosityView(): JSX.Element {
                 </FadeInOnScroll>
               ))}
             </div>
-            
+
             <p className="text-center text-theme-text-secondary mt-12 text-sm opacity-50">
               Psst... try clicking the hammer a few times or revving the engine.
             </p>
+          </section>
+
+          {/* Gaming Section */}
+          <section id="gaming" className="space-y-8">
+            <FadeInOnScroll variant="fadeUp">
+              <GamingShowcase />
+            </FadeInOnScroll>
+          </section>
+
+          {/* Aesthetic Section */}
+          <section id="aesthetic" className="space-y-8">
+            <FadeInOnScroll variant="fadeUp">
+              <GreenGallery />
+            </FadeInOnScroll>
           </section>
 
           {/* Roadmap Section */}
@@ -279,10 +301,10 @@ export function CuriosityView(): JSX.Element {
         </div>
       </div>
 
-      <PassionModal 
-        isOpen={!!selectedPassion} 
-        onClose={() => setSelectedPassion(null)} 
-        passion={selectedPassion} 
+      <PassionModal
+        isOpen={!!selectedPassion}
+        onClose={() => setSelectedPassion(null)}
+        passion={selectedPassion}
       />
     </div>
   );

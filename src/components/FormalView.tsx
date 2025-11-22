@@ -12,36 +12,38 @@ import projectsData from '../data/generated/pinned.json';
 import { AboutFormal } from './sections/AboutFormal';
 import { useGitHubStats } from '@/hooks/useGitHubStats';
 import { LeetcodeStats } from './formal/LeetcodeStats';
+import { GithubActivity } from './formal/GithubActivity';
+import { DailyVerse } from './formal/DailyVerse';
 
 export function FormalView(): JSX.Element {
   const { data: githubData } = useGitHubStats();
 
   // Merge local project data with live GitHub data where possible
-  const displayProjects = githubData?.topRepos.length 
+  const displayProjects = githubData?.topRepos.length
     ? githubData.topRepos.slice(0, 6).map(repo => {
-        return {
-          name: repo.name,
-          description: repo.description || '',
-          url: repo.url,
-          stars: repo.stars,
-          forks: repo.forks,
-          language: repo.language ? { name: repo.language.name, color: repo.language.color } : null,
-          updatedAt: repo.updatedAt
-        };
-      })
+      return {
+        name: repo.name,
+        description: repo.description || '',
+        url: repo.url,
+        stars: repo.stars,
+        forks: repo.forks,
+        language: repo.language ? { name: repo.language.name, color: repo.language.color } : null,
+        updatedAt: repo.updatedAt
+      };
+    })
     : projectsData.projects.map((project: any) => ({
-        name: project.name,
-        description: project.description,
-        url: project.url,
-        stars: project.stars,
-        forks: project.forks,
-        language: project.language 
-          ? (typeof project.language === 'string' 
-              ? { name: project.language, color: '#3178C6' } 
-              : { name: project.language.name, color: project.language.color }) 
-          : null,
-        updatedAt: project.updatedAt
-      }));
+      name: project.name,
+      description: project.description,
+      url: project.url,
+      stars: project.stars,
+      forks: project.forks,
+      language: project.language
+        ? (typeof project.language === 'string'
+          ? { name: project.language, color: '#3178C6' }
+          : { name: project.language.name, color: project.language.color })
+        : null,
+      updatedAt: project.updatedAt
+    }));
 
   return (
     <div className="min-h-screen p-8 md:p-16 bg-primary-rich-black">
@@ -65,12 +67,12 @@ export function FormalView(): JSX.Element {
               {profile.tagline}
             </p>
             <div className="flex items-center gap-2 mt-2 text-md text-secondary-stone justify-center md:justify-start">
-              <img 
-                src="https://flagcdn.com/w40/do.png" 
+              <img
+                src="https://flagcdn.com/w40/do.png"
                 srcSet="https://flagcdn.com/w80/do.png 2x"
-                width="20" 
-                height="15" 
-                alt="Dominican Republic Flag" 
+                width="20"
+                height="15"
+                alt="Dominican Republic Flag"
                 className="rounded-sm shadow-sm opacity-80"
               />
               <span>{profile.location}</span>
@@ -80,6 +82,11 @@ export function FormalView(): JSX.Element {
 
         {/* About Section */}
         <AboutFormal />
+
+        {/* GitHub Activity Section */}
+        <section id="activity">
+          <GithubActivity />
+        </section>
 
         {/* Experience Section */}
         <section id="experience">
@@ -135,11 +142,11 @@ export function FormalView(): JSX.Element {
 
         {/* Top Languages Section */}
         <section id="languages">
-           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary-anti-flash-white border-b-2 border-primary-mountain-meadow pb-2">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary-anti-flash-white border-b-2 border-primary-mountain-meadow pb-2">
             Top Languages
           </h2>
           <div className="bg-primary-rich-black/40 rounded-2xl p-6 border border-white/5 backdrop-blur-sm flex justify-center md:justify-start">
-            <img 
+            <img
               src="https://github-readme-stats.vercel.app/api/top-langs/?username=AlvaGonz&layout=compact&langs_count=7&theme=dark"
               alt="Top Languages"
               className="max-w-full h-auto rounded-lg shadow-lg"
@@ -159,6 +166,7 @@ export function FormalView(): JSX.Element {
         {/* Contact Section */}
         <section id="contact" className="mb-16">
           <Contact profile={profile} />
+          <DailyVerse />
         </section>
       </div>
     </div>
