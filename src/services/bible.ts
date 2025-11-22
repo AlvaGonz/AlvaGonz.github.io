@@ -1,25 +1,4 @@
-const BASE_URL = 'https://api.scripture.api.bible/v1';
-const BIBLE_ID = 'de4e12af7f28f599-01'; // KJV (King James Version) as default, or use '61fd76eafa1577c2-02' for ASV
 
-export interface BibleVerse {
-    id: string;
-    orgId: string;
-    bibleId: string;
-    bookId: string;
-    chapterId: string;
-    reference: string;
-    content: string;
-    copyright: string;
-}
-
-// Popular verses for rotation
-const VERSES = [
-    'JER.29.11', // For I know the thoughts that I think toward you...
-    'ROM.8.28',  // And we know that all things work together for good...
-    'PHP.4.13',  // I can do all things through Christ...
-    'PRO.3.5',   // Trust in the Lord with all thine heart...
-    'ISA.40.31', // But they that wait upon the Lord...
-    'JHN.3.16',  // For God so loved the world...
 const BASE_URL = 'https://api.scripture.api.bible/v1';
 const BIBLE_ID = 'de4e12af7f28f599-01'; // KJV (King James Version) as default, or use '61fd76eafa1577c2-02' for ASV
 

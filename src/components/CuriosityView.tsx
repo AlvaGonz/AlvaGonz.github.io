@@ -10,23 +10,22 @@ import { FloatingElements } from './svg/FloatingElements';
 import { HeroCuriosity } from './sections/HeroCuriosity';
 import { FadeInOnScroll } from './animations/FadeInOnScroll';
 import { SpotifyNowPlaying } from './curiosity/SpotifyNowPlaying';
+import { getDuolingoStats, DuolingoUser } from '../services/duolingo';
 
 // Global flag to prevent multiple script injections
 let apiLoadStarted = false;
 
-// Declare window.YT for TypeScript
-declare global {
-  interface Window {
-    YT: any;
-    onYouTubeIframeAPIReady: (() => void) | undefined;
-  }
-}
+
 
 export function CuriosityView(): JSX.Element {
-
   const [showBSOD, setShowBSOD] = useState(false);
   const [selectedPassion, setSelectedPassion] = useState<PassionContent | null>(null);
+  const [duolingoStats, setDuolingoStats] = useState<DuolingoUser | null>(null);
   const bmwSoundRef = useRef<any>(null);
+
+  useEffect(() => {
+    getDuolingoStats().then(setDuolingoStats);
+  }, []);
 
   // Load BMW Sound (separate player)
   useEffect(() => {
@@ -320,20 +319,22 @@ export function CuriosityView(): JSX.Element {
                   <div className="bg-[#58cc02] h-full w-full rounded-xl p-6 relative">
                     <div className="flex items-center gap-4 mb-6">
                       <img
-                        src="https://d35aaqx5ub95lt.cloudfront.net/images/duo-2024.svg"
+                        src={duolingoStats?.avatar || "https://d35aaqx5ub95lt.cloudfront.net/images/duo-2024.svg"}
                         alt="Duo Owl"
-                        className="w-16 h-16 animate-bounce"
+                        className="w-16 h-16 animate-bounce rounded-full border-2 border-white/20"
                       />
                       <div>
                         <h3 className="text-2xl font-bold text-white">English</h3>
-                        <p className="text-white/80 font-medium">Learning Streak 🔥</p>
+                        <p className="text-white/80 font-medium">
+                          {duolingoStats ? `${duolingoStats.streak} Day Streak 🔥` : 'Loading Streak...'}
+                        </p>
                       </div>
                     </div>
 
                     <div className="bg-white/20 rounded-2xl p-4 backdrop-blur-sm">
                       <div className="flex justify-between items-center mb-2">
-                        <span className="font-bold text-white">Current Level</span>
-                        <span className="font-bold text-white">B2</span>
+                        <span className="font-bold text-white">Total XP</span>
+                        <span className="font-bold text-white">{duolingoStats?.totalXp.toLocaleString() || '...'}</span>
                       </div>
                       <div className="w-full bg-black/20 rounded-full h-4 overflow-hidden">
                         <div className="bg-yellow-400 h-full rounded-full w-[70%] relative overflow-hidden">
