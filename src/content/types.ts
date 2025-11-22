@@ -15,6 +15,7 @@ export interface Profile {
   name: string;
   role: string;
   tagline: string;
+  about: string;
   location: string;
   email?: string;
   linkedin: string;

@@ -11,6 +11,32 @@ export default {
         sans: ['Axiforma', 'system-ui', 'sans-serif'],
       },
       colors: {
+        // Semantic Theme Colors (Use these for shared components)
+        theme: {
+          background: 'var(--theme-background)',
+          surface: 'var(--theme-surface)',
+          primary: 'var(--theme-primary)',
+          secondary: 'var(--theme-secondary)',
+          accent: 'var(--theme-accent)',
+          text: {
+            DEFAULT: 'var(--theme-text)',
+            secondary: 'var(--theme-text-secondary)',
+          },
+          border: 'var(--theme-border)',
+        },
+        
+        // Curiosity Specific Colors (Palette 2)
+        curiosity: {
+          bg: 'var(--c-curiosity-bg)',
+          primary: 'var(--c-curiosity-primary)',
+          secondary: 'var(--c-curiosity-secondary)',
+          accent: 'var(--c-curiosity-accent)',
+          highlight: 'var(--c-curiosity-highlight)',
+          text: 'var(--c-curiosity-text)',
+          'text-secondary': 'var(--c-curiosity-text-secondary)',
+        },
+
+        // Legacy Formal Colors (Palette 1) - Kept for backward compatibility
         primary: {
           'rich-black': 'var(--c-primary-rich-black)',
           'dark-green': 'var(--c-primary-dark-green)',
@@ -64,4 +90,3 @@ export default {
   },
   plugins: [],
 } satisfies Config;
-

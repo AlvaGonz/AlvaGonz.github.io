@@ -16,19 +16,31 @@ export function FormalView(): JSX.Element {
   const { data: githubData } = useGitHubStats();
 
   // Merge local project data with live GitHub data where possible
-  const displayProjects = githubData?.repos.length 
-    ? githubData.repos.slice(0, 6).map(repo => {
+  const displayProjects = githubData?.topRepos.length 
+    ? githubData.topRepos.slice(0, 6).map(repo => {
         return {
           name: repo.name,
           description: repo.description || '',
           url: repo.url,
           stars: repo.stars,
           forks: repo.forks,
-          language: repo.language ? { name: repo.language, color: '#3178C6' } : null, // Default color
+          language: repo.language ? { name: repo.language.name, color: repo.language.color } : null,
           updatedAt: repo.updatedAt
         };
       })
-    : projectsData.projects;
+    : projectsData.projects.map((project: any) => ({
+        name: project.name,
+        description: project.description,
+        url: project.url,
+        stars: project.stars,
+        forks: project.forks,
+        language: project.language 
+          ? (typeof project.language === 'string' 
+              ? { name: project.language, color: '#3178C6' } 
+              : { name: project.language.name, color: project.language.color }) 
+          : null,
+        updatedAt: project.updatedAt
+      }));
 
   return (
     <div className="min-h-screen p-8 md:p-16 bg-primary-rich-black">

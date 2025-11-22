@@ -1,7 +1,6 @@
 import { useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { LandingSelector } from './LandingSelector';
-import { BackgroundMusic } from './BackgroundMusic';
 import { useSide } from '@/hooks/useSide';
 import { Navbar } from './layout/Navbar';
 
@@ -35,7 +34,6 @@ export function SplitLayout({ curiosity, formal }: SplitLayoutProps): JSX.Elemen
   return (
     <div className="min-h-screen" onKeyDown={handleKeyDown}>
       <Navbar />
-      <BackgroundMusic visible={side === 'curiosity'} />
       
       <div className="relative w-full min-h-screen pt-16">
         <AnimatePresence mode="wait">

@@ -1,22 +1,17 @@
 import { motion } from 'framer-motion';
 import type { Project } from '../content/types';
+import { useSide } from '@/hooks/useSide';
+import { GlassmorphicCard } from './animations/GlassmorphicCard';
 
 interface ProjectCardProps {
   project: Project;
 }
 
 export function ProjectCard({ project }: ProjectCardProps): JSX.Element {
-  // If we have GitHub API data (implied by presence of numeric ID in real API response, 
-  // though here we use our existing type which matches well enough. 
-  // We might want to add `updatedAt` to the type or just accept it if we extend the type locally).
-  
-  // Note: The current Project type in src/content/types.ts doesn't have updatedAt.
-  // We'll assume it might be passed in extended object or ignore for now to keep type safety pure 
-  // until we update the type definition. 
-  // Actually, let's check if we can safely access it.
-  
-  const updatedAt = (project as any).updatedAt as string | undefined;
+  const { side } = useSide();
+  const isCuriosity = side === 'curiosity';
 
+  const updatedAt = (project as any).updatedAt as string | undefined;
   const daysAgo = updatedAt
     ? Math.floor((Date.now() - new Date(updatedAt).getTime()) / (1000 * 60 * 60 * 24))
     : null;
@@ -29,20 +24,17 @@ export function ProjectCard({ project }: ProjectCardProps): JSX.Element {
     daysAgo < 365 ? `${Math.floor(daysAgo / 30)}mo ago` :
     `${Math.floor(daysAgo / 365)}y ago`;
 
-  return (
-    <motion.div
-      whileHover={{ y: -5, scale: 1.02 }}
-      className="bg-primary-dark-green rounded-xl p-6 border border-secondary-pine hover:border-primary-mountain-meadow transition-all duration-300 shadow-scroll-modern h-full flex flex-col"
-    >
+  const content = (
+    <>
       <div className="flex items-start justify-between mb-3">
-        <h3 className="text-xl font-semibold text-primary-anti-flash-white line-clamp-1" title={project.name}>
+        <h3 className="text-xl font-semibold text-theme-text line-clamp-1 group-hover:text-theme-primary transition-colors" title={project.name}>
           {project.name}
         </h3>
         {project.language && (
           <span
-            className="text-xs px-2 py-1 rounded-full shrink-0 ml-2"
+            className="text-xs px-2 py-1 rounded-full shrink-0 ml-2 backdrop-blur-sm"
             style={{
-              backgroundColor: `${project.language.color}20`,
+              backgroundColor: isCuriosity ? `${project.language.color}30` : `${project.language.color}20`,
               color: project.language.color,
               border: `1px solid ${project.language.color}40`
             }}
@@ -52,12 +44,12 @@ export function ProjectCard({ project }: ProjectCardProps): JSX.Element {
         )}
       </div>
       
-      <p className="text-secondary-pistachio mb-6 line-clamp-2 flex-grow">
+      <p className="text-theme-text-secondary mb-6 line-clamp-2 flex-grow">
         {project.description || 'No description available.'}
       </p>
       
-      <div className="flex items-center justify-between text-sm pt-4 border-t border-white/5">
-        <div className="flex gap-4 text-secondary-stone">
+      <div className="flex items-center justify-between text-sm pt-4 border-t border-theme-border/50">
+        <div className="flex gap-4 text-theme-text-secondary">
           <span className="flex items-center gap-1.5" title="Stars">
             <span className="text-yellow-500">⭐</span> {project.stars}
           </span>
@@ -68,7 +60,7 @@ export function ProjectCard({ project }: ProjectCardProps): JSX.Element {
         
         <div className="flex items-center gap-3">
           {timeText && (
-            <span className="text-xs text-secondary-stone/60 hidden sm:inline-block">
+            <span className="text-xs text-theme-text-secondary/60 hidden sm:inline-block">
               {timeText}
             </span>
           )}
@@ -76,12 +68,29 @@ export function ProjectCard({ project }: ProjectCardProps): JSX.Element {
             href={project.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-primary-mountain-meadow hover:text-primary-caribbean-green transition-colors font-medium flex items-center gap-1"
+            className="text-theme-primary hover:text-theme-accent transition-colors font-medium flex items-center gap-1"
           >
             Code <span className="text-lg">→</span>
           </a>
         </div>
       </div>
+    </>
+  );
+
+  if (isCuriosity) {
+    return (
+      <GlassmorphicCard className="p-6 h-full flex flex-col group">
+        {content}
+      </GlassmorphicCard>
+    );
+  }
+
+  return (
+    <motion.div
+      whileHover={{ y: -5, scale: 1.02 }}
+      className="bg-theme-surface rounded-xl p-6 border border-theme-border hover:border-theme-primary transition-all duration-300 shadow-scroll-modern h-full flex flex-col group"
+    >
+      {content}
     </motion.div>
   );
 }
