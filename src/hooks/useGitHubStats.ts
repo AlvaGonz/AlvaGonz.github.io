@@ -16,9 +16,16 @@ export function useGitHubStats() {
         if (cached && cacheTime) {
           const age = Date.now() - parseInt(cacheTime);
           if (age < 24 * 60 * 60 * 1000) {
-            setData(JSON.parse(cached));
-            setLoading(false);
-            return;
+            try {
+              const parsed = JSON.parse(cached);
+              if (parsed && Array.isArray(parsed.topLanguages) && Array.isArray(parsed.topRepos) && parsed.user) {
+                setData(parsed);
+                setLoading(false);
+                return;
+              }
+            } catch (e) {
+              console.warn('Failed to parse cached GitHub data');
+            }
           }
         }
 
@@ -30,8 +37,17 @@ export function useGitHubStats() {
         } else {
           // Fallback to cache if fetch fails even if expired
           if (cached) {
-            setData(JSON.parse(cached));
-            console.warn('Fetch failed, using expired cache');
+            try {
+              const parsed = JSON.parse(cached);
+              if (parsed && Array.isArray(parsed.topLanguages) && Array.isArray(parsed.topRepos) && parsed.user) {
+                setData(parsed);
+                console.warn('Fetch failed, using expired cache');
+              } else {
+                throw new Error('Invalid cache structure');
+              }
+            } catch (e) {
+              throw new Error('Failed to fetch GitHub data and invalid cache');
+            }
           } else {
             throw new Error('Failed to fetch GitHub data');
           }
