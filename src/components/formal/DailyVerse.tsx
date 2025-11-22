@@ -2,16 +2,16 @@ import { useFetch } from '../../hooks/useFetch';
 import { getDailyVerseUrl, getBibleHeaders, BibleVerse } from '../../services/bible';
 
 export function DailyVerse() {
-    const { data, loading, error } = useFetch<{ data: BibleVerse }>(
+    const { data, loading, error } = useFetch<BibleVerse>(
         getDailyVerseUrl(),
         { headers: getBibleHeaders() }
     );
 
-    if (loading || error || !data?.data) return null;
+    if (loading || error || !data) return null;
 
-    const verse = data.data;
-    // Clean up the content (API returns HTML sometimes)
-    const cleanContent = verse.content.replace(/<[^>]*>/g, '').trim();
+    const verse = data;
+    // Clean up the content (API returns text with newlines)
+    const cleanContent = verse.text.trim();
 
     return (
         <div className="mt-12 pt-8 border-t border-gray-200/10 text-center">

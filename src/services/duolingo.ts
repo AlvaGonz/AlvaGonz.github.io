@@ -12,28 +12,31 @@ export interface DuolingoUser {
 }
 
 const USERNAME = 'AlvaGonz';
-const PROXY_URL = 'https://api.allorigins.win/raw?url=';
-const DUOLINGO_API = `https://www.duolingo.com/api/1/users/show?username=${USERNAME}`;
+// Use allorigins.win/get for better CORS support
+const PROXY_URL = 'https://api.allorigins.win/get?url=';
+const DUOLINGO_API = `https://www.duolingo.com/2017-06-30/users?username=${USERNAME}`;
 
 export const getDuolingoStats = async (): Promise<DuolingoUser | null> => {
     try {
+        // Fetch via proxy - allorigins.win/get returns {contents: "...", status: {...}}
         const response = await fetch(`${PROXY_URL}${encodeURIComponent(DUOLINGO_API)}`);
 
         if (!response.ok) {
-            throw new Error('Failed to fetch Duolingo stats');
+            throw new Error(`Failed to fetch Duolingo stats: ${response.statusText}`);
         }
 
-        const data = await response.json();
+        const proxyData = await response.json();
+        const data = JSON.parse(proxyData.contents);
+        const userData = data.users?.[0] || data;
 
         // Transform the raw data into our interface
-        // Note: The structure might vary slightly, so we add safe access
         return {
-            username: data.username,
-            avatar: data.avatar || 'https://d35aaqx5ub95lt.cloudfront.net/images/duo-2024.svg',
-            streak: data.streakData?.streak || data.site_streak || 0,
-            totalXp: data.totalXp || 0,
-            learningLanguage: data.learningLanguage || 'en',
-            courses: data.courses || []
+            username: userData.username || USERNAME,
+            avatar: userData.picture || 'https://d35aaqx5ub95lt.cloudfront.net/images/duo-2024.svg',
+            streak: userData.streak || 0,
+            totalXp: userData.totalXp || 0,
+            learningLanguage: userData.learningLanguage || 'en',
+            courses: userData.courses || []
         };
     } catch (error) {
         console.error('Error fetching Duolingo stats:', error);
