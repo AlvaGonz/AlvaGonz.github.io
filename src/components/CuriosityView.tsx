@@ -213,11 +213,6 @@ export function CuriosityView(): JSX.Element {
           {/* About Section */}
           <AboutCuriosity />
 
-          {/* Vibe Check Section */}
-          <section className="max-w-md mx-auto">
-            <SpotifyNowPlaying />
-          </section>
-
           {/* Passions Grid */}
           <section id="projects">
             <FadeInOnScroll variant="fadeUp">
@@ -306,6 +301,9 @@ export function CuriosityView(): JSX.Element {
         onClose={() => setSelectedPassion(null)}
         passion={selectedPassion}
       />
+
+      {/* Floating Spotify Player */}
+      <SpotifyNowPlaying />
     </div>
   );
 }

@@ -120,6 +120,39 @@ export function FormalView(): JSX.Element {
           <SkillPills skills={skills} />
         </section>
 
+        {/* Spoken Languages Section */}
+        <section id="spoken-languages">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary-anti-flash-white border-b-2 border-primary-mountain-meadow pb-2">
+            Languages
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-primary-rich-black/50 p-4 rounded-xl border border-white/5 flex items-center justify-between hover:bg-white/5 transition-colors">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">🇩🇴</span>
+                <div>
+                  <h3 className="font-bold text-white">Spanish</h3>
+                  <p className="text-sm text-secondary-stone">Native</p>
+                </div>
+              </div>
+              <div className="px-3 py-1 rounded-full bg-primary-mountain-meadow/20 text-primary-mountain-meadow text-xs font-bold border border-primary-mountain-meadow/30">
+                Native
+              </div>
+            </div>
+            <div className="bg-primary-rich-black/50 p-4 rounded-xl border border-white/5 flex items-center justify-between hover:bg-white/5 transition-colors">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">🇺🇸</span>
+                <div>
+                  <h3 className="font-bold text-white">English</h3>
+                  <p className="text-sm text-secondary-stone">Basic (B2)</p>
+                </div>
+              </div>
+              <div className="px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-bold border border-blue-500/30">
+                B2
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Achievements Section */}
         <section id="achievements">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary-anti-flash-white border-b-2 border-primary-mountain-meadow pb-2">
