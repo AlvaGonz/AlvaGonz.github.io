@@ -41,12 +41,11 @@ export function FadeInOnScroll({
       animate={isInView ? 'visible' : 'hidden'}
       variants={variants}
       transition={{ 
-        delay,
         duration: 0.5,
-        // Merge custom transition from variant if exists, but override delay
-        ...variants.visible && typeof variants.visible === 'object' && 'transition' in variants.visible 
+        ...(variants?.visible && typeof variants.visible === 'object' && 'transition' in variants.visible 
           ? (variants.visible as any).transition 
-          : {} 
+          : {}),
+        delay
       }}
       className={className}
     >
