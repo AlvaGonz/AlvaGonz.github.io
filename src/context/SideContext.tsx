@@ -32,7 +32,7 @@ export function SideProvider({ children }: { children: ReactNode }) {
     const url = new URL(window.location.href);
     
     if (newSide) {
-      url.searchParams.set('side', newSide);
+    url.searchParams.set('side', newSide);
       localStorage.setItem('portfolio-side', newSide);
     } else {
       url.searchParams.delete('side');

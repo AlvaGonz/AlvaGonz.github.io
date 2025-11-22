@@ -1,7 +1,27 @@
 /* Axiforma Font Face Declarations */
-/* Fonts are loaded dynamically via src/utils/fontLoader.ts */
-/* This allows CDN configuration via VITE_FONT_CDN_URL environment variable */
-/* Fallback to local paths (/fonts/axiforma/) if CDN URL is not set */
+@font-face {
+  font-family: 'Axiforma';
+  src: url('/fonts/axiforma/Axiforma-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Axiforma';
+  src: url('/fonts/axiforma/Axiforma-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Axiforma';
+  src: url('/fonts/axiforma/Axiforma-SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* Primary Colors from Palette 1 */
 :root {

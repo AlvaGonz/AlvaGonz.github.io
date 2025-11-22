@@ -9,6 +9,8 @@ import { HeroIcon } from './svg/HeroIcon';
 import { FloatingElements } from './svg/FloatingElements';
 import { HeroCuriosity } from './sections/HeroCuriosity';
 import { FadeInOnScroll } from './animations/FadeInOnScroll';
+import { RandomUserGreeting } from './curiosity/RandomUserGreeting';
+import { PokemonCard } from './curiosity/PokemonCard';
 
 // Global flag to prevent multiple script injections
 let apiLoadStarted = false;
@@ -207,6 +209,11 @@ export function CuriosityView(): JSX.Element {
         <HeroCuriosity />
 
         <div className="max-w-7xl mx-auto px-8 space-y-24 pb-24">
+          {/* Random User Greeting */}
+          <FadeInOnScroll variant="fadeUp">
+            <RandomUserGreeting />
+          </FadeInOnScroll>
+
           {/* About Section */}
           <AboutCuriosity />
 
@@ -276,6 +283,15 @@ export function CuriosityView(): JSX.Element {
 
           {/* Roadmap Section */}
           <Roadmap variant="curiosity" />
+
+          {/* Pokemon Card Section */}
+          <section id="hobbies">
+            <FadeInOnScroll variant="fadeUp">
+              <div className="max-w-md mx-auto">
+                <PokemonCard />
+              </div>
+            </FadeInOnScroll>
+          </section>
         </div>
       </div>
 

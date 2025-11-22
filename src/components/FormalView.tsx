@@ -11,6 +11,7 @@ import { Contact } from './Contact';
 import projectsData from '../data/generated/pinned.json';
 import { AboutFormal } from './sections/AboutFormal';
 import { useGitHubStats } from '@/hooks/useGitHubStats';
+import { LeetcodeStats } from './formal/LeetcodeStats';
 
 export function FormalView(): JSX.Element {
   const { data: githubData } = useGitHubStats();
@@ -110,6 +111,14 @@ export function FormalView(): JSX.Element {
             Skills & Technologies
           </h2>
           <SkillPills skills={skills} />
+        </section>
+
+        {/* Achievements Section */}
+        <section id="achievements">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary-anti-flash-white border-b-2 border-primary-mountain-meadow pb-2">
+            Achievements
+          </h2>
+          <LeetcodeStats />
         </section>
 
         {/* Projects Section */}
