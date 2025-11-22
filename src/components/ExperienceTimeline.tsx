@@ -13,7 +13,7 @@ export function ExperienceTimeline(): JSX.Element {
           className="relative pl-8"
         >
           {/* Dot */}
-          <span className="absolute -left-[9px] top-1 h-4 w-4 rounded-full bg-theme-background border-2 border-theme-primary shadow-[0_0_10px_rgba(var(--theme-primary),0.5)] transition-colors" />
+          <span className="absolute -left-[9px] top-1 h-4 w-4 rounded-full bg-theme-background border-2 border-theme-primary shadow-[0_0_10px_color-mix(in_srgb,var(--theme-primary),transparent_50%)] transition-colors" />
           
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
             <h3 className="text-xl font-bold text-theme-text">

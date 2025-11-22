@@ -4,7 +4,7 @@ export type Side = 'curiosity' | 'formal';
 
 interface SideContextType {
   side: Side | null;
-  setSide: (side: Side) => void;
+  setSide: (side: Side | null) => void;
   toggleSide: () => void;
 }
 
@@ -21,18 +21,25 @@ const getInitialSide = (): Side | null => {
   const storedSide = localStorage.getItem('portfolio-side') as Side | null;
   if (storedSide === 'curiosity' || storedSide === 'formal') return storedSide;
   
-  return 'formal'; // Default fallback
+  return null; // Default fallback to show selector
 };
 
 export function SideProvider({ children }: { children: ReactNode }) {
   const [side, setSideState] = useState<Side | null>(getInitialSide);
 
-  const setSide = useCallback((newSide: Side) => {
+  const setSide = useCallback((newSide: Side | null) => {
     setSideState(newSide);
     const url = new URL(window.location.href);
-    url.searchParams.set('side', newSide);
+    
+    if (newSide) {
+      url.searchParams.set('side', newSide);
+      localStorage.setItem('portfolio-side', newSide);
+    } else {
+      url.searchParams.delete('side');
+      localStorage.removeItem('portfolio-side');
+    }
+    
     window.history.replaceState({}, '', url);
-    localStorage.setItem('portfolio-side', newSide);
   }, []);
 
   const toggleSide = useCallback(() => {

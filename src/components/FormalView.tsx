@@ -28,7 +28,19 @@ export function FormalView(): JSX.Element {
           updatedAt: repo.updatedAt
         };
       })
-    : projectsData.projects;
+    : projectsData.projects.map((project: any) => ({
+        name: project.name,
+        description: project.description,
+        url: project.url,
+        stars: project.stars,
+        forks: project.forks,
+        language: project.language 
+          ? (typeof project.language === 'string' 
+              ? { name: project.language, color: '#3178C6' } 
+              : { name: project.language.name, color: project.language.color }) 
+          : null,
+        updatedAt: project.updatedAt
+      }));
 
   return (
     <div className="min-h-screen p-8 md:p-16 bg-primary-rich-black">

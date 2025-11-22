@@ -32,11 +32,15 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center gap-3">
-            <a href="/" className="flex items-center gap-2 group">
+            <button 
+              onClick={() => setSide(null)} 
+              className="flex items-center gap-2 group"
+              aria-label="Return to selection"
+            >
               <div className="bg-white rounded-full p-1.5 flex items-center justify-center transition-transform group-hover:scale-110 shadow-lg shadow-theme-primary/20">
                 <img src="/logo.svg" alt="AAG Logo" className="h-6 w-6" />
               </div>
-            </a>
+            </button>
           </div>
 
           {/* Desktop nav */}
