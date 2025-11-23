@@ -1,52 +1,106 @@
-export function FireStreakEffect() {
-    return (
-        <div className="absolute inset-[-8px] pointer-events-none z-0 overflow-visible">
-            {/* Animated Fire Border Container */}
-            <div className="absolute inset-0 z-0">
-                {/* CSS-based Fire Animation Layer */}
-                <div className="absolute inset-0 w-full h-full opacity-90 mix-blend-screen overflow-visible">
-                    <style>
-                        {`
-                @keyframes fire-rise {
-                    0% { transform: translateY(0) scale(1); opacity: 0; }
-                    20% { opacity: 1; }
-                    100% { transform: translateY(-60px) scale(0); opacity: 0; }
-                }
-                @keyframes flicker {
-                    0%, 100% { opacity: 1; transform: scale(1); }
-                    50% { opacity: 0.8; transform: scale(0.98); }
-                }
-                `}
-                    </style>
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
-                    {/* Main Fire Gradient Border */}
-                    <div className="absolute inset-0 rounded-2xl border-[8px] border-transparent"
+export function FireStreakEffect() {
+    const fireAnimationUrl = 'https://lottie.host/b14cf9e9-2a6f-4a7a-b0a5-8c0f9e4f4e3b/NG4n3YU51z.json';
+
+    return (
+        <div className="absolute inset-[-20px] pointer-events-none z-0 overflow-visible">
+            {/* Top Fire */}
+            <div className="absolute -top-8 left-0 right-0 h-24 flex justify-around">
+                {[...Array(3)].map((_, i) => (
+                    <DotLottieReact
+                        key={`top-${i}`}
+                        src={fireAnimationUrl}
+                        loop
+                        autoplay
                         style={{
-                            background: 'linear-gradient(#58cc02, #58cc02) padding-box, linear-gradient(to top, #ff9600, #ff4b00) border-box',
-                            mask: 'linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)',
-                            WebkitMaskComposite: 'xor',
-                            maskComposite: 'exclude'
+                            width: '80px',
+                            height: '80px',
+                            transform: 'rotate(180deg)'
                         }}
                     />
-
-                    {/* Rising Flames Particles */}
-                    {[...Array(25)].map((_, i) => (
-                        <div
-                            key={i}
-                            className="absolute bottom-[-10px] w-5 h-8 bg-gradient-to-t from-[#ff4b00] to-[#ff9600] rounded-full blur-[2px]"
-                            style={{
-                                left: `${Math.random() * 100}%`,
-                                animation: `fire-rise ${0.7 + Math.random() * 0.5}s ease-out infinite`,
-                                animationDelay: `${Math.random() * 0.6}s`,
-                                opacity: 0
-                            }}
-                        />
-                    ))}
-
-                    {/* Inner Glow */}
-                    <div className="absolute inset-0 rounded-2xl shadow-[inset_0_0_25px_#ff4b00] opacity-60 animate-[flicker_0.2s_infinite]" />
-                </div>
+                ))}
             </div>
+
+            {/* Bottom Fire */}
+            <div className="absolute -bottom-8 left-0 right-0 h-24 flex justify-around">
+                {[...Array(3)].map((_, i) => (
+                    <DotLottieReact
+                        key={`bottom-${i}`}
+                        src={fireAnimationUrl}
+                        loop
+                        autoplay
+                        style={{
+                            width: '80px',
+                            height: '80px'
+                        }}
+                    />
+                ))}
+            </div>
+
+            {/* Left Fire */}
+            <div className="absolute -left-8 top-0 bottom-0 w-24 flex flex-col justify-around">
+                {[...Array(3)].map((_, i) => (
+                    <DotLottieReact
+                        key={`left-${i}`}
+                        src={fireAnimationUrl}
+                        loop
+                        autoplay
+                        style={{
+                            width: '80px',
+                            height: '80px',
+                            transform: 'rotate(90deg)'
+                        }}
+                    />
+                ))}
+            </div>
+
+            {/* Right Fire */}
+            <div className="absolute -right-8 top-0 bottom-0 w-24 flex flex-col justify-around">
+                {[...Array(3)].map((_, i) => (
+                    <DotLottieReact
+                        key={`right-${i}`}
+                        src={fireAnimationUrl}
+                        loop
+                        autoplay
+                        style={{
+                            width: '80px',
+                            height: '80px',
+                            transform: 'rotate(-90deg)'
+                        }}
+                    />
+                ))}
+            </div>
+
+            {/* Corner Fires for fuller effect */}
+            <DotLottieReact
+                src={fireAnimationUrl}
+                loop
+                autoplay
+                className="absolute -top-6 -left-6"
+                style={{ width: '60px', height: '60px', transform: 'rotate(135deg)' }}
+            />
+            <DotLottieReact
+                src={fireAnimationUrl}
+                loop
+                autoplay
+                className="absolute -top-6 -right-6"
+                style={{ width: '60px', height: '60px', transform: 'rotate(-135deg)' }}
+            />
+            <DotLottieReact
+                src={fireAnimationUrl}
+                loop
+                autoplay
+                className="absolute -bottom-6 -left-6"
+                style={{ width: '60px', height: '60px', transform: 'rotate(45deg)' }}
+            />
+            <DotLottieReact
+                src={fireAnimationUrl}
+                loop
+                autoplay
+                className="absolute -bottom-6 -right-6"
+                style={{ width: '60px', height: '60px', transform: 'rotate(-45deg)' }}
+            />
         </div>
     );
 }

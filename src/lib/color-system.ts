@@ -22,7 +22,7 @@ export const colorSystem = {
     }
   },
   curiosity: {
-    // Palette 2 - Creative/Mindful Identity
+    // Palette 2 - curios/Mindful Identity
     // Based on provided image: One Palette, Five Gradients
     background: '#21263A',       // Deep Blue/Grey (Gradient 05 end)
     surface: '#157954',          // Deep Green (Gradient 05 start / Gradient 04 end)

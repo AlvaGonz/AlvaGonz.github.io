@@ -287,7 +287,7 @@ export function CuriosityView(): JSX.Element {
             </div>
           </section>
 
-          {/* Creative Languages Section */}
+          {/* curios Languages Section */}
           <section id="languages" className="space-y-8">
             <FadeInOnScroll variant="fadeUp">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -318,7 +318,7 @@ export function CuriosityView(): JSX.Element {
 
                 {/* English - Duolingo Style */}
                 <div
-                  className="relative overflow-hidden rounded-2xl bg-[#58cc02] p-1 shadow-[0_8px_0_0_#46a302] transform hover:translate-y-1 hover:shadow-[0_4px_0_0_#46a302] transition-all duration-200 cursor-pointer group"
+                  className="relative overflow-visible rounded-2xl bg-[#58cc02] p-1 shadow-[0_8px_0_0_#46a302] transform hover:translate-y-1 hover:shadow-[0_4px_0_0_#46a302] transition-all duration-200 cursor-pointer group"
                 >
                   {/* Fire Effect Around Card - Always visible if streak > 0 */}
                   {duolingoStats && duolingoStats.streak > 0 && <FireStreakEffect />}

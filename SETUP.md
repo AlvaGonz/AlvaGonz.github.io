@@ -78,7 +78,7 @@ pnpm test:e2e
 - Vite React+TypeScript setup
 - Tailwind CSS with custom theme
 - Scroll-based modernization
-- Dual layout (creative/formal)
+- Dual layout (curios/formal)
 - GitHub integration script
 - Hero component (ported from legacy)
 - All components and tests

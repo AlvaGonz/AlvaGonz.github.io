@@ -26,7 +26,7 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Curiosity Special - Tinted for the creative side */
+/* Curiosity Special - Tinted for the curios side */
 [data-theme="curiosity"] .glass-panel {
   background: linear-gradient(
     135deg,

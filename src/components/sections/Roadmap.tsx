@@ -36,7 +36,7 @@ const roadmapData: Record<'formal' | 'curiosity', TimelinePhase[]> = {
       phase: 'Chapter 1: The Canvas',
       items: [
         'Discovered the beauty of design',
-        'React as my creative paintbrush',
+        'React as my curios paintbrush',
         'Building interfaces with intention',
       ],
     },
