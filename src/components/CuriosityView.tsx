@@ -22,7 +22,7 @@ export function CuriosityView(): JSX.Element {
   const [showBSOD, setShowBSOD] = useState(false);
   const [selectedPassion, setSelectedPassion] = useState<PassionContent | null>(null);
   const [duolingoStats, setDuolingoStats] = useState<DuolingoUser | null>(null);
-  const [showEnglishFire, setShowEnglishFire] = useState(false);
+
   const bmwSoundRef = useRef<any>(null);
 
   useEffect(() => {
@@ -318,21 +318,20 @@ export function CuriosityView(): JSX.Element {
 
                 {/* English - Duolingo Style */}
                 <div
-                  onClick={() => {
-                    setShowEnglishFire(true);
-                    setTimeout(() => setShowEnglishFire(false), 3000); // Fire effect for 3 seconds
-                  }}
                   className="relative overflow-hidden rounded-2xl bg-[#58cc02] p-1 shadow-[0_8px_0_0_#46a302] transform hover:translate-y-1 hover:shadow-[0_4px_0_0_#46a302] transition-all duration-200 cursor-pointer group"
                 >
-                  {/* Fire Effect Around Card - Only on Click */}
-                  {showEnglishFire && <FireStreakEffect />}
+                  {/* Fire Effect Around Card - Always visible if streak > 0 */}
+                  {duolingoStats && duolingoStats.streak > 0 && <FireStreakEffect />}
 
                   <div className="bg-[#58cc02] h-full w-full rounded-xl p-6 relative z-10">
                     <div className="flex items-center gap-4 mb-6">
                       <img
-                        src={duolingoStats?.avatar || "https://d35aaqx5ub95lt.cloudfront.net/images/duo-2024.svg"}
+                        src={duolingoStats?.avatar || "/images/duo-face.png"}
                         alt="Duo Owl"
                         className="w-16 h-16 animate-bounce rounded-full border-2 border-white/20 group-hover:scale-110 transition-transform"
+                        onError={(e) => {
+                          e.currentTarget.src = "/images/duo-face.png";
+                        }}
                       />
                       <div>
                         <h3 className="text-2xl font-bold text-white">Duolingo Stats</h3>
@@ -366,9 +365,19 @@ export function CuriosityView(): JSX.Element {
                                 <span className="text-lg">
                                   {course.learningLanguage === 'en' ? '🇺🇸' :
                                     course.learningLanguage === 'ja' ? '🇯🇵' :
-                                      course.learningLanguage === 'fr' ? '🇫🇷' : '🌍'}
+                                      course.learningLanguage === 'fr' ? '🇫🇷' :
+                                        course.learningLanguage === 'ht' ? '🇭🇹' : '🌍'}
                                 </span>
-                                <span className="text-white/90">{course.title}</span>
+                                <div className="flex flex-col">
+                                  <span className="text-white/90 font-medium flex items-center gap-2">
+                                    {course.title}
+                                    {course.learningLanguage === 'en' && (
+                                      <span className="px-1.5 py-0.5 rounded bg-yellow-400 text-green-900 text-[10px] font-bold">
+                                        B2 Basic
+                                      </span>
+                                    )}
+                                  </span>
+                                </div>
                               </div>
                               <span className="text-white font-mono bg-black/20 px-2 py-0.5 rounded text-xs">
                                 {course.xp.toLocaleString()} XP

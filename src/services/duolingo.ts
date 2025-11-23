@@ -34,7 +34,7 @@ export const getDuolingoStats = async (): Promise<DuolingoUser | null> => {
         // Transform the raw data into our interface
         return {
             username: userData.username || USERNAME,
-            avatar: userData.picture || 'https://d35aaqx5ub95lt.cloudfront.net/images/duo-2024.svg',
+            avatar: userData.picture ? (userData.picture.startsWith('//') ? `https:${userData.picture}` : userData.picture) : '/images/duo-face.png',
             streak: userData.streak || 0,
             totalXp: userData.totalXp || 0,
             learningLanguage: userData.learningLanguage || 'en',

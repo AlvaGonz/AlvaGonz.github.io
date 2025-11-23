@@ -1,129 +1,52 @@
-import { motion } from 'framer-motion';
-
 export function FireStreakEffect() {
-    const flames = Array.from({ length: 20 }, (_, i) => i);
-
     return (
-        <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-2xl">
-            {flames.map((i) => (
-                <motion.div
-                    key={i}
-                    className="absolute"
-                    style={{
-                        left: `${(i / flames.length) * 100}%`,
-                        bottom: '-10px',
-                        width: '40px',
-                        height: '60px',
-                    }}
-                    animate={{
-                        y: [-60, -120, -60],
-                        opacity: [0, 1, 0],
-                        scale: [0.5, 1.2, 0.5],
-                    }}
-                    transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        delay: i * 0.1,
-                        ease: 'easeInOut',
-                    }}
-                >
-                    <div className="relative w-full h-full">
-                        {/* Outer flame */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-orange-600 via-orange-400 to-yellow-300 rounded-full blur-sm" />
-                        {/* Inner flame */}
-                        <div className="absolute inset-2 bg-gradient-to-t from-red-500 via-orange-300 to-yellow-200 rounded-full blur-xs" />
-                    </div>
-                </motion.div>
-            ))}
+        <div className="absolute inset-[-8px] pointer-events-none z-0 overflow-visible">
+            {/* Animated Fire Border Container */}
+            <div className="absolute inset-0 z-0">
+                {/* CSS-based Fire Animation Layer */}
+                <div className="absolute inset-0 w-full h-full opacity-90 mix-blend-screen overflow-visible">
+                    <style>
+                        {`
+                @keyframes fire-rise {
+                    0% { transform: translateY(0) scale(1); opacity: 0; }
+                    20% { opacity: 1; }
+                    100% { transform: translateY(-60px) scale(0); opacity: 0; }
+                }
+                @keyframes flicker {
+                    0%, 100% { opacity: 1; transform: scale(1); }
+                    50% { opacity: 0.8; transform: scale(0.98); }
+                }
+                `}
+                    </style>
 
-            {/* Top flames */}
-            {flames.map((i) => (
-                <motion.div
-                    key={`top-${i}`}
-                    className="absolute"
-                    style={{
-                        left: `${(i / flames.length) * 100}%`,
-                        top: '-10px',
-                        width: '40px',
-                        height: '60px',
-                    }}
-                    animate={{
-                        y: [60, 120, 60],
-                        opacity: [0, 1, 0],
-                        scale: [0.5, 1.2, 0.5],
-                    }}
-                    transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        delay: i * 0.1 + 1,
-                        ease: 'easeInOut',
-                    }}
-                >
-                    <div className="relative w-full h-full rotate-180">
-                        <div className="absolute inset-0 bg-gradient-to-t from-orange-600 via-orange-400 to-yellow-300 rounded-full blur-sm" />
-                        <div className="absolute inset-2 bg-gradient-to-t from-red-500 via-orange-300 to-yellow-200 rounded-full blur-xs" />
-                    </div>
-                </motion.div>
-            ))}
+                    {/* Main Fire Gradient Border */}
+                    <div className="absolute inset-0 rounded-2xl border-[8px] border-transparent"
+                        style={{
+                            background: 'linear-gradient(#58cc02, #58cc02) padding-box, linear-gradient(to top, #ff9600, #ff4b00) border-box',
+                            mask: 'linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)',
+                            WebkitMaskComposite: 'xor',
+                            maskComposite: 'exclude'
+                        }}
+                    />
 
-            {/* Side flames */}
-            {[...Array(10)].map((_, i) => (
-                <motion.div
-                    key={`left-${i}`}
-                    className="absolute"
-                    style={{
-                        left: '-10px',
-                        top: `${(i / 10) * 100}%`,
-                        width: '60px',
-                        height: '40px',
-                    }}
-                    animate={{
-                        x: [-60, -120, -60],
-                        opacity: [0, 1, 0],
-                        scale: [0.5, 1.2, 0.5],
-                    }}
-                    transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        delay: i * 0.15,
-                        ease: 'easeInOut',
-                    }}
-                >
-                    <div className="relative w-full h-full rotate-90">
-                        <div className="absolute inset-0 bg-gradient-to-t from-orange-600 via-orange-400 to-yellow-300 rounded-full blur-sm" />
-                        <div className="absolute inset-2 bg-gradient-to-t from-red-500 via-orange-300 to-yellow-200 rounded-full blur-xs" />
-                    </div>
-                </motion.div>
-            ))}
+                    {/* Rising Flames Particles */}
+                    {[...Array(25)].map((_, i) => (
+                        <div
+                            key={i}
+                            className="absolute bottom-[-10px] w-5 h-8 bg-gradient-to-t from-[#ff4b00] to-[#ff9600] rounded-full blur-[2px]"
+                            style={{
+                                left: `${Math.random() * 100}%`,
+                                animation: `fire-rise ${0.7 + Math.random() * 0.5}s ease-out infinite`,
+                                animationDelay: `${Math.random() * 0.6}s`,
+                                opacity: 0
+                            }}
+                        />
+                    ))}
 
-            {[...Array(10)].map((_, i) => (
-                <motion.div
-                    key={`right-${i}`}
-                    className="absolute"
-                    style={{
-                        right: '-10px',
-                        top: `${(i / 10) * 100}%`,
-                        width: '60px',
-                        height: '40px',
-                    }}
-                    animate={{
-                        x: [60, 120, 60],
-                        opacity: [0, 1, 0],
-                        scale: [0.5, 1.2, 0.5],
-                    }}
-                    transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        delay: i * 0.15 + 0.5,
-                        ease: 'easeInOut',
-                    }}
-                >
-                    <div className="relative w-full h-full -rotate-90">
-                        <div className="absolute inset-0 bg-gradient-to-t from-orange-600 via-orange-400 to-yellow-300 rounded-full blur-sm" />
-                        <div className="absolute inset-2 bg-gradient-to-t from-red-500 via-orange-300 to-yellow-200 rounded-full blur-xs" />
-                    </div>
-                </motion.div>
-            ))}
+                    {/* Inner Glow */}
+                    <div className="absolute inset-0 rounded-2xl shadow-[inset_0_0_25px_#ff4b00] opacity-60 animate-[flicker_0.2s_infinite]" />
+                </div>
+            </div>
         </div>
     );
 }
