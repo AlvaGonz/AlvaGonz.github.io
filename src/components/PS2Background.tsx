@@ -141,7 +141,7 @@ export function PS2Background(): JSX.Element {
       </motion.div>
 
       {/* Floating Particles (Palette accents) */}
-      {[...Array(7)].map((_, i) => (
+      {[...Array(22)].map((_, i) => (
         <motion.div
           key={i}
           className="absolute rounded-full blur-2xl"
@@ -169,13 +169,13 @@ export function PS2Background(): JSX.Element {
 
       {/* Vignette */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,#0f111a_90%)] pointer-events-none" />
-      
+
       {/* Scanline Effect */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
-           style={{ 
-             backgroundImage: 'linear-gradient(transparent 50%, rgba(0,0,0,0.5) 50%)',
-             backgroundSize: '4px 4px'
-           }} 
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage: 'linear-gradient(transparent 50%, rgba(0,0,0,0.5) 50%)',
+          backgroundSize: '4px 4px'
+        }}
       />
     </div>
   );

@@ -140,13 +140,7 @@ export function FormalView(): JSX.Element {
           </div>
         </section>
 
-        {/* Achievements Section */}
-        <section id="achievements">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary-anti-flash-white border-b-2 border-primary-mountain-meadow pb-2">
-            Achievements
-          </h2>
-          <LeetcodeStats />
-        </section>
+
 
         {/* Projects Section */}
         <section id="projects">
@@ -175,9 +169,15 @@ export function FormalView(): JSX.Element {
           </div>
         </section>
 
-        {/* GitHub Activity Section */}
-        <section id="activity">
-          <GithubActivity />
+        {/* Activity & Achievements Section */}
+        <section id="activity-achievements">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary-anti-flash-white border-b-2 border-primary-mountain-meadow pb-2">
+            Activity & Achievements
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <LeetcodeStats />
+            <GithubActivity />
+          </div>
         </section>
 
         {/* Organizations Section (Penultimate) */}

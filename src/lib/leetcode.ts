@@ -1,22 +1,20 @@
-const username = import.meta.env.VITE_LEETCODE_USERNAME || 'AlvaGonz';
+const username = import.meta.env.VITE_LEETCODE_USERNAME || 'alvagonz';
 
 export interface LeetCodeStats {
   status: string;
   message: string;
-  data?: {
-    userProfile: {
-      username: string;
-      realName: string;
-      avatar: string;
-      ranking: number;
-      totalProblems: number;
-      totalSolved: number;
-      easyCount: number;
-      mediumCount: number;
-      hardCount: number;
-      acceptanceRate: number;
-    };
-  };
+  totalSolved: number;
+  totalQuestions: number;
+  easySolved: number;
+  totalEasy: number;
+  mediumSolved: number;
+  totalMedium: number;
+  hardSolved: number;
+  totalHard: number;
+  acceptanceRate: number;
+  ranking: number;
+  contributionPoints: number;
+  reputation: number;
 }
 
 export async function fetchLeetCodeStats(): Promise<LeetCodeStats | null> {

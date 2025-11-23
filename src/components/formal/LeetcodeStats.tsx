@@ -12,13 +12,13 @@ export function LeetcodeStats() {
     );
   }
 
-  if (error || !data?.data?.userProfile) {
+  if (error || !data || data.status !== 'success') {
     return null;
   }
 
-  const user = data.data.userProfile;
-  const solvePercentage = user.totalProblems > 0 
-    ? (user.totalSolved / user.totalProblems) * 100 
+  const user = data;
+  const solvePercentage = user.totalQuestions > 0
+    ? (user.totalSolved / user.totalQuestions) * 100
     : 0;
 
   return (
@@ -26,7 +26,7 @@ export function LeetcodeStats() {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-2xl p-6 border border-amber-200 dark:border-amber-800 backdrop-blur-sm"
+      className="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-2xl p-6 border border-amber-200 dark:border-amber-800 backdrop-blur-sm h-full"
     >
       <h3 className="text-xl font-bold mb-4 text-theme-text flex items-center gap-2">
         <span className="text-2xl">⚔️</span>
@@ -51,7 +51,7 @@ export function LeetcodeStats() {
       <div className="mb-4">
         <div className="flex justify-between items-center mb-2">
           <p className="text-sm text-theme-text-secondary">
-            {user.totalSolved} / {user.totalProblems} problemas resueltos
+            {user.totalSolved} / {user.totalQuestions} problems solved
           </p>
           <p className="text-sm font-semibold text-theme-text">
             {solvePercentage.toFixed(1)}%
@@ -70,15 +70,15 @@ export function LeetcodeStats() {
 
       <div className="grid grid-cols-3 gap-2 text-sm">
         <div className="text-center p-3 bg-white/50 dark:bg-theme-surface/50 rounded-lg border border-green-200 dark:border-green-800">
-          <p className="text-green-600 dark:text-green-400 font-bold text-lg">{user.easyCount}</p>
+          <p className="text-green-600 dark:text-green-400 font-bold text-lg">{user.easySolved}</p>
           <p className="text-theme-text-secondary text-xs">Easy</p>
         </div>
         <div className="text-center p-3 bg-white/50 dark:bg-theme-surface/50 rounded-lg border border-orange-200 dark:border-orange-800">
-          <p className="text-orange-600 dark:text-orange-400 font-bold text-lg">{user.mediumCount}</p>
+          <p className="text-orange-600 dark:text-orange-400 font-bold text-lg">{user.mediumSolved}</p>
           <p className="text-theme-text-secondary text-xs">Medium</p>
         </div>
         <div className="text-center p-3 bg-white/50 dark:bg-theme-surface/50 rounded-lg border border-red-200 dark:border-red-800">
-          <p className="text-red-600 dark:text-red-400 font-bold text-lg">{user.hardCount}</p>
+          <p className="text-red-600 dark:text-red-400 font-bold text-lg">{user.hardSolved}</p>
           <p className="text-theme-text-secondary text-xs">Hard</p>
         </div>
       </div>

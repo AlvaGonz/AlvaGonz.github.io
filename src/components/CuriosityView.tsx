@@ -11,6 +11,7 @@ import { HeroCuriosity } from './sections/HeroCuriosity';
 import { FadeInOnScroll } from './animations/FadeInOnScroll';
 import { SpotifyNowPlaying } from './curiosity/SpotifyNowPlaying';
 import { getDuolingoStats, DuolingoUser } from '../services/duolingo';
+import { FireStreakEffect } from './effects/FireStreakEffect';
 
 // Global flag to prevent multiple script injections
 let apiLoadStarted = false;
@@ -21,6 +22,7 @@ export function CuriosityView(): JSX.Element {
   const [showBSOD, setShowBSOD] = useState(false);
   const [selectedPassion, setSelectedPassion] = useState<PassionContent | null>(null);
   const [duolingoStats, setDuolingoStats] = useState<DuolingoUser | null>(null);
+  const [showEnglishFire, setShowEnglishFire] = useState(false);
   const bmwSoundRef = useRef<any>(null);
 
   useEffect(() => {
@@ -103,8 +105,8 @@ export function CuriosityView(): JSX.Element {
       id: 'ai',
       title: 'AI & Ethics',
       icon: '🤖',
-      shortDesc: 'Exploring the moral implications of artificial intelligence.',
-      fullDesc: "As we stand on the brink of the AI revolution, I'm fascinated not just by the 'how', but the 'should'. I delve into topics like algorithmic bias, the future of work, and the philosophical questions of machine consciousness. It's about building technology that elevates humanity rather than diminishing it.",
+      shortDesc: 'The future of development: managing AI agents as a team.',
+      fullDesc: "We've evolved from manually writing every line and debugging for hours, to AI-powered troubleshooting and instant code generation. The breakthrough of late 2025 changed everything: single developers can now leverage multiple AI agents as a team, making large-scale solo projects feasible.\n\nThe most crucial skill for 2026 isn't just coding—it's learning to manage AI agents like a senior engineer manages a team. Assigning tasks, reviewing output, and orchestrating the workflow. It's about understanding application architecture and knowing how to divide and delegate work between human creativity and AI execution.\n\nUsing AI agents isn't optional anymore—it's as essential as calculators for math. The question isn't 'how' we build, but 'should' we build it, and how do we ensure technology elevates humanity rather than diminishing it.",
       image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop',
       color: 'from-cyan-400/80 to-blue-600/80',
     },
@@ -315,34 +317,74 @@ export function CuriosityView(): JSX.Element {
                 </div>
 
                 {/* English - Duolingo Style */}
-                <div className="relative overflow-hidden rounded-2xl bg-[#58cc02] p-1 shadow-[0_8px_0_0_#46a302] transform hover:translate-y-1 hover:shadow-[0_4px_0_0_#46a302] transition-all duration-200">
-                  <div className="bg-[#58cc02] h-full w-full rounded-xl p-6 relative">
+                <div
+                  onClick={() => {
+                    setShowEnglishFire(true);
+                    setTimeout(() => setShowEnglishFire(false), 3000); // Fire effect for 3 seconds
+                  }}
+                  className="relative overflow-hidden rounded-2xl bg-[#58cc02] p-1 shadow-[0_8px_0_0_#46a302] transform hover:translate-y-1 hover:shadow-[0_4px_0_0_#46a302] transition-all duration-200 cursor-pointer group"
+                >
+                  {/* Fire Effect Around Card - Only on Click */}
+                  {showEnglishFire && <FireStreakEffect />}
+
+                  <div className="bg-[#58cc02] h-full w-full rounded-xl p-6 relative z-10">
                     <div className="flex items-center gap-4 mb-6">
                       <img
                         src={duolingoStats?.avatar || "https://d35aaqx5ub95lt.cloudfront.net/images/duo-2024.svg"}
                         alt="Duo Owl"
-                        className="w-16 h-16 animate-bounce rounded-full border-2 border-white/20"
+                        className="w-16 h-16 animate-bounce rounded-full border-2 border-white/20 group-hover:scale-110 transition-transform"
                       />
                       <div>
-                        <h3 className="text-2xl font-bold text-white">English</h3>
+                        <h3 className="text-2xl font-bold text-white">Duolingo Stats</h3>
                         <p className="text-white/80 font-medium">
                           {duolingoStats ? `${duolingoStats.streak} Day Streak 🔥` : 'Loading Streak...'}
                         </p>
                       </div>
                     </div>
 
-                    <div className="bg-white/20 rounded-2xl p-4 backdrop-blur-sm">
-                      <div className="flex justify-between items-center mb-2">
+                    <div className="bg-white/20 rounded-2xl p-4 backdrop-blur-sm space-y-4">
+                      {/* Total XP */}
+                      <div className="flex justify-between items-center">
                         <span className="font-bold text-white">Total XP</span>
                         <span className="font-bold text-white">{duolingoStats?.totalXp.toLocaleString() || '...'}</span>
                       </div>
+
+                      {/* XP Progress Bar Visual */}
                       <div className="w-full bg-black/20 rounded-full h-4 overflow-hidden">
-                        <div className="bg-yellow-400 h-full rounded-full w-[70%] relative overflow-hidden">
+                        <div className="bg-yellow-400 h-full rounded-full w-[85%] relative overflow-hidden">
                           <div className="absolute top-0 left-0 w-full h-full bg-white/30 animate-[shimmer_2s_infinite]"></div>
                         </div>
                       </div>
-                      <p className="text-white/90 text-sm mt-3 italic">
-                        "I can communicate effectively in most situations."
+
+                      {/* Courses List */}
+                      {duolingoStats?.courses && duolingoStats.courses.length > 0 ? (
+                        <div className="space-y-3 mt-4">
+                          <h4 className="text-white font-bold border-b border-white/20 pb-1">Active Courses</h4>
+                          {duolingoStats.courses.map((course, idx) => (
+                            <div key={idx} className="flex justify-between items-center text-sm">
+                              <div className="flex items-center gap-2">
+                                <span className="text-lg">
+                                  {course.learningLanguage === 'en' ? '🇺🇸' :
+                                    course.learningLanguage === 'ja' ? '🇯🇵' :
+                                      course.learningLanguage === 'fr' ? '🇫🇷' : '🌍'}
+                                </span>
+                                <span className="text-white/90">{course.title}</span>
+                              </div>
+                              <span className="text-white font-mono bg-black/20 px-2 py-0.5 rounded text-xs">
+                                {course.xp.toLocaleString()} XP
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="flex items-center justify-between">
+                          <span className="font-bold text-white">Current Focus</span>
+                          <span className="px-3 py-1 rounded-full bg-yellow-400 text-green-900 font-bold text-sm">English</span>
+                        </div>
+                      )}
+
+                      <p className="text-white/90 text-xs italic text-center pt-2 opacity-75">
+                        "Learning a language is a marathon, not a sprint."
                       </p>
                     </div>
                   </div>

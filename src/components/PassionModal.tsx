@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { FireStreakEffect } from './effects/FireStreakEffect';
 
 export interface PassionContent {
   id: string;
@@ -11,6 +12,8 @@ export interface PassionContent {
   color: string;
   isSound?: boolean;
   isInteractive?: boolean;
+  showFireEffect?: boolean;
+  englishLevel?: string;
 }
 
 interface PassionModalProps {
@@ -66,6 +69,8 @@ export function PassionModal({ isOpen, onClose, passion, onPlaySound, onTriggerB
           onClick={(e) => e.stopPropagation()}
           className="relative w-full max-w-3xl bg-primary-rich-black rounded-2xl overflow-hidden shadow-2xl border border-white/10"
         >
+          {/* Fire Effect for English */}
+          {passion.showFireEffect && <FireStreakEffect />}
           {/* Header Image */}
           <div className="relative h-64 md:h-80">
             <img
@@ -104,6 +109,19 @@ export function PassionModal({ isOpen, onClose, passion, onPlaySound, onTriggerB
               <p className="text-lg leading-relaxed whitespace-pre-line">
                 {passion.fullDesc}
               </p>
+
+              {/* English Level Display */}
+              {passion.englishLevel && (
+                <div className="mt-6 p-4 bg-[#58cc02]/20 rounded-xl border-2 border-[#58cc02]/50">
+                  <div className="flex items-center gap-3">
+                    <div className="text-4xl">🎯</div>
+                    <div>
+                      <p className="text-white font-bold text-xl mb-1">Current Level</p>
+                      <p className="text-[#58cc02] font-bold text-2xl">{passion.englishLevel}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
 
             {passion.isSound && (

@@ -8,6 +8,8 @@ export interface DuolingoUser {
         title: string;
         xp: number;
         crowns: number;
+        learningLanguage: string;
+        fromLanguage: string;
     }>;
 }
 
@@ -36,7 +38,13 @@ export const getDuolingoStats = async (): Promise<DuolingoUser | null> => {
             streak: userData.streak || 0,
             totalXp: userData.totalXp || 0,
             learningLanguage: userData.learningLanguage || 'en',
-            courses: userData.courses || []
+            courses: (userData.courses || []).map((course: any) => ({
+                title: course.title,
+                xp: course.xp,
+                crowns: course.crowns || 0,
+                learningLanguage: course.learningLanguage,
+                fromLanguage: course.fromLanguage
+            }))
         };
     } catch (error) {
         console.error('Error fetching Duolingo stats:', error);
