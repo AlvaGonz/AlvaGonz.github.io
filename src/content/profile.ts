@@ -10,5 +10,6 @@ export const profile: Profile = {
   location: 'Dominican Republic',
   linkedin: 'https://www.linkedin.com/in/adrian-alexander-a-4a8842217/',
   github: 'https://github.com/AlvaGonz',
+  instagram: 'https://www.instagram.com/adrianalv.gon/',
   avatar: '/images/Sitting.png',
 };

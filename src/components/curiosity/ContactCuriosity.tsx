@@ -22,7 +22,7 @@ export function ContactCuriosity({ profile }: ContactCuriosityProps): JSX.Elemen
             </FadeInOnScroll>
 
             <FadeInOnScroll variant="scale" delay={0.3}>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl">
                     {/* LinkedIn */}
                     <a
                         href={profile.linkedin}
@@ -66,6 +66,30 @@ export function ContactCuriosity({ profile }: ContactCuriosityProps): JSX.Elemen
                             <span className="text-gray-400 text-sm">Check my code</span>
                         </div>
                     </a>
+
+                    {/* Instagram */}
+                    {profile.instagram && (
+                        <a
+                            href={profile.instagram}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group relative overflow-hidden rounded-2xl bg-[#0c1214] border border-pink-500/30 p-6 hover:border-pink-500/60 transition-all duration-300 hover:scale-105"
+                            aria-label="Instagram profile"
+                        >
+                            <div className="absolute inset-0 bg-gradient-to-br from-pink-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                            <div className="relative z-10 flex flex-col items-center gap-4">
+                                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center group-hover:from-purple-500/30 group-hover:to-pink-500/30 transition-colors">
+                                    <img
+                                        src="https://skillicons.dev/icons?i=instagram"
+                                        alt="Instagram"
+                                        className="w-10 h-10 group-hover:scale-110 transition-transform"
+                                    />
+                                </div>
+                                <span className="text-white font-bold text-lg">Instagram</span>
+                                <span className="text-gray-400 text-sm">Follow me</span>
+                            </div>
+                        </a>
+                    )}
 
                     {/* Email */}
                     {profile.email && (
