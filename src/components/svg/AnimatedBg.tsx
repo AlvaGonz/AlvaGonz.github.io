@@ -57,20 +57,98 @@ export function AnimatedBg() {
 
       {/* Animated Lines */}
       <svg className="absolute inset-0 w-full h-full opacity-30">
+        {/* Line 1 */}
         <motion.path
           d="M -100 200 Q 400 400 800 100 T 1600 300"
           fill="none"
-          stroke="url(#gradient-line)"
+          stroke="url(#gradient-line-1)"
           strokeWidth="2"
           initial={{ pathLength: 0, pathOffset: 0 }}
           animate={{ pathLength: 1, pathOffset: 1 }}
           transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
         />
+
+        {/* Line 2 */}
+        <motion.path
+          d="M -100 600 Q 500 300 1000 500 T 1800 400"
+          fill="none"
+          stroke="url(#gradient-line-2)"
+          strokeWidth="1.5"
+          initial={{ pathLength: 0, pathOffset: 0 }}
+          animate={{ pathLength: 1, pathOffset: 1 }}
+          transition={{ duration: 12, repeat: Infinity, ease: 'linear', delay: 1 }}
+        />
+
+        {/* Line 3 */}
+        <motion.path
+          d="M 2000 100 Q 1400 350 900 150 T -100 250"
+          fill="none"
+          stroke="url(#gradient-line-3)"
+          strokeWidth="2.5"
+          initial={{ pathLength: 0, pathOffset: 0 }}
+          animate={{ pathLength: 1, pathOffset: 1 }}
+          transition={{ duration: 15, repeat: Infinity, ease: 'linear', delay: 2 }}
+        />
+
+        {/* Line 4 */}
+        <motion.path
+          d="M -100 800 Q 600 600 1200 750 T 2000 700"
+          fill="none"
+          stroke="url(#gradient-line-1)"
+          strokeWidth="1.8"
+          initial={{ pathLength: 0, pathOffset: 0 }}
+          animate={{ pathLength: 1, pathOffset: 1 }}
+          transition={{ duration: 11, repeat: Infinity, ease: 'linear', delay: 0.5 }}
+        />
+
+        {/* Line 5 */}
+        <motion.path
+          d="M 1900 900 Q 1200 700 600 850 T -100 800"
+          fill="none"
+          stroke="url(#gradient-line-2)"
+          strokeWidth="2.2"
+          initial={{ pathLength: 0, pathOffset: 0 }}
+          animate={{ pathLength: 1, pathOffset: 1 }}
+          transition={{ duration: 13, repeat: Infinity, ease: 'linear', delay: 1.5 }}
+        />
+
+        {/* Line 6 */}
+        <motion.path
+          d="M -100 400 Q 700 250 1400 450 T 2100 350"
+          fill="none"
+          stroke="url(#gradient-line-3)"
+          strokeWidth="1.6"
+          initial={{ pathLength: 0, pathOffset: 0 }}
+          animate={{ pathLength: 1, pathOffset: 1 }}
+          transition={{ duration: 14, repeat: Infinity, ease: 'linear', delay: 2.5 }}
+        />
+
+        {/* Line 7 */}
+        <motion.path
+          d="M 2000 650 Q 1100 500 400 680 T -100 550"
+          fill="none"
+          stroke="url(#gradient-line-1)"
+          strokeWidth="2"
+          initial={{ pathLength: 0, pathOffset: 0 }}
+          animate={{ pathLength: 1, pathOffset: 1 }}
+          transition={{ duration: 16, repeat: Infinity, ease: 'linear', delay: 3 }}
+        />
+
         <defs>
-          <linearGradient id="gradient-line" x1="0%" y1="0%" x2="100%" y2="0%">
+          <linearGradient id="gradient-line-1" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="var(--c-curiosity-primary)" stopOpacity="0" />
             <stop offset="50%" stopColor="var(--c-curiosity-primary)" />
             <stop offset="100%" stopColor="var(--c-curiosity-primary)" stopOpacity="0" />
+          </linearGradient>
+          <linearGradient id="gradient-line-2" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="var(--c-curiosity-secondary)" stopOpacity="0" />
+            <stop offset="50%" stopColor="var(--c-curiosity-secondary)" />
+            <stop offset="100%" stopColor="var(--c-curiosity-secondary)" stopOpacity="0" />
+          </linearGradient>
+          <linearGradient id="gradient-line-3" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="var(--c-curiosity-accent)" stopOpacity="0" />
+            <stop offset="50%" stopColor="var(--c-curiosity-accent)" />
+            <stop offset="100%" stopColor="var(--c-curiosity-accent)" stopOpacity="0" />
           </linearGradient>
         </defs>
       </svg>

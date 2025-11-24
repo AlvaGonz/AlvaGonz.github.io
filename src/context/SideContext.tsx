@@ -15,11 +15,11 @@ const getInitialSide = (): Side | null => {
   if (typeof window === 'undefined') return null;
 
   const urlParams = new URLSearchParams(window.location.search);
-  const urlSide = urlParams.get('side') as Side | null;
-  if (urlSide === 'curiosity' || urlSide === 'formal') return urlSide;
+  const sideParam = urlParams.get('side'); // 'formal' | 'curiosity' | null
 
-  const storedSide = localStorage.getItem('portfolio-side') as Side | null;
-  if (storedSide === 'curiosity' || storedSide === 'formal') return storedSide;
+  if (sideParam === 'formal' || sideParam === 'curiosity') {
+    return sideParam;
+  }
 
   return null; // Default fallback to show selector
 };

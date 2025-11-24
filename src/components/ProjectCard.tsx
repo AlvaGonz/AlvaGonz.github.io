@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import type { Project } from '../content/types';
-import { useSide } from '@/hooks/useSide';
+import { usePortfolioSide } from '@/hooks/usePortfolioSide';
 import { GlassmorphicCard } from './animations/GlassmorphicCard';
 
 interface ProjectCardProps {
@@ -8,7 +8,7 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project }: ProjectCardProps): JSX.Element {
-  const { side } = useSide();
+  const { side } = usePortfolioSide();
   const isCuriosity = side === 'curiosity';
 
   const updatedAt = project.updatedAt;

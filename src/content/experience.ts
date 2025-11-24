@@ -3,27 +3,33 @@ export interface ExperienceItem {
   role: string;
   company: string;
   period: string;
-  description: string;
+  description: string | string[];
   skills?: string[];
 }
 
 export const experience: ExperienceItem[] = [
   {
     id: 'qudif',
-    role: 'TI Support',
+    role: 'IT Support',
     company: 'QUDIF',
     period: 'Jan 2022 - Apr 2024',
-    description:
-      '-Brinde soporte técnico, diagnostico y resolución de incidentes relacionados con hardware, software y redes para usuarios.\n-Capacite a usuarios en el uso adecuado del programa.\n-Asistí en momentos requeridos dentro de la DB.',
-    skills: ['Databases', 'Trabajo en equipo', 'Support', 'Hardware/Software'],
+    description: [
+      'Provided technical support, diagnostics, and incident resolution related to hardware, software, and networks for users.',
+      'Trained users on the proper use of the software.',
+      'Assisted with database tasks as required.',
+    ],
+    skills: ['Technical Support', 'Network Administration', 'Database Management', 'User Training'],
   },
   {
     id: 'gritvap',
     role: 'QA Analyst',
     company: 'Gritvap',
     period: 'May 2021 - Jan 2022',
-    description:
-      '-Colabore con el equipo de desarrollo para resolver problemas y mejorar la calidad del producto.\n-Identificar, documentar y reportar errores y defectos encontrados durante las pruebas.\n-Contribuí en la resolución de problemas en las DB.',
-    skills: ['Databases', 'Trabajo en equipo', 'QA', 'Bug Tracking'],
+    description: [
+      'Collaborated with the development team to resolve issues and improve product quality.',
+      'Identified, documented, and reported errors and defects found during testing.',
+      'Contributed to database troubleshooting and resolution.',
+    ],
+    skills: ['Quality Assurance', 'Bug Tracking', 'Database Testing', 'Agile Collaboration'],
   },
 ];

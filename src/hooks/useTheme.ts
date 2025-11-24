@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import { useSide } from './useSide';
+import { usePortfolioSide } from './usePortfolioSide';
 import { Theme } from '@/lib/color-system';
 
 export function useTheme() {
-  const { side } = useSide();
+  const { side } = usePortfolioSide();
   // Default to formal if side is null or undefined
   const currentTheme: Theme = side === 'formal' || side === 'curiosity' ? side : 'formal';
 

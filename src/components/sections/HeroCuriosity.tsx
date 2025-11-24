@@ -48,7 +48,7 @@ export function HeroCuriosity() {
 
         <motion.div variants={fadeInUp} className="flex justify-center gap-4">
           <a
-            href="#projects"
+            href="#about"
             className="px-8 py-3 rounded-full bg-curiosity-primary text-curiosity-bg font-bold hover:scale-105 transition-transform shadow-[0_0_20px_rgba(208,211,77,0.4)]"
           >
             Explore Work

@@ -23,9 +23,19 @@ export function ExperienceTimeline(): JSX.Element {
             </span>
           </div>
 
-          <p className="text-theme-text-secondary mb-4 max-w-2xl leading-relaxed">
-            {item.description}
-          </p>
+          {Array.isArray(item.description) ? (
+            <ul className="list-disc list-outside ml-4 mb-4 space-y-2 text-theme-text-secondary max-w-2xl">
+              {item.description.map((point, i) => (
+                <li key={i} className="leading-relaxed">
+                  {point}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-theme-text-secondary mb-4 max-w-2xl leading-relaxed">
+              {item.description}
+            </p>
+          )}
 
           {item.skills && (
             <div className="flex flex-wrap gap-2">

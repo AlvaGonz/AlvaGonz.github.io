@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { SideToggle } from '@/components/ui/SideToggle';
-import { useSide } from '@/hooks/useSide';
+import { usePortfolioSide } from '@/hooks/usePortfolioSide';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '@/hooks/useTheme';
 
 export function Navbar() {
-  const { side, setSide } = useSide();
+  const { side, setSide } = usePortfolioSide();
   useTheme(); // Ensure theme effect is applied
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -20,8 +20,10 @@ export function Navbar() {
 
   const curiosityItems = [
     { label: 'About', href: '#about' },
-    { label: 'Passions', href: '#projects' },
-    { label: 'Roadmap', href: '#roadmap' },
+    { label: 'Gaming', href: '#gaming' },
+    { label: 'Creative', href: '#graphic-design' },
+    { label: 'Hobbies', href: '#hobbies' },
+    { label: 'Contact', href: '#contact' },
   ];
 
   const navItems = side === 'curiosity' ? curiosityItems : formalItems;
@@ -157,11 +159,10 @@ export function Navbar() {
               <div className="border-t border-theme-border pt-6 mt-6">
                 <p className="text-sm text-theme-text-secondary mb-2">Current Mode:</p>
                 <div
-                  className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium ${
-                    side === 'curiosity'
-                      ? 'bg-curiosity-secondary/20 text-curiosity-secondary border border-curiosity-secondary/30'
-                      : 'bg-primary-dark-green text-primary-mountain-meadow border border-primary-mountain-meadow/30'
-                  }`}
+                  className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium ${side === 'curiosity'
+                    ? 'bg-curiosity-secondary/20 text-curiosity-secondary border border-curiosity-secondary/30'
+                    : 'bg-primary-dark-green text-primary-mountain-meadow border border-primary-mountain-meadow/30'
+                    }`}
                 >
                   <span>{side === 'curiosity' ? '✨' : '💼'}</span>
                   <span className="capitalize">{side}</span>
