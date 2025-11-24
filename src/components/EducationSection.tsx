@@ -20,7 +20,9 @@ export function EducationSection(): JSX.Element {
               <div className="bg-primary-rich-black/40 p-6 rounded-xl border border-white/5 hover:border-primary-mountain-meadow/30 transition-colors">
                 <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
                   <div>
-                    <h4 className="text-xl font-bold text-primary-anti-flash-white">{item.school}</h4>
+                    <h4 className="text-xl font-bold text-primary-anti-flash-white">
+                      {item.school}
+                    </h4>
                     <p className="text-lg text-secondary-pistachio">{item.degree}</p>
                   </div>
                   <span className="text-sm font-mono text-secondary-stone mt-2 md:mt-0 bg-white/5 px-3 py-1 rounded-full">
@@ -29,8 +31,11 @@ export function EducationSection(): JSX.Element {
                 </div>
                 {item.skills && (
                   <div className="flex flex-wrap gap-2 mt-4">
-                    {item.skills.map(skill => (
-                      <span key={skill} className="text-xs px-2 py-1 rounded bg-primary-dark-green text-primary-mountain-meadow border border-primary-mountain-meadow/20">
+                    {item.skills.map((skill) => (
+                      <span
+                        key={skill}
+                        className="text-xs px-2 py-1 rounded bg-primary-dark-green text-primary-mountain-meadow border border-primary-mountain-meadow/20"
+                      >
                         {skill}
                       </span>
                     ))}

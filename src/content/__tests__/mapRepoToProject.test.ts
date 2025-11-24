@@ -87,4 +87,3 @@ describe('mapRepoToProject', () => {
     expect(project.language).toBeNull();
   });
 });
-

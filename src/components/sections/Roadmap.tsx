@@ -16,11 +16,7 @@ const roadmapData: Record<'formal' | 'curiosity', TimelinePhase[]> = {
     },
     {
       phase: 'Present (2024-2025)',
-      items: [
-        'Full-Stack development',
-        'Backend patterns & architecture',
-        'System design focus',
-      ],
+      items: ['Full-Stack development', 'Backend patterns & architecture', 'System design focus'],
     },
     {
       phase: 'Future (2025-2026)',
@@ -36,7 +32,7 @@ const roadmapData: Record<'formal' | 'curiosity', TimelinePhase[]> = {
       phase: 'Chapter 1: The Canvas',
       items: [
         'Discovered the beauty of design',
-        'React as my creative paintbrush',
+        'React as my curios paintbrush',
         'Building interfaces with intention',
       ],
     },
@@ -44,7 +40,7 @@ const roadmapData: Record<'formal' | 'curiosity', TimelinePhase[]> = {
       phase: 'Chapter 2: The Logic',
       items: [
         'Found elegance in algorithms',
-        'Backend\'s hidden complexity',
+        "Backend's hidden complexity",
         'Systems thinking breakthrough',
       ],
     },
@@ -70,4 +66,3 @@ export function Roadmap({ variant = 'formal' }: RoadmapProps) {
     </section>
   );
 }
-

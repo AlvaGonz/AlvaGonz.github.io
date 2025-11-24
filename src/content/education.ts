@@ -53,7 +53,17 @@ export const certifications: CertificationItem[] = [
     issuer: 'freeCodeCamp',
     date: 'Issued Oct 2025',
     credentialId: 'alvagonz-qa',
-    skills: ['Software Testing', 'HTML5', 'Automated Software Testing', 'Manual Testing', 'GitHub', 'Functional Testing', 'JS', 'QA', 'CSS'],
+    skills: [
+      'Software Testing',
+      'HTML5',
+      'Automated Software Testing',
+      'Manual Testing',
+      'GitHub',
+      'Functional Testing',
+      'JS',
+      'QA',
+      'CSS',
+    ],
   },
   {
     id: 'js-inter',

@@ -11,10 +11,7 @@ describe('SplitLayout', () => {
 
   it('should render landing selector by default', () => {
     render(
-      <SplitLayout
-        curiosity={<div>Curiosity Content</div>}
-        formal={<div>Formal Content</div>}
-      />
+      <SplitLayout curiosity={<div>Curiosity Content</div>} formal={<div>Formal Content</div>} />,
     );
     expect(screen.getByText('Select a Profile')).toBeInTheDocument();
   });
@@ -22,10 +19,7 @@ describe('SplitLayout', () => {
   it('should show curiosity content after selecting it', async () => {
     const user = userEvent.setup();
     render(
-      <SplitLayout
-        curiosity={<div>Curiosity Content</div>}
-        formal={<div>Formal Content</div>}
-      />
+      <SplitLayout curiosity={<div>Curiosity Content</div>} formal={<div>Formal Content</div>} />,
     );
 
     const curiosityButton = screen.getByText('Curiosity').closest('button');
@@ -38,12 +32,9 @@ describe('SplitLayout', () => {
   it('should toggle between views', async () => {
     const user = userEvent.setup();
     window.history.replaceState({}, '', '/?side=curiosity'); // Start in curiosity mode
-    
+
     render(
-      <SplitLayout
-        curiosity={<div>Curiosity Content</div>}
-        formal={<div>Formal Content</div>}
-      />
+      <SplitLayout curiosity={<div>Curiosity Content</div>} formal={<div>Formal Content</div>} />,
     );
 
     const toggleButton = screen.getByLabelText(/switch to/i);
@@ -56,12 +47,9 @@ describe('SplitLayout', () => {
   it('should persist side preference to localStorage', async () => {
     const user = userEvent.setup();
     window.history.replaceState({}, '', '/?side=curiosity');
-    
+
     render(
-      <SplitLayout
-        curiosity={<div>Curiosity Content</div>}
-        formal={<div>Formal Content</div>}
-      />
+      <SplitLayout curiosity={<div>Curiosity Content</div>} formal={<div>Formal Content</div>} />,
     );
 
     const toggleButton = screen.getByLabelText(/switch to/i);
@@ -72,12 +60,9 @@ describe('SplitLayout', () => {
 
   it('should sync with URL query parameter', () => {
     window.history.replaceState({}, '', '/?side=formal');
-    
+
     render(
-      <SplitLayout
-        curiosity={<div>Curiosity Content</div>}
-        formal={<div>Formal Content</div>}
-      />
+      <SplitLayout curiosity={<div>Curiosity Content</div>} formal={<div>Formal Content</div>} />,
     );
 
     expect(screen.getByText('Formal Content')).toBeInTheDocument();

@@ -17,18 +17,23 @@ export function FadeInOnScroll({
   delay = 0,
   className = '',
   once = true,
-  threshold = 0.2
+  threshold = 0.2,
 }: FadeInOnScrollProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once, amount: threshold } as UseInViewOptions);
 
   const getVariant = () => {
     switch (variant) {
-      case 'slideLeft': return slideInLeft;
-      case 'slideRight': return slideInRight;
-      case 'scale': return scaleIn;
-      case 'fade': return fadeIn;
-      default: return fadeInUp;
+      case 'slideLeft':
+        return slideInLeft;
+      case 'slideRight':
+        return slideInRight;
+      case 'scale':
+        return scaleIn;
+      case 'fade':
+        return fadeIn;
+      default:
+        return fadeInUp;
     }
   };
 
@@ -40,12 +45,14 @@ export function FadeInOnScroll({
       initial="hidden"
       animate={isInView ? 'visible' : 'hidden'}
       variants={variants}
-      transition={{ 
+      transition={{
         duration: 0.5,
-        ...(variants?.visible && typeof variants.visible === 'object' && 'transition' in variants.visible 
-          ? (variants.visible as any).transition 
+        ...(variants?.visible &&
+        typeof variants.visible === 'object' &&
+        'transition' in variants.visible
+          ? (variants.visible as { transition?: object }).transition
           : {}),
-        delay
+        delay,
       }}
       className={className}
     >

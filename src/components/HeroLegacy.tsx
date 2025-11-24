@@ -20,4 +20,3 @@ export function HeroLegacy(): JSX.Element {
     </header>
   );
 }
-

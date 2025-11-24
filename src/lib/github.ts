@@ -6,7 +6,7 @@ const octokit = new Octokit({
 
 export async function getTopLanguages() {
   const username = import.meta.env.VITE_GITHUB_USERNAME || 'AlvaGonz';
-  
+
   try {
     const { data: repos } = await octokit.repos.listForUser({
       username,
@@ -16,7 +16,7 @@ export async function getTopLanguages() {
     });
 
     const languages: Record<string, number> = {};
-    repos.forEach(repo => {
+    repos.forEach((repo) => {
       if (repo.language) {
         languages[repo.language] = (languages[repo.language] || 0) + 1;
       }
@@ -44,7 +44,7 @@ export async function getTopRepos(limit = 6) {
       per_page: limit,
     });
 
-    return repos.map(repo => ({
+    return repos.map((repo) => ({
       id: repo.id,
       name: repo.name,
       description: repo.description,

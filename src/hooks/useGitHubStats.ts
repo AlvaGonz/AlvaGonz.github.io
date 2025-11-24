@@ -18,7 +18,12 @@ export function useGitHubStats() {
           if (age < 24 * 60 * 60 * 1000) {
             try {
               const parsed = JSON.parse(cached);
-              if (parsed && Array.isArray(parsed.topLanguages) && Array.isArray(parsed.topRepos) && parsed.user) {
+              if (
+                parsed &&
+                Array.isArray(parsed.topLanguages) &&
+                Array.isArray(parsed.topRepos) &&
+                parsed.user
+              ) {
                 setData(parsed);
                 setLoading(false);
                 return;
@@ -39,7 +44,12 @@ export function useGitHubStats() {
           if (cached) {
             try {
               const parsed = JSON.parse(cached);
-              if (parsed && Array.isArray(parsed.topLanguages) && Array.isArray(parsed.topRepos) && parsed.user) {
+              if (
+                parsed &&
+                Array.isArray(parsed.topLanguages) &&
+                Array.isArray(parsed.topRepos) &&
+                parsed.user
+              ) {
                 setData(parsed);
                 console.warn('Fetch failed, using expired cache');
               } else {

@@ -8,19 +8,19 @@ export const skills: Skill[] = [
   { name: 'HTML', category: 'language', iconId: 'html' },
   { name: 'CSS', category: 'language', iconId: 'css' },
   { name: 'TypeScript', category: 'language', iconId: 'ts' },
-  
+
   // Frameworks & Libraries
   { name: 'React', category: 'framework', iconId: 'react' },
   { name: 'Node.js', category: 'framework', iconId: 'nodejs' },
   { name: 'ASP.NET', category: 'framework', iconId: 'dotnet' },
-  
+
   // Tools & Platforms
   { name: 'Git', category: 'tool', iconId: 'git' },
   { name: 'GitHub', category: 'tool', iconId: 'github' },
   { name: 'Docker', category: 'tool', iconId: 'docker' },
   { name: 'Visual Studio Code', category: 'tool', iconId: 'vscode' },
   { name: 'Figma', category: 'tool', iconId: 'figma' },
-  
+
   // Databases
   { name: 'MySQL', category: 'database', iconId: 'mysql' },
   { name: 'MongoDB', category: 'database', iconId: 'mongodb' },

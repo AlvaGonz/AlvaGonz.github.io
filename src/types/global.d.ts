@@ -6,4 +6,3 @@ declare global {
     YT: any;
   }
 }
-

@@ -9,6 +9,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Axiforma', 'system-ui', 'sans-serif'],
+        axiforma: ['Axiforma', 'sans-serif'],
       },
       colors: {
         // Semantic Theme Colors (Use these for shared components)

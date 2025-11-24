@@ -25,7 +25,7 @@ export function SkillPills({ skills, animate = true }: SkillPillsProps): JSX.Ele
       acc[skill.category].push(skill);
       return acc;
     },
-    {} as Record<Skill['category'], Skill[]>
+    {} as Record<Skill['category'], Skill[]>,
   );
 
   const Container = animate ? motion.div : 'div';
@@ -40,12 +40,12 @@ export function SkillPills({ skills, animate = true }: SkillPillsProps): JSX.Ele
               {category}
               <span className="h-px flex-1 bg-theme-border" />
             </h3>
-            
-            <Container 
+
+            <Container
               className="flex flex-wrap gap-3"
               variants={animate ? staggerContainer : undefined}
-              initial={animate ? "hidden" : undefined}
-              whileInView={animate ? "visible" : undefined}
+              initial={animate ? 'hidden' : undefined}
+              whileInView={animate ? 'visible' : undefined}
               viewport={animate ? { once: true } : undefined}
             >
               {groupedSkills[category].map((skill) => (
@@ -56,9 +56,9 @@ export function SkillPills({ skills, animate = true }: SkillPillsProps): JSX.Ele
                   className={`pl-2 pr-4 py-2 rounded-full text-sm font-medium ${categoryColors[category]} transition-all flex items-center gap-2 border shadow-sm hover:shadow-md`}
                 >
                   {skill.iconId && (
-                    <img 
-                      src={`https://skillicons.dev/icons?i=${skill.iconId}`} 
-                      alt="" 
+                    <img
+                      src={`https://skillicons.dev/icons?i=${skill.iconId}`}
+                      alt=""
                       className="w-5 h-5 rounded-sm opacity-90"
                       loading="lazy"
                     />

@@ -1,13 +1,13 @@
 # Alva Portfolio v3 – Formal & Curiosity Dual Experience
 
-A modern dual-personality portfolio showcasing two distinct experiences: a professional **Formal** side and a creative **Curiosity** side, built with React 18, TypeScript, and cutting-edge web technologies.
+A modern dual-personality portfolio showcasing two distinct experiences: a professional **Formal** side and a curios **Curiosity** side, built with React 18, TypeScript, and cutting-edge web technologies.
 
 ## 🌐 Live Demo
 
 **[Visit Portfolio](https://alvagonz.github.io/)**
 
 - **Formal Experience**: [?side=formal](https://alvagonz.github.io/?side=formal) - Professional, minimalist showcase
-- **Curiosity Experience**: [?side=curiosity](https://alvagonz.github.io/?side=curiosity) - Creative, vibrant exploration
+- **Curiosity Experience**: [?side=curiosity](https://alvagonz.github.io/?side=curiosity) - curios, vibrant exploration
 
 ## 🛠️ Tech Stack
 
@@ -26,7 +26,7 @@ This portfolio implements a unique **dual-experience architecture** where users 
 ### 🎯 The Central Hub
 The **main landing page serves as the nexus** for both experiences. Users are presented with an elegant selector that routes them to either side via URL parameters:
 - `?side=formal` - Professional, corporate-focused experience
-- `?side=curiosity` - Creative, passion-driven experience
+- `?side=curiosity` - curios, passion-driven experience
 
 ### 🏢 Formal Side
 - **Purpose**: Professional showcase for recruiters, clients, and business contacts
@@ -35,9 +35,9 @@ The **main landing page serves as the nexus** for both experiences. Users are pr
 - **Animations**: Subtle, professional transitions
 
 ### 🎨 Curiosity Side  
-- **Purpose**: Creative exploration of passions, hobbies, and personal interests
+- **Purpose**: curios exploration of passions, hobbies, and personal interests
 - **Design**: Vibrant, dynamic, experimental visuals
-- **Content**: Personal projects, creative endeavors, learning journey
+- **Content**: Personal projects, curios endeavors, learning journey
 - **Animations**: Bold, playful, interactive elements
 
 ## 🚀 Current Features (Implemented)
@@ -74,7 +74,7 @@ src/
 │   │   └── SplitLayout.tsx         # Main dual-layout orchestrator
 │   ├── sections/
 │   │   ├── AboutFormal.tsx         # Professional about section
-│   │   ├── AboutCuriosity.tsx      # Creative about section
+│   │   ├── AboutCuriosity.tsx      # curios about section
 │   │   └── Roadmap.tsx             # Visual timeline component
 │   ├── github/
 │   │   └── GithubStats.tsx         # GitHub integration components
@@ -152,7 +152,7 @@ GITHUB_TOKEN=your_github_personal_access_token
 | `pnpm test:e2e:ui` | Run E2E tests with UI |
 | `pnpm fetch-pinned` | Fetch GitHub pinned repositories |
 
-## 🗺️ Roadmap: Creative Phase 2 (Curiosity Focus)
+## 🗺️ Roadmap: curios Phase 2 (Curiosity Focus)
 
 The following enhancements are planned to elevate the **Curiosity side** with advanced visual effects and interactions:
 
@@ -179,7 +179,7 @@ The following enhancements are planned to elevate the **Curiosity side** with ad
 ### 🔮 Phase 4: Glassmorphism & Advanced CSS (Planned)
 - **Frosted Glass Effects**: backdrop-filter blur with rgba backgrounds
 - **Component Library**: Glass navbar, cards, modals, and badges
-- **Blend Modes**: Creative color overlays and visual depth
+- **Blend Modes**: curios color overlays and visual depth
 - **Browser Fallbacks**: Graceful degradation for unsupported browsers
 
 ### 🎭 Phase 5: SVG Animations & Dynamic Icons (Planned)
