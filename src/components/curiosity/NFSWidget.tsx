@@ -96,10 +96,16 @@ export function NFSWidget() {
                     </div>
 
                     <div className="relative z-10 p-6 h-full flex flex-col justify-end min-h-[300px]">
-                        <div className="mb-auto">
-                            <span className="inline-block px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-bold border border-blue-500/30 mb-2">
-                                LEGENDARY RIDE
+                        <div className="mb-auto flex items-start justify-between w-full">
+                            <span className="inline-block px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-bold border border-blue-500/30">
+                                NFS MW'S LEGENDARY RIDE
                             </span>
+                            {/* NFS Most Wanted Logo */}
+                            <img
+                                src="/images/nfsmw-logo.png"
+                                alt="NFS Most Wanted"
+                                className="h-16 w-auto opacity-90 group-hover:opacity-100 transition-opacity rounded-lg"
+                            />
                         </div>
 
                         <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">

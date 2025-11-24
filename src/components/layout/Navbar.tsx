@@ -21,12 +21,9 @@ export function Navbar() {
   const curiosityItems = [
     { label: 'About', href: '#about' },
     { label: 'Gaming', href: '#gaming' },
-    { label: 'Learning', href: '#learning' },
-    { label: 'Graphic Design', href: '#graphic-design' },
-    { label: 'Multimedia', href: '#multimedia' },
+    { label: 'Creative', href: '#graphic-design' },
     { label: 'Hobbies', href: '#hobbies' },
-    { label: 'Contributions', href: '#contributions' },
-    { label: 'Roadmap', href: '#roadmap' },
+    { label: 'Contact', href: '#contact' },
   ];
 
   const navItems = side === 'curiosity' ? curiosityItems : formalItems;

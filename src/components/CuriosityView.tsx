@@ -7,11 +7,14 @@ import { GamingShowcase } from './curiosity/GamingShowcase';
 import { NFSWidget } from './curiosity/NFSWidget';
 import { Hobbies } from './curiosity/Hobbies';
 import { Roadmap } from './sections/Roadmap';
+import { DailyVerse } from './formal/DailyVerse';
+import { ContactCuriosity } from './curiosity/ContactCuriosity';
 import { AnimatedBg } from './svg/AnimatedBg';
 import { FloatingElements } from './svg/FloatingElements';
 import { HeroCuriosity } from './sections/HeroCuriosity';
 import { FadeInOnScroll } from './animations/FadeInOnScroll';
 import { DuolingoFireWidget } from './curiosity/DuolingoFireWidget';
+import { profile } from '../content/profile';
 
 export function CuriosityView(): JSX.Element {
   return (
@@ -99,6 +102,12 @@ export function CuriosityView(): JSX.Element {
 
           {/* Roadmap Section */}
           <Roadmap variant="curiosity" />
+
+          {/* Contact Section */}
+          <ContactCuriosity profile={profile} />
+
+          {/* Daily Verse */}
+          <DailyVerse />
         </div>
       </div>
     </div>
