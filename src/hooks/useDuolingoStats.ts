@@ -1,12 +1,21 @@
 import { useState, useEffect } from 'react';
+import duolingoData from '../data/generated/duolingo.json';
 
-interface DuolingoStats {
+export interface DuolingoCourse {
+  title: string;
+  learningLanguage: string;
+  xp: number;
+}
+
+export interface DuolingoStats {
   username: string;
   streak: number;
   totalXp: number;
   level: string;
   learningLanguage: string;
   avatar?: string;
+  courses: DuolingoCourse[];
+  motivation: string;
 }
 
 interface UseDuolingoStatsOptions {
@@ -15,73 +24,34 @@ interface UseDuolingoStatsOptions {
 }
 
 /**
- * Custom hook para fetch de stats de Duolingo
- * Centraliza la lógica de llamadas a API y error handling
+ * Custom hook for Duolingo stats
+ * Uses build-time generated data to avoid CORS and runtime API issues
  */
 export function useDuolingoStats({ username, fallbackData }: UseDuolingoStatsOptions) {
-  const [stats, setStats] = useState<DuolingoStats | null>(fallbackData ?? null);
-  const [loading, setLoading] = useState(!fallbackData);
+  // Since data is imported statically, we don't strictly need state for "loading",
+  // but we keep the interface consistent for now or for potential future client-side revalidation.
+  const [stats, setStats] = useState<DuolingoStats | null>(null);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    let isMounted = true;
+    // Simulate a brief loading state or just set immediately
+    // Setting immediately is better for UX (SSG-like feel)
 
-    const fetchStats = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-
-        // Using allorigins proxy to avoid CORS issues as in previous implementation
-        const response = await fetch(
-          `https://api.allorigins.win/get?url=${encodeURIComponent(`https://www.duolingo.com/2017-06-30/users?username=${username}`)}`,
-        );
-
-        if (!response.ok) {
-          throw new Error(`API error: ${response.status}`);
-        }
-
-        const data = await response.json();
-        const parsedData = JSON.parse(data.contents);
-
-        if (!isMounted) return;
-
-        if (parsedData.users && parsedData.users.length > 0) {
-          const user = parsedData.users[0];
-          const processedStats: DuolingoStats = {
-            username: user.username,
-            streak: user.streak,
-            totalXp: user.totalXp,
-            level: 'B2', // Inferred or static
-            learningLanguage: user.learningLanguage,
-            avatar: user.picture ? `https:${user.picture}/xxlarge` : undefined,
-          };
-          setStats(processedStats);
-        } else {
-          throw new Error('User not found');
-        }
-      } catch (err) {
-        if (!isMounted) return;
-
-        const error = err instanceof Error ? err : new Error('Unknown error');
-        setError(error);
-        console.error('Duolingo fetch error:', error);
-
-        // Usar fallback data si disponible
-        if (fallbackData) {
-          setStats(fallbackData);
-        }
-      } finally {
-        if (isMounted) {
-          setLoading(false);
-        }
+    if (duolingoData) {
+      // Cast the imported JSON to our interface to ensure type safety
+      // The script ensures the structure matches
+      setStats(duolingoData as unknown as DuolingoStats);
+      setLoading(false);
+    } else {
+      if (fallbackData) {
+        setStats(fallbackData);
+        setLoading(false);
+      } else {
+        setError(new Error('No data available'));
+        setLoading(false);
       }
-    };
-
-    fetchStats();
-
-    return () => {
-      isMounted = false; // Cleanup
-    };
+    }
   }, [username, fallbackData]);
 
   return { stats, loading, error };
