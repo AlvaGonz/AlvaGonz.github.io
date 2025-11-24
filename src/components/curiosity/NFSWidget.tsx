@@ -8,9 +8,14 @@ let apiLoadStarted = false;
 export function NFSWidget() {
     const [isPlaying, setIsPlaying] = useState(false);
     const bmwSoundRef = useRef<any>(null);
+    const fadeOutTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const fadeInTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+    const fadeInInterval = useRef<ReturnType<typeof setInterval> | null>(null);
+    const fadeOutInterval = useRef<ReturnType<typeof setInterval> | null>(null);
 
+    // Initialize YouTube player
     useEffect(() => {
-        // Inject YouTube API script if not present
+        // Inject YouTube IFrame API script if not already present
         if (!window.YT) {
             if (!apiLoadStarted) {
                 apiLoadStarted = true;
@@ -52,31 +57,152 @@ export function NFSWidget() {
         if (window.YT && window.YT.Player) {
             initBmwPlayer();
         } else {
-            const prevCallback = window.onYouTubeIframeAPIReady;
-            window.onYouTubeIframeAPIReady = () => {
+            const prevCallback = (window as any).onYouTubeIframeAPIReady;
+            (window as any).onYouTubeIframeAPIReady = () => {
                 if (prevCallback) prevCallback();
                 initBmwPlayer();
             };
         }
+
+        // Cleanup on unmount
+        return () => {
+            // Clear all timeouts
+            if (fadeOutTimeout.current) {
+                clearTimeout(fadeOutTimeout.current);
+                fadeOutTimeout.current = null;
+            }
+            if (fadeInTimeout.current) {
+                clearTimeout(fadeInTimeout.current);
+                fadeInTimeout.current = null;
+            }
+            // Clear all intervals
+            if (fadeInInterval.current) {
+                clearInterval(fadeInInterval.current);
+                fadeInInterval.current = null;
+            }
+            if (fadeOutInterval.current) {
+                clearInterval(fadeOutInterval.current);
+                fadeOutInterval.current = null;
+            }
+        };
     }, []);
+
+    // Helper to fade volume with improved smoothness
+    const fadeVolume = (
+        player: any,
+        start: number,
+        end: number,
+        duration: number,
+        onComplete?: () => void
+    ): ReturnType<typeof setInterval> | undefined => {
+        if (!player || typeof player.setVolume !== 'function') {
+            if (onComplete) onComplete();
+            return undefined;
+        }
+
+        const steps = 30; // More steps for smoother fade
+        const stepTime = duration / steps;
+        let currentStep = 0;
+        const delta = (end - start) / steps;
+        
+        // Ensure volume is clamped between 0 and 100
+        const clampVolume = (vol: number) => Math.max(0, Math.min(100, vol));
+        
+        const interval = setInterval(() => {
+            currentStep++;
+            const newVol = clampVolume(Math.round(start + delta * currentStep));
+            
+            try {
+                player.setVolume(newVol);
+            } catch (e) {
+                console.warn('Error setting volume:', e);
+                clearInterval(interval);
+                if (onComplete) onComplete();
+                return;
+            }
+            
+            if (currentStep >= steps) {
+                clearInterval(interval);
+                // Ensure final volume is set correctly
+                try {
+                    player.setVolume(clampVolume(end));
+                } catch (e) {
+                    console.warn('Error setting final volume:', e);
+                }
+                if (onComplete) onComplete();
+            }
+        }, stepTime);
+        
+        return interval;
+    };
 
     const playSound = () => {
         if (bmwSoundRef.current && typeof bmwSoundRef.current.playVideo === 'function') {
+            // Clear any existing timeouts and intervals
+            if (fadeOutTimeout.current) {
+                clearTimeout(fadeOutTimeout.current);
+                fadeOutTimeout.current = null;
+            }
+            if (fadeInTimeout.current) {
+                clearTimeout(fadeInTimeout.current);
+                fadeInTimeout.current = null;
+            }
+            if (fadeInInterval.current) {
+                clearInterval(fadeInInterval.current);
+                fadeInInterval.current = null;
+            }
+            if (fadeOutInterval.current) {
+                clearInterval(fadeOutInterval.current);
+                fadeOutInterval.current = null;
+            }
+            
             setIsPlaying(true);
-            bmwSoundRef.current.seekTo(0);
-            bmwSoundRef.current.setVolume(100);
-            bmwSoundRef.current.playVideo();
-
-            // Stop after 15 seconds
-            setTimeout(() => {
-                bmwSoundRef.current.pauseVideo();
+            
+            // Start completely silent
+            try {
+                bmwSoundRef.current.setVolume(0);
+                bmwSoundRef.current.seekTo(0);
+                bmwSoundRef.current.playVideo();
+            } catch (e) {
+                console.warn('Error starting video:', e);
                 setIsPlaying(false);
-            }, 15000);
+                return;
+            }
+
+            // Wait a tiny bit for video to start, then fade in smoothly over 1.5s
+            fadeInTimeout.current = setTimeout(() => {
+                if (bmwSoundRef.current) {
+                    fadeInInterval.current = fadeVolume(bmwSoundRef.current, 0, 100, 1500, () => {
+                        // Clear interval reference after completion
+                        fadeInInterval.current = null;
+                    }) || null;
+                }
+            }, 100);
+
+            // Start fade out at 13.5s (to complete fade out by 15s), then pause
+            fadeOutTimeout.current = setTimeout(() => {
+                if (bmwSoundRef.current) {
+                    fadeOutInterval.current = fadeVolume(bmwSoundRef.current, 100, 0, 1500, () => {
+                        try {
+                            if (bmwSoundRef.current) {
+                                bmwSoundRef.current.pauseVideo();
+                                bmwSoundRef.current.setVolume(0);
+                            }
+                        } catch (e) {
+                            console.warn('Error pausing video:', e);
+                        }
+                        setIsPlaying(false);
+                        // Clear interval reference after completion
+                        fadeOutInterval.current = null;
+                    }) || null;
+                }
+            }, 13500); // Start fade out at 13.5s for 1.5s fade = 15s total
         }
     };
 
     return (
         <div className="relative">
+            {/* Hidden YouTube player */}
             <div id="bmw-sound-player-widget" className="hidden" />
 
             <FadeInOnScroll variant="scale">
@@ -95,12 +221,12 @@ export function NFSWidget() {
                         <div className="absolute inset-0 bg-gradient-to-t from-blue-900/90 via-transparent to-transparent" />
                     </div>
 
+                    {/* Content */}
                     <div className="relative z-10 p-6 h-full flex flex-col justify-end min-h-[300px]">
                         <div className="mb-auto flex items-start justify-between w-full">
                             <span className="inline-block px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-bold border border-blue-500/30">
                                 NFS MW'S LEGENDARY RIDE
                             </span>
-                            {/* NFS Most Wanted Logo */}
                             <img
                                 src="/images/nfsmw-logo.png"
                                 alt="NFS Most Wanted"
@@ -112,8 +238,8 @@ export function NFSWidget() {
                             BMW M3 GTR
                             {isPlaying && (
                                 <span className="flex h-3 w-3 relative">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+                                    <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500" />
                                 </span>
                             )}
                         </h3>
@@ -125,10 +251,10 @@ export function NFSWidget() {
 
                         <div className="flex items-center gap-4 text-xs text-blue-300 font-mono">
                             <span className="flex items-center gap-1">
-                                <span className="i-lucide-gauge"></span> 380 km/h
+                                <span className="i-lucide-gauge" /> 380 km/h
                             </span>
                             <span className="flex items-center gap-1">
-                                <span className="i-lucide-zap"></span> 4.0L V8
+                                <span className="i-lucide-zap" /> 4.0L V8
                             </span>
                         </div>
                     </div>
