@@ -1,8 +1,9 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { LandingSelector } from './LandingSelector';
 import { useSide } from '@/hooks/useSide';
 import { Navbar } from './layout/Navbar';
+import { SpotifyNowPlaying } from './curiosity/SpotifyNowPlaying';
 
 interface SplitLayoutProps {
   curiosity: React.ReactNode;
@@ -27,6 +28,13 @@ export function SplitLayout({ curiosity, formal }: SplitLayoutProps): JSX.Elemen
     }
   }, [side, setSide]);
 
+  // Scroll to top when switching views
+  useEffect(() => {
+    if (side) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [side]);
+
   if (!side) {
     return <LandingSelector onSelect={setSide} />;
   }
@@ -34,7 +42,7 @@ export function SplitLayout({ curiosity, formal }: SplitLayoutProps): JSX.Elemen
   return (
     <div className="min-h-screen" onKeyDown={handleKeyDown}>
       <Navbar />
-      
+
       <div className="relative w-full min-h-screen pt-16">
         <AnimatePresence mode="wait">
           {side === 'curiosity' ? (
@@ -62,6 +70,7 @@ export function SplitLayout({ curiosity, formal }: SplitLayoutProps): JSX.Elemen
           )}
         </AnimatePresence>
       </div>
+      <SpotifyNowPlaying />
     </div>
   );
 }

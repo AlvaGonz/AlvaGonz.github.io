@@ -9,9 +9,9 @@ import { HeroIcon } from './svg/HeroIcon';
 import { FloatingElements } from './svg/FloatingElements';
 import { HeroCuriosity } from './sections/HeroCuriosity';
 import { FadeInOnScroll } from './animations/FadeInOnScroll';
-import { SpotifyNowPlaying } from './curiosity/SpotifyNowPlaying';
+
 import { getDuolingoStats, DuolingoUser } from '../services/duolingo';
-import { FireStreakEffect } from './effects/FireStreakEffect';
+
 
 // Global flag to prevent multiple script injections
 let apiLoadStarted = false;
@@ -145,8 +145,21 @@ export function CuriosityView(): JSX.Element {
     if (bmwSoundRef.current && typeof bmwSoundRef.current.playVideo === 'function') {
       try {
         bmwSoundRef.current.seekTo(0);
-        bmwSoundRef.current.setVolume(100);
+        bmwSoundRef.current.setVolume(0); // Start at 0 for fade in
         bmwSoundRef.current.playVideo();
+
+        // Fade in logic (0 to 100 over 2 seconds)
+        let vol = 0;
+        const fadeInInterval = setInterval(() => {
+          vol += 5; // Increase by 5 every 100ms (20 steps * 100ms = 2000ms)
+          if (vol >= 100) {
+            vol = 100;
+            clearInterval(fadeInInterval);
+          }
+          try {
+            bmwSoundRef.current.setVolume(vol);
+          } catch (e) { /* ignore */ }
+        }, 100);
 
         // Fade out logic
         const fadeOutStart = 12000; // Start fading at 12s
@@ -320,8 +333,7 @@ export function CuriosityView(): JSX.Element {
                 <div
                   className="relative overflow-visible rounded-2xl bg-[#58cc02] p-1 shadow-[0_8px_0_0_#46a302] transform hover:translate-y-1 hover:shadow-[0_4px_0_0_#46a302] transition-all duration-200 cursor-pointer group"
                 >
-                  {/* Fire Effect Around Card - Always visible if streak > 0 */}
-                  {duolingoStats && duolingoStats.streak > 0 && <FireStreakEffect />}
+
 
                   <div className="bg-[#58cc02] h-full w-full rounded-xl p-6 relative z-10">
                     <div className="flex items-center gap-4 mb-6">
@@ -415,8 +427,7 @@ export function CuriosityView(): JSX.Element {
         onTriggerBSOD={triggerBSOD}
       />
 
-      {/* Floating Spotify Player */}
-      <SpotifyNowPlaying />
+
     </div>
   );
 }
