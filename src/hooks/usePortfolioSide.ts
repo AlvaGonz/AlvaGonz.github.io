@@ -1,5 +1,5 @@
 import { useSideContext } from '@/context/SideContext';
 
-export function useSide() {
+export function usePortfolioSide() {
   return useSideContext();
 }

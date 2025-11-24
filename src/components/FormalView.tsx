@@ -38,29 +38,29 @@ export function FormalView(): JSX.Element {
   // Merge local project data with live GitHub data where possible
   const displayProjects = githubData?.topRepos.length
     ? githubData.topRepos.slice(0, 6).map((repo) => {
-        return {
-          name: repo.name,
-          description: repo.description || '',
-          url: repo.url,
-          stars: repo.stars,
-          forks: repo.forks,
-          language: repo.language ? { name: repo.language.name, color: repo.language.color } : null,
-          updatedAt: repo.updatedAt,
-        };
-      })
+      return {
+        name: repo.name,
+        description: repo.description || '',
+        url: repo.url,
+        stars: repo.stars,
+        forks: repo.forks,
+        language: repo.language ? { name: repo.language.name, color: repo.language.color } : null,
+        updatedAt: repo.updatedAt,
+      };
+    })
     : pinnedData.projects.map((project) => ({
-        name: project.name,
-        description: project.description,
-        url: project.url,
-        stars: project.stars,
-        forks: project.forks,
-        language: project.language
-          ? typeof project.language === 'string'
-            ? { name: project.language, color: '#3178C6' }
-            : { name: project.language.name, color: project.language.color }
-          : null,
-        updatedAt: project.updatedAt,
-      }));
+      name: project.name,
+      description: project.description,
+      url: project.url,
+      stars: project.stars,
+      forks: project.forks,
+      language: project.language
+        ? typeof project.language === 'string'
+          ? { name: project.language, color: '#3178C6' }
+          : { name: project.language.name, color: project.language.color }
+        : null,
+      updatedAt: project.updatedAt,
+    }));
 
   return (
     <div className="min-h-screen p-8 md:p-16 bg-primary-rich-black">
@@ -123,7 +123,7 @@ export function FormalView(): JSX.Element {
         {/* Skills Section */}
         <section id="skills">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary-anti-flash-white border-b-2 border-primary-mountain-meadow pb-2">
-            Skills & Technologies
+            Skills
           </h2>
           <SkillPills skills={skills} />
         </section>
@@ -153,7 +153,7 @@ export function FormalView(): JSX.Element {
         {/* Projects Section */}
         <section id="projects">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary-anti-flash-white border-b-2 border-primary-mountain-meadow pb-2">
-            Featured Projects
+            Projects
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {displayProjects.map((project: Project, index: number) => (

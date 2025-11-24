@@ -3,7 +3,7 @@ export function AboutFormal() {
     <section id="about" className="space-y-12">
       <div>
         <h2 className="text-4xl font-bold mb-6 font-axiforma text-primary-anti-flash-white">
-          About Me
+          About
         </h2>
         <div className="space-y-6 text-lg text-secondary-pistachio leading-relaxed max-w-4xl">
           <p>

@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { LandingSelector } from './LandingSelector';
-import { useSide } from '@/hooks/useSide';
+import { PortfolioSelector } from './PortfolioSelector';
+import { usePortfolioSide } from '@/hooks/usePortfolioSide';
 import { Navbar } from './layout/Navbar';
 import { SpotifyNowPlaying } from './curiosity/SpotifyNowPlaying';
 
@@ -11,7 +11,7 @@ interface SplitLayoutProps {
 }
 
 export function SplitLayout({ curiosity, formal }: SplitLayoutProps): JSX.Element {
-  const { side, setSide } = useSide();
+  const { side, setSide } = usePortfolioSide();
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
@@ -39,7 +39,7 @@ export function SplitLayout({ curiosity, formal }: SplitLayoutProps): JSX.Elemen
   }, [side]);
 
   if (!side) {
-    return <LandingSelector onSelect={setSide} />;
+    return <PortfolioSelector onSelect={setSide} />;
   }
 
   return (
