@@ -10,8 +10,8 @@ import { FloatingElements } from './svg/FloatingElements';
 import { HeroCuriosity } from './sections/HeroCuriosity';
 import { FadeInOnScroll } from './animations/FadeInOnScroll';
 
-import { getDuolingoStats, DuolingoUser } from '../services/duolingo';
 
+import { DuolingoFireWidget } from './Curiosity/DuolingoFireWidget';
 
 // Global flag to prevent multiple script injections
 let apiLoadStarted = false;
@@ -21,12 +21,10 @@ let apiLoadStarted = false;
 export function CuriosityView(): JSX.Element {
   const [showBSOD, setShowBSOD] = useState(false);
   const [selectedPassion, setSelectedPassion] = useState<PassionContent | null>(null);
-  const [duolingoStats, setDuolingoStats] = useState<DuolingoUser | null>(null);
-
   const bmwSoundRef = useRef<any>(null);
 
   useEffect(() => {
-    getDuolingoStats().then(setDuolingoStats);
+    // getDuolingoStats().then(setDuolingoStats); // Moved to widget
   }, []);
 
   // Load BMW Sound (separate player)
@@ -330,86 +328,7 @@ export function CuriosityView(): JSX.Element {
                 </div>
 
                 {/* English - Duolingo Style */}
-                <div
-                  className="relative overflow-visible rounded-2xl bg-[#58cc02] p-1 shadow-[0_8px_0_0_#46a302] transform hover:translate-y-1 hover:shadow-[0_4px_0_0_#46a302] transition-all duration-200 cursor-pointer group"
-                >
-
-
-                  <div className="bg-[#58cc02] h-full w-full rounded-xl p-6 relative z-10">
-                    <div className="flex items-center gap-4 mb-6">
-                      <img
-                        src={duolingoStats?.avatar || "/images/duo-face.png"}
-                        alt="Duo Owl"
-                        className="w-16 h-16 animate-bounce rounded-full border-2 border-white/20 group-hover:scale-110 transition-transform"
-                        onError={(e) => {
-                          e.currentTarget.src = "/images/duo-face.png";
-                        }}
-                      />
-                      <div>
-                        <h3 className="text-2xl font-bold text-white">Duolingo Stats</h3>
-                        <p className="text-white/80 font-medium">
-                          {duolingoStats ? `${duolingoStats.streak} Day Streak 🔥` : 'Loading Streak...'}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="bg-white/20 rounded-2xl p-4 backdrop-blur-sm space-y-4">
-                      {/* Total XP */}
-                      <div className="flex justify-between items-center">
-                        <span className="font-bold text-white">Total XP</span>
-                        <span className="font-bold text-white">{duolingoStats?.totalXp.toLocaleString() || '...'}</span>
-                      </div>
-
-                      {/* XP Progress Bar Visual */}
-                      <div className="w-full bg-black/20 rounded-full h-4 overflow-hidden">
-                        <div className="bg-yellow-400 h-full rounded-full w-[85%] relative overflow-hidden">
-                          <div className="absolute top-0 left-0 w-full h-full bg-white/30 animate-[shimmer_2s_infinite]"></div>
-                        </div>
-                      </div>
-
-                      {/* Courses List */}
-                      {duolingoStats?.courses && duolingoStats.courses.length > 0 ? (
-                        <div className="space-y-3 mt-4">
-                          <h4 className="text-white font-bold border-b border-white/20 pb-1">Active Courses</h4>
-                          {duolingoStats.courses.map((course, idx) => (
-                            <div key={idx} className="flex justify-between items-center text-sm">
-                              <div className="flex items-center gap-2">
-                                <span className="text-lg">
-                                  {course.learningLanguage === 'en' ? '🇺🇸' :
-                                    course.learningLanguage === 'ja' ? '🇯🇵' :
-                                      course.learningLanguage === 'fr' ? '🇫🇷' :
-                                        course.learningLanguage === 'ht' ? '🇭🇹' : '🌍'}
-                                </span>
-                                <div className="flex flex-col">
-                                  <span className="text-white/90 font-medium flex items-center gap-2">
-                                    {course.title}
-                                    {course.learningLanguage === 'en' && (
-                                      <span className="px-1.5 py-0.5 rounded bg-yellow-400 text-green-900 text-[10px] font-bold">
-                                        B2 Basic
-                                      </span>
-                                    )}
-                                  </span>
-                                </div>
-                              </div>
-                              <span className="text-white font-mono bg-black/20 px-2 py-0.5 rounded text-xs">
-                                {course.xp.toLocaleString()} XP
-                              </span>
-                            </div>
-                          ))}
-                        </div>
-                      ) : (
-                        <div className="flex items-center justify-between">
-                          <span className="font-bold text-white">Current Focus</span>
-                          <span className="px-3 py-1 rounded-full bg-yellow-400 text-green-900 font-bold text-sm">English</span>
-                        </div>
-                      )}
-
-                      <p className="text-white/90 text-xs italic text-center pt-2 opacity-75">
-                        "Learning a language is a marathon, not a sprint."
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <DuolingoFireWidget />
               </div>
             </FadeInOnScroll>
           </section>
