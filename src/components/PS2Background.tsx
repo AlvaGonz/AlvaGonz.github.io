@@ -26,19 +26,15 @@ export function PS2Background(): JSX.Element {
           ease: 'easeInOut',
         }}
       >
-        <svg
-          className="w-full h-full"
-          viewBox="0 0 1440 800"
-          preserveAspectRatio="none"
-        >
+        <svg className="w-full h-full" viewBox="0 0 1440 800" preserveAspectRatio="none">
           <motion.path
             d="M0,400 C320,500 640,300 960,400 C1280,500 1440,400 1440,400 V800 H0 Z"
             fill="url(#grad1)"
             animate={{
               d: [
-                "M0,400 C320,500 640,300 960,400 C1280,500 1440,400 1440,400 V800 H0 Z",
-                "M0,400 C320,300 640,500 960,400 C1280,300 1440,400 1440,400 V800 H0 Z",
-                "M0,400 C320,500 640,300 960,400 C1280,500 1440,400 1440,400 V800 H0 Z",
+                'M0,400 C320,500 640,300 960,400 C1280,500 1440,400 1440,400 V800 H0 Z',
+                'M0,400 C320,300 640,500 960,400 C1280,300 1440,400 1440,400 V800 H0 Z',
+                'M0,400 C320,500 640,300 960,400 C1280,500 1440,400 1440,400 V800 H0 Z',
               ],
             }}
             transition={{
@@ -68,19 +64,15 @@ export function PS2Background(): JSX.Element {
           ease: 'easeInOut',
         }}
       >
-        <svg
-          className="w-full h-full"
-          viewBox="0 0 1440 800"
-          preserveAspectRatio="none"
-        >
+        <svg className="w-full h-full" viewBox="0 0 1440 800" preserveAspectRatio="none">
           <motion.path
             d="M0,500 C400,600 800,400 1200,500 L1440,550 V800 H0 Z"
             fill="url(#grad2)"
             animate={{
               d: [
-                "M0,500 C400,600 800,400 1200,500 L1440,550 V800 H0 Z",
-                "M0,500 C400,400 800,600 1200,500 L1440,450 V800 H0 Z",
-                "M0,500 C400,600 800,400 1200,500 L1440,550 V800 H0 Z",
+                'M0,500 C400,600 800,400 1200,500 L1440,550 V800 H0 Z',
+                'M0,500 C400,400 800,600 1200,500 L1440,450 V800 H0 Z',
+                'M0,500 C400,600 800,400 1200,500 L1440,550 V800 H0 Z',
               ],
             }}
             transition={{
@@ -110,19 +102,15 @@ export function PS2Background(): JSX.Element {
           ease: 'easeInOut',
         }}
       >
-        <svg
-          className="w-full h-full"
-          viewBox="0 0 1440 800"
-          preserveAspectRatio="none"
-        >
+        <svg className="w-full h-full" viewBox="0 0 1440 800" preserveAspectRatio="none">
           <motion.path
             d="M0,300 C480,200 960,600 1440,300 V800 H0 Z"
             fill="url(#grad3)"
             animate={{
               d: [
-                "M0,300 C480,200 960,600 1440,300 V800 H0 Z",
-                "M0,300 C480,500 960,100 1440,300 V800 H0 Z",
-                "M0,300 C480,200 960,600 1440,300 V800 H0 Z",
+                'M0,300 C480,200 960,600 1440,300 V800 H0 Z',
+                'M0,300 C480,500 960,100 1440,300 V800 H0 Z',
+                'M0,300 C480,200 960,600 1440,300 V800 H0 Z',
               ],
             }}
             transition={{
@@ -152,7 +140,7 @@ export function PS2Background(): JSX.Element {
             top: `${Math.random() * 100}%`,
             // Alternate between Lime and Light Blue
             background: i % 2 === 0 ? '#D0D34D' : '#C7CEE8',
-            opacity: 0.1
+            opacity: 0.1,
           }}
           animate={{
             x: [0, Math.random() * 100 - 50, 0],
@@ -162,7 +150,7 @@ export function PS2Background(): JSX.Element {
           transition={{
             duration: 20 + Math.random() * 15,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: 'easeInOut',
           }}
         />
       ))}
@@ -171,10 +159,11 @@ export function PS2Background(): JSX.Element {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,#0f111a_90%)] pointer-events-none" />
 
       {/* Scanline Effect */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
+      <div
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
           backgroundImage: 'linear-gradient(transparent 50%, rgba(0,0,0,0.5) 50%)',
-          backgroundSize: '4px 4px'
+          backgroundSize: '4px 4px',
         }}
       />
     </div>

@@ -16,7 +16,7 @@ export function GithubStats() {
   if (!data) return null;
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -30,12 +30,8 @@ export function GithubStats() {
             Top Languages
           </h3>
           <div className="flex flex-wrap gap-2">
-            {data.topLanguages.map(lang => (
-              <LanguageBadge
-                key={lang.name}
-                name={lang.name}
-                count={lang.count}
-              />
+            {data.topLanguages.map((lang) => (
+              <LanguageBadge key={lang.name} name={lang.name} count={lang.count} />
             ))}
           </div>
         </div>
@@ -52,15 +48,21 @@ export function GithubStats() {
           </h3>
           <div className="grid grid-cols-3 gap-4">
             <div className="bg-theme-surface/50 rounded-xl p-4 text-center border border-theme-border hover:border-theme-primary/30 transition-colors group">
-              <p className="text-xs text-theme-text-secondary uppercase tracking-wider mb-1 group-hover:text-theme-primary transition-colors">Repos</p>
+              <p className="text-xs text-theme-text-secondary uppercase tracking-wider mb-1 group-hover:text-theme-primary transition-colors">
+                Repos
+              </p>
               <p className="text-2xl font-bold text-theme-text">{data.user.publicRepos}</p>
             </div>
             <div className="bg-theme-surface/50 rounded-xl p-4 text-center border border-theme-border hover:border-theme-primary/30 transition-colors group">
-              <p className="text-xs text-theme-text-secondary uppercase tracking-wider mb-1 group-hover:text-theme-primary transition-colors">Followers</p>
+              <p className="text-xs text-theme-text-secondary uppercase tracking-wider mb-1 group-hover:text-theme-primary transition-colors">
+                Followers
+              </p>
               <p className="text-2xl font-bold text-theme-text">{data.user.followers}</p>
             </div>
             <div className="bg-theme-surface/50 rounded-xl p-4 text-center border border-theme-border hover:border-theme-primary/30 transition-colors group">
-              <p className="text-xs text-theme-text-secondary uppercase tracking-wider mb-1 group-hover:text-theme-primary transition-colors">Status</p>
+              <p className="text-xs text-theme-text-secondary uppercase tracking-wider mb-1 group-hover:text-theme-primary transition-colors">
+                Status
+              </p>
               <div className="flex items-center justify-center gap-2">
                 <span className="relative flex h-3 w-3">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>

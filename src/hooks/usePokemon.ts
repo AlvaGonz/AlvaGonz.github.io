@@ -65,4 +65,3 @@ export function usePokemon(pokemonId: number) {
 
   return { data, loading, error };
 }
-

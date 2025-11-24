@@ -23,10 +23,7 @@ function App(): JSX.Element {
       <ScrollProgressBar />
       <ScrollOrchestrator />
       <main id="main-content">
-        <SplitLayout
-          curiosity={<CuriosityView />}
-          formal={<FormalView />}
-        />
+        <SplitLayout curiosity={<CuriosityView />} formal={<FormalView />} />
       </main>
     </div>
   );

@@ -23,7 +23,7 @@ export function AnimatedBg() {
         transition={{
           duration: 20,
           repeat: Infinity,
-          ease: "easeInOut"
+          ease: 'easeInOut',
         }}
       />
 
@@ -37,14 +37,20 @@ export function AnimatedBg() {
         transition={{
           duration: 25,
           repeat: Infinity,
-          ease: "easeInOut"
+          ease: 'easeInOut',
         }}
       />
 
       {/* Floating Mesh Grid */}
       <svg className="absolute inset-0 w-full h-full opacity-20">
         <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
-          <path d="M 50 0 L 0 0 0 50" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-curiosity-secondary" />
+          <path
+            d="M 50 0 L 0 0 0 50"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="0.5"
+            className="text-curiosity-secondary"
+          />
         </pattern>
         <rect width="100%" height="100%" fill="url(#grid)" />
       </svg>
@@ -58,7 +64,7 @@ export function AnimatedBg() {
           strokeWidth="2"
           initial={{ pathLength: 0, pathOffset: 0 }}
           animate={{ pathLength: 1, pathOffset: 1 }}
-          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
         />
         <defs>
           <linearGradient id="gradient-line" x1="0%" y1="0%" x2="100%" y2="0%">

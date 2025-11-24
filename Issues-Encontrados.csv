@@ -1,0 +1,8 @@
+Severidad,Categoría,Descripción,Archivos Afectados,Recomendación
+High,Security,10 vulnerabilidades detectadas por pnpm audit,package.json,"Ejecutar `pnpm audit fix` o actualizar dependencias manualmente"
+Medium,TypeScript,Uso de tipo `any` en mapeo de cursos,src/services/duolingo.ts,"Definir interfaz para respuesta cruda de API"
+Medium,TypeScript,Uso de tipo `any` en mapeo de cursos,src/components/Curiosity/DuolingoFireWidget.tsx,"Definir interfaz para respuesta cruda de API"
+Medium,Code Quality,Duplicación de lógica de fetch de Duolingo,src/services/duolingo.ts; src/components/Curiosity/DuolingoFireWidget.tsx,"Centralizar lógica en un hook `useDuolingoStats` o servicio"
+Medium,Configuration,Falta configuración explícita de ESLint/Prettier,.eslintrc; .prettierrc,"Crear archivos de configuración para estandarizar código"
+Low,Documentation,Falta de documentación de arquitectura,ARCHITECTURE.md,"Crear archivo ARCHITECTURE.md describiendo el sistema"
+Low,Security,Uso de proxy público allorigins.win,src/services/duolingo.ts,"Considerar backend proxy propio si escala"

@@ -29,4 +29,3 @@ export function computeStageFromScroll(progress: number): number {
   if (progress < 0.75) return 2;
   return 3;
 }
-

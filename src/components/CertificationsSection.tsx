@@ -2,15 +2,20 @@ import { motion } from 'framer-motion';
 import { certifications } from '../content/education';
 
 const getCertIcon = (name: string, issuer: string): JSX.Element => {
-  const iconSize = "w-10 h-10 rounded-md";
-  
-  if (name.includes('C#')) return <img src="https://skillicons.dev/icons?i=cs" alt="C#" className={iconSize} />;
-  if (name.includes('JavaScript')) return <img src="https://skillicons.dev/icons?i=js" alt="JS" className={iconSize} />;
-  if (name.includes('HTML')) return <img src="https://skillicons.dev/icons?i=html" alt="HTML" className={iconSize} />;
-  if (name.includes('CSS')) return <img src="https://skillicons.dev/icons?i=css" alt="CSS" className={iconSize} />;
-  if (issuer.includes('freeCodeCamp')) return <img src="https://skillicons.dev/icons?i=github" alt="FCC" className={iconSize} />; // FCC often associated with GitHub repo activities or simple code icon
+  const iconSize = 'w-10 h-10 rounded-md';
+
+  if (name.includes('C#'))
+    return <img src="https://skillicons.dev/icons?i=cs" alt="C#" className={iconSize} />;
+  if (name.includes('JavaScript'))
+    return <img src="https://skillicons.dev/icons?i=js" alt="JS" className={iconSize} />;
+  if (name.includes('HTML'))
+    return <img src="https://skillicons.dev/icons?i=html" alt="HTML" className={iconSize} />;
+  if (name.includes('CSS'))
+    return <img src="https://skillicons.dev/icons?i=css" alt="CSS" className={iconSize} />;
+  if (issuer.includes('freeCodeCamp'))
+    return <img src="https://skillicons.dev/icons?i=github" alt="FCC" className={iconSize} />; // FCC often associated with GitHub repo activities or simple code icon
   if (name.includes('Remote Work')) return <span className="text-3xl">🌐</span>;
-  
+
   return <span className="text-3xl">📜</span>;
 };
 
@@ -37,10 +42,8 @@ export function CertificationsSection(): JSX.Element {
               {getCertIcon(cert.name, cert.issuer)}
             </div>
           </div>
-          
-          <div className="text-sm text-secondary-stone mb-4 font-mono mt-auto">
-            {cert.date}
-          </div>
+
+          <div className="text-sm text-secondary-stone mb-4 font-mono mt-auto">{cert.date}</div>
 
           {cert.credentialId && (
             <div className="text-xs text-secondary-stone/70 mb-4">
@@ -50,8 +53,11 @@ export function CertificationsSection(): JSX.Element {
 
           {cert.skills && (
             <div className="flex flex-wrap gap-1.5">
-              {cert.skills.slice(0, 4).map(skill => (
-                <span key={skill} className="text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-secondary-pistachio border border-white/10">
+              {cert.skills.slice(0, 4).map((skill) => (
+                <span
+                  key={skill}
+                  className="text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-secondary-pistachio border border-white/10"
+                >
                   {skill}
                 </span>
               ))}

@@ -19,9 +19,7 @@ export interface LeetCodeStats {
 
 export async function fetchLeetCodeStats(): Promise<LeetCodeStats | null> {
   try {
-    const response = await fetch(
-      `https://leetcode-stats-api.herokuapp.com/${username}`
-    );
+    const response = await fetch(`https://leetcode-stats-api.herokuapp.com/${username}`);
 
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -34,4 +32,3 @@ export async function fetchLeetCodeStats(): Promise<LeetCodeStats | null> {
     return null;
   }
 }
-

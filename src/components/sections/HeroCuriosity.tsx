@@ -41,8 +41,8 @@ export function HeroCuriosity() {
             variants={fadeInUp}
             className="text-xl md:text-2xl text-curiosity-text-secondary max-w-2xl mx-auto mb-8 leading-relaxed"
           >
-            Crafting digital experiences with code, design, and a touch of magic.
-            Exploring the intersection of functionality and aesthetics.
+            Crafting digital experiences with code, design, and a touch of magic. Exploring the
+            intersection of functionality and aesthetics.
           </motion.p>
         </ParallaxSection>
 
@@ -64,4 +64,3 @@ export function HeroCuriosity() {
     </section>
   );
 }
-

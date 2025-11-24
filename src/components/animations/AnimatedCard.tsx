@@ -9,18 +9,13 @@ interface AnimatedCardProps {
   onClick?: () => void;
 }
 
-export function AnimatedCard({ 
-  children, 
-  className = '', 
-  delay = 0,
-  onClick
-}: AnimatedCardProps) {
+export function AnimatedCard({ children, className = '', delay = 0, onClick }: AnimatedCardProps) {
   return (
     <motion.div
       variants={fadeInUp}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-50px" }}
+      viewport={{ once: true, margin: '-50px' }}
       whileHover={hoverLift.whileHover}
       transition={{ delay }}
       className={`cursor-pointer ${className}`}

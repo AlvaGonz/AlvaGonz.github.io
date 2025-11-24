@@ -1,0 +1,19 @@
+{
+    "scores": {
+        "structure": 95,
+        "typescript": 80,
+        "react": 90,
+        "styles": 95,
+        "api_services": 70,
+        "dependencies_security": 60,
+        "configuration": 75,
+        "documentation": 70,
+        "performance": 90,
+        "testing": 85
+    },
+    "overall_score": 82,
+    "critical_issues": 1,
+    "high_issues": 4,
+    "medium_issues": 3,
+    "low_issues": 2
+}

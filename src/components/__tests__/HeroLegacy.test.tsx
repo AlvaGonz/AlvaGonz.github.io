@@ -23,4 +23,3 @@ describe('HeroLegacy', () => {
     expect(header).toBeInTheDocument();
   });
 });
-

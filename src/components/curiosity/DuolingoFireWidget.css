@@ -2,146 +2,156 @@
 
 /* Variables */
 :root {
-    --duo-green-primary: #58CC02;
-    --duo-green-secondary: #89E219;
-    --duo-orange-fire: #F49000;
-    --duo-yellow-fire: #FFD000;
-    --duo-yellow-light: #FFA500;
-    --duo-red: #FF4B4B;
-    --duo-text: #4B4B4B;
+  --duo-green-primary: #58cc02;
+  --duo-green-secondary: #89e219;
+  --duo-orange-fire: #f49000;
+  --duo-yellow-fire: #ffd000;
+  --duo-yellow-light: #ffa500;
+  --duo-red: #ff4b4b;
+  --duo-text: #4b4b4b;
 }
 
 /* Keyframes */
 @keyframes flameFloat {
-    0% {
-        opacity: 1;
-        transform: translateY(0px) scale(1) rotate(0deg);
-    }
+  0% {
+    opacity: 1;
+    transform: translateY(0px) scale(1) rotate(0deg);
+  }
 
-    50% {
-        transform: translateY(-50%) scale(0.95);
-    }
+  50% {
+    transform: translateY(-50%) scale(0.95);
+  }
 
-    100% {
-        opacity: 0;
-        transform: translateY(-150px) scale(0.5);
-    }
+  100% {
+    opacity: 0;
+    transform: translateY(-150px) scale(0.5);
+  }
 }
 
 @keyframes streakFire {
+  0%,
+  100% {
+    color: white;
+    text-shadow: none;
+  }
 
-    0%,
-    100% {
-        color: white;
-        text-shadow: none;
-    }
-
-    50% {
-        color: var(--duo-yellow-fire);
-        text-shadow: 0 0 10px var(--duo-orange-fire);
-    }
+  50% {
+    color: var(--duo-yellow-fire);
+    text-shadow: 0 0 10px var(--duo-orange-fire);
+  }
 }
 
 @keyframes fireBounce {
-    0% {
-        transform: scale(1);
-    }
+  0% {
+    transform: scale(1);
+  }
 
-    50% {
-        transform: scale(1.5);
-    }
+  50% {
+    transform: scale(1.5);
+  }
 
-    100% {
-        transform: scale(1);
-    }
+  100% {
+    transform: scale(1);
+  }
 }
 
 /* Widget Container */
 .duo-widget-container {
-    font-family: 'Feather Bold', 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
-    letter-spacing: 0.5px;
-    transition: all 0.3s cubic-bezier(0.25, 1.8, 0.25, 1.8);
-    position: relative;
-    overflow: visible;
-    /* Allow fire to overflow */
+  font-family:
+    'Feather Bold',
+    'Poppins',
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: 0.5px;
+  transition: all 0.3s cubic-bezier(0.25, 1.8, 0.25, 1.8);
+  position: relative;
+  overflow: visible;
+  /* Allow fire to overflow */
 }
 
 /* Fire Active State */
 .duo-widget-container.fire-active {
-    background: linear-gradient(135deg, var(--duo-green-primary), var(--duo-green-secondary)) !important;
-    transform: scale(1.05);
-    box-shadow: 0 0 30px rgba(244, 144, 0, 0.6), 0 0 60px rgba(88, 204, 2, 0.3) !important;
-    border-color: var(--duo-yellow-fire) !important;
+  background: linear-gradient(
+    135deg,
+    var(--duo-green-primary),
+    var(--duo-green-secondary)
+  ) !important;
+  transform: scale(1.05);
+  box-shadow:
+    0 0 30px rgba(244, 144, 0, 0.6),
+    0 0 60px rgba(88, 204, 2, 0.3) !important;
+  border-color: var(--duo-yellow-fire) !important;
 }
 
 .duo-widget-container.fire-active .streak-count {
-    animation: streakFire 1.5s ease-in-out infinite;
+  animation: streakFire 1.5s ease-in-out infinite;
 }
 
 .duo-widget-container.fire-active .fire-icon {
-    animation: fireBounce 1.5s ease-in-out infinite;
+  animation: fireBounce 1.5s ease-in-out infinite;
 }
 
 .duo-widget-container.fire-active .duo-avatar {
-    box-shadow: 0 0 15px rgba(255, 199, 21, 0.6);
-    border-color: var(--duo-yellow-fire);
+  box-shadow: 0 0 15px rgba(255, 199, 21, 0.6);
+  border-color: var(--duo-yellow-fire);
 }
 
 /* Fire Effect Wrapper */
 .fire-effect-wrapper {
-    position: absolute;
-    inset: -20px;
-    pointer-events: none;
-    z-index: 50;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
+  position: absolute;
+  inset: -20px;
+  pointer-events: none;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 }
 
 /* Contenedor de las llamas */
 .fire-flames-container {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 100%;
-    height: 200px;
-    transform: translateX(-50%);
-    pointer-events: none;
-    z-index: 60;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 100%;
+  height: 200px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 60;
 }
 
 .flame {
-    position: absolute;
-    bottom: 0;
-    width: var(--size, 60px);
-    height: var(--size, 60px);
+  position: absolute;
+  bottom: 0;
+  width: var(--size, 60px);
+  height: var(--size, 60px);
 
-    /* Forma de gota suave (Duolingo) */
-    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  /* Forma de gota suave (Duolingo) */
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
 
-    /* Gradiente amarillo-naranja */
-    background: radial-gradient(circle at 35% 30%, #FFD000 0%, #FFA500 50%, #F49000 100%);
+  /* Gradiente amarillo-naranja */
+  background: radial-gradient(circle at 35% 30%, #ffd000 0%, #ffa500 50%, #f49000 100%);
 
-    /* Glow suave */
-    filter: drop-shadow(0 0 12px rgba(255, 208, 0, 0.5));
+  /* Glow suave */
+  filter: drop-shadow(0 0 12px rgba(255, 208, 0, 0.5));
 
-    /* Animación */
-    animation: flameFloat 3s ease-out forwards;
-    animation-delay: var(--delay, 0s);
+  /* Animación */
+  animation: flameFloat 3s ease-out forwards;
+  animation-delay: var(--delay, 0s);
 
-    /* Sombra interna para profundidad */
-    box-shadow: inset -2px -2px 4px rgba(0, 0, 0, 0.1);
+  /* Sombra interna para profundidad */
+  box-shadow: inset -2px -2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Tamaños variables */
 .flame-large {
-    --size: 80px;
+  --size: 80px;
 }
 
 .flame-medium {
-    --size: 50px;
+  --size: 50px;
 }
 
 .flame-small {
-    --size: 30px;
+  --size: 30px;
 }

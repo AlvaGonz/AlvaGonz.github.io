@@ -13,14 +13,14 @@ const SideContext = createContext<SideContextType | undefined>(undefined);
 // Helper to get initial state synchronously
 const getInitialSide = (): Side | null => {
   if (typeof window === 'undefined') return null;
-  
+
   const urlParams = new URLSearchParams(window.location.search);
   const urlSide = urlParams.get('side') as Side | null;
   if (urlSide === 'curiosity' || urlSide === 'formal') return urlSide;
 
   const storedSide = localStorage.getItem('portfolio-side') as Side | null;
   if (storedSide === 'curiosity' || storedSide === 'formal') return storedSide;
-  
+
   return null; // Default fallback to show selector
 };
 
@@ -30,15 +30,15 @@ export function SideProvider({ children }: { children: ReactNode }) {
   const setSide = useCallback((newSide: Side | null) => {
     setSideState(newSide);
     const url = new URL(window.location.href);
-    
+
     if (newSide) {
-    url.searchParams.set('side', newSide);
+      url.searchParams.set('side', newSide);
       localStorage.setItem('portfolio-side', newSide);
     } else {
       url.searchParams.delete('side');
       localStorage.removeItem('portfolio-side');
     }
-    
+
     window.history.replaceState({}, '', url);
   }, []);
 
@@ -54,9 +54,7 @@ export function SideProvider({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <SideContext.Provider value={{ side, setSide, toggleSide }}>
-      {children}
-    </SideContext.Provider>
+    <SideContext.Provider value={{ side, setSide, toggleSide }}>{children}</SideContext.Provider>
   );
 }
 

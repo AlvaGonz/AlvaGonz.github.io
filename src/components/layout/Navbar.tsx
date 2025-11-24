@@ -32,8 +32,8 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center gap-3">
-            <button 
-              onClick={() => setSide(null)} 
+            <button
+              onClick={() => setSide(null)}
               className="flex items-center gap-2 group"
               aria-label="Return to selection"
             >
@@ -60,9 +60,9 @@ export function Navbar() {
           {/* Controls */}
           <div className="flex items-center gap-4">
             <SideToggle />
-            
+
             <div className="h-6 w-px bg-white/10 hidden sm:block" />
-            
+
             <a
               href="https://github.com/AlvaGonz"
               target="_blank"
@@ -81,8 +81,19 @@ export function Navbar() {
               onClick={() => setIsMobileMenuOpen(true)}
               aria-label="Open menu"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
               </svg>
             </button>
           </div>
@@ -113,14 +124,25 @@ export function Navbar() {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="p-2 text-theme-text-secondary hover:text-white transition-colors"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
                   </svg>
                 </button>
               </div>
 
               <nav className="space-y-6 flex-1">
-                {navItems.map(item => (
+                {navItems.map((item) => (
                   <a
                     key={item.label}
                     href={item.href}
@@ -134,11 +156,13 @@ export function Navbar() {
 
               <div className="border-t border-theme-border pt-6 mt-6">
                 <p className="text-sm text-theme-text-secondary mb-2">Current Mode:</p>
-                <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium ${
-                  side === 'curiosity' 
-                    ? 'bg-curiosity-secondary/20 text-curiosity-secondary border border-curiosity-secondary/30' 
-                    : 'bg-primary-dark-green text-primary-mountain-meadow border border-primary-mountain-meadow/30'
-                }`}>
+                <div
+                  className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium ${
+                    side === 'curiosity'
+                      ? 'bg-curiosity-secondary/20 text-curiosity-secondary border border-curiosity-secondary/30'
+                      : 'bg-primary-dark-green text-primary-mountain-meadow border border-primary-mountain-meadow/30'
+                  }`}
+                >
                   <span>{side === 'curiosity' ? '✨' : '💼'}</span>
                   <span className="capitalize">{side}</span>
                 </div>

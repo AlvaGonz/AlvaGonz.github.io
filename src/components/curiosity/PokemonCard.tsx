@@ -27,9 +27,7 @@ const getTypeColor = (type: string): string => {
 };
 
 export function PokemonCard() {
-  const [pokemonId, setPokemonId] = useState<number>(
-    Math.floor(Math.random() * 151) + 1
-  );
+  const [pokemonId, setPokemonId] = useState<number>(Math.floor(Math.random() * 151) + 1);
 
   const { data: pokemon, loading } = usePokemon(pokemonId);
 
@@ -72,9 +70,7 @@ export function PokemonCard() {
         />
       )}
 
-      <h2 className="text-2xl font-bold capitalize mb-2 text-curiosity-text">
-        {pokemon.name}
-      </h2>
+      <h2 className="text-2xl font-bold capitalize mb-2 text-curiosity-text">{pokemon.name}</h2>
       <p className="text-sm text-curiosity-text-secondary mb-4">#{pokemon.id}</p>
 
       <div className="grid grid-cols-2 gap-3 mb-4 text-sm">
@@ -91,7 +87,7 @@ export function PokemonCard() {
       <div className="mb-4">
         <p className="text-sm text-curiosity-text-secondary mb-2">Tipos:</p>
         <div className="flex gap-2 justify-center flex-wrap">
-          {pokemon.types.map(t => (
+          {pokemon.types.map((t) => (
             <span
               key={t.type.name}
               className={`px-3 py-1 rounded-full text-xs font-semibold ${getTypeColor(t.type.name)} capitalize`}
@@ -113,4 +109,3 @@ export function PokemonCard() {
     </motion.div>
   );
 }
-

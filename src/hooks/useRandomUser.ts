@@ -64,4 +64,3 @@ export function useRandomUser() {
 
   return { data, loading, error };
 }
-

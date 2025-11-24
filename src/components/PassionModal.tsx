@@ -24,7 +24,13 @@ interface PassionModalProps {
   onTriggerBSOD?: () => void;
 }
 
-export function PassionModal({ isOpen, onClose, passion, onPlaySound, onTriggerBSOD }: PassionModalProps): JSX.Element {
+export function PassionModal({
+  isOpen,
+  onClose,
+  passion,
+  onPlaySound,
+  onTriggerBSOD,
+}: PassionModalProps): JSX.Element {
   const [clickCount, setClickCount] = useState(0);
 
   useEffect(() => {
@@ -73,17 +79,26 @@ export function PassionModal({ isOpen, onClose, passion, onPlaySound, onTriggerB
           {passion.showFireEffect && <FireStreakEffect />}
           {/* Header Image */}
           <div className="relative h-64 md:h-80">
-            <img
-              src={passion.image}
-              alt={passion.title}
-              className="w-full h-full object-cover"
-            />
+            <img src={passion.image} alt={passion.title} className="w-full h-full object-cover" />
             <div className={`absolute inset-0 bg-gradient-to-t ${passion.color} opacity-80`} />
             <button
               onClick={onClose}
               className="absolute top-4 right-4 p-2 bg-black/40 hover:bg-black/60 rounded-full text-white transition-colors"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
             </button>
 
             <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10">
@@ -106,9 +121,7 @@ export function PassionModal({ isOpen, onClose, passion, onPlaySound, onTriggerB
             </p>
 
             <div className="prose prose-invert max-w-none text-secondary-pistachio">
-              <p className="text-lg leading-relaxed whitespace-pre-line">
-                {passion.fullDesc}
-              </p>
+              <p className="text-lg leading-relaxed whitespace-pre-line">{passion.fullDesc}</p>
 
               {/* English Level Display */}
               {passion.englishLevel && (
@@ -132,7 +145,9 @@ export function PassionModal({ isOpen, onClose, passion, onPlaySound, onTriggerB
                 <div className="text-3xl group-hover:scale-110 transition-transform">🔊</div>
                 <div>
                   <p className="font-bold text-white">Hear the Engine</p>
-                  <p className="text-sm text-gray-400">Click here to unleash the straight-cut gears.</p>
+                  <p className="text-sm text-gray-400">
+                    Click here to unleash the straight-cut gears.
+                  </p>
                 </div>
               </div>
             )}

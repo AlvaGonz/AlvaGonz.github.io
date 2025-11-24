@@ -40,4 +40,3 @@ export async function fetchRandomUser(): Promise<RandomUser | null> {
     return null;
   }
 }
-

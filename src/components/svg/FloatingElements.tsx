@@ -23,7 +23,7 @@ export function FloatingElements() {
           transition={{
             duration: 5 + i,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: 'easeInOut',
             delay: shape.delay,
           }}
         >
@@ -38,8 +38,8 @@ function Shape({ type, size }: { type: string; size: number }) {
   const props = {
     width: size,
     height: size,
-    viewBox: "0 0 24 24",
-    fill: "currentColor",
+    viewBox: '0 0 24 24',
+    fill: 'currentColor',
   };
 
   switch (type) {
@@ -71,4 +71,3 @@ function Shape({ type, size }: { type: string; size: number }) {
       return null;
   }
 }
-

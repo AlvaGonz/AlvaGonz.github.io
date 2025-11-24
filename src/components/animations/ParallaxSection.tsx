@@ -12,12 +12,12 @@ export function ParallaxSection({
   children,
   offset = 50,
   className = '',
-  direction = 'y'
+  direction = 'y',
 }: ParallaxSectionProps) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "end start"]
+    offset: ['start end', 'end start'],
   });
 
   // Map scroll progress (0 to 1) to transform (-offset to offset)
@@ -26,11 +26,7 @@ export function ParallaxSection({
   const style = direction === 'y' ? { y: moveValue } : { x: moveValue };
 
   return (
-    <motion.div
-      ref={ref}
-      style={style}
-      className={className}
-    >
+    <motion.div ref={ref} style={style} className={className}>
       {children}
     </motion.div>
   );

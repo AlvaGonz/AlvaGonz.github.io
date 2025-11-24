@@ -13,20 +13,23 @@ interface SplitLayoutProps {
 export function SplitLayout({ curiosity, formal }: SplitLayoutProps): JSX.Element {
   const { side, setSide } = useSide();
 
-  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
-    if (!side) return;
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (!side) return;
 
-    // Accessibility: Allow keyboard navigation but don't interfere with Tab
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-      if (e.key === 'ArrowLeft' && side === 'formal') {
-        e.preventDefault();
-        setSide('curiosity');
-      } else if (e.key === 'ArrowRight' && side === 'curiosity') {
-        e.preventDefault();
-        setSide('formal');
+      // Accessibility: Allow keyboard navigation but don't interfere with Tab
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        if (e.key === 'ArrowLeft' && side === 'formal') {
+          e.preventDefault();
+          setSide('curiosity');
+        } else if (e.key === 'ArrowRight' && side === 'curiosity') {
+          e.preventDefault();
+          setSide('formal');
+        }
       }
-    }
-  }, [side, setSide]);
+    },
+    [side, setSide],
+  );
 
   // Scroll to top when switching views
   useEffect(() => {
@@ -51,7 +54,7 @@ export function SplitLayout({ curiosity, formal }: SplitLayoutProps): JSX.Elemen
               initial={{ opacity: 0, filter: 'blur(10px)' }}
               animate={{ opacity: 1, filter: 'blur(0px)' }}
               exit={{ opacity: 0, filter: 'blur(10px)' }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
+              transition={{ duration: 0.5, ease: 'easeInOut' }}
               className="w-full"
             >
               {curiosity}
@@ -62,7 +65,7 @@ export function SplitLayout({ curiosity, formal }: SplitLayoutProps): JSX.Elemen
               initial={{ opacity: 0, filter: 'blur(10px)' }}
               animate={{ opacity: 1, filter: 'blur(0px)' }}
               exit={{ opacity: 0, filter: 'blur(10px)' }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
+              transition={{ duration: 0.5, ease: 'easeInOut' }}
               className="w-full"
             >
               {formal}

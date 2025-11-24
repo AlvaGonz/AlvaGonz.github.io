@@ -17,9 +17,8 @@ export function LeetcodeStats() {
   }
 
   const user = data;
-  const solvePercentage = user.totalQuestions > 0
-    ? (user.totalSolved / user.totalQuestions) * 100
-    : 0;
+  const solvePercentage =
+    user.totalQuestions > 0 ? (user.totalSolved / user.totalQuestions) * 100 : 0;
 
   return (
     <motion.div
@@ -53,9 +52,7 @@ export function LeetcodeStats() {
           <p className="text-sm text-theme-text-secondary">
             {user.totalSolved} / {user.totalQuestions} problems solved
           </p>
-          <p className="text-sm font-semibold text-theme-text">
-            {solvePercentage.toFixed(1)}%
-          </p>
+          <p className="text-sm font-semibold text-theme-text">{solvePercentage.toFixed(1)}%</p>
         </div>
         <div className="w-full bg-gray-200 dark:bg-theme-surface rounded-full h-3">
           <motion.div
@@ -74,7 +71,9 @@ export function LeetcodeStats() {
           <p className="text-theme-text-secondary text-xs">Easy</p>
         </div>
         <div className="text-center p-3 bg-white/50 dark:bg-theme-surface/50 rounded-lg border border-orange-200 dark:border-orange-800">
-          <p className="text-orange-600 dark:text-orange-400 font-bold text-lg">{user.mediumSolved}</p>
+          <p className="text-orange-600 dark:text-orange-400 font-bold text-lg">
+            {user.mediumSolved}
+          </p>
           <p className="text-theme-text-secondary text-xs">Medium</p>
         </div>
         <div className="text-center p-3 bg-white/50 dark:bg-theme-surface/50 rounded-lg border border-red-200 dark:border-red-800">
@@ -85,4 +84,3 @@ export function LeetcodeStats() {
     </motion.div>
   );
 }
-

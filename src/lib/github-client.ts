@@ -62,11 +62,11 @@ export async function fetchGitHubStats(): Promise<GitHubStats | null> {
       }),
     ]);
 
-    const repos = reposReq.data.filter(repo => !repo.fork); // Filter out forks for language stats
+    const repos = reposReq.data.filter((repo) => !repo.fork); // Filter out forks for language stats
 
     // Calculate Top Languages
     const langCount: Record<string, number> = {};
-    repos.forEach(repo => {
+    repos.forEach((repo) => {
       if (repo.language) {
         langCount[repo.language] = (langCount[repo.language] || 0) + 1;
       }
@@ -78,26 +78,28 @@ export async function fetchGitHubStats(): Promise<GitHubStats | null> {
       .map(([name, count]) => ({
         name,
         count,
-        color: languageColors[name] || '#8b949e' // Fallback color
+        color: languageColors[name] || '#8b949e', // Fallback color
       }));
 
-    // Get Top Repos (pinned logic is hard via REST, so we use 'starred' or 'updated' and let user pick manually ideally, 
+    // Get Top Repos (pinned logic is hard via REST, so we use 'starred' or 'updated' and let user pick manually ideally,
     // but for now we'll pick top starred + updated)
     // A better heuristic: sort by stars, then updated
     const topRepos = repos
       .sort((a, b) => (b.stargazers_count || 0) - (a.stargazers_count || 0))
       .slice(0, 6)
-      .map(repo => ({
+      .map((repo) => ({
         id: repo.id,
         name: repo.name,
         description: repo.description || '',
         url: repo.html_url,
         stars: repo.stargazers_count || 0,
         forks: repo.forks_count || 0,
-        language: repo.language ? {
-          name: repo.language,
-          color: languageColors[repo.language] || '#8b949e'
-        } : null,
+        language: repo.language
+          ? {
+              name: repo.language,
+              color: languageColors[repo.language] || '#8b949e',
+            }
+          : null,
         updatedAt: repo.updated_at || new Date().toISOString(),
       }));
 
@@ -112,10 +114,8 @@ export async function fetchGitHubStats(): Promise<GitHubStats | null> {
       topLanguages,
       topRepos,
     };
-
   } catch (error) {
     console.error('Error fetching GitHub data:', error);
     return null;
   }
 }
-

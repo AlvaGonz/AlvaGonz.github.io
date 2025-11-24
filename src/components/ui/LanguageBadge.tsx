@@ -34,4 +34,3 @@ export function LanguageBadge({ name, count }: LanguageBadgeProps) {
     </div>
   );
 }
-

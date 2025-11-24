@@ -18,10 +18,10 @@ export function Contact({ profile }: ContactProps): JSX.Element {
           className="px-6 py-3 bg-[#0077b5]/10 text-[#0077b5] border border-[#0077b5]/30 rounded-lg hover:bg-[#0077b5]/20 transition-all font-medium flex items-center gap-3 group"
           aria-label="LinkedIn profile"
         >
-          <img 
-            src="https://skillicons.dev/icons?i=linkedin" 
-            alt="LinkedIn" 
-            className="w-6 h-6 group-hover:scale-110 transition-transform" 
+          <img
+            src="https://skillicons.dev/icons?i=linkedin"
+            alt="LinkedIn"
+            className="w-6 h-6 group-hover:scale-110 transition-transform"
           />
           <span>LinkedIn</span>
         </a>
@@ -32,10 +32,10 @@ export function Contact({ profile }: ContactProps): JSX.Element {
           className="px-6 py-3 bg-white/5 text-primary-anti-flash-white border border-white/10 rounded-lg hover:bg-white/10 transition-all font-medium flex items-center gap-3 group"
           aria-label="GitHub profile"
         >
-          <img 
-            src="https://skillicons.dev/icons?i=github" 
-            alt="GitHub" 
-            className="w-6 h-6 group-hover:scale-110 transition-transform bg-white rounded-full" 
+          <img
+            src="https://skillicons.dev/icons?i=github"
+            alt="GitHub"
+            className="w-6 h-6 group-hover:scale-110 transition-transform bg-white rounded-full"
           />
           <span>GitHub</span>
         </a>
@@ -45,10 +45,10 @@ export function Contact({ profile }: ContactProps): JSX.Element {
             className="px-6 py-3 bg-red-500/10 text-red-400 border border-red-500/30 rounded-lg hover:bg-red-500/20 transition-all font-medium flex items-center gap-3 group"
             aria-label="Send email"
           >
-            <img 
-              src="https://skillicons.dev/icons?i=gmail" 
-              alt="Email" 
-              className="w-6 h-6 group-hover:scale-110 transition-transform" 
+            <img
+              src="https://skillicons.dev/icons?i=gmail"
+              alt="Email"
+              className="w-6 h-6 group-hover:scale-110 transition-transform"
             />
             <span>Email</span>
           </a>

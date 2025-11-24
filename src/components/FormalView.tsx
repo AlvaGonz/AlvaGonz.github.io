@@ -16,35 +16,51 @@ import { GithubActivity } from './formal/GithubActivity';
 import { DailyVerse } from './formal/DailyVerse';
 import { DuolingoWidget } from './formal/DuolingoWidget';
 
+interface PinnedProject {
+  name: string;
+  description: string;
+  url: string;
+  stars: number;
+  forks: number;
+  language: string | { name: string; color: string } | null;
+  updatedAt: string;
+}
+
+interface PinnedData {
+  projects: PinnedProject[];
+}
+
+const pinnedData = projectsData as unknown as PinnedData;
+
 export function FormalView(): JSX.Element {
   const { data: githubData } = useGitHubStats();
 
   // Merge local project data with live GitHub data where possible
   const displayProjects = githubData?.topRepos.length
-    ? githubData.topRepos.slice(0, 6).map(repo => {
-      return {
-        name: repo.name,
-        description: repo.description || '',
-        url: repo.url,
-        stars: repo.stars,
-        forks: repo.forks,
-        language: repo.language ? { name: repo.language.name, color: repo.language.color } : null,
-        updatedAt: repo.updatedAt
-      };
-    })
-    : projectsData.projects.map((project: any) => ({
-      name: project.name,
-      description: project.description,
-      url: project.url,
-      stars: project.stars,
-      forks: project.forks,
-      language: project.language
-        ? (typeof project.language === 'string'
-          ? { name: project.language, color: '#3178C6' }
-          : { name: project.language.name, color: project.language.color })
-        : null,
-      updatedAt: project.updatedAt
-    }));
+    ? githubData.topRepos.slice(0, 6).map((repo) => {
+        return {
+          name: repo.name,
+          description: repo.description || '',
+          url: repo.url,
+          stars: repo.stars,
+          forks: repo.forks,
+          language: repo.language ? { name: repo.language.name, color: repo.language.color } : null,
+          updatedAt: repo.updatedAt,
+        };
+      })
+    : pinnedData.projects.map((project) => ({
+        name: project.name,
+        description: project.description,
+        url: project.url,
+        stars: project.stars,
+        forks: project.forks,
+        language: project.language
+          ? typeof project.language === 'string'
+            ? { name: project.language, color: '#3178C6' }
+            : { name: project.language.name, color: project.language.color }
+          : null,
+        updatedAt: project.updatedAt,
+      }));
 
   return (
     <div className="min-h-screen p-8 md:p-16 bg-primary-rich-black">
@@ -61,12 +77,8 @@ export function FormalView(): JSX.Element {
             <h1 className="text-4xl md:text-5xl font-bold mb-2 text-primary-anti-flash-white">
               {profile.name}
             </h1>
-            <p className="text-xl md:text-2xl text-primary-mountain-meadow mb-4">
-              {profile.role}
-            </p>
-            <p className="text-lg text-secondary-pistachio max-w-2xl">
-              {profile.tagline}
-            </p>
+            <p className="text-xl md:text-2xl text-primary-mountain-meadow mb-4">{profile.role}</p>
+            <p className="text-lg text-secondary-pistachio max-w-2xl">{profile.tagline}</p>
             <div className="flex items-center gap-2 mt-2 text-md text-secondary-stone justify-center md:justify-start">
               <img
                 src="https://flagcdn.com/w40/do.png"
@@ -83,8 +95,6 @@ export function FormalView(): JSX.Element {
 
         {/* About Section */}
         <AboutFormal />
-
-
 
         {/* Experience Section */}
         <section id="experience">
@@ -139,8 +149,6 @@ export function FormalView(): JSX.Element {
             <DuolingoWidget />
           </div>
         </section>
-
-
 
         {/* Projects Section */}
         <section id="projects">

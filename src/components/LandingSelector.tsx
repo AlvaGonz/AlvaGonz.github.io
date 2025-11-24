@@ -46,12 +46,8 @@ export function LandingSelector({ onSelect }: LandingSelectorProps): JSX.Element
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h2 className="text-3xl font-bold text-primary-anti-flash-white mb-2">
-                Formal
-              </h2>
-              <p className="text-primary-mountain-meadow font-medium mb-6">
-                Professional & Clean
-              </p>
+              <h2 className="text-3xl font-bold text-primary-anti-flash-white mb-2">Formal</h2>
+              <p className="text-primary-mountain-meadow font-medium mb-6">Professional & Clean</p>
               <p className="text-secondary-pistachio leading-relaxed">
                 Minimalist design showcasing career achievements, skills, and professional timeline.
               </p>
@@ -59,8 +55,8 @@ export function LandingSelector({ onSelect }: LandingSelectorProps): JSX.Element
             <div className="mt-8 h-1 w-full bg-white/10 rounded-full overflow-hidden">
               <motion.div
                 className="h-full bg-primary-mountain-meadow"
-                initial={{ width: "0%" }}
-                whileHover={{ width: "100%" }}
+                initial={{ width: '0%' }}
+                whileHover={{ width: '100%' }}
                 transition={{ duration: 0.3 }}
               />
             </div>
@@ -83,12 +79,8 @@ export function LandingSelector({ onSelect }: LandingSelectorProps): JSX.Element
               <div className="w-20 h-20 rounded-full bg-gradient-to-br from-curiosity-primary to-curiosity-secondary mb-6 flex items-center justify-center text-3xl text-curiosity-bg shadow-[0_0_15px_rgba(208,211,77,0.4)]">
                 ✨
               </div>
-              <h2 className="text-3xl font-bold text-curiosity-text mb-2">
-                Curiosity
-              </h2>
-              <p className="text-curiosity-primary font-medium mb-6">
-                curios & Interactive
-              </p>
+              <h2 className="text-3xl font-bold text-curiosity-text mb-2">Curiosity</h2>
+              <p className="text-curiosity-primary font-medium mb-6">curios & Interactive</p>
               <p className="text-curiosity-text-secondary leading-relaxed">
                 Vibrant, animated experience exploring curios coding, passions, and experiments.
               </p>
@@ -96,8 +88,8 @@ export function LandingSelector({ onSelect }: LandingSelectorProps): JSX.Element
             <div className="mt-8 h-1 w-full bg-white/10 rounded-full overflow-hidden">
               <motion.div
                 className="h-full bg-gradient-to-r from-curiosity-primary to-curiosity-secondary"
-                initial={{ width: "0%" }}
-                whileHover={{ width: "100%" }}
+                initial={{ width: '0%' }}
+                whileHover={{ width: '100%' }}
                 transition={{ duration: 0.3 }}
               />
             </div>

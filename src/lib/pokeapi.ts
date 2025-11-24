@@ -34,4 +34,3 @@ export async function fetchPokemon(id: number): Promise<PokemonData | null> {
     return null;
   }
 }
-
