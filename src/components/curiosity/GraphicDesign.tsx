@@ -21,7 +21,7 @@ export function GraphicDesign() {
                                 className="w-full h-auto transform group-hover:scale-105 transition-transform duration-700"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                                <p className="text-white font-medium">Community Event Branding</p>
+                                <p className="text-white font-medium">Demasiado Hipster ¿No?</p>
                             </div>
                         </div>
                     </div>

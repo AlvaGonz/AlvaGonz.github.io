@@ -31,6 +31,30 @@ export function FloatingElements() {
     { type: 'cross', x: '22%', y: '28%', size: 18, color: 'text-curiosity-accent', delay: 1.3 },
     { type: 'circle', x: '68%', y: '72%', size: 20, color: 'text-curiosity-primary', delay: 2.3 },
     { type: 'rect', x: '3%', y: '12%', size: 24, color: 'text-curiosity-secondary', delay: 3.2 },
+
+    // Second batch of 22
+    { type: 'circle', x: '48%', y: '95%', size: 19, color: 'text-curiosity-accent', delay: 0.7 },
+    { type: 'rect', x: '78%', y: '22%', size: 23, color: 'text-curiosity-primary', delay: 1.4 },
+    { type: 'triangle', x: '28%', y: '48%', size: 21, color: 'text-curiosity-secondary', delay: 2.6 },
+    { type: 'cross', x: '93%', y: '78%', size: 18, color: 'text-curiosity-accent', delay: 3.8 },
+    { type: 'circle', x: '14%', y: '33%', size: 22, color: 'text-curiosity-primary', delay: 0.4 },
+    { type: 'rect', x: '58%', y: '62%', size: 20, color: 'text-curiosity-secondary', delay: 1.7 },
+    { type: 'triangle', x: '6%', y: '88%', size: 24, color: 'text-curiosity-accent', delay: 2.9 },
+    { type: 'cross', x: '72%', y: '12%', size: 17, color: 'text-curiosity-primary', delay: 3.7 },
+    { type: 'circle', x: '38%', y: '68%', size: 21, color: 'text-curiosity-secondary', delay: 1.0 },
+    { type: 'rect', x: '86%', y: '42%', size: 25, color: 'text-curiosity-accent', delay: 2.4 },
+    { type: 'triangle', x: '20%', y: '15%', size: 19, color: 'text-curiosity-primary', delay: 3.9 },
+    { type: 'cross', x: '52%', y: '32%', size: 20, color: 'text-curiosity-secondary', delay: 0.3 },
+    { type: 'circle', x: '95%', y: '90%', size: 23, color: 'text-curiosity-accent', delay: 1.9 },
+    { type: 'rect', x: '16%', y: '58%', size: 22, color: 'text-curiosity-primary', delay: 3.0 },
+    { type: 'triangle', x: '62%', y: '4%', size: 20, color: 'text-curiosity-secondary', delay: 0.2 },
+    { type: 'cross', x: '42%', y: '78%', size: 19, color: 'text-curiosity-accent', delay: 1.6 },
+    { type: 'circle', x: '26%', y: '52%', size: 21, color: 'text-curiosity-primary', delay: 2.7 },
+    { type: 'rect', x: '74%', y: '88%', size: 24, color: 'text-curiosity-secondary', delay: 3.4 },
+    { type: 'triangle', x: '8%', y: '24%', size: 18, color: 'text-curiosity-accent', delay: 1.2 },
+    { type: 'cross', x: '88%', y: '38%', size: 22, color: 'text-curiosity-primary', delay: 2.1 },
+    { type: 'circle', x: '44%', y: '82%', size: 20, color: 'text-curiosity-secondary', delay: 3.3 },
+    { type: 'rect', x: '32%', y: '6%', size: 23, color: 'text-curiosity-accent', delay: 0.9 },
   ];
 
   return (
