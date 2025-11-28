@@ -229,4 +229,4 @@ MIT License - feel free to use this project as inspiration for your own portfoli
 
 ---
 
-**Built with ❤️ by Adrian A. A. González**
+**Built with ❤️ by Adrian A. A. Gonzalez**

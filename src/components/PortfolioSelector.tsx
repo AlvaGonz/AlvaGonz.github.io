@@ -102,7 +102,7 @@ export function PortfolioSelector({ onSelect }: PortfolioSelectorProps): JSX.Ele
             </div>
 
             <footer className="absolute bottom-8 text-center text-sm text-secondary-stone opacity-60">
-                <p>© 2025 Adrian A. A. González</p>
+                <p>© 2025 Adrian A. A. Gonzalez</p>
             </footer>
         </div>
     );
