@@ -36,7 +36,7 @@ export function GoogleAnalytics(): null {
     // This matches: function gtag(){dataLayer.push(arguments);}
     if (!window.gtag) {
       function gtag() {
-        window.dataLayer.push(arguments);
+        window.dataLayer?.push(arguments);
       }
       window.gtag = gtag;
     }
