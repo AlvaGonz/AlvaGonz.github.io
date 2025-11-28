@@ -36,6 +36,7 @@ coverage
 .env
 .env.local
 .env.*.local
+!.env.local.example
 
 # Generated data
 src/data/generated/
