@@ -127,10 +127,11 @@ pnpm dev
 
 ### Environment Variables (Optional)
 
-For enhanced GitHub integration, create a `.env.local` file:
+For enhanced GitHub integration and Google Analytics, create a `.env.local` file:
 
 ```env
 GITHUB_TOKEN=your_github_personal_access_token
+VITE_GA_TRACKING_ID=G-SQDSK4NGBK
 ```
 
 **How to get a GitHub token:**
@@ -138,6 +139,14 @@ GITHUB_TOKEN=your_github_personal_access_token
 2. Generate new token (classic)
 3. Select scopes: `public_repo`, `read:user`
 4. Copy token to `.env.local`
+
+**How to get a Google Analytics tracking ID:**
+1. Go to Google Analytics → Admin → Data Streams
+2. Select your web stream
+3. Copy the Measurement ID (format: `G-XXXXXXXXXX`)
+4. Add it to `.env.local` as `VITE_GA_TRACKING_ID`
+
+**Note:** Copy `.env.local.example` to `.env.local` and fill in your values.
 
 ## 📜 Available Scripts
 
