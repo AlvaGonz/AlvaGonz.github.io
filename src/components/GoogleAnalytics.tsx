@@ -16,22 +16,38 @@ export function GoogleAnalytics(): null {
       return;
     }
 
-    // Initialize dataLayer
+    // Initialize dataLayer before script loads (allows queuing commands)
     window.dataLayer = window.dataLayer || [];
     const dataLayer = window.dataLayer;
+    
+    // Define gtag function to queue commands until script loads
     function gtag(...args: unknown[]) {
       dataLayer.push(args);
     }
+    window.gtag = gtag;
 
     // Load gtag.js script
     const script = document.createElement('script');
     script.async = true;
     script.src = `https://www.googletagmanager.com/gtag/js?id=${trackingId}`;
+    
+    // Wait for script to load before configuring
+    script.onload = () => {
+      // Use window.gtag (now replaced by GA script) or fallback to local function
+      const gtagFn = window.gtag || gtag;
+      // Configure gtag after script has loaded
+      gtagFn('js', new Date());
+      gtagFn('config', trackingId);
+    };
+    
+    // Handle script load errors
+    script.onerror = () => {
+      if (import.meta.env.DEV) {
+        console.error('Failed to load Google Analytics script');
+      }
+    };
+    
     document.head.appendChild(script);
-
-    // Configure gtag
-    gtag('js', new Date());
-    gtag('config', trackingId);
 
     // Cleanup function (though script will remain in DOM)
     return () => {
