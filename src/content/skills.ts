@@ -4,7 +4,7 @@ export const skills: Skill[] = [
   // Languages
   { name: 'JavaScript', category: 'language', iconId: 'js' },
   { name: 'C#', category: 'language', iconId: 'cs' },
-  { name: 'SQL', category: 'language', iconId: 'mysql' }, // Generic SQL often maps to a specific DB or just doesn't have one, using mysql/postgres usually works visually or omitting
+  { name: 'SQL', category: 'language', iconUrl: 'https://img.icons8.com/color/48/sql.png' }, // Generic SQL often maps to a specific DB or just doesn't have one, using mysql/postgres usually works visually or omitting
   { name: 'HTML', category: 'language', iconId: 'html' },
   { name: 'CSS', category: 'language', iconId: 'css' },
   { name: 'TypeScript', category: 'language', iconId: 'ts' },
@@ -22,7 +22,7 @@ export const skills: Skill[] = [
   { name: 'Figma', category: 'tool', iconId: 'figma' },
 
   // Databases
-  { name: 'MySQL', category: 'database', iconId: 'mysql' },
+  { name: 'SQLite', category: 'database', iconUrl: 'https://img.icons8.com/color/48/sqlite.png' },
   { name: 'MongoDB', category: 'database', iconId: 'mongodb' },
   { name: 'SQL Server', category: 'database', iconId: 'azure' }, // SQL Server often associated with Azure or just use generic db icon if needed. Azure is close. Or we skip icon.
 ];

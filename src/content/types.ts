@@ -29,4 +29,5 @@ export interface Skill {
   name: string;
   category: 'language' | 'framework' | 'tool' | 'database';
   iconId?: string; // ID for skillicons.dev
+  iconUrl?: string; // Direct URL for custom icons
 }
