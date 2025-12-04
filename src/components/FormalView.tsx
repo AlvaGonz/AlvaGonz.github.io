@@ -68,7 +68,7 @@ export function FormalView(): JSX.Element {
         {/* Profile / Hero Section */}
         <section className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-8">
           <img
-            src={profile.avatar}
+            src={profile.avatar_formal}
             alt={`${profile.name} profile`}
             className="w-32 h-32 md:w-48 md:h-48 rounded-full object-cover border-4 border-primary-mountain-meadow shadow-scroll-modern"
             loading="lazy"

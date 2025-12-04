@@ -11,5 +11,6 @@ export const profile: Profile = {
   linkedin: 'https://www.linkedin.com/in/adrian-alexander-a-4a8842217/',
   github: 'https://github.com/AlvaGonz',
   instagram: 'https://www.instagram.com/adrianalv.gon/',
-  avatar: '/images/Sitting.png',
+  avatar_formal: '/images/Perfil 2.png',
+  avatar_curious: '/images/hipster3.png',
 };

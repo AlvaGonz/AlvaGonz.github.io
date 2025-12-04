@@ -20,7 +20,7 @@ export function HeroCuriosity() {
             className="inline-block p-1 rounded-full bg-gradient-to-r from-curiosity-primary to-curiosity-secondary"
           >
             <img
-              src={profile.avatar}
+              src={profile.avatar_curious}
               alt={profile.name}
               className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-curiosity-bg object-cover"
             />
