@@ -100,14 +100,6 @@ export const certifications: CertificationItem[] = [
     skills: ['Cascading Style Sheets (CSS)'],
     url: 'https://www.sololearn.com/certificates/CC-J2BB43FF',
   },
-  {
-    id: 'remote-work',
-    name: 'Remote Work and Virtual Collaboration Professional Certificate - RWVCPC',
-    issuer: 'Certiprof',
-    date: 'Issued Jul 2021 · Expired Jul 2023',
-    credentialId: '66326051',
-    url: 'https://www.credly.com/badges/dbdc9b12-6c74-4e9d-acc9-6c1ae0b0461c?source=linked_in_profile',
-  },
 ];
 
 export const organizations: OrganizationItem[] = [

@@ -15,7 +15,7 @@ const getCertIcon = (name: string, issuer: string): JSX.Element => {
   if (issuer.includes('Google'))
     return (
       <img
-        src="https://img.icons8.com/external-tal-revivo-color-tal-revivo/512w/external-google-analytics-lets-you-measure-your-advertising-roi-logo-color-tal-revivo.png"
+        src="https://go-skill-icons.vercel.app/api/icons?i=googleanalytics"
         alt="Google Analytics"
         className={iconSize}
       />

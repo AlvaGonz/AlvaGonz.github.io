@@ -22,7 +22,7 @@ export const skills: Skill[] = [
   { name: 'Figma', category: 'tool', iconId: 'figma' },
 
   // Databases
-  { name: 'SQLite', category: 'database', iconUrl: 'https://img.icons8.com/color/48/sqlite.png' },
+  { name: 'SQLite', category: 'database', iconId: 'sqlite' },
   { name: 'MongoDB', category: 'database', iconId: 'mongodb' },
   { name: 'SQL Server', category: 'database', iconId: 'azure' }, // SQL Server often associated with Azure or just use generic db icon if needed. Azure is close. Or we skip icon.
 ];
