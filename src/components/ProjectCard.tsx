@@ -1,104 +1,57 @@
-import { motion } from 'framer-motion';
-import type { Project } from '../content/types';
-import { usePortfolioSide } from '@/hooks/usePortfolioSide';
-import { GlassmorphicCard } from './animations/GlassmorphicCard';
+import { GitHubRepository } from '../lib/github-client';
 
-interface ProjectCardProps {
-  project: Project;
-}
+// Componente para mostrar cada proyecto
+export function ProjectCard({ project }: { project: GitHubRepository }) {
+  return (
+    <a href={project.url} target="_blank" rel="noopener noreferrer" 
+       className="block p-6 bg-primary-rich-black-light rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border border-primary-slate-gray/20 hover:border-primary-mountain-meadow/50 group">
+      <h3 className="text-xl font-bold text-primary-anti-flash-white mb-2 group-hover:text-primary-mountain-meadow transition-colors">{project.name}</h3>
+      <p className="text-sm text-secondary-stone mb-4 line-clamp-2">{project.description || 'No description'}</p>
 
-export function ProjectCard({ project }: ProjectCardProps): JSX.Element {
-  const { side } = usePortfolioSide();
-  const isCuriosity = side === 'curiosity';
-
-  const updatedAt = project.updatedAt;
-  const daysAgo = updatedAt
-    ? Math.floor((Date.now() - new Date(updatedAt).getTime()) / (1000 * 60 * 60 * 24))
-    : null;
-
-  const timeText =
-    daysAgo === null
-      ? null
-      : daysAgo === 0
-        ? 'today'
-        : daysAgo === 1
-          ? 'yesterday'
-          : daysAgo < 30
-            ? `${daysAgo}d ago`
-            : daysAgo < 365
-              ? `${Math.floor(daysAgo / 30)}mo ago`
-              : `${Math.floor(daysAgo / 365)}y ago`;
-
-  const content = (
-    <>
-      <div className="flex items-start justify-between mb-3">
-        <h3
-          className="text-xl font-semibold text-theme-text line-clamp-1 group-hover:text-theme-primary transition-colors"
-          title={project.name}
-        >
-          {project.name}
-        </h3>
-        {project.language && (
-          <span
-            className="text-xs px-2 py-1 rounded-full shrink-0 ml-2 backdrop-blur-sm"
-            style={{
-              backgroundColor: isCuriosity
-                ? `${project.language.color}30`
-                : `${project.language.color}20`,
-              color: project.language.color,
-              border: `1px solid ${project.language.color}40`,
-            }}
-          >
-            {project.language.name}
+      <div className="flex items-center gap-4 text-xs mb-4">
+        {project.primaryLanguage && (
+          <span className="flex items-center gap-1.5 px-3 py-1 bg-primary-deep-champagne/10 text-primary-deep-champagne rounded-full font-semibold">
+            <span
+              className="w-2 h-2 rounded-full"
+              style={{
+                backgroundColor: project.primaryLanguage.color || '#cccccc',
+              }}
+            />
+            {project.primaryLanguage.name}
+          </span>
+        )}
+        
+        {project.stargazerCount > 0 && (
+          <span className="flex items-center gap-1 text-secondary-pistachio">
+            ⭐ {project.stargazerCount}
+          </span>
+        )}
+        
+        {project.forkCount > 0 && (
+          <span className="flex items-center gap-1 text-secondary-pistachio">
+            🍴 {project.forkCount}
           </span>
         )}
       </div>
 
-      <p className="text-theme-text-secondary mb-6 line-clamp-2 flex-grow">
-        {project.description || 'No description available.'}
-      </p>
-
-      <div className="flex items-center justify-between text-sm pt-4 border-t border-theme-border/50">
-        <div className="flex gap-4 text-theme-text-secondary">
-          <span className="flex items-center gap-1.5" title="Stars">
-            <span className="text-yellow-500">⭐</span> {project.stars}
-          </span>
-          <span className="flex items-center gap-1.5" title="Forks">
-            <span className="text-blue-400">🍴</span> {project.forks}
-          </span>
-        </div>
-
-        <div className="flex items-center gap-3">
-          {timeText && (
-            <span className="text-xs text-theme-text-secondary/60 hidden sm:inline-block">
-              {timeText}
+      {project.repositoryTopics.length > 0 && (
+        <div className="flex flex-wrap gap-2 mb-4">
+          {project.repositoryTopics.map((topic) => (
+            <span key={topic.topic.name} className="px-3 py-1 bg-primary-mountain-meadow/20 text-primary-mountain-meadow text-xs rounded-md">
+              {topic.topic.name}
             </span>
-          )}
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-theme-primary hover:text-theme-accent transition-colors font-medium flex items-center gap-1"
-          >
-            Code <span className="text-lg">→</span>
+          ))}
+        </div>
+      )}
+
+      {project.homepageUrl && (
+        <div className="mt-4">
+          <a href={project.homepageUrl} target="_blank" rel="noopener noreferrer"
+             className="inline-flex items-center text-primary-deep-champagne hover:underline text-sm font-medium">
+            Live Demo →
           </a>
         </div>
-      </div>
-    </>
-  );
-
-  if (isCuriosity) {
-    return (
-      <GlassmorphicCard className="p-6 h-full flex flex-col group">{content}</GlassmorphicCard>
-    );
-  }
-
-  return (
-    <motion.div
-      whileHover={{ y: -5, scale: 1.02 }}
-      className="bg-theme-surface rounded-xl p-6 border border-theme-border hover:border-theme-primary transition-all duration-300 shadow-scroll-modern h-full flex flex-col group"
-    >
-      {content}
-    </motion.div>
+      )}
+    </a>
   );
 }

@@ -1,222 +1,375 @@
-import { Octokit } from '@octokit/rest';
+import { GraphQLClient, gql } from 'graphql-request';
 
-// Use token if available for higher rate limits, otherwise public API
-const token = import.meta.env.VITE_GITHUB_TOKEN;
-export const username = import.meta.env.VITE_GITHUB_USERNAME || 'AlvaGonz';
+// Validar que token existe
+const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
+const GITHUB_USER = 'AlvaGonz';
 
-export const octokit = new Octokit({
-  auth: token,
+if (!GITHUB_TOKEN) {
+  console.warn('⚠️ VITE_GITHUB_TOKEN not found in .env.local');
+  console.warn('GitHub API requests will be rate-limited (60/hour)');
+}
+
+// Cliente GraphQL con autenticación
+const graphqlClient = new GraphQLClient('https://api.github.com/graphql', {
+  headers: {
+    Authorization: `Bearer ${GITHUB_TOKEN || ''}`,
+    'Content-Type': 'application/json',
+  },
 });
 
-export interface GitHubStats {
-  user: {
-    followers: number;
-    publicRepos: number;
-    avatar: string;
-    bio: string;
-    location: string;
-  };
-  topLanguages: Array<{ name: string; count: number; color: string }>;
-  topRepos: Array<{
-    id: number;
-    name: string;
-    description: string;
-    url: string;
-    stars: number;
-    forks: number;
-    language: { name: string; color: string } | null;
-    updatedAt: string;
-  }>;
-}
+// ==================== QUERIES ====================
 
-// GitHub language colors map (fallback)
-const languageColors: Record<string, string> = {
-  TypeScript: '#3178c6',
-  JavaScript: '#f1e05a',
-  Python: '#3572A5',
-  HTML: '#e34c26',
-  CSS: '#563d7c',
-  Vue: '#41b883',
-  React: '#61dafb',
-  Java: '#b07219',
-  'C#': '#178600',
-  Go: '#00ADD8',
-  Rust: '#dea584',
-  Shell: '#89e051',
-  PHP: '#4F5D95',
-  Ruby: '#701516',
-  Swift: '#F05138',
-  Kotlin: '#A97BFF',
-  Dart: '#00B4AB',
-};
-
-export async function fetchGitHubStats(): Promise<GitHubStats | null> {
-  try {
-    const [userReq, reposReq] = await Promise.all([
-      octokit.users.getByUsername({ username }),
-      octokit.repos.listForUser({
-        username,
-        type: 'owner',
-        sort: 'updated',
-        per_page: 100, // Fetch enough to get accurate language stats
-      }),
-    ]);
-
-    const repos = reposReq.data.filter((repo) => !repo.fork); // Filter out forks for language stats
-
-    // Calculate Top Languages based on bytes
-    const langPromises = repos.map((repo) =>
-      octokit.repos
-        .listLanguages({
-          owner: username,
-          repo: repo.name,
-        })
-        .then((res) => res.data)
-    );
-
-    const langData = await Promise.all(langPromises);
-
-    const langBytes: Record<string, number> = {};
-    langData.forEach((repoLangs) => {
-      for (const lang in repoLangs) {
-        if (repoLangs[lang]) {
-          langBytes[lang] = (langBytes[lang] || 0) + repoLangs[lang];
-        }
-      }
-    });
-
-    const totalBytes = Object.values(langBytes).reduce((a, b) => a + b, 0);
-
-    const topLanguages = Object.entries(langBytes)
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, 7)
-      .map(([name, bytes]) => ({
-        name,
-        count: Math.round((bytes / totalBytes) * 100), // As percentage
-        color: languageColors[name] || '#8b949e', // Fallback color
-      }));
-
-    // Get Top Repos (pinned logic is hard via REST, so we use 'starred' or 'updated' and let user pick manually ideally,
-    // but for now we'll pick top starred + updated)
-    // A better heuristic: sort by stars, then updated
-    const topRepos = repos
-      .sort((a, b) => (b.stargazers_count || 0) - (a.stargazers_count || 0))
-      .slice(0, 6)
-      .map((repo) => ({
-        id: repo.id,
-        name: repo.name,
-        description: repo.description || '',
-        url: repo.html_url,
-        stars: repo.stargazers_count || 0,
-        forks: repo.forks_count || 0,
-        language: repo.language
-          ? {
-              name: repo.language,
-              color: languageColors[repo.language] || '#8b949e',
-            }
-          : null,
-        updatedAt: repo.updated_at || new Date().toISOString(),
-      }));
-
-    return {
-      user: {
-        followers: userReq.data.followers,
-        publicRepos: userReq.data.public_repos,
-        avatar: userReq.data.avatar_url,
-        bio: userReq.data.bio || '',
-        location: userReq.data.location || '',
-      },
-      topLanguages,
-      topRepos,
-    };
-  } catch (error) {
-    console.error('Error fetching GitHub data:', error);
-    return null;
-  }
-}
-
-export interface PinnedProject {
-  name: string;
-  description: string;
-  url: string;
-  stars: number;
-  forks: number;
-  language: {
-    name: string;
-    color: string;
-  } | null;
-}
-
-interface GraphQLResponse {
-  data?: {
-    user?: {
-      pinnedItems?: {
-        nodes?: Array<{
-          name: string;
-          description: string | null;
-          url: string;
-          stargazerCount: number;
-          forkCount: number;
-          primaryLanguage?: {
-            name: string;
-            color: string;
-          } | null;
-        }>;
-      };
-    };
-  };
-  errors?: Array<{ message: string }>;
-}
-
-export async function fetchPinnedProjects(username: string): Promise<PinnedProject[]> {
-  const query = `
-    query($login: String!) {
-      user(login: $login) {
-        pinnedItems(first: 6, types: REPOSITORY) {
-          nodes {
-            ... on Repository {
+/**
+ * Query para obtener repositorios pinneados del usuario
+ * Devuelve: name, description, url, languages, stargazers, homepageUrl, primaryLanguage
+ */
+const PINNED_REPOS_QUERY = gql`
+  query GetPinnedRepositories($userName: String!) {
+    user(login: $userName) {
+      pinnedItems(first: 6, types: REPOSITORY) {
+        nodes {
+          ... on Repository {
+            id
+            name
+            description
+            url
+            isPrivate
+            stargazerCount
+            forkCount
+            primaryLanguage {
               name
-              description
-              url
-              stargazerCount
-              forkCount
-              primaryLanguage {
+              color
+            }
+            languages(first: 3) {
+              nodes {
                 name
                 color
               }
             }
+            homepageUrl
+            repositoryTopics(first: 5) {
+              nodes {
+                topic {
+                  name
+                }
+              }
+            }
+            pushedAt
           }
         }
+      }
+    }
+  }
+`;
+
+/**
+ * Query para obtener todos los repositorios (no solo pinneados)
+ * Ordenado por stars descendente
+ */
+const ALL_REPOS_QUERY = gql`
+  query GetAllRepositories($userName: String!, $first: Int = 20) {
+    user(login: $userName) {
+      repositories(
+        first: $first
+        orderBy: { field: STARGAZERS, direction: DESC }
+        privacy: PUBLIC
+      ) {
+        totalCount
+        nodes {
+          id
+          name
+          description
+          url
+          isPrivate
+          stargazerCount
+          forkCount
+          primaryLanguage {
+            name
+            color
+          }
+          languages(first: 3) {
+            nodes {
+              name
+              color
+            }
+          }
+          homepageUrl
+          repositoryTopics(first: 5) {
+            nodes {
+              topic {
+                name
+              }
+            }
+          }
+          pushedAt
+        }
+      }
+    }
+  }
+`;
+
+/**
+ * Query para obtener estadísticas del usuario
+ */
+const USER_STATS_QUERY = gql`
+  query GetUserStats($userName: String!) {
+    user(login: $userName) {
+      name
+      bio
+      location
+      websiteUrl
+      twitterUsername
+      repositories {
+        totalCount
+      }
+      followers {
+        totalCount
+      }
+      following {
+        totalCount
+      }
+      pullRequests {
+        totalCount
+      }
+      issues {
+        totalCount
+      }
+      gists {
+        totalCount
+      }
+    }
+  }
+`;
+
+// ==================== TIPOS ====================
+
+export interface GitHubRepository {
+  id: string;
+  name: string;
+  description: string | null;
+  url: string;
+  isPrivate: boolean;
+  stargazerCount: number;
+  forkCount: number;
+  primaryLanguage: {
+    name: string;
+    color: string;
+  } | null;
+  languages: Array<{
+    name: string;
+    color: string;
+  }>;
+  homepageUrl: string | null;
+  repositoryTopics: Array<{
+    topic: {
+      name: string;
+    };
+  }>;
+  pushedAt: string;
+}
+
+export interface GitHubUserStats {
+  name: string;
+  bio: string | null;
+  location: string | null;
+  websiteUrl: string | null;
+  twitterUsername: string | null;
+  repositories: {
+    totalCount: number;
+  };
+  followers: {
+    totalCount: number;
+  };
+  following: {
+    totalCount: number;
+  };
+  pullRequests: {
+    totalCount: number;
+  };
+  issues: {
+    totalCount: number;
+  };
+  gists: {
+    totalCount: number;
+  };
+}
+
+// ==================== FUNCIONES ====================
+
+/**
+ * Obtener repositorios pinneados del usuario
+ */
+export async function fetchPinnedProjects(): Promise<GitHubRepository[]> {
+  try {
+    const data: any = await graphqlClient.request(PINNED_REPOS_QUERY, {
+      userName: GITHUB_USER,
+    });
+
+    const repos = data.user.pinnedItems.nodes || [];
+
+    return repos.map((repo: any) => ({
+      id: repo.id,
+      name: repo.name,
+      description: repo.description,
+      url: repo.url,
+      isPrivate: repo.isPrivate,
+      stargazerCount: repo.stargazerCount,
+      forkCount: repo.forkCount,
+      primaryLanguage: repo.primaryLanguage,
+      languages: repo.languages?.nodes || [],
+      homepageUrl: repo.homepageUrl,
+      repositoryTopics: repo.repositoryTopics?.nodes || [],
+      pushedAt: repo.pushedAt,
+    }));
+  } catch (error) {
+    console.error('❌ Error fetching pinned projects:', error);
+
+    // Fallback: devolver repos vacío en lugar de fallar
+    return [];
+  }
+}
+
+/**
+ * Obtener todos los repositorios públicos
+ */
+export async function fetchAllPublicRepos(
+  limit: number = 20
+): Promise<GitHubRepository[]> {
+  try {
+    const data: any = await graphqlClient.request(ALL_REPOS_QUERY, {
+      userName: GITHUB_USER,
+      first: limit,
+    });
+
+    const repos = data.user.repositories.nodes || [];
+
+    return repos.map((repo: any) => ({
+      id: repo.id,
+      name: repo.name,
+      description: repo.description,
+      url: repo.url,
+      isPrivate: repo.isPrivate,
+      stargazerCount: repo.stargazerCount,
+      forkCount: repo.forkCount,
+      primaryLanguage: repo.primaryLanguage,
+      languages: repo.languages?.nodes || [],
+      homepageUrl: repo.homepageUrl,
+      repositoryTopics: repo.repositoryTopics?.nodes || [],
+      pushedAt: repo.pushedAt,
+    }));
+  } catch (error) {
+    console.error('❌ Error fetching all repositories:', error);
+    return [];
+  }
+}
+
+/**
+ * Obtener estadísticas del usuario
+ */
+export async function fetchUserStats(): Promise<GitHubUserStats | null> {
+  try {
+    const data: any = await graphqlClient.request(USER_STATS_QUERY, {
+      userName: GITHUB_USER,
+    });
+
+    return data.user;
+  } catch (error) {
+    console.error('❌ Error fetching user stats:', error);
+    return null;
+  }
+}
+
+/**
+ * Obtener repositorio específico por nombre
+ */
+export async function fetchRepositoryByName(
+  repoName: string
+): Promise<GitHubRepository | null> {
+  const REPO_QUERY = gql`
+    query GetRepository($owner: String!, $name: String!) {
+      repository(owner: $owner, name: $name) {
+        id
+        name
+        description
+        url
+        isPrivate
+        stargazerCount
+        forkCount
+        primaryLanguage {
+          name
+          color
+        }
+        languages(first: 3) {
+          nodes {
+            name
+            color
+          }
+        }
+        homepageUrl
+        repositoryTopics(first: 5) {
+          nodes {
+            topic {
+              name
+            }
+          }
+        }
+        pushedAt
       }
     }
   `;
 
   try {
-    const response = await octokit.graphql<GraphQLResponse>(query, { login: username });
+    const data: any = await graphqlClient.request(REPO_QUERY, {
+      owner: GITHUB_USER,
+      name: repoName,
+    });
 
-    if (!response.data?.user?.pinnedItems?.nodes) {
-      console.error('Error fetching pinned projects: Invalid response format');
-      return [];
-    }
-
-    const nodes = response.data.user.pinnedItems.nodes;
-    const projects: PinnedProject[] = nodes.map((repo) => ({
+    const repo = data.repository;
+    return {
+      id: repo.id,
       name: repo.name,
-      description: repo.description || '',
+      description: repo.description,
       url: repo.url,
-      stars: repo.stargazerCount,
-      forks: repo.forkCount,
-      language: repo.primaryLanguage
-        ? {
-            name: repo.primaryLanguage.name,
-            color: repo.primaryLanguage.color,
-          }
-        : null,
-    }));
-
-    return projects;
+      isPrivate: repo.isPrivate,
+      stargazerCount: repo.stargazerCount,
+      forkCount: repo.forkCount,
+      primaryLanguage: repo.primaryLanguage,
+      languages: repo.languages?.nodes || [],
+      homepageUrl: repo.homepageUrl,
+      repositoryTopics: repo.repositoryTopics?.nodes || [],
+      pushedAt: repo.pushedAt,
+    };
   } catch (error) {
-    console.error('Error fetching pinned projects:', error);
-    return [];
+    console.error(`❌ Error fetching repository ${repoName}:`, error);
+    return null;
+  }
+}
+
+/**
+ * Validar que el token está funcionando
+ */
+export async function validateToken(): Promise<boolean> {
+  if (!GITHUB_TOKEN) {
+    console.warn('⚠️ No GitHub token provided');
+    return false;
+  }
+
+  try {
+    const data: any = await graphqlClient.request(
+      gql`
+        query {
+          viewer {
+            login
+          }
+        }
+      `
+    );
+
+    console.log('✅ GitHub token valid - Authenticated as:', data.viewer.login);
+    return true;
+  }
+  catch (error) {
+    console.error('❌ GitHub token validation failed:', error);
+    return false;
   }
 }

@@ -1,7 +1,8 @@
+import { ProjectCard } from './ProjectCard';
 import { profile } from '../content/profile';
 import { skills } from '../content/skills';
-import type { Project } from '../content/types';
-import { ProjectCard } from './ProjectCard';
+
+
 import { SkillPills } from './SkillPills';
 import { ExperienceTimeline } from './ExperienceTimeline';
 import { EducationSection } from './EducationSection';
@@ -15,32 +16,72 @@ import { DailyVerse } from './formal/DailyVerse';
 import { TopLanguages } from './github/TopLanguages';
 import { DuolingoWidget } from './formal/DuolingoWidget';
 import { useEffect, useState } from 'react';
-import { fetchPinnedProjects, username } from '../lib/github-client';
+import { fetchPinnedProjects, fetchAllPublicRepos, validateToken, GitHubRepository } from '../lib/github-client';
 
 export function FormalView(): JSX.Element {
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [projects, setProjects] = useState<GitHubRepository[]>([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchProjects = async () => {
+    async function loadProjects() {
       try {
-        const data = await fetchPinnedProjects(username);
-        // The Project and PinnedProject interfaces are compatible.
-        setProjects(data as Project[]);
-      } catch (e) {
-        if (e instanceof Error) {
-          setError(e.message);
-        } else {
-          setError('An unknown error occurred');
-        }
-      } finally {
-        setIsLoading(false);
-      }
-    };
+        setLoading(true);
+        setError(null);
 
-    fetchProjects();
+        // 1. Validar token (solo en desarrollo)
+        if (import.meta.env.DEV) {
+          await validateToken();
+        }
+
+        // 2. Intentar obtener repos pinneados
+        let repos = await fetchPinnedProjects();
+
+        // 3. Si no hay pinneados, obtener todos los repos
+        if (repos.length === 0) {
+          console.log('ℹ️ No pinned repositories found, fetching all public repos...');
+          repos = await fetchAllPublicRepos(6);
+        }
+
+        setProjects(repos);
+
+        // Log éxito
+        if (repos.length > 0) {
+          console.log(`✅ Loaded ${repos.length} repositories from GitHub`);
+        } else {
+          setError('No repositories found');
+        }
+      } catch (err) {
+        const errorMsg = err instanceof Error ? err.message : 'Unknown error';
+        setError(`Failed to load projects: ${errorMsg}`);
+        console.error('❌ Error loading projects:', err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadProjects();
   }, []);
+
+  // Rendering logic
+  if (loading) {
+    return <div className="projects-loading">Loading projects...</div>;
+  }
+
+  if (error) {
+    return (
+      <div className="projects-error">
+        <p>{error}</p>
+        <p className="text-sm">
+          Make sure VITE_GITHUB_TOKEN is set in .env.local
+        </p>
+      </div>
+    );
+  }
+
+  if (projects.length === 0) {
+    return <div className="projects-empty">No projects available</div>;
+  }
 
   return (
     <div className="min-h-screen p-8 md:p-16 bg-primary-rich-black">
@@ -135,12 +176,20 @@ export function FormalView(): JSX.Element {
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary-anti-flash-white border-b-2 border-primary-mountain-meadow pb-2">
             Projects
           </h2>
-          {isLoading && <p className="text-secondary-pistachio">Loading projects...</p>}
-          {error && <p className="text-red-500">Error: {error}</p>}
-          {!isLoading && !error && (
+          {loading && <div className="projects-loading">Loading projects...</div>}
+          {error && (
+            <div className="projects-error">
+              <p>{error}</p>
+              <p className="text-sm">
+                Make sure VITE_GITHUB_TOKEN is set in .env.local
+              </p>
+            </div>
+          )}
+          {projects.length === 0 && !loading && !error && <div className="projects-empty">No projects available</div>}
+          {!loading && !error && projects.length > 0 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {projects.map((project: Project, index: number) => (
-                <ProjectCard key={index} project={project} />
+              {projects.map((project) => (
+                <ProjectCard key={project.id} project={project} />
               ))}
             </div>
           )}
