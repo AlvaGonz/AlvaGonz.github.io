@@ -21,7 +21,8 @@ export interface Profile {
   linkedin: string;
   github: string;
   instagram?: string;
-  avatar: string;
+  avatar_formal: string;
+  avatar_curious: string;
 }
 
 export interface Skill {
