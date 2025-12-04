@@ -2,7 +2,7 @@ import { Octokit } from '@octokit/rest';
 
 // Use token if available for higher rate limits, otherwise public API
 const token = import.meta.env.VITE_GITHUB_TOKEN;
-const username = import.meta.env.VITE_GITHUB_USERNAME || 'AlvaGonz';
+export const username = import.meta.env.VITE_GITHUB_USERNAME || 'AlvaGonz';
 
 export const octokit = new Octokit({
   auth: token,
@@ -64,20 +64,35 @@ export async function fetchGitHubStats(): Promise<GitHubStats | null> {
 
     const repos = reposReq.data.filter((repo) => !repo.fork); // Filter out forks for language stats
 
-    // Calculate Top Languages
-    const langCount: Record<string, number> = {};
-    repos.forEach((repo) => {
-      if (repo.language) {
-        langCount[repo.language] = (langCount[repo.language] || 0) + 1;
+    // Calculate Top Languages based on bytes
+    const langPromises = repos.map((repo) =>
+      octokit.repos
+        .listLanguages({
+          owner: username,
+          repo: repo.name,
+        })
+        .then((res) => res.data)
+    );
+
+    const langData = await Promise.all(langPromises);
+
+    const langBytes: Record<string, number> = {};
+    langData.forEach((repoLangs) => {
+      for (const lang in repoLangs) {
+        if (repoLangs[lang]) {
+          langBytes[lang] = (langBytes[lang] || 0) + repoLangs[lang];
+        }
       }
     });
 
-    const topLanguages = Object.entries(langCount)
+    const totalBytes = Object.values(langBytes).reduce((a, b) => a + b, 0);
+
+    const topLanguages = Object.entries(langBytes)
       .sort((a, b) => b[1] - a[1])
-      .slice(0, 5)
-      .map(([name, count]) => ({
+      .slice(0, 7)
+      .map(([name, bytes]) => ({
         name,
-        count,
+        count: Math.round((bytes / totalBytes) * 100), // As percentage
         color: languageColors[name] || '#8b949e', // Fallback color
       }));
 
@@ -117,5 +132,91 @@ export async function fetchGitHubStats(): Promise<GitHubStats | null> {
   } catch (error) {
     console.error('Error fetching GitHub data:', error);
     return null;
+  }
+}
+
+export interface PinnedProject {
+  name: string;
+  description: string;
+  url: string;
+  stars: number;
+  forks: number;
+  language: {
+    name: string;
+    color: string;
+  } | null;
+}
+
+interface GraphQLResponse {
+  data?: {
+    user?: {
+      pinnedItems?: {
+        nodes?: Array<{
+          name: string;
+          description: string | null;
+          url: string;
+          stargazerCount: number;
+          forkCount: number;
+          primaryLanguage?: {
+            name: string;
+            color: string;
+          } | null;
+        }>;
+      };
+    };
+  };
+  errors?: Array<{ message: string }>;
+}
+
+export async function fetchPinnedProjects(username: string): Promise<PinnedProject[]> {
+  const query = `
+    query($login: String!) {
+      user(login: $login) {
+        pinnedItems(first: 6, types: REPOSITORY) {
+          nodes {
+            ... on Repository {
+              name
+              description
+              url
+              stargazerCount
+              forkCount
+              primaryLanguage {
+                name
+                color
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const response = await octokit.graphql<GraphQLResponse>(query, { login: username });
+
+    if (!response.data?.user?.pinnedItems?.nodes) {
+      console.error('Error fetching pinned projects: Invalid response format');
+      return [];
+    }
+
+    const nodes = response.data.user.pinnedItems.nodes;
+    const projects: PinnedProject[] = nodes.map((repo) => ({
+      name: repo.name,
+      description: repo.description || '',
+      url: repo.url,
+      stars: repo.stargazerCount,
+      forks: repo.forkCount,
+      language: repo.primaryLanguage
+        ? {
+            name: repo.primaryLanguage.name,
+            color: repo.primaryLanguage.color,
+          }
+        : null,
+    }));
+
+    return projects;
+  } catch (error) {
+    console.error('Error fetching pinned projects:', error);
+    return [];
   }
 }

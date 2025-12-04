@@ -8,59 +8,39 @@ import { EducationSection } from './EducationSection';
 import { CertificationsSection } from './CertificationsSection';
 import { OrganizationsSection } from './OrganizationsSection';
 import { Contact } from './Contact';
-import projectsData from '../data/generated/pinned.json';
 import { AboutFormal } from './sections/AboutFormal';
-import { useGitHubStats } from '@/hooks/useGitHubStats';
 import { LeetcodeStats } from './formal/LeetcodeStats';
 import { GithubActivity } from './formal/GithubActivity';
 import { DailyVerse } from './formal/DailyVerse';
+import { TopLanguages } from './github/TopLanguages';
 import { DuolingoWidget } from './formal/DuolingoWidget';
-
-interface PinnedProject {
-  name: string;
-  description: string;
-  url: string;
-  stars: number;
-  forks: number;
-  language: string | { name: string; color: string } | null;
-  updatedAt: string;
-}
-
-interface PinnedData {
-  projects: PinnedProject[];
-}
-
-const pinnedData = projectsData as unknown as PinnedData;
+import { useEffect, useState } from 'react';
+import { fetchPinnedProjects, username } from '../lib/github-client';
 
 export function FormalView(): JSX.Element {
-  const { data: githubData } = useGitHubStats();
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // Merge local project data with live GitHub data where possible
-  const displayProjects = githubData?.topRepos.length
-    ? githubData.topRepos.slice(0, 6).map((repo) => {
-      return {
-        name: repo.name,
-        description: repo.description || '',
-        url: repo.url,
-        stars: repo.stars,
-        forks: repo.forks,
-        language: repo.language ? { name: repo.language.name, color: repo.language.color } : null,
-        updatedAt: repo.updatedAt,
-      };
-    })
-    : pinnedData.projects.map((project) => ({
-      name: project.name,
-      description: project.description,
-      url: project.url,
-      stars: project.stars,
-      forks: project.forks,
-      language: project.language
-        ? typeof project.language === 'string'
-          ? { name: project.language, color: '#3178C6' }
-          : { name: project.language.name, color: project.language.color }
-        : null,
-      updatedAt: project.updatedAt,
-    }));
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const data = await fetchPinnedProjects(username);
+        // The Project and PinnedProject interfaces are compatible.
+        setProjects(data as Project[]);
+      } catch (e) {
+        if (e instanceof Error) {
+          setError(e.message);
+        } else {
+          setError('An unknown error occurred');
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
 
   return (
     <div className="min-h-screen p-8 md:p-16 bg-primary-rich-black">
@@ -155,26 +135,23 @@ export function FormalView(): JSX.Element {
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary-anti-flash-white border-b-2 border-primary-mountain-meadow pb-2">
             Projects
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {displayProjects.map((project: Project, index: number) => (
-              <ProjectCard key={index} project={project} />
-            ))}
-          </div>
+          {isLoading && <p className="text-secondary-pistachio">Loading projects...</p>}
+          {error && <p className="text-red-500">Error: {error}</p>}
+          {!isLoading && !error && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {projects.map((project: Project, index: number) => (
+                <ProjectCard key={index} project={project} />
+              ))}
+            </div>
+          )}
         </section>
 
         {/* Top Languages Section */}
-        <section id="languages">
+        <section id="github-stats">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary-anti-flash-white border-b-2 border-primary-mountain-meadow pb-2">
             Top Languages
           </h2>
-          <div className="bg-primary-rich-black/40 rounded-2xl p-6 border border-white/5 backdrop-blur-sm flex justify-center md:justify-start">
-            <img
-              src="https://github-readme-stats.vercel.app/api/top-langs/?username=AlvaGonz&layout=compact&langs_count=7&theme=dark"
-              alt="Top Languages"
-              className="max-w-full h-auto rounded-lg shadow-lg"
-              loading="lazy"
-            />
-          </div>
+          <TopLanguages />
         </section>
 
         {/* Activity & Achievements Section */}
