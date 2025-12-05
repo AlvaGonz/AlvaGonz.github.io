@@ -7,6 +7,8 @@ const GITHUB_USER = 'AlvaGonz';
 if (!GITHUB_TOKEN) {
   console.warn('⚠️ VITE_GITHUB_TOKEN not found in .env.local');
   console.warn('GitHub API requests will be rate-limited (60/hour)');
+} else {
+  console.log(`✅ GitHub Token detected (Length: ${GITHUB_TOKEN.length})`);
 }
 
 // Cliente GraphQL con autenticación
@@ -207,37 +209,31 @@ export interface GitHubUserStats {
  * Obtener repositorios pinneados del usuario
  */
 export async function fetchPinnedProjects(): Promise<GitHubRepository[]> {
-  try {
-    const data: any = await graphqlClient.request(PINNED_REPOS_QUERY, {
-      userName: GITHUB_USER,
-    });
+  // Remove try-catch to let the component handle the error
+  const data: any = await graphqlClient.request(PINNED_REPOS_QUERY, {
+    userName: GITHUB_USER,
+  });
 
-    const repos = data.user.pinnedItems.nodes || [];
+  const repos = data.user.pinnedItems.nodes || [];
 
-    return repos.map((repo: any) => ({
-      id: repo.id,
-      name: repo.name,
-      description: repo.description,
-      url: repo.url,
-      isPrivate: repo.isPrivate,
-      stargazerCount: repo.stargazerCount,
-      forkCount: repo.forkCount,
-      primaryLanguage: repo.primaryLanguage,
-      languages: repo.languages?.edges?.map((edge: any) => ({
-        name: edge.node.name,
-        color: edge.node.color,
-        size: edge.size,
-      })) || [],
-      homepageUrl: repo.homepageUrl,
-      repositoryTopics: repo.repositoryTopics?.nodes || [],
-      pushedAt: repo.pushedAt,
-    }));
-  } catch (error) {
-    console.error('❌ Error fetching pinned projects:', error);
-
-    // Fallback: devolver repos vacío en lugar de fallar
-    return [];
-  }
+  return repos.map((repo: any) => ({
+    id: repo.id,
+    name: repo.name,
+    description: repo.description,
+    url: repo.url,
+    isPrivate: repo.isPrivate,
+    stargazerCount: repo.stargazerCount,
+    forkCount: repo.forkCount,
+    primaryLanguage: repo.primaryLanguage,
+    languages: repo.languages?.edges?.map((edge: any) => ({
+      name: edge.node.name,
+      color: edge.node.color,
+      size: edge.size,
+    })) || [],
+    homepageUrl: repo.homepageUrl,
+    repositoryTopics: repo.repositoryTopics?.nodes || [],
+    pushedAt: repo.pushedAt,
+  }));
 }
 
 /**
@@ -246,36 +242,32 @@ export async function fetchPinnedProjects(): Promise<GitHubRepository[]> {
 export async function fetchAllPublicRepos(
   limit: number = 20
 ): Promise<GitHubRepository[]> {
-  try {
-    const data: any = await graphqlClient.request(ALL_REPOS_QUERY, {
-      userName: GITHUB_USER,
-      first: limit,
-    });
+  // Remove try-catch to let the component handle the error
+  const data: any = await graphqlClient.request(ALL_REPOS_QUERY, {
+    userName: GITHUB_USER,
+    first: limit,
+  });
 
-    const repos = data.user.repositories.nodes || [];
+  const repos = data.user.repositories.nodes || [];
 
-    return repos.map((repo: any) => ({
-      id: repo.id,
-      name: repo.name,
-      description: repo.description,
-      url: repo.url,
-      isPrivate: repo.isPrivate,
-      stargazerCount: repo.stargazerCount,
-      forkCount: repo.forkCount,
-      primaryLanguage: repo.primaryLanguage,
-      languages: repo.languages?.edges?.map((edge: any) => ({
-        name: edge.node.name,
-        color: edge.node.color,
-        size: edge.size,
-      })) || [],
-      homepageUrl: repo.homepageUrl,
-      repositoryTopics: repo.repositoryTopics?.nodes || [],
-      pushedAt: repo.pushedAt,
-    }));
-  } catch (error) {
-    console.error('❌ Error fetching all repositories:', error);
-    return [];
-  }
+  return repos.map((repo: any) => ({
+    id: repo.id,
+    name: repo.name,
+    description: repo.description,
+    url: repo.url,
+    isPrivate: repo.isPrivate,
+    stargazerCount: repo.stargazerCount,
+    forkCount: repo.forkCount,
+    primaryLanguage: repo.primaryLanguage,
+    languages: repo.languages?.edges?.map((edge: any) => ({
+      name: edge.node.name,
+      color: edge.node.color,
+      size: edge.size,
+    })) || [],
+    homepageUrl: repo.homepageUrl,
+    repositoryTopics: repo.repositoryTopics?.nodes || [],
+    pushedAt: repo.pushedAt,
+  }));
 }
 
 /**
