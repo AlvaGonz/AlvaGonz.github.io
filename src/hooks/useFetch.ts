@@ -24,7 +24,7 @@ export function useFetch<T>(url: string, options?: FetchOptions): ApiState<T> {
   });
 
   useEffect(() => {
-    if (options?.skip) return;
+    if (options?.skip || !url) return;
 
     const fetchData = async () => {
       // Check local storage cache first

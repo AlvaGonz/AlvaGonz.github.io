@@ -15,6 +15,7 @@ import { HeroCuriosity } from './sections/HeroCuriosity';
 import { FadeInOnScroll } from './animations/FadeInOnScroll';
 import { DuolingoFireWidget } from './curiosity/DuolingoFireWidget';
 import { profile } from '../content/profile';
+import { LanguageMindMap } from './curiosity/LanguageMindMap';
 
 export function CuriosityView(): JSX.Element {
   return (
@@ -85,6 +86,18 @@ export function CuriosityView(): JSX.Element {
                 {/* English - Duolingo Style */}
                 <DuolingoFireWidget />
               </div>
+            </FadeInOnScroll>
+          </section>
+
+          {/* Code Universe Section */}
+          <section id="code-universe" className="space-y-8">
+            <FadeInOnScroll variant="fadeUp">
+              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-curiosity-primary border-b-2 border-curiosity-secondary/30 pb-2 inline-block">
+                Code Universe
+              </h2>
+            </FadeInOnScroll>
+            <FadeInOnScroll variant="scale">
+              <LanguageMindMap />
             </FadeInOnScroll>
           </section>
 

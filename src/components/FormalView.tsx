@@ -1,66 +1,87 @@
+import { ProjectCard } from './ProjectCard';
 import { profile } from '../content/profile';
 import { skills } from '../content/skills';
-import type { Project } from '../content/types';
-import { ProjectCard } from './ProjectCard';
+
+
 import { SkillPills } from './SkillPills';
 import { ExperienceTimeline } from './ExperienceTimeline';
 import { EducationSection } from './EducationSection';
 import { CertificationsSection } from './CertificationsSection';
 import { OrganizationsSection } from './OrganizationsSection';
 import { Contact } from './Contact';
-import projectsData from '../data/generated/pinned.json';
 import { AboutFormal } from './sections/AboutFormal';
-import { useGitHubStats } from '@/hooks/useGitHubStats';
 import { LeetcodeStats } from './formal/LeetcodeStats';
 import { GithubActivity } from './formal/GithubActivity';
 import { DailyVerse } from './formal/DailyVerse';
+import { TopLanguages } from './github/TopLanguages';
 import { DuolingoWidget } from './formal/DuolingoWidget';
-
-interface PinnedProject {
-  name: string;
-  description: string;
-  url: string;
-  stars: number;
-  forks: number;
-  language: string | { name: string; color: string } | null;
-  updatedAt: string;
-}
-
-interface PinnedData {
-  projects: PinnedProject[];
-}
-
-const pinnedData = projectsData as unknown as PinnedData;
+import { useEffect, useState } from 'react';
+import { fetchPinnedProjects, fetchAllPublicRepos, validateToken, GitHubRepository } from '../lib/github-client';
 
 export function FormalView(): JSX.Element {
-  const { data: githubData } = useGitHubStats();
+  const [projects, setProjects] = useState<GitHubRepository[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // Merge local project data with live GitHub data where possible
-  const displayProjects = githubData?.topRepos.length
-    ? githubData.topRepos.slice(0, 6).map((repo) => {
-      return {
-        name: repo.name,
-        description: repo.description || '',
-        url: repo.url,
-        stars: repo.stars,
-        forks: repo.forks,
-        language: repo.language ? { name: repo.language.name, color: repo.language.color } : null,
-        updatedAt: repo.updatedAt,
-      };
-    })
-    : pinnedData.projects.map((project) => ({
-      name: project.name,
-      description: project.description,
-      url: project.url,
-      stars: project.stars,
-      forks: project.forks,
-      language: project.language
-        ? typeof project.language === 'string'
-          ? { name: project.language, color: '#3178C6' }
-          : { name: project.language.name, color: project.language.color }
-        : null,
-      updatedAt: project.updatedAt,
-    }));
+  useEffect(() => {
+    async function loadProjects() {
+      try {
+        setLoading(true);
+        setError(null);
+
+        // 1. Validar token (solo en desarrollo)
+        if (import.meta.env.DEV) {
+          await validateToken();
+        }
+
+        // 2. Intentar obtener repos pinneados
+        let repos = await fetchPinnedProjects();
+
+        // 3. Si no hay pinneados, obtener todos los repos
+        if (repos.length === 0) {
+          console.log('ℹ️ No pinned repositories found, fetching all public repos...');
+          repos = await fetchAllPublicRepos(6);
+        }
+
+        setProjects(repos);
+
+        // Log éxito
+        if (repos.length > 0) {
+          console.log(`✅ Loaded ${repos.length} repositories from GitHub`);
+        } else {
+          setError('No repositories found');
+        }
+      } catch (err) {
+        const errorMsg = err instanceof Error ? err.message : 'Unknown error';
+        setError(`Failed to load projects: ${errorMsg}`);
+        console.error('❌ Error loading projects:', err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadProjects();
+  }, []);
+
+  // Rendering logic
+  if (loading) {
+    return <div className="projects-loading">Loading projects...</div>;
+  }
+
+  if (error) {
+    return (
+      <div className="projects-error">
+        <p>{error}</p>
+        <p className="text-sm">
+          Make sure VITE_GITHUB_TOKEN is set in .env.local
+        </p>
+      </div>
+    );
+  }
+
+  if (projects.length === 0) {
+    return <div className="projects-empty">No projects available</div>;
+  }
 
   return (
     <div className="min-h-screen p-8 md:p-16 bg-primary-rich-black">
@@ -68,7 +89,7 @@ export function FormalView(): JSX.Element {
         {/* Profile / Hero Section */}
         <section className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-8">
           <img
-            src={profile.avatar}
+            src={profile.avatar_formal}
             alt={`${profile.name} profile`}
             className="w-32 h-32 md:w-48 md:h-48 rounded-full object-cover border-4 border-primary-mountain-meadow shadow-scroll-modern"
             loading="lazy"
@@ -155,26 +176,31 @@ export function FormalView(): JSX.Element {
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary-anti-flash-white border-b-2 border-primary-mountain-meadow pb-2">
             Projects
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {displayProjects.map((project: Project, index: number) => (
-              <ProjectCard key={index} project={project} />
-            ))}
-          </div>
+          {loading && <div className="projects-loading">Loading projects...</div>}
+          {error && (
+            <div className="projects-error">
+              <p>{error}</p>
+              <p className="text-sm">
+                Make sure VITE_GITHUB_TOKEN is set in .env.local
+              </p>
+            </div>
+          )}
+          {projects.length === 0 && !loading && !error && <div className="projects-empty">No projects available</div>}
+          {!loading && !error && projects.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {projects.map((project) => (
+                <ProjectCard key={project.id} project={project} />
+              ))}
+            </div>
+          )}
         </section>
 
         {/* Top Languages Section */}
-        <section id="languages">
+        <section id="github-stats">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary-anti-flash-white border-b-2 border-primary-mountain-meadow pb-2">
             Top Languages
           </h2>
-          <div className="bg-primary-rich-black/40 rounded-2xl p-6 border border-white/5 backdrop-blur-sm flex justify-center md:justify-start">
-            <img
-              src="https://github-readme-stats.vercel.app/api/top-langs/?username=AlvaGonz&layout=compact&langs_count=7&theme=dark"
-              alt="Top Languages"
-              className="max-w-full h-auto rounded-lg shadow-lg"
-              loading="lazy"
-            />
-          </div>
+          <TopLanguages />
         </section>
 
         {/* Activity & Achievements Section */}

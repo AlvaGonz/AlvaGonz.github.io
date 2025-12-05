@@ -1,76 +1,90 @@
 import { useState, useEffect } from 'react';
-import { fetchGitHubStats, GitHubStats } from '@/lib/github-client';
+import {
+  fetchUserStats,
+  fetchAllPublicRepos
+} from '@/lib/github-client';
 
-export function useGitHubStats() {
-  const [data, setData] = useState<GitHubStats | null>(null);
+interface GitHubStatsData {
+  user: {
+    publicRepos: number;
+  };
+  topLanguages: Array<{ name: string; count: number; color: string }>;
+  allLanguages: Array<{ name: string; count: number; color: string; bytes: number }>;
+}
+
+const languageColors: Record<string, string> = {
+  TypeScript: '#3178c6',
+  JavaScript: '#f1e05a',
+  Python: '#3572A5',
+  HTML: '#e34c26',
+  CSS: '#563d7c',
+  Vue: '#41b883',
+  React: '#61dafb',
+  Java: '#b07219',
+  'C#': '#953cad',
+  Go: '#00ADD8',
+  Rust: '#dea584',
+  Shell: '#89e051',
+  PHP: '#4F5D95',
+  Ruby: '#701516',
+  Swift: '#F05138',
+  Kotlin: '#A97BFF',
+  Dart: '#00B4AB',
+};
+
+export const useGitHubStats = () => {
+  const [data, setData] = useState<GitHubStatsData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    const loadData = async () => {
+    const getStats = async () => {
       try {
-        // Check cache (24 hours)
-        const cached = localStorage.getItem('github_stats_v2');
-        const cacheTime = localStorage.getItem('github_stats_v2_time');
+        setLoading(true);
+        const userStats = await fetchUserStats();
+        const repos = await fetchAllPublicRepos(100); // Fetch enough to get accurate language stats
 
-        if (cached && cacheTime) {
-          const age = Date.now() - parseInt(cacheTime);
-          if (age < 24 * 60 * 60 * 1000) {
-            try {
-              const parsed = JSON.parse(cached);
-              if (
-                parsed &&
-                Array.isArray(parsed.topLanguages) &&
-                Array.isArray(parsed.topRepos) &&
-                parsed.user
-              ) {
-                setData(parsed);
-                setLoading(false);
-                return;
-              }
-            } catch (e) {
-              console.warn('Failed to parse cached GitHub data');
-            }
-          }
+        if (!userStats || !repos) {
+          throw new Error('Failed to fetch GitHub stats or repositories.');
         }
 
-        const stats = await fetchGitHubStats();
-        if (stats) {
-          setData(stats);
-          localStorage.setItem('github_stats_v2', JSON.stringify(stats));
-          localStorage.setItem('github_stats_v2_time', Date.now().toString());
-        } else {
-          // Fallback to cache if fetch fails even if expired
-          if (cached) {
-            try {
-              const parsed = JSON.parse(cached);
-              if (
-                parsed &&
-                Array.isArray(parsed.topLanguages) &&
-                Array.isArray(parsed.topRepos) &&
-                parsed.user
-              ) {
-                setData(parsed);
-                console.warn('Fetch failed, using expired cache');
-              } else {
-                throw new Error('Invalid cache structure');
-              }
-            } catch (e) {
-              throw new Error('Failed to fetch GitHub data and invalid cache');
-            }
-          } else {
-            throw new Error('Failed to fetch GitHub data');
-          }
-        }
+        const langBytes: Record<string, number> = {};
+
+        repos.forEach((repo) => {
+          repo.languages.forEach((lang) => {
+            langBytes[lang.name] = (langBytes[lang.name] || 0) + lang.size;
+          });
+        });
+
+        const totalBytes = Object.values(langBytes).reduce((a, b) => a + b, 0);
+
+        const sortedLanguages = Object.entries(langBytes)
+          .sort(([, bytesA], [, bytesB]) => bytesB - bytesA)
+          .map(([name, count]) => ({
+            name,
+            count: totalBytes > 0 ? Math.round((count / totalBytes) * 100) : 0, // As percentage
+            color: languageColors[name] || '#8b949e', // Fallback color
+            bytes: count,
+          }));
+
+        const topLanguages = sortedLanguages.slice(0, 5);
+
+        setData({
+          user: {
+            publicRepos: userStats.repositories.totalCount,
+          },
+          topLanguages,
+          allLanguages: sortedLanguages,
+        });
       } catch (err) {
-        setError(err as Error);
+        setError(err instanceof Error ? err : new Error('An unknown error occurred'));
       } finally {
         setLoading(false);
       }
     };
 
-    loadData();
+    getStats();
   }, []);
 
   return { data, loading, error };
-}
+};

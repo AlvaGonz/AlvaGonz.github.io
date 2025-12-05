@@ -21,11 +21,13 @@ export interface Profile {
   linkedin: string;
   github: string;
   instagram?: string;
-  avatar: string;
+  avatar_formal: string;
+  avatar_curious: string;
 }
 
 export interface Skill {
   name: string;
   category: 'language' | 'framework' | 'tool' | 'database';
   iconId?: string; // ID for skillicons.dev
+  iconUrl?: string; // Direct URL for custom icons
 }

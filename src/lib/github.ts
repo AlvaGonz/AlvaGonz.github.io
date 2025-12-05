@@ -12,20 +12,47 @@ export async function getTopLanguages() {
       username,
       type: 'owner',
       per_page: 100,
-      sort: 'updated',
+      sort: 'pushed',
     });
 
-    const languages: Record<string, number> = {};
-    repos.forEach((repo) => {
-      if (repo.language) {
-        languages[repo.language] = (languages[repo.language] || 0) + 1;
+    const langPromises = repos.map((repo) =>
+      octokit.repos
+        .listLanguages({
+          owner: username,
+          repo: repo.name,
+        })
+        .then((response) => response.data)
+    );
+
+    const langData = await Promise.all(langPromises);
+
+    const languageTotals: Record<string, number> = {};
+
+    langData.forEach((langs) => {
+      for (const lang in langs) {
+        if (Object.prototype.hasOwnProperty.call(langs, lang)) {
+          languageTotals[lang] =
+            (languageTotals[lang] || 0) + (langs[lang] as number);
+        }
       }
     });
 
-    return Object.entries(languages)
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, 5)
-      .map(([name, count]) => ({ name, count }));
+    const totalBytes = Object.values(languageTotals).reduce(
+      (sum, bytes) => sum + bytes,
+      0
+    );
+
+    if (totalBytes === 0) {
+      return [];
+    }
+
+    return Object.entries(languageTotals)
+      .sort(([, aBytes], [, bBytes]) => bBytes - aBytes)
+      .slice(0, 7) // Top 7 languages
+      .map(([name, bytes]) => ({
+        name,
+        percentage: ((bytes / totalBytes) * 100).toFixed(2),
+      }));
   } catch (error) {
     console.error('Error fetching languages:', error);
     return [];

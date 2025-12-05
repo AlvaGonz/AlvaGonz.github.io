@@ -36,7 +36,6 @@ coverage
 .env
 .env.local
 .env.*.local
-!.env.local.example
 
 # Generated data
 src/data/generated/
@@ -45,3 +44,6 @@ src/data/generated/
 public/fonts/axiforma/*.otf
 public/fonts/axiforma/*.woff2
 !public/fonts/axiforma/.gitkeep
+
+# Local Netlify folder
+.netlify

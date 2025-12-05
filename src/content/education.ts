@@ -13,12 +13,13 @@ export interface CertificationItem {
   date: string;
   credentialId?: string;
   skills?: string[];
+  url: string;
 }
 
 export interface OrganizationItem {
   id: string;
   name: string;
-  role?: string; // LinkedIn text doesn't specify role explicitly, just dates, but implies membership/service
+  role?: string;
   period: string;
 }
 
@@ -41,11 +42,20 @@ export const education: EducationItem[] = [
 
 export const certifications: CertificationItem[] = [
   {
+    id: 'google-analytics',
+    name: 'Google Analytics',
+    issuer: 'Google',
+    date: 'Issued Nov 2025', //DUMMY DATA
+    skills: ['Google Analytics', 'Data Analysis'],//DUMMY DATA
+    url: 'https://skillshop.credential.net/ac112d6e-7fe9-412c-9878-c10538e5f9fd?record_view=true',
+  },
+  {
     id: 'csharp-inter',
     name: 'C# Intermediate',
     issuer: 'Sololearn',
     date: 'Issued Nov 2025',
     skills: ['C#', 'OOP', 'Data Structures', 'Programming', 'Problem Solving', 'Problem Analysis'],
+    url: 'https://www.sololearn.com/certificates/CC-PXX51NLR',
   },
   {
     id: 'qa-fcc',
@@ -64,6 +74,7 @@ export const certifications: CertificationItem[] = [
       'QA',
       'CSS',
     ],
+    url: 'https://freecodecamp.org/certification/alvagonz/quality-assurance-v7',
   },
   {
     id: 'js-inter',
@@ -71,6 +82,7 @@ export const certifications: CertificationItem[] = [
     issuer: 'Sololearn',
     date: 'Issued Mar 2023',
     skills: ['JavaScript'],
+    url: 'https://www.sololearn.com/certificates/CC-3MPZ0IMT',
   },
   {
     id: 'html',
@@ -78,6 +90,7 @@ export const certifications: CertificationItem[] = [
     issuer: 'Sololearn',
     date: 'Issued Feb 2023',
     skills: ['HTML5'],
+    url: 'https://www.sololearn.com/certificates/CT-EBLXYRE7',
   },
   {
     id: 'css',
@@ -85,6 +98,7 @@ export const certifications: CertificationItem[] = [
     issuer: 'Sololearn',
     date: 'Issued Feb 2023',
     skills: ['Cascading Style Sheets (CSS)'],
+    url: 'https://www.sololearn.com/certificates/CC-J2BB43FF',
   },
   {
     id: 'remote-work',
@@ -92,6 +106,7 @@ export const certifications: CertificationItem[] = [
     issuer: 'Certiprof',
     date: 'Issued Jul 2021 · Expired Jul 2023',
     credentialId: '66326051',
+    url: 'https://www.credly.com/badges/dbdc9b12-6c74-4e9d-acc9-6c1ae0b0461c?source=linked_in_profile',
   },
 ];
 

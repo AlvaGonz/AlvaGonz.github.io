@@ -25,7 +25,7 @@ export default {
           },
           border: 'var(--theme-border)',
         },
-        
+
         // Curiosity Specific Colors (Palette 2)
         curiosity: {
           bg: 'var(--c-curiosity-bg)',
@@ -86,6 +86,16 @@ export default {
       },
       blur: {
         'scroll-modern': 'var(--blur-modern, 0px)',
+      },
+      animation: {
+        'spin-slow': 'spin 8s linear infinite',
+        'spin-reverse-slow': 'spin-reverse 10s linear infinite',
+      },
+      keyframes: {
+        'spin-reverse': {
+          from: { transform: 'rotate(360deg)' },
+          to: { transform: 'rotate(0deg)' },
+        },
       },
     },
   },

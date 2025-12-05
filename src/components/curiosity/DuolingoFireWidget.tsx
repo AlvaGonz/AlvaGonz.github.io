@@ -84,22 +84,30 @@ export const DuolingoFireWidget: React.FC<DuolingoFireWidgetProps> = ({
                 <div className="fire-effect-wrapper">
                     <div className="fire-flames-container">
                         {/* 3 Gotas Grandes */}
-                        <div
+                        <img
+                            src="/images/streak-flame-updated-v0-3n46sx7a0e9b1.webp"
+                            alt="flame"
                             className="flame flame-large"
                             style={{ left: '20%', '--delay': '0s' } as React.CSSProperties}
-                        ></div>
-                        <div
+                        />
+                        <img
+                            src="/images/streak-flame-updated-v0-3n46sx7a0e9b1.webp"
+                            alt="flame"
                             className="flame flame-large"
                             style={{ left: '50%', '--delay': '0.1s' } as React.CSSProperties}
-                        ></div>
-                        <div
+                        />
+                        <img
+                            src="/images/streak-flame-updated-v0-3n46sx7a0e9b1.webp"
+                            alt="flame"
                             className="flame flame-large"
                             style={{ left: '80%', '--delay': '0.2s' } as React.CSSProperties}
-                        ></div>
+                        />
 
                         {/* 6 Gotas Medianas */}
                         {[...Array(6)].map((_, i) => (
-                            <div
+                            <img
+                                src="/images/streak-flame-updated-v0-3n46sx7a0e9b1.webp"
+                                alt="flame"
                                 key={`med-${i}`}
                                 className="flame flame-medium"
                                 style={
@@ -109,12 +117,14 @@ export const DuolingoFireWidget: React.FC<DuolingoFireWidgetProps> = ({
                                         '--rotation': `${i * 60}deg`,
                                     } as React.CSSProperties
                                 }
-                            ></div>
+                            />
                         ))}
 
                         {/* 8 Gotas Pequeñas */}
                         {[...Array(8)].map((_, i) => (
-                            <div
+                            <img
+                                src="/images/streak-flame-updated-v0-3n46sx7a0e9b1.webp"
+                                alt="flame"
                                 key={`sm-${i}`}
                                 className="flame flame-small"
                                 style={
@@ -124,7 +134,7 @@ export const DuolingoFireWidget: React.FC<DuolingoFireWidgetProps> = ({
                                         '--rotation': `${i * 45}deg`,
                                     } as React.CSSProperties
                                 }
-                            ></div>
+                            />
                         ))}
                     </div>
                 </div>

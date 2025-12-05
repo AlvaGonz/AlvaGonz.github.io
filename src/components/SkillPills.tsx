@@ -55,9 +55,13 @@ export function SkillPills({ skills, animate = true }: SkillPillsProps): JSX.Ele
                   whileHover={animate ? { scale: 1.05, y: -2 } : undefined}
                   className={`pl-2 pr-4 py-2 rounded-full text-sm font-medium ${categoryColors[category]} transition-all flex items-center gap-2 border shadow-sm hover:shadow-md`}
                 >
-                  {skill.iconId && (
+                  {(skill.iconUrl || skill.iconId) && (
                     <img
-                      src={`https://skillicons.dev/icons?i=${skill.iconId}`}
+                      src={
+                        skill.iconUrl
+                          ? skill.iconUrl
+                          : `https://skillicons.dev/icons?i=${skill.iconId}`
+                      }
                       alt=""
                       className="w-5 h-5 rounded-sm opacity-90"
                       loading="lazy"

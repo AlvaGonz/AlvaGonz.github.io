@@ -5,7 +5,6 @@ import { CuriosityView } from './components/CuriosityView';
 import { FormalView } from './components/FormalView';
 import { useTheme } from '@/hooks/useTheme';
 import { ScrollProgressBar } from './components/layout/ScrollProgressBar';
-import { GoogleAnalytics } from './components/GoogleAnalytics';
 
 function App(): JSX.Element {
   const { theme } = useTheme();
@@ -21,7 +20,6 @@ function App(): JSX.Element {
 
   return (
     <div className="min-h-screen" data-theme={theme}>
-      <GoogleAnalytics />
       <ScrollProgressBar />
       <ScrollOrchestrator />
       <main id="main-content">

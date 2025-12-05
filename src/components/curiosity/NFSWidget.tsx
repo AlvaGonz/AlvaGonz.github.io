@@ -84,6 +84,12 @@ export function NFSWidget() {
                 clearInterval(fadeOutInterval.current);
                 fadeOutInterval.current = null;
             }
+
+            // Destroy player
+            if (bmwSoundRef.current && typeof bmwSoundRef.current.destroy === 'function') {
+                bmwSoundRef.current.destroy();
+                bmwSoundRef.current = null;
+            }
         };
     }, []);
 
@@ -104,14 +110,14 @@ export function NFSWidget() {
         const stepTime = duration / steps;
         let currentStep = 0;
         const delta = (end - start) / steps;
-        
+
         // Ensure volume is clamped between 0 and 100
         const clampVolume = (vol: number) => Math.max(0, Math.min(100, vol));
-        
+
         const interval = setInterval(() => {
             currentStep++;
             const newVol = clampVolume(Math.round(start + delta * currentStep));
-            
+
             try {
                 player.setVolume(newVol);
             } catch (e) {
@@ -120,7 +126,7 @@ export function NFSWidget() {
                 if (onComplete) onComplete();
                 return;
             }
-            
+
             if (currentStep >= steps) {
                 clearInterval(interval);
                 // Ensure final volume is set correctly
@@ -132,7 +138,7 @@ export function NFSWidget() {
                 if (onComplete) onComplete();
             }
         }, stepTime);
-        
+
         return interval;
     };
 
@@ -155,9 +161,9 @@ export function NFSWidget() {
                 clearInterval(fadeOutInterval.current);
                 fadeOutInterval.current = null;
             }
-            
+
             setIsPlaying(true);
-            
+
             // Start completely silent
             try {
                 bmwSoundRef.current.setVolume(0);

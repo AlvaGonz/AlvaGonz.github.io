@@ -41,7 +41,7 @@ export function PortfolioSelector({ onSelect }: PortfolioSelectorProps): JSX.Ele
                         <div>
                             <div className="w-20 h-20 rounded-full bg-primary-rich-black border-2 border-primary-mountain-meadow mb-6 overflow-hidden">
                                 <img
-                                    src="/images/Sitting.png"
+                                    src="/images/Perfil 2.png"
                                     alt="Formal"
                                     className="w-full h-full object-cover"
                                 />
