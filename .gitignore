@@ -38,7 +38,7 @@ coverage
 .env.*.local
 
 # Generated data
-src/data/generated/
+
 
 # Proprietary Fonts
 public/fonts/axiforma/*.otf
