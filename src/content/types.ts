@@ -31,3 +31,9 @@ export interface Skill {
   iconId?: string; // ID for skillicons.dev
   iconUrl?: string; // Direct URL for custom icons
 }
+
+export interface Certification {
+  name: string;
+  url: string;
+  issuer: string;
+}
