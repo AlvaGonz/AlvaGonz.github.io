@@ -29,6 +29,7 @@
 }
 
 @keyframes streakFire {
+
   0%,
   100% {
     color: white;
@@ -72,11 +73,9 @@
 
 /* Fire Active State */
 .duo-widget-container.fire-active {
-  background: linear-gradient(
-    135deg,
-    var(--duo-green-primary),
-    var(--duo-green-secondary)
-  ) !important;
+  background: linear-gradient(135deg,
+      var(--duo-green-primary),
+      var(--duo-green-secondary)) !important;
   transform: scale(1.05);
   box-shadow:
     0 0 30px rgba(244, 144, 0, 0.6),
@@ -126,11 +125,8 @@
   width: var(--size, 60px);
   height: var(--size, 60px);
 
-  /* Forma de gota suave (Duolingo) */
-  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-
-  /* Gradiente amarillo-naranja */
-  background: radial-gradient(circle at 35% 30%, #ffd000 0%, #ffa500 50%, #f49000 100%);
+  /* Image-based flame */
+  object-fit: contain;
 
   /* Glow suave */
   filter: drop-shadow(0 0 12px rgba(255, 208, 0, 0.5));
@@ -138,9 +134,6 @@
   /* Animación */
   animation: flameFloat 3s ease-out forwards;
   animation-delay: var(--delay, 0s);
-
-  /* Sombra interna para profundidad */
-  box-shadow: inset -2px -2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Tamaños variables */

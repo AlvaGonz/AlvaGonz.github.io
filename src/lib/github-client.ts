@@ -40,10 +40,13 @@ const PINNED_REPOS_QUERY = gql`
               name
               color
             }
-            languages(first: 3) {
-              nodes {
-                name
-                color
+            languages(first: 10, orderBy: { field: SIZE, direction: DESC }) {
+              edges {
+                size
+                node {
+                  name
+                  color
+                }
               }
             }
             homepageUrl
@@ -87,10 +90,13 @@ const ALL_REPOS_QUERY = gql`
             name
             color
           }
-          languages(first: 3) {
-            nodes {
-              name
-              color
+          languages(first: 10, orderBy: { field: SIZE, direction: DESC }) {
+            edges {
+              size
+              node {
+                name
+                color
+              }
             }
           }
           homepageUrl
@@ -158,6 +164,7 @@ export interface GitHubRepository {
   languages: Array<{
     name: string;
     color: string;
+    size: number;
   }>;
   homepageUrl: string | null;
   repositoryTopics: Array<{
@@ -216,7 +223,11 @@ export async function fetchPinnedProjects(): Promise<GitHubRepository[]> {
       stargazerCount: repo.stargazerCount,
       forkCount: repo.forkCount,
       primaryLanguage: repo.primaryLanguage,
-      languages: repo.languages?.nodes || [],
+      languages: repo.languages?.edges?.map((edge: any) => ({
+        name: edge.node.name,
+        color: edge.node.color,
+        size: edge.size,
+      })) || [],
       homepageUrl: repo.homepageUrl,
       repositoryTopics: repo.repositoryTopics?.nodes || [],
       pushedAt: repo.pushedAt,
@@ -252,7 +263,11 @@ export async function fetchAllPublicRepos(
       stargazerCount: repo.stargazerCount,
       forkCount: repo.forkCount,
       primaryLanguage: repo.primaryLanguage,
-      languages: repo.languages?.nodes || [],
+      languages: repo.languages?.edges?.map((edge: any) => ({
+        name: edge.node.name,
+        color: edge.node.color,
+        size: edge.size,
+      })) || [],
       homepageUrl: repo.homepageUrl,
       repositoryTopics: repo.repositoryTopics?.nodes || [],
       pushedAt: repo.pushedAt,
@@ -299,10 +314,13 @@ export async function fetchRepositoryByName(
           name
           color
         }
-        languages(first: 3) {
-          nodes {
-            name
-            color
+        languages(first: 10, orderBy: { field: SIZE, direction: DESC }) {
+          edges {
+            size
+            node {
+              name
+              color
+            }
           }
         }
         homepageUrl
@@ -334,7 +352,11 @@ export async function fetchRepositoryByName(
       stargazerCount: repo.stargazerCount,
       forkCount: repo.forkCount,
       primaryLanguage: repo.primaryLanguage,
-      languages: repo.languages?.nodes || [],
+      languages: repo.languages?.edges?.map((edge: any) => ({
+        name: edge.node.name,
+        color: edge.node.color,
+        size: edge.size,
+      })) || [],
       homepageUrl: repo.homepageUrl,
       repositoryTopics: repo.repositoryTopics?.nodes || [],
       pushedAt: repo.pushedAt,

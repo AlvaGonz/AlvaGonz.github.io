@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import {
   fetchUserStats,
-  fetchAllPublicRepos,
-  GitHubRepository,
-  GitHubUserStats,
+  fetchAllPublicRepos
 } from '@/lib/github-client';
 
 interface GitHubStatsData {
@@ -11,6 +9,7 @@ interface GitHubStatsData {
     publicRepos: number;
   };
   topLanguages: Array<{ name: string; count: number; color: string }>;
+  allLanguages: Array<{ name: string; count: number; color: string; bytes: number }>;
 }
 
 const languageColors: Record<string, string> = {
@@ -50,29 +49,32 @@ export const useGitHubStats = () => {
         }
 
         const langBytes: Record<string, number> = {};
+
         repos.forEach((repo) => {
           repo.languages.forEach((lang) => {
-            // Assuming languages from GitHubRepository provide 'name' directly
-            langBytes[lang.name] = (langBytes[lang.name] || 0) + 1; // Count occurrences, not bytes
+            langBytes[lang.name] = (langBytes[lang.name] || 0) + lang.size;
           });
         });
 
-        const totalLanguageMentions = Object.values(langBytes).reduce((a, b) => a + b, 0);
+        const totalBytes = Object.values(langBytes).reduce((a, b) => a + b, 0);
 
-        const topLanguages = Object.entries(langBytes)
-          .sort(([, countA], [, countB]) => countB - countA)
-          .slice(0, 7) // Limit to top 7 for display
+        const sortedLanguages = Object.entries(langBytes)
+          .sort(([, bytesA], [, bytesB]) => bytesB - bytesA)
           .map(([name, count]) => ({
             name,
-            count: Math.round((count / totalLanguageMentions) * 100), // As percentage
+            count: totalBytes > 0 ? Math.round((count / totalBytes) * 100) : 0, // As percentage
             color: languageColors[name] || '#8b949e', // Fallback color
+            bytes: count,
           }));
+
+        const topLanguages = sortedLanguages.slice(0, 5);
 
         setData({
           user: {
             publicRepos: userStats.repositories.totalCount,
           },
           topLanguages,
+          allLanguages: sortedLanguages,
         });
       } catch (err) {
         setError(err instanceof Error ? err : new Error('An unknown error occurred'));
