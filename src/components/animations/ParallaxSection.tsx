@@ -26,7 +26,7 @@ export function ParallaxSection({
   const style = direction === 'y' ? { y: moveValue } : { x: moveValue };
 
   return (
-    <motion.div ref={ref} style={style} className={className}>
+    <motion.div ref={ref} style={style} className={`relative ${className}`}>
       {children}
     </motion.div>
   );
