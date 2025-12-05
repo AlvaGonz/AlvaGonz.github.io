@@ -1,0 +1,26 @@
+{
+  "username": "AlvaGonz",
+  "streak": 462,
+  "totalXp": 32015,
+  "level": "B2",
+  "learningLanguage": "en",
+  "avatar": "https://simg-ssl.duolingo.com/ssr-avatars/478388255/SSR-DKgKrF3cE-/xxlarge",
+  "courses": [
+    {
+      "title": "English",
+      "learningLanguage": "en",
+      "xp": 29364
+    },
+    {
+      "title": "Japanese",
+      "learningLanguage": "ja",
+      "xp": 2286
+    },
+    {
+      "title": "Haitian Creole",
+      "learningLanguage": "ht",
+      "xp": 365
+    }
+  ],
+  "motivation": "brain"
+}
