@@ -11,45 +11,45 @@ describe('SplitLayout', () => {
 
   it('should render landing selector by default', () => {
     render(
-      <SplitLayout curiosity={<div>Curiosity Content</div>} formal={<div>Formal Content</div>} />,
+      <SplitLayout curiousity={<div>curiousity Content</div>} formal={<div>Formal Content</div>} />,
     );
     expect(screen.getByText('Select a Profile')).toBeInTheDocument();
   });
 
-  it('should show curiosity content after selecting it', async () => {
+  it('should show curiousity content after selecting it', async () => {
     const user = userEvent.setup();
     render(
-      <SplitLayout curiosity={<div>Curiosity Content</div>} formal={<div>Formal Content</div>} />,
+      <SplitLayout curiousity={<div>curiousity Content</div>} formal={<div>Formal Content</div>} />,
     );
 
-    const curiosityButton = screen.getByText('Curiosity').closest('button');
-    expect(curiosityButton).toBeInTheDocument();
-    if (curiosityButton) await user.click(curiosityButton);
+    const curiousityButton = screen.getByText('curiousity').closest('button');
+    expect(curiousityButton).toBeInTheDocument();
+    if (curiousityButton) await user.click(curiousityButton);
 
-    expect(screen.getByText('Curiosity Content')).toBeInTheDocument();
+    expect(screen.getByText('curiousity Content')).toBeInTheDocument();
   });
 
   it('should toggle between views', async () => {
     const user = userEvent.setup();
-    window.history.replaceState({}, '', '/?side=curiosity'); // Start in curiosity mode
+    window.history.replaceState({}, '', '/?side=curiousity'); // Start in curiousity mode
 
     render(
-      <SplitLayout curiosity={<div>Curiosity Content</div>} formal={<div>Formal Content</div>} />,
+      <SplitLayout curiousity={<div>curiousity Content</div>} formal={<div>Formal Content</div>} />,
     );
 
     const toggleButton = screen.getByLabelText(/switch to/i);
     await user.click(toggleButton);
 
     expect(screen.getByText('Formal Content')).toBeInTheDocument();
-    expect(screen.queryByText('Curiosity Content')).not.toBeInTheDocument();
+    expect(screen.queryByText('curiousity Content')).not.toBeInTheDocument();
   });
 
   it('should persist side preference to localStorage', async () => {
     const user = userEvent.setup();
-    window.history.replaceState({}, '', '/?side=curiosity');
+    window.history.replaceState({}, '', '/?side=curiousity');
 
     render(
-      <SplitLayout curiosity={<div>Curiosity Content</div>} formal={<div>Formal Content</div>} />,
+      <SplitLayout curiousity={<div>curiousity Content</div>} formal={<div>Formal Content</div>} />,
     );
 
     const toggleButton = screen.getByLabelText(/switch to/i);
@@ -62,7 +62,7 @@ describe('SplitLayout', () => {
     window.history.replaceState({}, '', '/?side=formal');
 
     render(
-      <SplitLayout curiosity={<div>Curiosity Content</div>} formal={<div>Formal Content</div>} />,
+      <SplitLayout curiousity={<div>curiousity Content</div>} formal={<div>Formal Content</div>} />,
     );
 
     expect(screen.getByText('Formal Content')).toBeInTheDocument();

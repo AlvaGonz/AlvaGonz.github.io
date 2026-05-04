@@ -53,14 +53,14 @@
   --c-gradient-5-from: #157954;
   --c-gradient-5-to: #21263a;
 
-  /* Palette 2 (Curiosity) Base Colors */
-  --c-curiosity-bg: #21263a;
-  --c-curiosity-primary: #d0d34d;
-  --c-curiosity-secondary: #c7cee8;
-  --c-curiosity-accent: #157954;
-  --c-curiosity-highlight: #d6d9d8;
-  --c-curiosity-text: #f1f5f9;
-  --c-curiosity-text-secondary: #94a3b8;
+  /* Palette 2 (curiousity) Base Colors */
+  --c-curiousity-bg: #21263a;
+  --c-curiousity-primary: #d0d34d;
+  --c-curiousity-secondary: #c7cee8;
+  --c-curiousity-accent: #157954;
+  --c-curiousity-highlight: #d6d9d8;
+  --c-curiousity-text: #f1f5f9;
+  --c-curiousity-text-secondary: #94a3b8;
 
   /* Semantic Theme Variables (Defaults to Formal) */
   --theme-background: var(--c-primary-rich-black);
@@ -80,15 +80,15 @@
   --gradient-intensity: 0;
 }
 
-/* Curiosity Theme Override */
-[data-theme='curiosity'] {
-  --theme-background: var(--c-curiosity-bg);
+/* curiousity Theme Override */
+[data-theme='curiousity'] {
+  --theme-background: var(--c-curiousity-bg);
   --theme-surface: rgba(33, 38, 58, 0.8);
-  --theme-primary: var(--c-curiosity-primary);
-  --theme-secondary: var(--c-curiosity-secondary);
-  --theme-accent: var(--c-curiosity-highlight);
-  --theme-text: var(--c-curiosity-text);
-  --theme-text-secondary: var(--c-curiosity-text-secondary);
+  --theme-primary: var(--c-curiousity-primary);
+  --theme-secondary: var(--c-curiousity-secondary);
+  --theme-accent: var(--c-curiousity-highlight);
+  --theme-text: var(--c-curiousity-text);
+  --theme-text-secondary: var(--c-curiousity-text-secondary);
   --theme-border: rgba(199, 206, 232, 0.2);
 }
 

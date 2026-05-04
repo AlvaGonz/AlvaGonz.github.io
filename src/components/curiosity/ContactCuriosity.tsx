@@ -1,21 +1,21 @@
 import type { Profile } from '../../content/types';
 import { FadeInOnScroll } from '../animations/FadeInOnScroll';
 
-interface ContactCuriosityProps {
+interface ContactcuriousityProps {
     profile: Profile;
 }
 
-export function ContactCuriosity({ profile }: ContactCuriosityProps): JSX.Element {
+export function Contactcuriousity({ profile }: ContactcuriousityProps): JSX.Element {
     return (
         <section id="contact" className="py-12 md:py-20">
             <FadeInOnScroll variant="fadeUp">
-                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-curiosity-primary border-b-2 border-curiosity-secondary/30 pb-2 inline-block">
+                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-curiousity-primary border-b-2 border-curiousity-secondary/30 pb-2 inline-block">
                     Let's Connect! 🚀
                 </h2>
             </FadeInOnScroll>
 
             <FadeInOnScroll variant="fadeUp" delay={0.2}>
-                <p className="text-xl text-curiosity-text-secondary mb-8 max-w-2xl">
+                <p className="text-xl text-curiousity-text-secondary mb-8 max-w-2xl">
                     Got a cool project idea? Want to chat about tech, games, or anything in between?
                     Hit me up through any of these channels!
                 </p>

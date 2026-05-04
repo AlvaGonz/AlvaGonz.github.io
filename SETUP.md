@@ -71,21 +71,3 @@ pnpm test
 # E2E tests (requires dev server)
 pnpm test:e2e
 ```
-
-## Project Status
-
-✅ All core features implemented:
-- Vite React+TypeScript setup
-- Tailwind CSS with custom theme
-- Scroll-based modernization
-- Dual layout (curios/formal)
-- GitHub integration script
-- Hero component (ported from legacy)
-- All components and tests
-- Netlify configuration
-
-⏳ Pending user action:
-- Add Axiforma font files
-- (Optional) Set GitHub token
-- (Optional) Customize profile/skills in `src/content/`
-

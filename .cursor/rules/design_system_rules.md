@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document defines the design system architecture for the Alva Portfolio dual-experience project. The system supports two distinct themes (Formal and Curiosity) with dynamic switching, progressive scroll enhancements, and comprehensive animation patterns.
+This document defines the design system architecture for the Alva Portfolio dual-experience project. The system supports two distinct themes (Formal and curiousity) with dynamic switching, progressive scroll enhancements, and comprehensive animation patterns.
 
 ## 1. Token Definitions
 
@@ -28,10 +28,10 @@ This document defines the design system architecture for the Alva Portfolio dual
   --theme-border: var(--c-secondary-basil);
 }
 
-/* Curiosity Theme Override */
-[data-theme="curiosity"] {
-  --theme-background: var(--c-curiosity-bg);
-  --theme-primary: var(--c-curiosity-primary);
+/* curiousity Theme Override */
+[data-theme="curiousity"] {
+  --theme-background: var(--c-curiousity-bg);
+  --theme-primary: var(--c-curiousity-primary);
   /* ... */
 }
 ```
@@ -300,7 +300,7 @@ src/styles/
 }
 
 /* Theme-specific variants */
-[data-theme="curiosity"] .glass-panel {
+[data-theme="curiousity"] .glass-panel {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
   border: 1px solid rgba(199, 206, 232, 0.15);
 }
@@ -326,8 +326,8 @@ src/styles/
 const { side, setSide } = useSide();
 
 // CSS targeting
-[data-theme="curiosity"] {
-  --theme-primary: var(--c-curiosity-primary);
+[data-theme="curiousity"] {
+  --theme-primary: var(--c-curiousity-primary);
 }
 ```
 
@@ -357,7 +357,7 @@ src/
 **Components**: PascalCase (`ButtonWithRipple`)
 **Files**: PascalCase for components, camelCase for utilities
 **CSS Classes**: kebab-case for custom, Tailwind utilities as-is
-**CSS Variables**: kebab-case with prefixes (`--theme-primary`, `--c-curiosity-bg`)
+**CSS Variables**: kebab-case with prefixes (`--theme-primary`, `--c-curiousity-bg`)
 
 ### 7.3 Import Patterns
 
@@ -419,7 +419,7 @@ body[data-scroll-stage="3"] { /* Fully enhanced */ }
 1. Extract design tokens (spacing, colors, typography)
 2. Map to existing animation variants
 3. Apply glassmorphism patterns where appropriate
-4. Ensure theme compatibility (Formal vs Curiosity)
+4. Ensure theme compatibility (Formal vs curiousity)
 
 ### 9.3 Animation Integration
 
@@ -443,7 +443,7 @@ body[data-scroll-stage="3"] { /* Fully enhanced */ }
 2. **Token Extraction**: Identify reusable tokens
 3. **Component Creation**: Build with TypeScript + Tailwind
 4. **Animation Integration**: Apply appropriate motion variants
-5. **Theme Testing**: Verify both Formal and Curiosity themes
+5. **Theme Testing**: Verify both Formal and curiousity themes
 6. **Accessibility**: Test keyboard navigation and screen readers
 
 ### 10.2 Quality Standards
