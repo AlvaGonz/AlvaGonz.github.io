@@ -1,3 +1,4 @@
+// Implemented from DESIGN.md — Curiosity scope
 import { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { FadeInOnScroll } from '@/components/animations/FadeInOnScroll';
@@ -216,7 +217,7 @@ export function NFSWidget() {
       <FadeInOnScroll variant="scale">
         <motion.div
           whileHover={{ scale: 1.02 }}
-          className="relative overflow-hidden rounded-2xl bg-[#0c1214] border border-blue-500/30 shadow-2xl group cursor-pointer"
+          className="relative overflow-hidden rounded-2xl bg-[#282e45] border border-Curiosity-secondary/30 hover:border-Curiosity-secondary/60 shadow-2xl hover:shadow-[0_0_20px_rgba(199,206,232,0.2)] group cursor-pointer transition-all duration-300"
           onClick={playSound}
         >
           {/* Background Image */}
@@ -226,13 +227,14 @@ export function NFSWidget() {
               alt="BMW M3 GTR"
               className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-blue-900/90 via-transparent to-transparent" />
+            {/* Gradient 5: Emerald → Night Blue from DESIGN.md */}
+            <div className="absolute inset-0 bg-gradient-to-t from-Curiosity-bg/90 via-transparent to-transparent" />
           </div>
 
           {/* Content */}
           <div className="relative z-10 p-6 h-full flex flex-col justify-end min-h-[300px]">
             <div className="mb-auto flex items-start justify-between w-full">
-              <span className="inline-block px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-bold border border-blue-500/30">
+              <span className="inline-block px-3 py-1 rounded-full bg-Curiosity-secondary/20 text-Curiosity-secondary text-xs font-bold border border-Curiosity-secondary/30">
                 NFS MW'S LEGENDARY RIDE
               </span>
               <img
@@ -242,22 +244,22 @@ export function NFSWidget() {
               />
             </div>
 
-            <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
+            <h3 className="text-2xl font-bold text-Curiosity-text mb-2 flex items-center gap-2">
               BMW M3 GTR
               {isPlaying && (
                 <span className="flex h-3 w-3 relative">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500" />
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-Curiosity-primary opacity-75" />
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-Curiosity-primary" />
                 </span>
               )}
             </h3>
 
-            <p className="text-gray-300 text-sm mb-4">
+            <p className="text-Curiosity-text-secondary text-sm mb-4">
               The straight-cut gears. The V8 whine. The most iconic car in racing game history.
               Click to hear the beast roar.
             </p>
 
-            <div className="flex items-center gap-4 text-xs text-blue-300 font-mono">
+            <div className="flex items-center gap-4 text-xs text-Curiosity-secondary font-mono">
               <span className="flex items-center gap-1">
                 <span className="i-lucide-gauge" /> 380 km/h
               </span>

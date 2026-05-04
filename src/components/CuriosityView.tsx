@@ -1,3 +1,4 @@
+// Implemented from DESIGN.md — Curiosity scope
 import { About } from './Curiosity/About';
 import { GraphicDesign } from './Curiosity/GraphicDesign';
 import { MultimediaManagement } from './Curiosity/MultimediaManagement';
@@ -57,9 +58,9 @@ export function CuriosityView(): JSX.Element {
             </FadeInOnScroll>
             <FadeInOnScroll variant="fadeUp">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Spanish - Native */}
-                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-orange-500 to-yellow-500 p-1 shadow-xl transform hover:scale-[1.02] transition-transform duration-300">
-                  <div className="bg-primary-rich-black h-full w-full rounded-xl p-6 relative overflow-hidden">
+                {/* Spanish — Gradient 4: Lime → Night Blue border per DESIGN.md */}
+                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-Curiosity-primary to-Curiosity-highlight p-1 shadow-xl transform hover:scale-[1.02] transition-transform duration-300">
+                  <div className="bg-Curiosity-bg h-full w-full rounded-xl p-6 relative overflow-hidden">
                     <div className="absolute top-0 right-0 p-4 opacity-20">
                       <span className="text-9xl">ñ</span>
                     </div>
@@ -67,14 +68,14 @@ export function CuriosityView(): JSX.Element {
                       <div>
                         <div className="flex items-center gap-3 mb-4">
                           <span className="text-4xl">🇩🇴</span>
-                          <h3 className="text-2xl font-bold text-white">Spanish</h3>
+                          <h3 className="text-2xl font-bold text-Curiosity-text">Spanish</h3>
                         </div>
-                        <p className="text-gray-300">
+                        <p className="text-Curiosity-text-secondary">
                           My mother tongue. The language of my thoughts, passion, and culture.
                         </p>
                       </div>
                       <div className="mt-6">
-                        <div className="inline-block px-4 py-2 rounded-full bg-orange-500/20 text-orange-400 font-bold border border-orange-500/30">
+                        <div className="inline-block px-4 py-2 rounded-full bg-Curiosity-primary/20 text-Curiosity-primary font-bold border border-Curiosity-primary/30">
                           Native Speaker
                         </div>
                       </div>

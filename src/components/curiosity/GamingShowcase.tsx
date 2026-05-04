@@ -1,12 +1,14 @@
+// Implemented from DESIGN.md — Curiosity scope
 import { favoriteGames } from '../../content/games';
 import { motion } from 'framer-motion';
 
 export function GamingShowcase() {
   return (
     <div className="space-y-6">
-      <h3 className="text-2xl font-bold text-white flex items-center gap-3">
+      <h3 className="text-2xl font-bold text-Curiosity-text flex items-center gap-3">
         <span className="i-lucide-gamepad-2 text-Curiosity-primary"></span>
-        <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
+        {/* Gradient 1: Cloud Grey → Periwinkle from DESIGN.md */}
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-Curiosity-highlight to-Curiosity-secondary">
           Gaming Collection
         </span>
       </h3>
@@ -19,7 +21,7 @@ export function GamingShowcase() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-50px' }}
             transition={{ delay: index * 0.05, duration: 0.4 }}
-            className="group relative h-56 rounded-2xl overflow-hidden border border-white/10 hover:border-Curiosity-primary/50 transition-all duration-500 shadow-lg hover:shadow-Curiosity-primary/20"
+            className="group relative h-56 rounded-2xl overflow-hidden border border-theme-border hover:border-Curiosity-primary/50 transition-all duration-500 shadow-lg hover:shadow-[0_0_15px_rgba(208,211,77,0.2)]"
           >
             {/* Background Image */}
             <img
@@ -29,13 +31,13 @@ export function GamingShowcase() {
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
 
-            {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-70 transition-opacity" />
+            {/* Gradient Overlay — Gradient 4: Lime → Night Blue (hero) */}
+            <div className="absolute inset-0 bg-gradient-to-t from-Curiosity-bg/90 via-Curiosity-bg/30 to-transparent opacity-80 group-hover:opacity-70 transition-opacity" />
 
             {/* Content */}
             <div className="absolute bottom-0 left-0 p-5 w-full transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
               <div className="flex justify-between items-start mb-1">
-                <h4 className="font-bold text-white text-xl leading-tight max-w-[80%] drop-shadow-md">
+                <h4 className="font-bold text-Curiosity-text text-xl leading-tight max-w-[80%] drop-shadow-md">
                   {game.title}
                 </h4>
                 <span className="text-xs font-mono text-Curiosity-primary bg-Curiosity-primary/10 px-2 py-1 rounded border border-Curiosity-primary/20 backdrop-blur-sm">
@@ -44,11 +46,12 @@ export function GamingShowcase() {
               </div>
 
               <div className="flex items-center justify-between mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-75">
-                <span className="text-xs text-gray-300 font-medium flex items-center gap-1.5">
+                <span className="text-xs text-Curiosity-text-secondary font-medium flex items-center gap-1.5">
                   <span className="i-lucide-clock w-3 h-3" />
                   {game.playtime}
                 </span>
-                <span className="text-yellow-400 text-sm tracking-widest">{game.rating}</span>
+                {/* Rating uses Curiosity-primary (Lime) for stars */}
+                <span className="text-Curiosity-primary text-sm tracking-widest">{game.rating}</span>
               </div>
             </div>
           </motion.div>

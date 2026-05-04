@@ -1,6 +1,41 @@
+// Implemented from DESIGN.md — Curiosity scope
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FadeInOnScroll } from '@/components/animations/FadeInOnScroll';
+
+const hobbies = [
+  {
+    icon: '💪',
+    label: 'Working Out',
+    desc: 'Building discipline through fitness. Calisthenics, weightlifting, and nutrition.',
+    borderClass: 'border-Curiosity-highlight/30',
+    interactive: false,
+  },
+  {
+    icon: '🔨',
+    label: 'Tech Tinkering',
+    desc: "Building PCs, fixing hardware, and breaking things just to see how they work.",
+    hint: '(Warning: Don\'t click too many times...)',
+    borderClass: 'border-Curiosity-primary/30',
+    glowClass: 'bg-Curiosity-primary/5 group-hover:bg-Curiosity-primary/10',
+    hintClass: 'text-Curiosity-primary/70',
+    interactive: true,
+  },
+  {
+    icon: '📚',
+    label: 'Reading',
+    desc: 'Sci-fi, Theology, and Tech documentation. Always learning something new.',
+    borderClass: 'border-Curiosity-secondary/30',
+    interactive: false,
+  },
+  {
+    icon: '🎵',
+    label: 'Music',
+    desc: 'Appreciating everything from Lo-Fi beats to Worship music.',
+    borderClass: 'border-Curiosity-accent/30',
+    interactive: false,
+  },
+] as const;
 
 export function Hobbies() {
   const [showBSOD, setShowBSOD] = useState(false);
@@ -49,76 +84,53 @@ export function Hobbies() {
       </AnimatePresence>
 
       <FadeInOnScroll variant="fadeUp">
-        <h2 className="text-3xl md:text-4xl font-bold mb-8 text-green-500 border-b-2 border-green-500/30 pb-2 inline-block">
-          Hobbies & Interests
+        <h2 className="text-3xl md:text-4xl font-bold mb-8 text-Curiosity-primary border-b-2 border-Curiosity-primary/30 pb-2 inline-block">
+          Hobbies &amp; Interests
         </h2>
       </FadeInOnScroll>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {/* Working Out Card */}
-        <FadeInOnScroll variant="scale" delay={0.1}>
-          <motion.div
-            whileHover={{ y: -5 }}
-            className="bg-[#0c1214] p-6 rounded-xl border border-red-500/30 shadow-xl h-full"
-          >
-            <div className="text-4xl mb-4">💪</div>
-            <h3 className="text-xl font-bold text-white mb-2">Working Out</h3>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              Building discipline through fitness. Calisthenics, weightlifting, and nutrition.
-            </p>
-          </motion.div>
-        </FadeInOnScroll>
-
-        {/* Tech Tinkering Card (Interactive) */}
-        <FadeInOnScroll variant="scale" delay={0.2}>
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={handleTinkeringClick}
-            className="bg-[#0c1214] p-6 rounded-xl border border-green-500/30 shadow-xl cursor-pointer group h-full relative overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-green-500/5 group-hover:bg-green-500/10 transition-colors" />
-            <div className="relative z-10">
-              <div className="text-4xl mb-4">🔨</div>
-              <h3 className="text-xl font-bold text-white mb-2">Tech Tinkering</h3>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                Building PCs, fixing hardware, and breaking things just to see how they work.
-                <br />
-                <span className="text-xs text-green-500/70 mt-2 block italic">
-                  (Warning: Don't click too many times...)
-                </span>
-              </p>
-            </div>
-          </motion.div>
-        </FadeInOnScroll>
-
-        {/* Reading Card */}
-        <FadeInOnScroll variant="scale" delay={0.3}>
-          <motion.div
-            whileHover={{ y: -5 }}
-            className="bg-[#0c1214] p-6 rounded-xl border border-blue-500/30 shadow-xl h-full"
-          >
-            <div className="text-4xl mb-4">📚</div>
-            <h3 className="text-xl font-bold text-white mb-2">Reading</h3>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              Sci-fi, Theology, and Tech documentation. Always learning something new.
-            </p>
-          </motion.div>
-        </FadeInOnScroll>
-
-        {/* Music Card */}
-        <FadeInOnScroll variant="scale" delay={0.4}>
-          <motion.div
-            whileHover={{ y: -5 }}
-            className="bg-[#0c1214] p-6 rounded-xl border border-purple-500/30 shadow-xl h-full"
-          >
-            <div className="text-4xl mb-4">🎵</div>
-            <h3 className="text-xl font-bold text-white mb-2">Music</h3>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              Appreciating everything from Lo-Fi beats to Worship music.
-            </p>
-          </motion.div>
-        </FadeInOnScroll>
+        {hobbies.map((hobby, index) =>
+          hobby.interactive ? (
+            <FadeInOnScroll key={hobby.label} variant="scale" delay={index * 0.1}>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleTinkeringClick}
+                className={`bg-[#282e45] p-6 rounded-2xl border ${hobby.borderClass} shadow-2xl cursor-pointer group h-full relative overflow-hidden`}
+              >
+                <div className={`absolute inset-0 transition-colors ${'glowClass' in hobby ? hobby.glowClass : ''}`} />
+                <div className="relative z-10">
+                  <div className="text-4xl mb-4">{hobby.icon}</div>
+                  <h3 className="text-xl font-bold text-Curiosity-text mb-2">{hobby.label}</h3>
+                  <p className="text-Curiosity-text-secondary text-sm leading-relaxed">
+                    {hobby.desc}
+                    {'hint' in hobby && (
+                      <>
+                        <br />
+                        <span className={`text-xs mt-2 block italic ${'hintClass' in hobby ? hobby.hintClass : ''}`}>
+                          {hobby.hint}
+                        </span>
+                      </>
+                    )}
+                  </p>
+                </div>
+              </motion.div>
+            </FadeInOnScroll>
+          ) : (
+            <FadeInOnScroll key={hobby.label} variant="scale" delay={index * 0.1}>
+              <motion.div
+                whileHover={{ y: -5 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                className={`bg-[#282e45] p-6 rounded-2xl border ${hobby.borderClass} shadow-2xl h-full`}
+              >
+                <div className="text-4xl mb-4">{hobby.icon}</div>
+                <h3 className="text-xl font-bold text-Curiosity-text mb-2">{hobby.label}</h3>
+                <p className="text-Curiosity-text-secondary text-sm leading-relaxed">{hobby.desc}</p>
+              </motion.div>
+            </FadeInOnScroll>
+          ),
+        )}
       </div>
     </section>
   );

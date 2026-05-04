@@ -1,9 +1,16 @@
+// Implemented from DESIGN.md — Curiosity scope
 import { FadeInOnScroll } from '@/components/animations/FadeInOnScroll';
+
+const toolsList = [
+  { icon: '🎨', title: 'Tools of Choice', desc: 'Figma, Canva, Adobe Creative Suite' },
+  { icon: '✨', title: 'Focus', desc: 'Event Flyers, Social Media Assets, Video Creation' },
+] as const;
 
 export function GraphicDesign() {
   return (
     <section id="graphic-design" className="py-12 md:py-20">
       <FadeInOnScroll variant="fadeUp">
+        {/* Section header uses Gradient 2 (Periwinkle → Lime) as per DESIGN.md */}
         <h2 className="text-3xl md:text-4xl font-bold mb-8 text-Curiosity-primary border-b-2 border-Curiosity-secondary/30 pb-2 inline-block">
           Graphic Design
         </h2>
@@ -12,16 +19,17 @@ export function GraphicDesign() {
       <div className="grid md:grid-cols-2 gap-12 items-center">
         <FadeInOnScroll variant="scale">
           <div className="relative group">
-            <div className="absolute -inset-2 bg-gradient-to-r from-pink-500 to-purple-600 rounded-xl opacity-30 blur-lg group-hover:opacity-50 transition-opacity duration-500" />
-            <div className="relative overflow-hidden rounded-xl border border-white/10 shadow-2xl">
+            {/* Ambient glow — Gradient 2: Periwinkle → Lime from DESIGN.md */}
+            <div className="absolute -inset-2 bg-gradient-to-r from-Curiosity-secondary to-Curiosity-primary rounded-xl opacity-30 blur-lg group-hover:opacity-50 transition-opacity duration-500" />
+            <div className="relative overflow-hidden rounded-2xl border border-theme-border shadow-2xl">
               <img
                 src="/images/hipters.png"
                 alt="Hipsters Community Event Design"
                 loading="lazy"
                 className="w-full h-auto transform group-hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                <p className="text-white font-medium">Demasiado Hipster ¿No?</p>
+              <div className="absolute inset-0 bg-gradient-to-t from-Curiosity-bg/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                <p className="text-Curiosity-text font-medium">Demasiado Hipster ¿No?</p>
               </div>
             </div>
           </div>
@@ -37,23 +45,15 @@ export function GraphicDesign() {
             </p>
 
             <div className="space-y-4">
-              <div className="flex items-center gap-4">
-                <span className="text-2xl">🎨</span>
-                <div>
-                  <h4 className="font-bold text-theme-text">Tools of Choice</h4>
-                  <p className="text-theme-text-secondary">Figma, Canva, Adobe Creative Suite</p>
+              {toolsList.map((item) => (
+                <div key={item.title} className="flex items-center gap-4">
+                  <span className="text-2xl">{item.icon}</span>
+                  <div>
+                    <h4 className="font-bold text-theme-text">{item.title}</h4>
+                    <p className="text-theme-text-secondary">{item.desc}</p>
+                  </div>
                 </div>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <span className="text-2xl">✨</span>
-                <div>
-                  <h4 className="font-bold text-theme-text">Focus</h4>
-                  <p className="text-theme-text-secondary">
-                    Event Flyers, Social Media Assets, Video Creation
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </FadeInOnScroll>

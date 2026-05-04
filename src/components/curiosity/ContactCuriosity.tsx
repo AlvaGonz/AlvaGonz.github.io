@@ -1,3 +1,4 @@
+// Implemented from DESIGN.md — Curiosity scope
 import type { Profile } from '../../content/types';
 import { FadeInOnScroll } from '../animations/FadeInOnScroll';
 
@@ -5,7 +6,46 @@ interface ContactCuriosityProps {
   profile: Profile;
 }
 
+const socialCards = [
+  {
+    key: 'linkedin' as const,
+    label: 'LinkedIn',
+    subtext: "Let's network",
+    icon: 'https://skillicons.dev/icons?i=linkedin',
+    iconClass: '',
+    borderClass: 'border-Curiosity-secondary/30 hover:border-Curiosity-secondary/60',
+    bgClass: 'from-Curiosity-secondary/10',
+    avatarBgClass: 'bg-Curiosity-secondary/20 group-hover:bg-Curiosity-secondary/30',
+  },
+  {
+    key: 'github' as const,
+    label: 'GitHub',
+    subtext: 'Check my code',
+    icon: 'https://skillicons.dev/icons?i=github',
+    iconClass: 'bg-white rounded-full',
+    borderClass: 'border-Curiosity-primary/30 hover:border-Curiosity-primary/60',
+    bgClass: 'from-Curiosity-primary/10',
+    avatarBgClass: 'bg-Curiosity-primary/20 group-hover:bg-Curiosity-primary/30',
+  },
+  {
+    key: 'instagram' as const,
+    label: 'Instagram',
+    subtext: 'Follow me',
+    icon: 'https://skillicons.dev/icons?i=instagram',
+    iconClass: '',
+    borderClass: 'border-Curiosity-accent/30 hover:border-Curiosity-accent/60',
+    bgClass: 'from-Curiosity-accent/10',
+    avatarBgClass: 'bg-Curiosity-accent/20 group-hover:bg-Curiosity-accent/30',
+    optional: true,
+  },
+];
+
 export function ContactCuriosity({ profile }: ContactCuriosityProps): JSX.Element {
+  const getHref = (key: string): string => {
+    if (key === 'email') return `mailto:${profile.email}`;
+    return (profile as unknown as Record<string, string>)[key] ?? '#';
+  };
+
   return (
     <section id="contact" className="py-12 md:py-20">
       <FadeInOnScroll variant="fadeUp">
@@ -23,92 +63,51 @@ export function ContactCuriosity({ profile }: ContactCuriosityProps): JSX.Elemen
 
       <FadeInOnScroll variant="scale" delay={0.3}>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl">
-          {/* LinkedIn */}
-          <a
-            href={profile.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative overflow-hidden rounded-2xl bg-[#0c1214] border border-blue-500/30 p-6 hover:border-blue-500/60 transition-all duration-300 hover:scale-105"
-            aria-label="LinkedIn profile"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-            <div className="relative z-10 flex flex-col items-center gap-4">
-              <div className="w-16 h-16 rounded-full bg-blue-500/20 flex items-center justify-center group-hover:bg-blue-500/30 transition-colors">
-                <img
-                  src="https://skillicons.dev/icons?i=linkedin"
-                  alt="LinkedIn"
-                  className="w-10 h-10 group-hover:scale-110 transition-transform"
-                />
-              </div>
-              <span className="text-white font-bold text-lg">LinkedIn</span>
-              <span className="text-gray-400 text-sm">Let's network</span>
-            </div>
-          </a>
-
-          {/* GitHub */}
-          <a
-            href={profile.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative overflow-hidden rounded-2xl bg-[#0c1214] border border-purple-500/30 p-6 hover:border-purple-500/60 transition-all duration-300 hover:scale-105"
-            aria-label="GitHub profile"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-            <div className="relative z-10 flex flex-col items-center gap-4">
-              <div className="w-16 h-16 rounded-full bg-purple-500/20 flex items-center justify-center group-hover:bg-purple-500/30 transition-colors">
-                <img
-                  src="https://skillicons.dev/icons?i=github"
-                  alt="GitHub"
-                  className="w-10 h-10 bg-white rounded-full group-hover:scale-110 transition-transform"
-                />
-              </div>
-              <span className="text-white font-bold text-lg">GitHub</span>
-              <span className="text-gray-400 text-sm">Check my code</span>
-            </div>
-          </a>
-
-          {/* Instagram */}
-          {profile.instagram && (
-            <a
-              href={profile.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative overflow-hidden rounded-2xl bg-[#0c1214] border border-pink-500/30 p-6 hover:border-pink-500/60 transition-all duration-300 hover:scale-105"
-              aria-label="Instagram profile"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-pink-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="relative z-10 flex flex-col items-center gap-4">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center group-hover:from-purple-500/30 group-hover:to-pink-500/30 transition-colors">
-                  <img
-                    src="https://skillicons.dev/icons?i=instagram"
-                    alt="Instagram"
-                    className="w-10 h-10 group-hover:scale-110 transition-transform"
-                  />
+          {socialCards.map((card) => {
+            if (card.optional && !profile[card.key as keyof Profile]) return null;
+            return (
+              <a
+                key={card.key}
+                href={getHref(card.key)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`group relative overflow-hidden rounded-2xl bg-[#282e45] border ${card.borderClass} p-6 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(208,211,77,0.15)]`}
+                aria-label={`${card.label} profile`}
+              >
+                <div className={`absolute inset-0 bg-gradient-to-br ${card.bgClass} to-transparent opacity-0 group-hover:opacity-100 transition-opacity`} />
+                <div className="relative z-10 flex flex-col items-center gap-4">
+                  <div className={`w-16 h-16 rounded-full ${card.avatarBgClass} flex items-center justify-center transition-colors`}>
+                    <img
+                      src={card.icon}
+                      alt={card.label}
+                      className={`w-10 h-10 group-hover:scale-110 transition-transform ${card.iconClass}`}
+                    />
+                  </div>
+                  <span className="text-Curiosity-text font-bold text-lg">{card.label}</span>
+                  <span className="text-Curiosity-text-secondary text-sm">{card.subtext}</span>
                 </div>
-                <span className="text-white font-bold text-lg">Instagram</span>
-                <span className="text-gray-400 text-sm">Follow me</span>
-              </div>
-            </a>
-          )}
+              </a>
+            );
+          })}
 
-          {/* Email */}
+          {/* Email — always rendered if present */}
           {profile.email && (
             <a
               href={`mailto:${profile.email}`}
-              className="group relative overflow-hidden rounded-2xl bg-[#0c1214] border border-red-500/30 p-6 hover:border-red-500/60 transition-all duration-300 hover:scale-105"
+              className="group relative overflow-hidden rounded-2xl bg-[#282e45] border border-Curiosity-highlight/30 hover:border-Curiosity-highlight/60 p-6 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(208,211,77,0.15)]"
               aria-label="Send email"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-red-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute inset-0 bg-gradient-to-br from-Curiosity-highlight/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="relative z-10 flex flex-col items-center gap-4">
-                <div className="w-16 h-16 rounded-full bg-red-500/20 flex items-center justify-center group-hover:bg-red-500/30 transition-colors">
+                <div className="w-16 h-16 rounded-full bg-Curiosity-highlight/20 group-hover:bg-Curiosity-highlight/30 flex items-center justify-center transition-colors">
                   <img
                     src="https://skillicons.dev/icons?i=gmail"
                     alt="Email"
                     className="w-10 h-10 group-hover:scale-110 transition-transform"
                   />
                 </div>
-                <span className="text-white font-bold text-lg">Email</span>
-                <span className="text-gray-400 text-sm">Drop a message</span>
+                <span className="text-Curiosity-text font-bold text-lg">Email</span>
+                <span className="text-Curiosity-text-secondary text-sm">Drop a message</span>
               </div>
             </a>
           )}
