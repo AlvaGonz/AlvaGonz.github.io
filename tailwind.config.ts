@@ -37,7 +37,28 @@ export default {
           'text-secondary': 'var(--c-Curiosity-text-secondary)',
         },
 
-        // Legacy Formal Colors (Palette 1) - Kept for backward compatibility
+        // Formal Theme Colors (Palette 1)
+        formal: {
+          primary: {
+            'rich-black': 'var(--c-primary-rich-black)',
+            'dark-green': 'var(--c-primary-dark-green)',
+            'bangladesh-green': 'var(--c-primary-bangladesh-green)',
+            'mountain-meadow': 'var(--c-primary-mountain-meadow)',
+            'caribbean-green': 'var(--c-primary-caribbean-green)',
+            'anti-flash-white': 'var(--c-primary-anti-flash-white)',
+          },
+          secondary: {
+            pine: 'var(--c-secondary-pine)',
+            basil: 'var(--c-secondary-basil)',
+            forest: 'var(--c-secondary-forest)',
+            frog: 'var(--c-secondary-frog)',
+            mint: 'var(--c-secondary-mint)',
+            stone: 'var(--c-secondary-stone)',
+            pistachio: 'var(--c-secondary-pistachio)',
+          },
+        },
+
+        // Legacy Formal Colors - Kept for backward compatibility
         primary: {
           'rich-black': 'var(--c-primary-rich-black)',
           'dark-green': 'var(--c-primary-dark-green)',
