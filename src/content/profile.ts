@@ -12,5 +12,5 @@ export const profile: Profile = {
   github: 'https://github.com/AlvaGonz',
   instagram: 'https://www.instagram.com/adrianalv.gon/',
   avatar_formal: '/images/Perfil 2.png',
-  avatar_curious: '/images/hipster3.png',
+  avatar_Curious: '/images/hipster3.png',
 };

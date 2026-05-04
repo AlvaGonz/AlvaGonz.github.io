@@ -10,7 +10,7 @@ All data is either:
 ## Dual-Side Architecture (NON-NEGOTIABLE)
 The portfolio has two distinct visual experiences driven by a `side` URL parameter and managed via `SideContext`:
 - `?side=formal` — Professional, minimalist, corporate aesthetic
-- `?side=curiosity` — Vibrant, playful, experimental aesthetic
+- `?side=Curiosity` — Vibrant, playful, experimental aesthetic
 
 Every component that renders differently per side MUST read from `SideContext` or accept a `side` prop.
 Never hardcode visual behavior for one side inside a component that belongs to both.
@@ -21,7 +21,7 @@ Never hardcode visual behavior for one side inside a component that belongs to b
 src/
 ├── components/
 │   ├── formal/          # Components exclusive to the Formal side
-│   ├── curiosity/       # Components exclusive to the Curiosity side
+│   ├── Curiosity/       # Components exclusive to the Curiosity side
 │   ├── layout/          # Shared structural components (Navbar, SplitLayout, etc.)
 │   ├── sections/        # Shared section-level components
 │   ├── ui/              # Primitive, headless UI components (no side logic)
@@ -38,9 +38,9 @@ src/
 
 ## Component Placement Rules
 - A component that is ONLY used on the Formal side → `src/components/formal/`
-- A component that is ONLY used on the Curiosity side → `src/components/curiosity/`
+- A component that is ONLY used on the Curiosity side → `src/components/Curiosity/`
 - A component used on BOTH sides → `src/components/sections/`, `src/components/layout/`, or `src/components/ui/`
-- verify: No import from `components/formal/` exists inside any file under `components/curiosity/`, and vice versa.
+- verify: No import from `components/formal/` exists inside any file under `components/Curiosity/`, and vice versa.
 
 ## Data Flow (HARD RULE)
 - Static content → import directly from `src/content/*.ts`
@@ -55,7 +55,7 @@ src/
 - verify: `grep -rE "from '\.\./\.\." src/` must return 0 matches.
 
 ## State Management
-- `SideContext` — the single source of truth for the current active side (`formal` | `curiosity`).
+- `SideContext` — the single source of truth for the current active side (`formal` | `Curiosity`).
 - No other global state library is installed. Use React `useState` + `useContext` + `useMemo` as needed.
 - `localStorage` is used only for persisting the user's side preference across sessions.
 

@@ -53,14 +53,14 @@
   --c-gradient-5-from: #157954;
   --c-gradient-5-to: #21263a;
 
-  /* Palette 2 (curiosity) Base Colors */
-  --c-curiosity-bg: #21263a;
-  --c-curiosity-primary: #d0d34d;
-  --c-curiosity-secondary: #c7cee8;
-  --c-curiosity-accent: #157954;
-  --c-curiosity-highlight: #d6d9d8;
-  --c-curiosity-text: #f1f5f9;
-  --c-curiosity-text-secondary: #94a3b8;
+  /* Palette 2 (Curiosity) Base Colors */
+  --c-Curiosity-bg: #21263a;
+  --c-Curiosity-primary: #d0d34d;
+  --c-Curiosity-secondary: #c7cee8;
+  --c-Curiosity-accent: #157954;
+  --c-Curiosity-highlight: #d6d9d8;
+  --c-Curiosity-text: #f1f5f9;
+  --c-Curiosity-text-secondary: #94a3b8;
 
   /* Semantic Theme Variables (Defaults to Formal) */
   --theme-background: var(--c-primary-rich-black);
@@ -80,15 +80,15 @@
   --gradient-intensity: 0;
 }
 
-/* curiosity Theme Override */
-[data-theme='curiosity'] {
-  --theme-background: var(--c-curiosity-bg);
+/* Curiosity Theme Override */
+[data-theme='Curiosity'] {
+  --theme-background: var(--c-Curiosity-bg);
   --theme-surface: rgba(33, 38, 58, 0.8);
-  --theme-primary: var(--c-curiosity-primary);
-  --theme-secondary: var(--c-curiosity-secondary);
-  --theme-accent: var(--c-curiosity-highlight);
-  --theme-text: var(--c-curiosity-text);
-  --theme-text-secondary: var(--c-curiosity-text-secondary);
+  --theme-primary: var(--c-Curiosity-primary);
+  --theme-secondary: var(--c-Curiosity-secondary);
+  --theme-accent: var(--c-Curiosity-highlight);
+  --theme-text: var(--c-Curiosity-text);
+  --theme-text-secondary: var(--c-Curiosity-text-secondary);
   --theme-border: rgba(199, 206, 232, 0.2);
 }
 
@@ -131,6 +131,7 @@ html {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {

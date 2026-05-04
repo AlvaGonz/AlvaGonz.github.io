@@ -41,11 +41,11 @@ test.describe('Split Layout', () => {
     expect(name).toContain('Adrian');
   });
 
-  test('should toggle between curious and formal views', async ({ page }) => {
+  test('should toggle between Curious and formal views', async ({ page }) => {
     await page.goto('/');
 
-    // Default should be curious
-    await expect(page.locator('text=curious Space')).toBeVisible();
+    // Default should be Curious
+    await expect(page.locator('text=Curious Space')).toBeVisible();
 
     // Click toggle button
     const toggleButton = page.getByLabel(/switch to/i);
@@ -53,7 +53,7 @@ test.describe('Split Layout', () => {
 
     // Should show formal view and mocked projects
     await expect(page.locator('text=Skills & Technologies')).toBeVisible();
-    await expect(page.locator('text=curious Space')).not.toBeVisible();
+    await expect(page.locator('text=Curious Space')).not.toBeVisible();
     await expect(page.locator('text=Mock Project 1')).toBeVisible();
   });
 
@@ -65,7 +65,7 @@ test.describe('Split Layout', () => {
     // Toggle and verify URL updates
     const toggleButton = page.getByLabel(/switch to/i);
     await toggleButton.click();
-    await expect(page).toHaveURL(/side=curious/);
+    await expect(page).toHaveURL(/side=Curious/);
   });
 
   test('should be keyboard accessible', async ({ page }) => {
@@ -74,7 +74,7 @@ test.describe('Split Layout', () => {
     // Tab to toggle button
     await page.keyboard.press('Tab');
     const focusedElement = page.locator(':focus');
-    await expect(focusedElement).toHaveText(/Formal|curious/);
+    await expect(focusedElement).toHaveText(/Formal|Curious/);
 
     // Press Enter to toggle
     await page.keyboard.press('Enter');

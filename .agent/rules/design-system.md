@@ -15,7 +15,7 @@ This portfolio presents two distinct visual identities. Both must feel intention
 ## Color System Rules (NON-NEGOTIABLE)
 - All colors must be defined as CSS custom properties in `src/styles/theme.css`. Never use hardcoded hex values inside component files.
   - Example of WRONG: `className="bg-[#7C3AED]"` in a TSX file.
-  - Example of CORRECT: `className="bg-curiosity-primary"` mapped to `--color-curiosity-primary: #7C3AED`.
+  - Example of CORRECT: `className="bg-Curiosity-primary"` mapped to `--color-Curiosity-primary: #7C3AED`.
 - verify: `grep -rE "bg-\[#|text-\[#|border-\[#" src/components/` must return 0 matches.
 
 ## Typography Rules

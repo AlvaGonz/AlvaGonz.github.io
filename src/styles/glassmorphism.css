@@ -11,7 +11,8 @@
 
 /* Dark Glass - For dark themes */
 .glass-dark {
-  background: rgba(15, 23, 42, 0.6); /* Slate-900 with opacity */
+  background: rgba(15, 23, 42, 0.6);
+  /* Slate-900 with opacity */
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.05);
@@ -26,25 +27,29 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* curiosity Special - Tinted for the curious side */
-[data-theme='curiosity'] .glass-panel {
+/* Curiosity Special - Tinted for the Curious side */
+[data-theme='Curiosity'] .glass-panel {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(199, 206, 232, 0.15); /* Periwinkle tint */
+  border: 1px solid rgba(199, 206, 232, 0.15);
+  /* Periwinkle tint */
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
 }
 
 /* Fallbacks for browsers without backdrop-filter */
 @supports not (backdrop-filter: blur(1px)) {
+
   .glass,
   .glass-frosted {
     background: rgba(255, 255, 255, 0.9);
   }
+
   .glass-dark {
     background: rgba(15, 23, 42, 0.95);
   }
-  [data-theme='curiosity'] .glass-panel {
+
+  [data-theme='Curiosity'] .glass-panel {
     background: rgba(33, 38, 58, 0.95);
   }
 }

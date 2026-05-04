@@ -1,7 +1,7 @@
 # Agent Behavior Rules — Alva Portfolio v3
 # Loaded at the start of every session. All rules apply to all agents.
 
-1. **PLAN FIRST.** Any task touching 3+ files or both the `formal/` and `curiosity/` sides must enter Planning mode before execution. Never start editing files on a multi-step task without a written plan.
+1. **PLAN FIRST.** Any task touching 3+ files or both the `formal/` and `Curiosity/` sides must enter Planning mode before execution. Never start editing files on a multi-step task without a written plan.
    - Example of WRONG: Starting to edit 5 components before stating a plan.
    - Example of CORRECT: "I will: (1) identify affected components, (2) propose change, (3) implement, (4) verify build and visual."
 
@@ -21,8 +21,8 @@
    - The only secret this project uses is `GITHUB_TOKEN` for fetching pinned repos — it lives in `.env.local` only, and `.env.local` is gitignored.
    - verify: Before every push — search for literal token strings in source files. Must return 0 matches outside `*.md` and `*.example` files.
 
-7. **DUAL-SIDE PARITY.** Every structural change (layout, typography, spacing system) must be reviewed for impact on BOTH the `formal` and `curiosity` sides. A change that looks great on one side but breaks the other is not acceptable.
-   - verify: After any layout change, visually confirm both `?side=formal` and `?side=curiosity` render correctly.
+7. **DUAL-SIDE PARITY.** Every structural change (layout, typography, spacing system) must be reviewed for impact on BOTH the `formal` and `Curiosity` sides. A change that looks great on one side but breaks the other is not acceptable.
+   - verify: After any layout change, visually confirm both `?side=formal` and `?side=Curiosity` render correctly.
 
 8. **ROOT CAUSE FIRST.** When fixing a bug, identify the root cause before writing the fix. A band-aid that masks a deeper issue is not acceptable.
    - Example of WRONG: Catching an animation error silently to stop the test from failing.

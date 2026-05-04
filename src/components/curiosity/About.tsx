@@ -20,7 +20,7 @@ export function About() {
                                 🌱 The Person Behind the Code
                             </h2>
                             <p className="text-lg text-theme-text-secondary leading-relaxed mb-4">
-                                Beyond the terminal and the commits, I'm a person driven by <strong className="text-theme-primary">faith, community, and curiosity</strong>.
+                                Beyond the terminal and the commits, I'm a person driven by <strong className="text-theme-primary">faith, community, and Curiosity</strong>.
                                 I believe that technology is best used when it serves a purpose greater than itself.
                             </p>
                             <p className="text-lg text-theme-text-secondary leading-relaxed mb-4">

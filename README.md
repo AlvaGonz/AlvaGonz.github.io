@@ -1,13 +1,13 @@
 # Alva Portfolio v3 – Formal & Curiosity Dual Experience
 
-A modern dual-personality portfolio showcasing two distinct experiences: a professional **Formal** side and a curious **Curiosity** side, built with React 18, TypeScript, and cutting-edge web technologies.
+A modern dual-personality portfolio showcasing two distinct experiences: a professional **Formal** side and a Curious **Curiosity** side, built with React 18, TypeScript, and cutting-edge web technologies.
 
 ## 🌐 Live
 
 **[Visit Portfolio](https://alvagonz.github.io/)**
 
 - **Formal Experience**: [?side=formal](https://alvagonz.github.io/?side=formal) - Professional, minimalist showcase
-- **curiosity Experience**: [?side=curiosity](https://alvagonz.github.io/?side=curiosity) - curious, vibrant exploration
+- **Curiosity Experience**: [?side=Curiosity](https://alvagonz.github.io/?side=Curiosity) - Curious, vibrant exploration
 
 ## 🛠️ Tech Stack
 
@@ -35,23 +35,23 @@ A modern dual-personality portfolio showcasing two distinct experiences: a profe
 
 
 ### 🎨 Phase 2: Dual Color System (Planned)
-- **Theme Architecture**: Complete CSS variable system for formal/curiosity themes
+- **Theme Architecture**: Complete CSS variable system for formal/Curiosity themes
 - **Color Palettes**: 
   - Formal: Deep Blue (#1E40AF), Slate (#64748B), Cyan accent (#0891B2)
-  - curiosity: Purple (#7C3AED), Pink (#EC4899), Amber accent (#F59E0B)
+  - Curiosity: Purple (#7C3AED), Pink (#EC4899), Amber accent (#F59E0B)
 - **Smooth Transitions**: 300ms theme switching with URL-driven persistence
 
 ### ⚡ Phase 3: Advanced Framer Motion Animations (Planned)
 - **Hero Parallax**: Scroll-based Y transforms and scale animations
 - **Staggered Entrances**: Skill pills, cards, and timeline elements
 - **Hover Interactions**: Lift effects, color changes, and micro-feedback
-- **Scroll Triggers**: Different animation timings for formal (subtle) vs curiosity (bold)
+- **Scroll Triggers**: Different animation timings for formal (subtle) vs Curiosity (bold)
 - **Modal Systems**: Scale + blur backdrop with AnimatePresence
 
 ### 🔮 Phase 4: Glassmorphism & Advanced CSS (Planned)
 - **Frosted Glass Effects**: backdrop-filter blur with rgba backgrounds
 - **Component Library**: Glass navbar, cards, modals, and badges
-- **Blend Modes**: curious color overlays and visual depth
+- **Blend Modes**: Curious color overlays and visual depth
 - **Browser Fallbacks**: Graceful degradation for unsupported browsers
 
 ### 🎭 Phase 5: SVG Animations & Dynamic Icons (Planned)
@@ -63,7 +63,7 @@ A modern dual-personality portfolio showcasing two distinct experiences: a profe
 ### ✨ Phase 6: Micro-interactions & Polish (Planned)
 - **Button Ripples**: Click-triggered radial expansion effects
 - **Scroll Progress**: Visual progress bar with section-based color changes
-- **Cursor Effects**: Custom cursor for curiosity side with hover states
+- **Cursor Effects**: Custom cursor for Curiosity side with hover states
 - **Loading States**: Skeleton screens and shimmer animations
 - **Toast Notifications**: Slide-in feedback with auto-dismiss
 

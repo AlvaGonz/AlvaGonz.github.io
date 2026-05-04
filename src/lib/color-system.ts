@@ -1,4 +1,4 @@
-export type Theme = 'formal' | 'curiosity';
+export type Theme = 'formal' | 'Curiosity';
 
 export const colorSystem = {
   formal: {
@@ -21,8 +21,8 @@ export const colorSystem = {
       pistachio: '#aacbc4',
     },
   },
-  curiosity: {
-    // Palette 2 - curious/Mindful Identity
+  Curiosity: {
+    // Palette 2 - Curious/Mindful Identity
     // Based on provided image: One Palette, Five Gradients
     background: '#21263A', // Deep Blue/Grey (Gradient 05 end)
     surface: '#157954', // Deep Green (Gradient 05 start / Gradient 04 end)
@@ -46,14 +46,14 @@ export const semanticColors = {
     textSecondary: colorSystem.formal.secondary.pistachio,
     border: colorSystem.formal.secondary.basil,
   },
-  curiosity: {
-    background: colorSystem.curiosity.background,
+  Curiosity: {
+    background: colorSystem.Curiosity.background,
     surface: 'rgba(33, 38, 58, 0.8)', // slightly lighter/transparent version of bg
-    primary: colorSystem.curiosity.primary, // Lime
-    secondary: colorSystem.curiosity.secondary, // Periwinkle
-    accent: colorSystem.curiosity.highlight,
-    text: colorSystem.curiosity.text,
-    textSecondary: colorSystem.curiosity.textSecondary,
+    primary: colorSystem.Curiosity.primary, // Lime
+    secondary: colorSystem.Curiosity.secondary, // Periwinkle
+    accent: colorSystem.Curiosity.highlight,
+    text: colorSystem.Curiosity.text,
+    textSecondary: colorSystem.Curiosity.textSecondary,
     border: 'rgba(199, 206, 232, 0.2)', // Periwinkle with low opacity
   },
 };

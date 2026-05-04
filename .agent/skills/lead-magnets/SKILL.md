@@ -247,7 +247,7 @@ Don't waste the thank you page. After they've converted:
 
 ### A/B Testing Ideas
 
-- **Headline**: Benefit-focused vs. curiosity-driven
+- **Headline**: Benefit-focused vs. Curiosity-driven
 - **Format**: Checklist vs. guide on same topic
 - **Gate level**: Full gate vs. partial preview
 - **Form fields**: Email-only vs. email + name

@@ -22,7 +22,7 @@ export interface Profile {
   github: string;
   instagram?: string;
   avatar_formal: string;
-  avatar_curious: string;
+  avatar_Curious: string;
 }
 
 export interface Skill {

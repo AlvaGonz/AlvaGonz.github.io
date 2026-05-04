@@ -10,12 +10,12 @@
   - verify: `pnpm test --coverage` exits 0 and coverage summary shows ≥ 80% lines, functions, branches.
 - Test files must be colocated alongside their source file (`MyComponent.test.tsx` next to `MyComponent.tsx`) OR inside the nearest `__tests__/` folder.
 - Only test observable behavior: rendered output, user events, context state changes. Never test implementation details (internal state variables, private functions).
-- Components that conditionally render based on `side` (formal/curiosity) MUST be tested for BOTH sides.
-  - Example: A `HeroCuriosity.tsx` test must render with `side="curiosity"` in the `SideContext` and verify the correct elements appear.
+- Components that conditionally render based on `side` (formal/Curiosity) MUST be tested for BOTH sides.
+  - Example: A `HeroCuriosity.tsx` test must render with `side="Curiosity"` in the `SideContext` and verify the correct elements appear.
 
 ## Dual-Side Test Requirement (NON-NEGOTIABLE)
-- Any component that reads from `SideContext` must have test cases for BOTH `side="formal"` and `side="curiosity"`.
-  - verify: `grep -r "formal" src/components/__tests__/` — components that branch on `side` must have at least one formal test and one curiosity test.
+- Any component that reads from `SideContext` must have test cases for BOTH `side="formal"` and `side="Curiosity"`.
+  - verify: `grep -r "formal" src/components/__tests__/` — components that branch on `side` must have at least one formal test and one Curiosity test.
 
 ## Hook Testing
 - Custom hooks in `src/hooks/` must be tested using `@testing-library/react`'s `renderHook` utility.
@@ -28,7 +28,7 @@
 - Critical user flows must have a corresponding Playwright test:
   - [ ] Landing selector renders and both side buttons are clickable.
   - [ ] Navigating to `?side=formal` renders the Formal experience.
-  - [ ] Navigating to `?side=curiosity` renders the Curiosity experience.
+  - [ ] Navigating to `?side=Curiosity` renders the Curiosity experience.
   - [ ] Side preference is persisted in `localStorage` and survives a page reload.
   - [ ] Keyboard navigation (arrow keys) switches between sides correctly.
 - verify: `pnpm test:e2e` exits 0 on `develop` branch before merging features.

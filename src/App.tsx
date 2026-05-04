@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { ScrollOrchestrator } from './components/ScrollOrchestrator';
 import { SplitLayout } from './components/SplitLayout';
-import { curiosityView } from './components/curiosityView';
+import { CuriosityView } from './components/CuriosityView';
 import { FormalView } from './components/FormalView';
 import { useTheme } from '@/hooks/useTheme';
 import { ScrollProgressBar } from './components/layout/ScrollProgressBar';
@@ -23,7 +23,7 @@ function App(): JSX.Element {
       <ScrollProgressBar />
       <ScrollOrchestrator />
       <main id="main-content">
-        <SplitLayout curiosity={<curiosityView />} formal={<FormalView />} />
+        <SplitLayout Curiosity={<CuriosityView />} Formal={<FormalView />} />
       </main>
     </div>
   );

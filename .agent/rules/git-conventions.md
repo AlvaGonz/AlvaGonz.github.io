@@ -3,12 +3,12 @@
 ## 1. Branch Naming Strategy
 All new work must be performed on a feature branch. Use the following prefixes:
 
-- `feature/`: New features or new sections (e.g., `feature/curiosity-stats-panel`)
+- `feature/`: New features or new sections (e.g., `feature/Curiosity-stats-panel`)
 - `fix/`: Bug fixes (e.g., `fix/side-toggle-keyboard-nav`)
 - `refactor/`: Code improvements without behavior changes (e.g., `refactor/split-layout-cleanup`)
 - `chore/`: Maintenance, dependency updates (e.g., `chore/update-framer-motion`)
 - `docs/`: Documentation only (e.g., `docs/update-readme`)
-- `test/`: Adding or updating tests (e.g., `test/curiosity-view-e2e`)
+- `test/`: Adding or updating tests (e.g., `test/Curiosity-view-e2e`)
 - `ci/`: Continuous Integration / GitHub Actions changes
 - `design/`: Pure visual / CSS / animation changes (e.g., `design/glassmorphism-navbar`)
 
@@ -35,7 +35,7 @@ Use one of the following established scopes — match the component area or doma
 | Scope        | When to Use                                          |
 |--------------|------------------------------------------------------|
 | `formal`     | Changes to the Formal side experience                |
-| `curiosity`  | Changes to the Curiosity side experience             |
+| `Curiosity`  | Changes to the Curiosity side experience             |
 | `layout`     | Changes to `components/layout/`                      |
 | `selector`   | Changes to the `PortfolioSelector` landing page      |
 | `github`     | Changes to GitHub API integration or `useGitHubStats`|
@@ -45,7 +45,7 @@ Use one of the following established scopes — match the component area or doma
 | `ci`         | Changes to `.github/workflows/`                      |
 | `deps`       | Dependency updates                                   |
 
-Example: `feat(curiosity): Add animated stats panel with Leetcode data`
+Example: `feat(Curiosity): Add animated stats panel with Leetcode data`
 Example: `fix(formal): Resolve ExperienceTimeline overflow on mobile`
 Example: `design(theme): Implement glassmorphism card system for Curiosity side`
 

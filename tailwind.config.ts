@@ -26,15 +26,15 @@ export default {
           border: 'var(--theme-border)',
         },
 
-        // curiosity Specific Colors (Palette 2)
-        curiosity: {
-          bg: 'var(--c-curiosity-bg)',
-          primary: 'var(--c-curiosity-primary)',
-          secondary: 'var(--c-curiosity-secondary)',
-          accent: 'var(--c-curiosity-accent)',
-          highlight: 'var(--c-curiosity-highlight)',
-          text: 'var(--c-curiosity-text)',
-          'text-secondary': 'var(--c-curiosity-text-secondary)',
+        // Curiosity Specific Colors (Palette 2)
+        Curiosity: {
+          bg: 'var(--c-Curiosity-bg)',
+          primary: 'var(--c-Curiosity-primary)',
+          secondary: 'var(--c-Curiosity-secondary)',
+          accent: 'var(--c-Curiosity-accent)',
+          highlight: 'var(--c-Curiosity-highlight)',
+          text: 'var(--c-Curiosity-text)',
+          'text-secondary': 'var(--c-Curiosity-text-secondary)',
         },
 
         // Legacy Formal Colors (Palette 1) - Kept for backward compatibility

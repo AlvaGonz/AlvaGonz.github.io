@@ -1,23 +1,23 @@
 
-import { About } from './curiosity/About';
-import { GraphicDesign } from './curiosity/GraphicDesign';
-import { MultimediaManagement } from './curiosity/MultimediaManagement';
-import { Contributions } from './curiosity/Contributions';
-import { GamingShowcase } from './curiosity/GamingShowcase';
-import { NFSWidget } from './curiosity/NFSWidget';
-import { Hobbies } from './curiosity/Hobbies';
+import { About } from './Curiosity/About';
+import { GraphicDesign } from './Curiosity/GraphicDesign';
+import { MultimediaManagement } from './Curiosity/MultimediaManagement';
+import { Contributions } from './Curiosity/Contributions';
+import { GamingShowcase } from './Curiosity/GamingShowcase';
+import { NFSWidget } from './Curiosity/NFSWidget';
+import { Hobbies } from './Curiosity/Hobbies';
 import { Roadmap } from './sections/Roadmap';
-import { DailyVerse } from './formal/DailyVerse';
-import { Contactcuriosity } from './curiosity/Contactcuriosity';
+import { DailyVerse } from './Formal/DailyVerse';
+import { ContactCuriosity } from './Curiosity/ContactCuriosity';
 import { AnimatedBg } from './svg/AnimatedBg';
 import { FloatingElements } from './svg/FloatingElements';
-import { Herocuriosity } from './sections/Herocuriosity';
+import { HeroCuriosity } from './sections/HeroCuriosity';
 import { FadeInOnScroll } from './animations/FadeInOnScroll';
-import { DuolingoFireWidget } from './curiosity/DuolingoFireWidget';
+import { DuolingoFireWidget } from './Curiosity/DuolingoFireWidget';
 import { profile } from '../content/profile';
-import { LanguageMindMap } from './curiosity/LanguageMindMap';
+import { LanguageMindMap } from './Curiosity/LanguageMindMap';
 
-export function curiosityView(): JSX.Element {
+export function CuriosityView(): JSX.Element {
   return (
     <div className="min-h-screen p-0 md:p-0 relative overflow-hidden">
       {/* Dynamic SVG Background */}
@@ -30,7 +30,7 @@ export function curiosityView(): JSX.Element {
 
       <div className="relative z-10">
         {/* Hero Section */}
-        <Herocuriosity />
+        <HeroCuriosity />
 
         <div className="max-w-7xl mx-auto px-8 space-y-24 pb-24">
           {/* About Section */}
@@ -39,7 +39,7 @@ export function curiosityView(): JSX.Element {
           {/* Gaming Section */}
           <section id="gaming">
             <FadeInOnScroll variant="fadeUp">
-              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-curiosity-primary border-b-2 border-curiosity-secondary/30 pb-2 inline-block">
+              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-Curiosity-primary border-b-2 border-Curiosity-secondary/30 pb-2 inline-block">
                 Gaming
               </h2>
             </FadeInOnScroll>
@@ -52,7 +52,7 @@ export function curiosityView(): JSX.Element {
           {/* Learning Section */}
           <section id="learning" className="space-y-8">
             <FadeInOnScroll variant="fadeUp">
-              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-curiosity-secondary border-b-2 border-curiosity-primary/30 pb-2 inline-block">
+              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-Curiosity-secondary border-b-2 border-Curiosity-primary/30 pb-2 inline-block">
                 Learning
               </h2>
             </FadeInOnScroll>
@@ -92,7 +92,7 @@ export function curiosityView(): JSX.Element {
           {/* Code Universe Section */}
           <section id="code-universe" className="space-y-8">
             <FadeInOnScroll variant="fadeUp">
-              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-curiosity-primary border-b-2 border-curiosity-secondary/30 pb-2 inline-block">
+              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-Curiosity-primary border-b-2 border-Curiosity-secondary/30 pb-2 inline-block">
                 Code Universe
               </h2>
             </FadeInOnScroll>
@@ -114,10 +114,10 @@ export function curiosityView(): JSX.Element {
           <Contributions />
 
           {/* Roadmap Section */}
-          <Roadmap variant="curiosity" />
+          <Roadmap variant="Curiosity" />
 
           {/* Contact Section */}
-          <Contactcuriosity profile={profile} />
+          <ContactCuriosity profile={profile} />
 
           {/* Daily Verse */}
           <DailyVerse />

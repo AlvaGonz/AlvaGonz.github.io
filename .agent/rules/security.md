@@ -39,6 +39,6 @@
   - verify: Every hook in `src/hooks/` that calls an external API has a `catch` block and returns fallback data.
 
 ## localStorage Security
-- `localStorage` is used only for persisting the user's side preference (`formal` | `curiosity`).
+- `localStorage` is used only for persisting the user's side preference (`formal` | `Curiosity`).
 - Never store sensitive data (tokens, personal info) in `localStorage`.
   - verify: `grep -r "localStorage.setItem" src/` items must only relate to side/theme preferences.

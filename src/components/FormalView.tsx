@@ -10,11 +10,11 @@ import { CertificationsSection } from './CertificationsSection';
 import { OrganizationsSection } from './OrganizationsSection';
 import { Contact } from './Contact';
 import { AboutFormal } from './sections/AboutFormal';
-import { LeetcodeStats } from './formal/LeetcodeStats';
-import { GithubActivity } from './formal/GithubActivity';
-import { DailyVerse } from './formal/DailyVerse';
-import { TopLanguages } from './github/TopLanguages';
-import { DuolingoWidget } from './formal/DuolingoWidget';
+import { LeetcodeStats } from './Formal/LeetcodeStats';
+import { GithubActivity } from './Formal/GithubActivity';
+import { DailyVerse } from './Formal/DailyVerse';
+import { TopLanguages } from './GitHub/TopLanguages';
+import { DuolingoWidget } from './Formal/DuolingoWidget';
 import { useEffect, useState } from 'react';
 import { fetchPinnedProjects, fetchAllPublicRepos, validateToken, GitHubRepository } from '../lib/github-client';
 
