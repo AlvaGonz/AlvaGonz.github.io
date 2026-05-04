@@ -1,4 +1,3 @@
-
 import { About } from './Curiosity/About';
 import { GraphicDesign } from './Curiosity/GraphicDesign';
 import { MultimediaManagement } from './Curiosity/MultimediaManagement';

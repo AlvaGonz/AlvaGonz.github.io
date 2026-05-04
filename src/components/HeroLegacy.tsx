@@ -6,9 +6,9 @@ import React from 'react';
  * Adjust as needed to match design specifications.
  */
 export const HeroLegacy: React.FC = () => {
-    return (
-        <header role="banner" style={{ padding: '1rem', background: '#f0f0f0' }}>
-            HeroLegacy Component
-        </header>
-    );
+  return (
+    <header role="banner" style={{ padding: '1rem', background: '#f0f0f0' }}>
+      HeroLegacy Component
+    </header>
+  );
 };

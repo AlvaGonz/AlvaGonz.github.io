@@ -11,7 +11,7 @@ const languageColors: Record<string, string> = {
   'C#': '#953cad',
   SCSS: '#CF649A',
   Java: '#db771d',
-  Vue: '#41b883'
+  Vue: '#41b883',
   // Add more colors as needed
 };
 

@@ -159,10 +159,11 @@ export function Navbar() {
               <div className="border-t border-theme-border pt-6 mt-6">
                 <p className="text-sm text-theme-text-secondary mb-2">Current Mode:</p>
                 <div
-                  className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium ${side === 'Curiosity'
-                    ? 'bg-Curiosity-secondary/20 text-Curiosity-secondary border border-Curiosity-secondary/30'
-                    : 'bg-primary-dark-green text-primary-mountain-meadow border border-primary-mountain-meadow/30'
-                    }`}
+                  className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium ${
+                    side === 'Curiosity'
+                      ? 'bg-Curiosity-secondary/20 text-Curiosity-secondary border border-Curiosity-secondary/30'
+                      : 'bg-primary-dark-green text-primary-mountain-meadow border border-primary-mountain-meadow/30'
+                  }`}
                 >
                   <span>{side === 'Curiosity' ? '✨' : '💼'}</span>
                   <span className="capitalize">{side}</span>

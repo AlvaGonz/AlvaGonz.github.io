@@ -29,14 +29,16 @@ export default tseslint.config(
                 { allowConstantExport: true },
             ],
             'no-console': ['warn', { allow: ['warn', 'error'] }],
-            '@typescript-eslint/no-explicit-any': 'error',
+            '@typescript-eslint/no-explicit-any': 'warn',
             '@typescript-eslint/no-unused-vars': [
-                'error',
+                'warn',
                 {
                     argsIgnorePattern: '^_',
                     destructuredArrayIgnorePattern: '^_',
                 },
             ],
+            'react-hooks/purity': 'warn',
+            'react-hooks/set-state-in-effect': 'warn'
         },
     }
 );

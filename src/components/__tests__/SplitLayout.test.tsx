@@ -11,7 +11,7 @@ describe('SplitLayout', () => {
 
   it('should render landing selector by default', () => {
     render(
-      <SplitLayout Curiosity={<div>Curiosity Content</div>} formal={<div>Formal Content</div>} />,
+      <SplitLayout Curiosity={<div>Curiosity Content</div>} Formal={<div>Formal Content</div>} />,
     );
     expect(screen.getByText('Select a Profile')).toBeInTheDocument();
   });
@@ -19,7 +19,7 @@ describe('SplitLayout', () => {
   it('should show Curiosity content after selecting it', async () => {
     const user = userEvent.setup();
     render(
-      <SplitLayout Curiosity={<div>Curiosity Content</div>} formal={<div>Formal Content</div>} />,
+      <SplitLayout Curiosity={<div>Curiosity Content</div>} Formal={<div>Formal Content</div>} />,
     );
 
     const CuriosityButton = screen.getByText('Curiosity').closest('button');
@@ -34,7 +34,7 @@ describe('SplitLayout', () => {
     window.history.replaceState({}, '', '/?side=Curiosity'); // Start in Curiosity mode
 
     render(
-      <SplitLayout Curiosity={<div>Curiosity Content</div>} formal={<div>Formal Content</div>} />,
+      <SplitLayout Curiosity={<div>Curiosity Content</div>} Formal={<div>Formal Content</div>} />,
     );
 
     const toggleButton = screen.getByLabelText(/switch to/i);
@@ -49,7 +49,7 @@ describe('SplitLayout', () => {
     window.history.replaceState({}, '', '/?side=Curiosity');
 
     render(
-      <SplitLayout Curiosity={<div>Curiosity Content</div>} formal={<div>Formal Content</div>} />,
+      <SplitLayout Curiosity={<div>Curiosity Content</div>} Formal={<div>Formal Content</div>} />,
     );
 
     const toggleButton = screen.getByLabelText(/switch to/i);
@@ -62,7 +62,7 @@ describe('SplitLayout', () => {
     window.history.replaceState({}, '', '/?side=formal');
 
     render(
-      <SplitLayout Curiosity={<div>Curiosity Content</div>} formal={<div>Formal Content</div>} />,
+      <SplitLayout Curiosity={<div>Curiosity Content</div>} Formal={<div>Formal Content</div>} />,
     );
 
     expect(screen.getByText('Formal Content')).toBeInTheDocument();

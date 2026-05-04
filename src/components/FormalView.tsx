@@ -2,7 +2,6 @@ import { ProjectCard } from './ProjectCard';
 import { profile } from '../content/profile';
 import { skills } from '../content/skills';
 
-
 import { SkillPills } from './SkillPills';
 import { ExperienceTimeline } from './ExperienceTimeline';
 import { EducationSection } from './EducationSection';
@@ -16,7 +15,12 @@ import { DailyVerse } from './Formal/DailyVerse';
 import { TopLanguages } from './GitHub/TopLanguages';
 import { DuolingoWidget } from './Formal/DuolingoWidget';
 import { useEffect, useState } from 'react';
-import { fetchPinnedProjects, fetchAllPublicRepos, validateToken, GitHubRepository } from '../lib/github-client';
+import {
+  fetchPinnedProjects,
+  fetchAllPublicRepos,
+  validateToken,
+  GitHubRepository,
+} from '../lib/github-client';
 
 export function FormalView(): JSX.Element {
   const [projects, setProjects] = useState<GitHubRepository[]>([]);
@@ -72,9 +76,7 @@ export function FormalView(): JSX.Element {
     return (
       <div className="projects-error">
         <p>{error}</p>
-        <p className="text-sm">
-          Make sure VITE_GITHUB_TOKEN is set in .env.local
-        </p>
+        <p className="text-sm">Make sure VITE_GITHUB_TOKEN is set in .env.local</p>
       </div>
     );
   }
@@ -180,12 +182,12 @@ export function FormalView(): JSX.Element {
           {error && (
             <div className="projects-error">
               <p>{error}</p>
-              <p className="text-sm">
-                Make sure VITE_GITHUB_TOKEN is set in .env.local
-              </p>
+              <p className="text-sm">Make sure VITE_GITHUB_TOKEN is set in .env.local</p>
             </div>
           )}
-          {projects.length === 0 && !loading && !error && <div className="projects-empty">No projects available</div>}
+          {projects.length === 0 && !loading && !error && (
+            <div className="projects-empty">No projects available</div>
+          )}
           {!loading && !error && projects.length > 0 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {projects.map((project) => (

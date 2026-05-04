@@ -225,11 +225,12 @@ export async function fetchPinnedProjects(): Promise<GitHubRepository[]> {
     stargazerCount: repo.stargazerCount,
     forkCount: repo.forkCount,
     primaryLanguage: repo.primaryLanguage,
-    languages: repo.languages?.edges?.map((edge: any) => ({
-      name: edge.node.name,
-      color: edge.node.color,
-      size: edge.size,
-    })) || [],
+    languages:
+      repo.languages?.edges?.map((edge: any) => ({
+        name: edge.node.name,
+        color: edge.node.color,
+        size: edge.size,
+      })) || [],
     homepageUrl: repo.homepageUrl,
     repositoryTopics: repo.repositoryTopics?.nodes || [],
     pushedAt: repo.pushedAt,
@@ -239,9 +240,7 @@ export async function fetchPinnedProjects(): Promise<GitHubRepository[]> {
 /**
  * Obtener todos los repositorios públicos
  */
-export async function fetchAllPublicRepos(
-  limit: number = 20
-): Promise<GitHubRepository[]> {
+export async function fetchAllPublicRepos(limit: number = 20): Promise<GitHubRepository[]> {
   // Remove try-catch to let the component handle the error
   const data: any = await graphqlClient.request(ALL_REPOS_QUERY, {
     userName: GITHUB_USER,
@@ -259,11 +258,12 @@ export async function fetchAllPublicRepos(
     stargazerCount: repo.stargazerCount,
     forkCount: repo.forkCount,
     primaryLanguage: repo.primaryLanguage,
-    languages: repo.languages?.edges?.map((edge: any) => ({
-      name: edge.node.name,
-      color: edge.node.color,
-      size: edge.size,
-    })) || [],
+    languages:
+      repo.languages?.edges?.map((edge: any) => ({
+        name: edge.node.name,
+        color: edge.node.color,
+        size: edge.size,
+      })) || [],
     homepageUrl: repo.homepageUrl,
     repositoryTopics: repo.repositoryTopics?.nodes || [],
     pushedAt: repo.pushedAt,
@@ -289,9 +289,7 @@ export async function fetchUserStats(): Promise<GitHubUserStats | null> {
 /**
  * Obtener repositorio específico por nombre
  */
-export async function fetchRepositoryByName(
-  repoName: string
-): Promise<GitHubRepository | null> {
+export async function fetchRepositoryByName(repoName: string): Promise<GitHubRepository | null> {
   const REPO_QUERY = gql`
     query GetRepository($owner: String!, $name: String!) {
       repository(owner: $owner, name: $name) {
@@ -344,11 +342,12 @@ export async function fetchRepositoryByName(
       stargazerCount: repo.stargazerCount,
       forkCount: repo.forkCount,
       primaryLanguage: repo.primaryLanguage,
-      languages: repo.languages?.edges?.map((edge: any) => ({
-        name: edge.node.name,
-        color: edge.node.color,
-        size: edge.size,
-      })) || [],
+      languages:
+        repo.languages?.edges?.map((edge: any) => ({
+          name: edge.node.name,
+          color: edge.node.color,
+          size: edge.size,
+        })) || [],
       homepageUrl: repo.homepageUrl,
       repositoryTopics: repo.repositoryTopics?.nodes || [],
       pushedAt: repo.pushedAt,
@@ -369,20 +368,17 @@ export async function validateToken(): Promise<boolean> {
   }
 
   try {
-    const data: any = await graphqlClient.request(
-      gql`
-        query {
-          viewer {
-            login
-          }
+    const data: any = await graphqlClient.request(gql`
+      query {
+        viewer {
+          login
         }
-      `
-    );
+      }
+    `);
 
     console.log('✅ GitHub token valid - Authenticated as:', data.viewer.login);
     return true;
-  }
-  catch (error) {
+  } catch (error) {
     console.error('❌ GitHub token validation failed:', error);
     return false;
   }

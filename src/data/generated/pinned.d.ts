@@ -8,4 +8,3 @@ export interface PinnedData {
 
 declare const pinnedData: PinnedData;
 export default pinnedData;
-

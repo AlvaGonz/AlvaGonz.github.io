@@ -33,7 +33,10 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-75 backdrop-blur-sm">
-      <div ref={modalRef} className="relative w-full max-w-2xl p-8 bg-primary-rich-black-light rounded-lg shadow-xl border border-primary-slate-gray/20">
+      <div
+        ref={modalRef}
+        className="relative w-full max-w-2xl p-8 bg-primary-rich-black-light rounded-lg shadow-xl border border-primary-slate-gray/20"
+      >
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-primary-anti-flash-white hover:text-red-500 text-2xl font-bold transition-colors"
@@ -41,7 +44,9 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
           &times;
         </button>
         <h2 className="text-3xl font-bold text-primary-anti-flash-white mb-4">{project.name}</h2>
-        <p className="text-secondary-stone mb-6">{project.description || 'No description provided.'}</p>
+        <p className="text-secondary-stone mb-6">
+          {project.description || 'No description provided.'}
+        </p>
 
         <div className="flex flex-wrap items-center gap-4 mb-6">
           {project.primaryLanguage && (
@@ -72,7 +77,10 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
         {project.repositoryTopics.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-6">
             {project.repositoryTopics.map((topic) => (
-              <span key={topic.topic.name} className="px-3 py-1 bg-primary-mountain-meadow/20 text-primary-mountain-meadow text-xs rounded-md">
+              <span
+                key={topic.topic.name}
+                className="px-3 py-1 bg-primary-mountain-meadow/20 text-primary-mountain-meadow text-xs rounded-md"
+              >
                 {topic.topic.name}
               </span>
             ))}

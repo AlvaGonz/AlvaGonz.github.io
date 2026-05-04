@@ -17,7 +17,7 @@ export function GamingShowcase() {
             key={game.id}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true, margin: '-50px' }}
             transition={{ delay: index * 0.05, duration: 0.4 }}
             className="group relative h-56 rounded-2xl overflow-hidden border border-white/10 hover:border-Curiosity-primary/50 transition-all duration-500 shadow-lg hover:shadow-Curiosity-primary/20"
           >
@@ -48,9 +48,7 @@ export function GamingShowcase() {
                   <span className="i-lucide-clock w-3 h-3" />
                   {game.playtime}
                 </span>
-                <span className="text-yellow-400 text-sm tracking-widest">
-                  {game.rating}
-                </span>
+                <span className="text-yellow-400 text-sm tracking-widest">{game.rating}</span>
               </div>
             </div>
           </motion.div>

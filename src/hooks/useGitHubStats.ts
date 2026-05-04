@@ -1,8 +1,5 @@
 import { useState, useEffect } from 'react';
-import {
-  fetchUserStats,
-  fetchAllPublicRepos
-} from '@/lib/github-client';
+import { fetchUserStats, fetchAllPublicRepos } from '@/lib/github-client';
 
 interface GitHubStatsData {
   user: {

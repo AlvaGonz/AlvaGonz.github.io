@@ -21,7 +21,7 @@ export async function getTopLanguages() {
           owner: username,
           repo: repo.name,
         })
-        .then((response) => response.data)
+        .then((response) => response.data),
     );
 
     const langData = await Promise.all(langPromises);
@@ -31,16 +31,12 @@ export async function getTopLanguages() {
     langData.forEach((langs) => {
       for (const lang in langs) {
         if (Object.prototype.hasOwnProperty.call(langs, lang)) {
-          languageTotals[lang] =
-            (languageTotals[lang] || 0) + (langs[lang] as number);
+          languageTotals[lang] = (languageTotals[lang] || 0) + (langs[lang] as number);
         }
       }
     });
 
-    const totalBytes = Object.values(languageTotals).reduce(
-      (sum, bytes) => sum + bytes,
-      0
-    );
+    const totalBytes = Object.values(languageTotals).reduce((sum, bytes) => sum + bytes, 0);
 
     if (totalBytes === 0) {
       return [];

@@ -24,7 +24,7 @@ export function useFetch<T>(url: string, options?: FetchOptions): ApiState<T> {
   });
 
   useEffect(() => {
-    if (options?.skip || !url) return;
+    if (options?.skip || !url) return undefined;
 
     const fetchData = async () => {
       // Check local storage cache first
@@ -87,6 +87,8 @@ export function useFetch<T>(url: string, options?: FetchOptions): ApiState<T> {
       const interval = setInterval(fetchData, options.interval);
       return () => clearInterval(interval);
     }
+    
+    return undefined;
   }, [url, options?.interval, options?.skip]);
 
   return state;

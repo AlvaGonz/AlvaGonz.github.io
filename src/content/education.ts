@@ -46,7 +46,7 @@ export const certifications: CertificationItem[] = [
     name: 'Google Analytics',
     issuer: 'Google',
     date: 'Issued Nov 2025', //DUMMY DATA
-    skills: ['Google Analytics', 'Data Analysis'],//DUMMY DATA
+    skills: ['Google Analytics', 'Data Analysis'], //DUMMY DATA
     url: 'https://skillshop.credential.net/ac112d6e-7fe9-412c-9878-c10538e5f9fd?record_view=true',
   },
   {
