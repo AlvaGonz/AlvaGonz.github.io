@@ -1,10 +1,10 @@
 import { Timeline, TimelinePhase } from '@/components/ui/Timeline';
 
 export interface RoadmapProps {
-  variant: 'formal' | 'curiousity';
+  variant: 'formal' | 'curiosity';
 }
 
-const roadmapData: Record<'formal' | 'curiousity', TimelinePhase[]> = {
+const roadmapData: Record<'formal' | 'curiosity', TimelinePhase[]> = {
   formal: [
     {
       phase: 'Past (2023-2024)',
@@ -27,7 +27,7 @@ const roadmapData: Record<'formal' | 'curiousity', TimelinePhase[]> = {
       ],
     },
   ],
-  curiousity: [
+  curiosity: [
     {
       phase: 'Chapter 1: The Canvas',
       items: [
@@ -49,7 +49,7 @@ const roadmapData: Record<'formal' | 'curiousity', TimelinePhase[]> = {
       items: [
         'Bridging creativity and logic',
         'Exploring new frontiers',
-        'Wherever curiousity leads',
+        'Wherever curiosity leads',
       ],
     },
   ],

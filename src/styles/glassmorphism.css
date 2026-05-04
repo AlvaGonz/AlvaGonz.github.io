@@ -26,8 +26,8 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* curiousity Special - Tinted for the curious side */
-[data-theme='curiousity'] .glass-panel {
+/* curiosity Special - Tinted for the curious side */
+[data-theme='curiosity'] .glass-panel {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -44,7 +44,7 @@
   .glass-dark {
     background: rgba(15, 23, 42, 0.95);
   }
-  [data-theme='curiousity'] .glass-panel {
+  [data-theme='curiosity'] .glass-panel {
     background: rgba(33, 38, 58, 0.95);
   }
 }

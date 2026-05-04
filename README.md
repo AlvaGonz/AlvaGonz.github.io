@@ -1,13 +1,13 @@
-# Alva Portfolio v3 – Formal & curiousity Dual Experience
+# Alva Portfolio v3 – Formal & Curiosity Dual Experience
 
-A modern dual-personality portfolio showcasing two distinct experiences: a professional **Formal** side and a curious **curiousity** side, built with React 18, TypeScript, and cutting-edge web technologies.
+A modern dual-personality portfolio showcasing two distinct experiences: a professional **Formal** side and a curious **Curiosity** side, built with React 18, TypeScript, and cutting-edge web technologies.
 
 ## 🌐 Live
 
 **[Visit Portfolio](https://alvagonz.github.io/)**
 
 - **Formal Experience**: [?side=formal](https://alvagonz.github.io/?side=formal) - Professional, minimalist showcase
-- **curiousity Experience**: [?side=curiousity](https://alvagonz.github.io/?side=curiousity) - curious, vibrant exploration
+- **curiosity Experience**: [?side=curiosity](https://alvagonz.github.io/?side=curiosity) - curious, vibrant exploration
 
 ## 🛠️ Tech Stack
 
@@ -35,17 +35,17 @@ A modern dual-personality portfolio showcasing two distinct experiences: a profe
 
 
 ### 🎨 Phase 2: Dual Color System (Planned)
-- **Theme Architecture**: Complete CSS variable system for formal/curiousity themes
+- **Theme Architecture**: Complete CSS variable system for formal/curiosity themes
 - **Color Palettes**: 
   - Formal: Deep Blue (#1E40AF), Slate (#64748B), Cyan accent (#0891B2)
-  - curiousity: Purple (#7C3AED), Pink (#EC4899), Amber accent (#F59E0B)
+  - curiosity: Purple (#7C3AED), Pink (#EC4899), Amber accent (#F59E0B)
 - **Smooth Transitions**: 300ms theme switching with URL-driven persistence
 
 ### ⚡ Phase 3: Advanced Framer Motion Animations (Planned)
 - **Hero Parallax**: Scroll-based Y transforms and scale animations
 - **Staggered Entrances**: Skill pills, cards, and timeline elements
 - **Hover Interactions**: Lift effects, color changes, and micro-feedback
-- **Scroll Triggers**: Different animation timings for formal (subtle) vs curiousity (bold)
+- **Scroll Triggers**: Different animation timings for formal (subtle) vs curiosity (bold)
 - **Modal Systems**: Scale + blur backdrop with AnimatePresence
 
 ### 🔮 Phase 4: Glassmorphism & Advanced CSS (Planned)
@@ -63,30 +63,9 @@ A modern dual-personality portfolio showcasing two distinct experiences: a profe
 ### ✨ Phase 6: Micro-interactions & Polish (Planned)
 - **Button Ripples**: Click-triggered radial expansion effects
 - **Scroll Progress**: Visual progress bar with section-based color changes
-- **Cursor Effects**: Custom cursor for curiousity side with hover states
+- **Cursor Effects**: Custom cursor for curiosity side with hover states
 - **Loading States**: Skeleton screens and shimmer animations
 - **Toast Notifications**: Slide-in feedback with auto-dismiss
-
-## 🎯 Quality Standards
-
-### Testing
-- ✅ GitHub data integration works correctly
-- ✅ URL parameter navigation (`?side=`) functions properly
-- ✅ Animations maintain 60fps performance
-- ✅ Responsive design across all device sizes
-- ✅ No memory leaks in component lifecycle
-
-### Accessibility
-- ✅ Respects `prefers-reduced-motion` user preference
-- ✅ Maintains contrast ratios ≥ 4.5:1 for text
-- ✅ Full keyboard navigation support
-- ✅ Proper ARIA labels on interactive elements
-
-### Performance
-- 🎯 Lighthouse score > 90
-- 🎯 First Contentful Paint < 2s
-- 🎯 Largest Contentful Paint < 3s
-- 🎯 Cumulative Layout Shift < 0.1
 
 ## 🤝 Contributing
 

@@ -4,7 +4,7 @@ export function MultimediaManagement() {
     return (
         <section id="multimedia" className="py-12 md:py-20">
             <FadeInOnScroll variant="fadeUp">
-                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-curiousity-secondary border-b-2 border-curiousity-primary/30 pb-2 inline-block">
+                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-curiosity-secondary border-b-2 border-curiosity-primary/30 pb-2 inline-block">
                     Multimedia Management
                 </h2>
             </FadeInOnScroll>
@@ -27,7 +27,7 @@ export function MultimediaManagement() {
                                 'Team Coordination for Live Events'
                             ].map((item) => (
                                 <li key={item} className="flex items-center gap-3 text-theme-text-secondary">
-                                    <span className="text-curiousity-secondary">▶</span>
+                                    <span className="text-curiosity-secondary">▶</span>
                                     {item}
                                 </li>
                             ))}
@@ -35,7 +35,7 @@ export function MultimediaManagement() {
 
                         <div className="flex flex-wrap gap-2 mt-4">
                             {['Premiere Pro', 'DaVinci Resolve', 'OBS Studio', 'Audition'].map((tool) => (
-                                <span key={tool} className="px-3 py-1 rounded-full bg-curiousity-secondary/10 text-curiousity-secondary text-sm font-medium border border-curiousity-secondary/20">
+                                <span key={tool} className="px-3 py-1 rounded-full bg-curiosity-secondary/10 text-curiosity-secondary text-sm font-medium border border-curiosity-secondary/20">
                                     {tool}
                                 </span>
                             ))}

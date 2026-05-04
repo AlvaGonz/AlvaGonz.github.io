@@ -4,7 +4,7 @@ export function GraphicDesign() {
     return (
         <section id="graphic-design" className="py-12 md:py-20">
             <FadeInOnScroll variant="fadeUp">
-                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-curiousity-primary border-b-2 border-curiousity-secondary/30 pb-2 inline-block">
+                <h2 className="text-3xl md:text-4xl font-bold mb-8 text-curiosity-primary border-b-2 border-curiosity-secondary/30 pb-2 inline-block">
                     Graphic Design
                 </h2>
             </FadeInOnScroll>

@@ -1,6 +1,6 @@
 import { createContext, useState, useCallback, useContext, ReactNode } from 'react';
 
-export type Side = 'curiousity' | 'formal';
+export type Side = 'curiosity' | 'formal';
 
 interface SideContextType {
   side: Side | null;
@@ -15,9 +15,9 @@ const getInitialSide = (): Side | null => {
   if (typeof window === 'undefined') return null;
 
   const urlParams = new URLSearchParams(window.location.search);
-  const sideParam = urlParams.get('side'); // 'formal' | 'curiousity' | null
+  const sideParam = urlParams.get('side'); // 'formal' | 'curiosity' | null
 
-  if (sideParam === 'formal' || sideParam === 'curiousity') {
+  if (sideParam === 'formal' || sideParam === 'curiosity') {
     return sideParam;
   }
 
@@ -44,7 +44,7 @@ export function SideProvider({ children }: { children: ReactNode }) {
 
   const toggleSide = useCallback(() => {
     setSideState((prev) => {
-      const newSide = prev === 'curiousity' ? 'formal' : 'curiousity';
+      const newSide = prev === 'curiosity' ? 'formal' : 'curiosity';
       const url = new URL(window.location.href);
       url.searchParams.set('side', newSide);
       window.history.replaceState({}, '', url);

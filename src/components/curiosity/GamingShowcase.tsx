@@ -5,7 +5,7 @@ export function GamingShowcase() {
   return (
     <div className="space-y-6">
       <h3 className="text-2xl font-bold text-white flex items-center gap-3">
-        <span className="i-lucide-gamepad-2 text-curiousity-primary"></span>
+        <span className="i-lucide-gamepad-2 text-curiosity-primary"></span>
         <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
           Gaming Collection
         </span>
@@ -19,7 +19,7 @@ export function GamingShowcase() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ delay: index * 0.05, duration: 0.4 }}
-            className="group relative h-56 rounded-2xl overflow-hidden border border-white/10 hover:border-curiousity-primary/50 transition-all duration-500 shadow-lg hover:shadow-curiousity-primary/20"
+            className="group relative h-56 rounded-2xl overflow-hidden border border-white/10 hover:border-curiosity-primary/50 transition-all duration-500 shadow-lg hover:shadow-curiosity-primary/20"
           >
             {/* Background Image */}
             <img
@@ -38,7 +38,7 @@ export function GamingShowcase() {
                 <h4 className="font-bold text-white text-xl leading-tight max-w-[80%] drop-shadow-md">
                   {game.title}
                 </h4>
-                <span className="text-xs font-mono text-curiousity-primary bg-curiousity-primary/10 px-2 py-1 rounded border border-curiousity-primary/20 backdrop-blur-sm">
+                <span className="text-xs font-mono text-curiosity-primary bg-curiosity-primary/10 px-2 py-1 rounded border border-curiosity-primary/20 backdrop-blur-sm">
                   {game.year}
                 </span>
               </div>
