@@ -4,17 +4,17 @@ import { useTheme } from '@/hooks/useTheme';
 export function AnimatedBg() {
   const { theme } = useTheme();
 
-  // Only animate on curiosity side
-  if (theme !== 'curiosity') return null;
+  // Only animate on curiousity side
+  if (theme !== 'curiousity') return null;
 
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
       {/* Base Background */}
-      <div className="absolute inset-0 bg-curiosity-bg" />
+      <div className="absolute inset-0 bg-curiousity-bg" />
 
       {/* Animated Orbs */}
       <motion.div
-        className="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] rounded-full bg-curiosity-primary/10 blur-[100px]"
+        className="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] rounded-full bg-curiousity-primary/10 blur-[100px]"
         animate={{
           scale: [1, 1.2, 1],
           x: [0, 50, 0],
@@ -28,7 +28,7 @@ export function AnimatedBg() {
       />
 
       <motion.div
-        className="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-curiosity-secondary/10 blur-[100px]"
+        className="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-curiousity-secondary/10 blur-[100px]"
         animate={{
           scale: [1.2, 1, 1.2],
           x: [0, -50, 0],
@@ -49,7 +49,7 @@ export function AnimatedBg() {
             fill="none"
             stroke="currentColor"
             strokeWidth="0.5"
-            className="text-curiosity-secondary"
+            className="text-curiousity-secondary"
           />
         </pattern>
         <rect width="100%" height="100%" fill="url(#grid)" />
@@ -136,19 +136,19 @@ export function AnimatedBg() {
 
         <defs>
           <linearGradient id="gradient-line-1" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="var(--c-curiosity-primary)" stopOpacity="0" />
-            <stop offset="50%" stopColor="var(--c-curiosity-primary)" />
-            <stop offset="100%" stopColor="var(--c-curiosity-primary)" stopOpacity="0" />
+            <stop offset="0%" stopColor="var(--c-curiousity-primary)" stopOpacity="0" />
+            <stop offset="50%" stopColor="var(--c-curiousity-primary)" />
+            <stop offset="100%" stopColor="var(--c-curiousity-primary)" stopOpacity="0" />
           </linearGradient>
           <linearGradient id="gradient-line-2" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="var(--c-curiosity-secondary)" stopOpacity="0" />
-            <stop offset="50%" stopColor="var(--c-curiosity-secondary)" />
-            <stop offset="100%" stopColor="var(--c-curiosity-secondary)" stopOpacity="0" />
+            <stop offset="0%" stopColor="var(--c-curiousity-secondary)" stopOpacity="0" />
+            <stop offset="50%" stopColor="var(--c-curiousity-secondary)" />
+            <stop offset="100%" stopColor="var(--c-curiousity-secondary)" stopOpacity="0" />
           </linearGradient>
           <linearGradient id="gradient-line-3" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="var(--c-curiosity-accent)" stopOpacity="0" />
-            <stop offset="50%" stopColor="var(--c-curiosity-accent)" />
-            <stop offset="100%" stopColor="var(--c-curiosity-accent)" stopOpacity="0" />
+            <stop offset="0%" stopColor="var(--c-curiousity-accent)" stopOpacity="0" />
+            <stop offset="50%" stopColor="var(--c-curiousity-accent)" />
+            <stop offset="100%" stopColor="var(--c-curiousity-accent)" stopOpacity="0" />
           </linearGradient>
         </defs>
       </svg>

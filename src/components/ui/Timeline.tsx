@@ -29,8 +29,8 @@ export function Timeline({ phases }: TimelineProps) {
       <motion.div
         style={{ scaleY, transformOrigin: 'top' }}
         className={`absolute left-4 sm:left-8 top-2 bottom-0 w-0.5 -translate-x-1/2 z-0 ${
-          theme === 'curiosity'
-            ? 'bg-gradient-to-b from-curiosity-primary via-curiosity-secondary to-transparent shadow-[0_0_15px_rgba(208,211,77,0.5)]'
+          theme === 'curiousity'
+            ? 'bg-gradient-to-b from-curiousity-primary via-curiousity-secondary to-transparent shadow-[0_0_15px_rgba(208,211,77,0.5)]'
             : 'bg-gradient-to-b from-theme-primary via-theme-primary/50 to-transparent'
         }`}
       />
@@ -49,8 +49,8 @@ export function Timeline({ phases }: TimelineProps) {
               whileInView={{ scale: 1 }}
               transition={{ delay: idx * 0.2 + 0.3, type: 'spring' }}
               className={`w-4 h-4 rounded-full border-2 z-10 bg-theme-background ${
-                theme === 'curiosity'
-                  ? 'border-curiosity-primary shadow-[0_0_10px_rgba(208,211,77,0.8)]'
+                theme === 'curiousity'
+                  ? 'border-curiousity-primary shadow-[0_0_10px_rgba(208,211,77,0.8)]'
                   : 'border-theme-primary shadow-none'
               }`}
             />
@@ -61,23 +61,23 @@ export function Timeline({ phases }: TimelineProps) {
             className={`
             rounded-xl p-6 border backdrop-blur-sm transition-all duration-300
             ${
-              theme === 'curiosity'
-                ? 'bg-white/5 border-white/10 hover:border-curiosity-primary/50 hover:bg-white/10 shadow-xl'
+              theme === 'curiousity'
+                ? 'bg-white/5 border-white/10 hover:border-curiousity-primary/50 hover:bg-white/10 shadow-xl'
                 : 'bg-theme-surface/50 border-theme-border hover:border-theme-primary/50'
             }
           `}
           >
             <h3
               className={`text-xl font-bold mb-4 flex items-center gap-3 flex-wrap ${
-                theme === 'curiosity' ? 'text-white' : 'text-theme-text'
+                theme === 'curiousity' ? 'text-white' : 'text-theme-text'
               }`}
             >
               <span
                 className={`text-sm font-mono uppercase tracking-wider ${
-                  theme === 'curiosity' ? 'text-curiosity-primary' : 'text-theme-primary/80'
+                  theme === 'curiousity' ? 'text-curiousity-primary' : 'text-theme-primary/80'
                 }`}
               >
-                {theme === 'curiosity' ? `Chapter 0${idx + 1}` : `Phase ${idx + 1}`}
+                {theme === 'curiousity' ? `Chapter 0${idx + 1}` : `Phase ${idx + 1}`}
               </span>
               <span className="w-1 h-1 rounded-full bg-theme-text-secondary hidden sm:block" />
               <span className="w-full sm:w-auto">{milestone.phase}</span>
@@ -87,10 +87,10 @@ export function Timeline({ phases }: TimelineProps) {
                 <li key={i} className="text-theme-text-secondary flex items-start gap-2.5">
                   <span
                     className={`mt-1.5 text-xs ${
-                      theme === 'curiosity' ? 'text-curiosity-secondary' : 'text-theme-primary'
+                      theme === 'curiousity' ? 'text-curiousity-secondary' : 'text-theme-primary'
                     }`}
                   >
-                    {theme === 'curiosity' ? '✨' : '✦'}
+                    {theme === 'curiousity' ? '✨' : '✦'}
                   </span>
                   <span className="leading-relaxed">{item}</span>
                 </li>

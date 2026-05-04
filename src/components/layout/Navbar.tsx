@@ -18,7 +18,7 @@ export function Navbar() {
     { label: 'Contact', href: '#contact' },
   ];
 
-  const curiosityItems = [
+  const curiousityItems = [
     { label: 'About', href: '#about' },
     { label: 'Gaming', href: '#gaming' },
     { label: 'Creative', href: '#graphic-design' },
@@ -26,7 +26,7 @@ export function Navbar() {
     { label: 'Contact', href: '#contact' },
   ];
 
-  const navItems = side === 'curiosity' ? curiosityItems : formalItems;
+  const navItems = side === 'curiousity' ? curiousityItems : formalItems;
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-40 bg-theme-background/80 backdrop-blur-md border-b border-theme-border transition-all duration-300">
@@ -159,12 +159,12 @@ export function Navbar() {
               <div className="border-t border-theme-border pt-6 mt-6">
                 <p className="text-sm text-theme-text-secondary mb-2">Current Mode:</p>
                 <div
-                  className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium ${side === 'curiosity'
-                    ? 'bg-curiosity-secondary/20 text-curiosity-secondary border border-curiosity-secondary/30'
+                  className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium ${side === 'curiousity'
+                    ? 'bg-curiousity-secondary/20 text-curiousity-secondary border border-curiousity-secondary/30'
                     : 'bg-primary-dark-green text-primary-mountain-meadow border border-primary-mountain-meadow/30'
                     }`}
                 >
-                  <span>{side === 'curiosity' ? '✨' : '💼'}</span>
+                  <span>{side === 'curiousity' ? '✨' : '💼'}</span>
                   <span className="capitalize">{side}</span>
                 </div>
               </div>

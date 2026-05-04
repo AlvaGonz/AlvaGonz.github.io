@@ -3,14 +3,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { PortfolioSelector } from './PortfolioSelector';
 import { usePortfolioSide } from '@/hooks/usePortfolioSide';
 import { Navbar } from './layout/Navbar';
-import { SpotifyNowPlaying } from './curiosity/SpotifyNowPlaying';
+import { SpotifyNowPlaying } from './curiousity/SpotifyNowPlaying';
 
 interface SplitLayoutProps {
-  curiosity: React.ReactNode;
+  curiousity: React.ReactNode;
   formal: React.ReactNode;
 }
 
-export function SplitLayout({ curiosity, formal }: SplitLayoutProps): JSX.Element {
+export function SplitLayout({ curiousity, formal }: SplitLayoutProps): JSX.Element {
   const { side, setSide } = usePortfolioSide();
 
   const handleKeyDown = useCallback(
@@ -21,8 +21,8 @@ export function SplitLayout({ curiosity, formal }: SplitLayoutProps): JSX.Elemen
       if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
         if (e.key === 'ArrowLeft' && side === 'formal') {
           e.preventDefault();
-          setSide('curiosity');
-        } else if (e.key === 'ArrowRight' && side === 'curiosity') {
+          setSide('curiousity');
+        } else if (e.key === 'ArrowRight' && side === 'curiousity') {
           e.preventDefault();
           setSide('formal');
         }
@@ -48,16 +48,16 @@ export function SplitLayout({ curiosity, formal }: SplitLayoutProps): JSX.Elemen
 
       <div className="relative w-full min-h-screen pt-16">
         <AnimatePresence mode="wait">
-          {side === 'curiosity' ? (
+          {side === 'curiousity' ? (
             <motion.div
-              key="curiosity"
+              key="curiousity"
               initial={{ opacity: 0, filter: 'blur(10px)' }}
               animate={{ opacity: 1, filter: 'blur(0px)' }}
               exit={{ opacity: 0, filter: 'blur(10px)' }}
               transition={{ duration: 0.5, ease: 'easeInOut' }}
               className="w-full"
             >
-              {curiosity}
+              {curiousity}
             </motion.div>
           ) : (
             <motion.div
