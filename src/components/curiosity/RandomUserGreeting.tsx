@@ -24,7 +24,7 @@ export function RandomUserGreeting() {
       initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
-      className="flex items-center gap-4 p-4 bg-Curiosity-surface/50 rounded-xl border border-Curiosity-border backdrop-blur-sm"
+      className="flex items-center gap-4 p-4 bg-theme-surface/50 rounded-xl border border-theme-border backdrop-blur-sm"
     >
       {user.picture && (
         <img

@@ -4,12 +4,12 @@ import { getGreenGalleryUrl, UnsplashPhoto } from '../../services/unsplash';
 export function GreenGallery() {
   const { data, loading, error } = useFetch<{ results: UnsplashPhoto[] }>(getGreenGalleryUrl());
 
-  if (loading) return <div className="h-64 bg-white/5 rounded-lg animate-pulse"></div>;
+  if (loading) return <div className="h-64 bg-theme-surface rounded-lg animate-pulse"></div>;
   if (error || !data?.results) return null;
 
   return (
     <div className="space-y-4">
-      <h3 className="text-xl font-bold text-white flex items-center gap-2">
+      <h3 className="text-xl font-bold text-Curiosity-text flex items-center gap-2">
         <span className="i-lucide-image"></span>
         Aesthetic
       </h3>

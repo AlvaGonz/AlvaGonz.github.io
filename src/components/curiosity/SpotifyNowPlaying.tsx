@@ -43,7 +43,7 @@ export function SpotifyNowPlaying() {
               {/* Close Button */}
               <button
                 onClick={() => setIsOpen(false)}
-                className="absolute -top-3 -right-3 bg-white text-black rounded-full p-1 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-gray-200"
+                className="absolute -top-3 -right-3 bg-Curiosity-text text-Curiosity-bg rounded-full p-1 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-Curiosity-secondary"
                 aria-label="Close player"
               >
                 <svg

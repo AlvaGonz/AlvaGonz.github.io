@@ -50,8 +50,8 @@ export const DuolingoFireWidget: React.FC<DuolingoFireWidgetProps> = ({
 
   if (loading) {
     return (
-      <div className="w-full h-48 rounded-2xl bg-gray-100 animate-pulse flex items-center justify-center border-2 border-gray-200">
-        <div className="w-8 h-8 border-4 border-[#58CC02] border-t-transparent rounded-full animate-spin"></div>
+      <div className="w-full h-48 rounded-2xl bg-theme-surface animate-pulse flex items-center justify-center border border-theme-border">
+        <div className="w-8 h-8 border-4 border-Curiosity-primary border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }
