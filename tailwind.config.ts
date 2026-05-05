@@ -28,13 +28,13 @@ export default {
 
         // Curiosity Specific Colors (Palette 2)
         Curiosity: {
-          bg: 'var(--c-Curiosity-bg)',
-          primary: 'var(--c-Curiosity-primary)',
-          secondary: 'var(--c-Curiosity-secondary)',
-          accent: 'var(--c-Curiosity-accent)',
-          highlight: 'var(--c-Curiosity-highlight)',
-          text: 'var(--c-Curiosity-text)',
-          'text-secondary': 'var(--c-Curiosity-text-secondary)',
+          bg: '#21263a',
+          primary: '#d0d34d',
+          secondary: '#c7cee8',
+          accent: '#157954',
+          highlight: '#d6d9d8',
+          text: '#f1f5f9',
+          'text-secondary': '#94a3b8',
         },
 
         // Formal Theme Colors (Palette 1)

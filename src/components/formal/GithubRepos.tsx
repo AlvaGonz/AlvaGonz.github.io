@@ -25,10 +25,10 @@ export function GithubRepos() {
             href={repo.html_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="block p-4 rounded-lg border border-gray-200/10 hover:border-primary-500/50 hover:bg-gray-50/5 transition-all group"
+            className="block p-4 rounded-lg border border-gray-200/10 hover:border-formal-primary-500/50 hover:bg-gray-50/5 transition-all group"
           >
             <div className="flex justify-between items-start mb-2">
-              <h4 className="font-semibold group-hover:text-primary-400 transition-colors">
+              <h4 className="font-semibold group-hover:text-formal-primary-400 transition-colors">
                 {repo.name}
               </h4>
               <span className="text-xs bg-gray-100/10 px-2 py-1 rounded text-gray-400">
@@ -41,7 +41,7 @@ export function GithubRepos() {
             <div className="flex items-center gap-3 text-xs text-gray-500">
               {repo.language && (
                 <span className="flex items-center gap-1">
-                  <span className="w-2 h-2 rounded-full bg-primary-500"></span>
+                  <span className="w-2 h-2 rounded-full bg-formal-primary-500"></span>
                   {repo.language}
                 </span>
               )}

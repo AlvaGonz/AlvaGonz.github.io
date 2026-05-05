@@ -12,10 +12,10 @@ export function OrganizationsSection(): JSX.Element {
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-primary-rich-black/40 p-4 rounded-lg border border-white/5 flex justify-between items-center hover:border-primary-mountain-meadow/30 transition-colors"
+          className="bg-formal-primary-rich-black/40 p-4 rounded-lg border border-white/5 flex justify-between items-center hover:border-formal-primary-mountain-meadow/30 transition-colors"
         >
-          <span className="font-medium text-primary-anti-flash-white">{org.name}</span>
-          <span className="text-sm text-secondary-stone">{org.period}</span>
+          <span className="font-medium text-formal-primary-anti-flash-white">{org.name}</span>
+          <span className="text-sm text-formal-secondary-stone">{org.period}</span>
         </motion.div>
       ))}
     </div>

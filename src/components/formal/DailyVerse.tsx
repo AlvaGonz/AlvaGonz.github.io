@@ -15,7 +15,7 @@ export function DailyVerse() {
   return (
     <div className="mt-12 pt-8 border-t border-gray-200/10 text-center">
       <blockquote className="max-w-2xl mx-auto italic text-gray-400">"{cleanContent}"</blockquote>
-      <cite className="block mt-2 text-sm font-semibold text-primary-500 not-italic">
+      <cite className="block mt-2 text-sm font-semibold text-formal-primary-500 not-italic">
         — {verse.reference}
       </cite>
     </div>

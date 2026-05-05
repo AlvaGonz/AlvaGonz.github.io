@@ -8,7 +8,7 @@ export function ScrollProgressBar() {
   const background =
     theme === 'Curiosity'
       ? 'linear-gradient(90deg, var(--c-Curiosity-primary), var(--c-Curiosity-secondary))'
-      : 'var(--c-primary-mountain-meadow)';
+      : 'var(--c-formal-primary-mountain-meadow)';
 
   return (
     <motion.div

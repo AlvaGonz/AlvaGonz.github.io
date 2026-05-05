@@ -29,8 +29,8 @@ export function LanguageBadge({ name, count }: LanguageBadgeProps) {
         className="w-2.5 h-2.5 rounded-full shadow-[0_0_8px_rgba(0,0,0,0.5)]"
         style={{ backgroundColor: color }}
       />
-      <span className="font-medium text-primary-anti-flash-white">{name}</span>
-      {count && <span className="text-xs text-secondary-stone">({count})</span>}
+      <span className="font-medium text-formal-primary-anti-flash-white">{name}</span>
+      {count && <span className="text-xs text-formal-secondary-stone">({count})</span>}
     </div>
   );
 }

@@ -6,8 +6,8 @@ interface ContactProps {
 
 export function Contact({ profile }: ContactProps): JSX.Element {
   return (
-    <div className="bg-primary-dark-green rounded-xl p-8 border border-secondary-pine">
-      <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary-anti-flash-white border-b-2 border-primary-mountain-meadow pb-2">
+    <div className="bg-formal-primary-dark-green rounded-xl p-8 border border-formal-secondary-pine">
+      <h2 className="text-3xl md:text-4xl font-bold mb-6 text-formal-primary-anti-flash-white border-b-2 border-formal-primary-mountain-meadow pb-2">
         Contact
       </h2>
       <div className="flex flex-wrap gap-4 justify-center md:justify-start">
@@ -29,7 +29,7 @@ export function Contact({ profile }: ContactProps): JSX.Element {
           href={profile.github}
           target="_blank"
           rel="noopener noreferrer"
-          className="px-6 py-3 bg-white/5 text-primary-anti-flash-white border border-white/10 rounded-lg hover:bg-white/10 transition-all font-medium flex items-center gap-3 group"
+          className="px-6 py-3 bg-white/5 text-formal-primary-anti-flash-white border border-white/10 rounded-lg hover:bg-white/10 transition-all font-medium flex items-center gap-3 group"
           aria-label="GitHub profile"
         >
           <img

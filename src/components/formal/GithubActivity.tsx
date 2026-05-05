@@ -27,7 +27,7 @@ export function GithubActivity() {
           >
             <div className="flex-1">
               <div className="flex items-center gap-2">
-                <span className="font-medium text-primary-400">
+                <span className="font-medium text-formal-primary-400">
                   {event.type === 'PushEvent' ? 'Pushed to' : 'Created'}
                 </span>
                 <a

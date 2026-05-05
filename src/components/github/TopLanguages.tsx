@@ -22,7 +22,7 @@ export function TopLanguages() {
     return (
       <div className="space-y-4">
         {[...Array(5)].map((_, i) => (
-          <div key={i} className="h-10 bg-primary-rich-black/50 rounded-lg animate-pulse" />
+          <div key={i} className="h-10 bg-formal-primary-rich-black/50 rounded-lg animate-pulse" />
         ))}
       </div>
     );
@@ -51,11 +51,11 @@ export function TopLanguages() {
             <div className="flex items-center justify-between mb-1">
               <div className="flex items-center gap-2">
                 <LanguageIcon language={lang.name} className="w-5 h-5" />
-                <p className="font-medium text-secondary-pistachio">{lang.name}</p>
+                <p className="font-medium text-formal-secondary-pistachio">{lang.name}</p>
               </div>
-              <p className="text-sm font-mono text-secondary-stone">{percentage.toFixed(1)}%</p>
+              <p className="text-sm font-mono text-formal-secondary-stone">{percentage.toFixed(1)}%</p>
             </div>
-            <div className="w-full bg-primary-dark-green/50 rounded-full h-2.5 overflow-hidden border border-white/5">
+            <div className="w-full bg-formal-primary-dark-green/50 rounded-full h-2.5 overflow-hidden border border-white/5">
               <motion.div
                 className="h-full rounded-full"
                 style={{ backgroundColor: color }}

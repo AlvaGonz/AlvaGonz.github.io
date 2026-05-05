@@ -6,7 +6,7 @@ export function EducationSection(): JSX.Element {
     <div className="space-y-8">
       {/* Education */}
       <div>
-        <div className="space-y-8 border-l-2 border-primary-mountain-meadow/20 ml-3 py-2">
+        <div className="space-y-8 border-l-2 border-formal-primary-mountain-meadow/20 ml-3 py-2">
           {education.map((item, index) => (
             <motion.div
               key={item.id}
@@ -16,16 +16,16 @@ export function EducationSection(): JSX.Element {
               transition={{ delay: index * 0.1 }}
               className="relative pl-8"
             >
-              <span className="absolute -left-[7px] top-2 h-3 w-3 rounded-full bg-primary-mountain-meadow" />
-              <div className="bg-primary-rich-black/40 p-6 rounded-xl border border-white/5 hover:border-primary-mountain-meadow/30 transition-colors">
+              <span className="absolute -left-[7px] top-2 h-3 w-3 rounded-full bg-formal-primary-mountain-meadow" />
+              <div className="bg-formal-primary-rich-black/40 p-6 rounded-xl border border-white/5 hover:border-formal-primary-mountain-meadow/30 transition-colors">
                 <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
                   <div>
-                    <h4 className="text-xl font-bold text-primary-anti-flash-white">
+                    <h4 className="text-xl font-bold text-formal-primary-anti-flash-white">
                       {item.school}
                     </h4>
-                    <p className="text-lg text-secondary-pistachio">{item.degree}</p>
+                    <p className="text-lg text-formal-secondary-pistachio">{item.degree}</p>
                   </div>
-                  <span className="text-sm font-mono text-secondary-stone mt-2 md:mt-0 bg-white/5 px-3 py-1 rounded-full">
+                  <span className="text-sm font-mono text-formal-secondary-stone mt-2 md:mt-0 bg-white/5 px-3 py-1 rounded-full">
                     {item.period}
                   </span>
                 </div>
@@ -34,7 +34,7 @@ export function EducationSection(): JSX.Element {
                     {item.skills.map((skill) => (
                       <span
                         key={skill}
-                        className="text-xs px-2 py-1 rounded bg-primary-dark-green text-primary-mountain-meadow border border-primary-mountain-meadow/20"
+                        className="text-xs px-2 py-1 rounded bg-formal-primary-dark-green text-formal-primary-mountain-meadow border border-formal-primary-mountain-meadow/20"
                       >
                         {skill}
                       </span>

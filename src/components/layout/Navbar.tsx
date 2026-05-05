@@ -162,7 +162,7 @@ export function Navbar() {
                   className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium ${
                     side === 'Curiosity'
                       ? 'bg-Curiosity-secondary/20 text-Curiosity-secondary border border-Curiosity-secondary/30'
-                      : 'bg-primary-dark-green text-primary-mountain-meadow border border-primary-mountain-meadow/30'
+                      : 'bg-formal-primary-dark-green text-formal-primary-mountain-meadow border border-formal-primary-mountain-meadow/30'
                   }`}
                 >
                   <span>{side === 'Curiosity' ? '✨' : '💼'}</span>

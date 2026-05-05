@@ -1,27 +1,5 @@
-/* Axiforma Font Face Declarations */
-@font-face {
-  font-family: 'Axiforma';
-  src: url('/fonts/axiforma/Axiforma-Regular.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
 
-@font-face {
-  font-family: 'Axiforma';
-  src: url('/fonts/axiforma/Axiforma-Medium.otf') format('opentype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Axiforma';
-  src: url('/fonts/axiforma/Axiforma-SemiBold.otf') format('opentype');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
 
 /* Primary Colors from Palette 1 */
 :root {
@@ -86,7 +64,7 @@
   --theme-surface: rgba(33, 38, 58, 0.8);
   --theme-primary: var(--c-Curiosity-primary);
   --theme-secondary: var(--c-Curiosity-secondary);
-  --theme-accent: var(--c-Curiosity-highlight);
+  --theme-accent: var(--c-Curiosity-accent);
   --theme-text: var(--c-Curiosity-text);
   --theme-text-secondary: var(--c-Curiosity-text-secondary);
   --theme-border: rgba(199, 206, 232, 0.2);
@@ -145,7 +123,7 @@ html {
 body {
   margin: 0;
   font-family:
-    'Axiforma',
+    'Outfit',
     'Inter',
     system-ui,
     -apple-system,

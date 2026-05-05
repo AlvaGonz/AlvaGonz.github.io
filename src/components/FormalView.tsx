@@ -9,7 +9,6 @@ import { CertificationsSection } from './CertificationsSection';
 import { OrganizationsSection } from './OrganizationsSection';
 import { Contact } from './Contact';
 import { AboutFormal } from './sections/AboutFormal';
-import { LeetcodeStats } from './Formal/LeetcodeStats';
 import { GithubActivity } from './Formal/GithubActivity';
 import { DailyVerse } from './Formal/DailyVerse';
 import { TopLanguages } from './GitHub/TopLanguages';
@@ -86,23 +85,23 @@ export function FormalView(): JSX.Element {
   }
 
   return (
-    <div className="min-h-screen p-8 md:p-16 bg-primary-rich-black">
+    <div className="min-h-screen p-8 md:p-16 bg-formal-primary-rich-black">
       <div className="max-w-5xl mx-auto space-y-24 pt-8">
         {/* Profile / Hero Section */}
         <section className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-8">
           <img
             src={profile.avatar_formal}
             alt={`${profile.name} profile`}
-            className="w-32 h-32 md:w-48 md:h-48 rounded-full object-cover border-4 border-primary-mountain-meadow shadow-scroll-modern"
+            className="w-32 h-32 md:w-48 md:h-48 rounded-full object-cover border-4 border-formal-primary-mountain-meadow shadow-scroll-modern"
             loading="lazy"
           />
           <div className="text-center md:text-left">
-            <h1 className="text-4xl md:text-5xl font-bold mb-2 text-primary-anti-flash-white">
+            <h1 className="text-4xl md:text-5xl font-bold mb-2 text-formal-primary-anti-flash-white">
               {profile.name}
             </h1>
-            <p className="text-xl md:text-2xl text-primary-mountain-meadow mb-4">{profile.role}</p>
-            <p className="text-lg text-secondary-pistachio max-w-2xl">{profile.tagline}</p>
-            <div className="flex items-center gap-2 mt-2 text-md text-secondary-stone justify-center md:justify-start">
+            <p className="text-xl md:text-2xl text-formal-primary-mountain-meadow mb-4">{profile.role}</p>
+            <p className="text-lg text-formal-secondary-pistachio max-w-2xl">{profile.tagline}</p>
+            <div className="flex items-center gap-2 mt-2 text-md text-formal-secondary-stone justify-center md:justify-start">
               <img
                 src="https://flagcdn.com/w40/do.png"
                 srcSet="https://flagcdn.com/w80/do.png 2x"
@@ -121,7 +120,7 @@ export function FormalView(): JSX.Element {
 
         {/* Experience Section */}
         <section id="experience">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-primary-anti-flash-white border-b-2 border-primary-mountain-meadow pb-2">
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-formal-primary-anti-flash-white border-b-2 border-formal-primary-mountain-meadow pb-2">
             Experience
           </h2>
           <ExperienceTimeline />
@@ -129,7 +128,7 @@ export function FormalView(): JSX.Element {
 
         {/* Education Section */}
         <section id="education">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-primary-anti-flash-white border-b-2 border-primary-mountain-meadow pb-2">
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-formal-primary-anti-flash-white border-b-2 border-formal-primary-mountain-meadow pb-2">
             Education
           </h2>
           <EducationSection />
@@ -137,7 +136,7 @@ export function FormalView(): JSX.Element {
 
         {/* Certifications Section */}
         <section id="certifications">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-primary-anti-flash-white border-b-2 border-primary-mountain-meadow pb-2">
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-formal-primary-anti-flash-white border-b-2 border-formal-primary-mountain-meadow pb-2">
             Licenses & Certifications
           </h2>
           <CertificationsSection />
@@ -145,7 +144,7 @@ export function FormalView(): JSX.Element {
 
         {/* Skills Section */}
         <section id="skills">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary-anti-flash-white border-b-2 border-primary-mountain-meadow pb-2">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-formal-primary-anti-flash-white border-b-2 border-formal-primary-mountain-meadow pb-2">
             Skills
           </h2>
           <SkillPills skills={skills} />
@@ -153,19 +152,19 @@ export function FormalView(): JSX.Element {
 
         {/* Spoken Languages Section */}
         <section id="spoken-languages">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary-anti-flash-white border-b-2 border-primary-mountain-meadow pb-2">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-formal-primary-anti-flash-white border-b-2 border-formal-primary-mountain-meadow pb-2">
             Languages
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-primary-rich-black/50 p-4 rounded-xl border border-white/5 flex items-center justify-between hover:bg-white/5 transition-colors">
+            <div className="bg-formal-primary-rich-black/50 p-4 rounded-xl border border-white/5 flex items-center justify-between hover:bg-white/5 transition-colors">
               <div className="flex items-center gap-3">
                 <span className="text-2xl">🇩🇴</span>
                 <div>
                   <h3 className="font-bold text-white">Spanish</h3>
-                  <p className="text-sm text-secondary-stone">Native</p>
+                  <p className="text-sm text-formal-secondary-stone">Native</p>
                 </div>
               </div>
-              <div className="px-3 py-1 rounded-full bg-primary-mountain-meadow/20 text-primary-mountain-meadow text-xs font-bold border border-primary-mountain-meadow/30">
+              <div className="px-3 py-1 rounded-full bg-formal-primary-mountain-meadow/20 text-formal-primary-mountain-meadow text-xs font-bold border border-formal-primary-mountain-meadow/30">
                 Native
               </div>
             </div>
@@ -175,7 +174,7 @@ export function FormalView(): JSX.Element {
 
         {/* Projects Section */}
         <section id="projects">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary-anti-flash-white border-b-2 border-primary-mountain-meadow pb-2">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-formal-primary-anti-flash-white border-b-2 border-formal-primary-mountain-meadow pb-2">
             Projects
           </h2>
           {loading && <div className="projects-loading">Loading projects...</div>}
@@ -199,7 +198,7 @@ export function FormalView(): JSX.Element {
 
         {/* Top Languages Section */}
         <section id="github-stats">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary-anti-flash-white border-b-2 border-primary-mountain-meadow pb-2">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-formal-primary-anti-flash-white border-b-2 border-formal-primary-mountain-meadow pb-2">
             Top Languages
           </h2>
           <TopLanguages />
@@ -207,18 +206,17 @@ export function FormalView(): JSX.Element {
 
         {/* Activity & Achievements Section */}
         <section id="activity-achievements">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary-anti-flash-white border-b-2 border-primary-mountain-meadow pb-2">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-formal-primary-anti-flash-white border-b-2 border-formal-primary-mountain-meadow pb-2">
             Activity & Achievements
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <LeetcodeStats />
             <GithubActivity />
           </div>
         </section>
 
         {/* Organizations Section (Penultimate) */}
         <section id="organizations">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary-anti-flash-white border-b-2 border-primary-mountain-meadow pb-2">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-formal-primary-anti-flash-white border-b-2 border-formal-primary-mountain-meadow pb-2">
             Organizations
           </h2>
           <OrganizationsSection />

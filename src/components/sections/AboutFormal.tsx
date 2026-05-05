@@ -2,10 +2,10 @@ export function AboutFormal() {
   return (
     <section id="about" className="space-y-12">
       <div>
-        <h2 className="text-4xl font-bold mb-6 font-axiforma text-primary-anti-flash-white">
+        <h2 className="text-4xl font-bold mb-6 font-axiforma text-formal-primary-anti-flash-white">
           About
         </h2>
-        <div className="space-y-6 text-lg text-secondary-pistachio leading-relaxed max-w-4xl">
+        <div className="space-y-6 text-lg text-formal-secondary-pistachio leading-relaxed max-w-4xl">
           <p>
             I am a Software Engineering student transitioning from a Frontend foundation toward a
             deeper focus on Backend Architecture and System Design. While I navigate the balance
