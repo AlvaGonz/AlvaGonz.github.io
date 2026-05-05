@@ -51,7 +51,7 @@ export const semanticColors = {
     surface: 'rgba(33, 38, 58, 0.8)', // slightly lighter/transparent version of bg
     primary: colorSystem.Curiosity.primary, // Lime
     secondary: colorSystem.Curiosity.secondary, // Periwinkle
-    accent: colorSystem.Curiosity.highlight,
+    accent: colorSystem.Curiosity.surface, // Deep Emerald (#157954)
     text: colorSystem.Curiosity.text,
     textSecondary: colorSystem.Curiosity.textSecondary,
     border: 'rgba(199, 206, 232, 0.2)', // Periwinkle with low opacity

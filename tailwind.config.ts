@@ -8,8 +8,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Axiforma', 'system-ui', 'sans-serif'],
-        axiforma: ['Axiforma', 'sans-serif'],
+        sans: ['Outfit', 'system-ui', 'sans-serif'],
+        outfit: ['Outfit', 'sans-serif'],
       },
       colors: {
         // Semantic Theme Colors (Use these for shared components)

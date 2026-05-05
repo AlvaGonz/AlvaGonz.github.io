@@ -7,7 +7,7 @@ import { useTheme } from '@/hooks/useTheme';
 import { ScrollProgressBar } from './components/layout/ScrollProgressBar';
 
 function App(): JSX.Element {
-  const { theme } = useTheme();
+  useTheme();
 
   useEffect(() => {
     // Add skip link for accessibility
@@ -19,7 +19,7 @@ function App(): JSX.Element {
   }, []);
 
   return (
-    <div className="min-h-screen" data-theme={theme}>
+    <div className="min-h-screen">
       <ScrollProgressBar />
       <ScrollOrchestrator />
       <main id="main-content">
