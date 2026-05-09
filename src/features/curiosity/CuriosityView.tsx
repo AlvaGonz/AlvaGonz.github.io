@@ -1,21 +1,21 @@
 // Implemented from DESIGN.md — Curiosity scope
-import { About } from './Curiosity/About';
-import { GraphicDesign } from './Curiosity/GraphicDesign';
-import { MultimediaManagement } from './Curiosity/MultimediaManagement';
-import { Contributions } from './Curiosity/Contributions';
-import { GamingShowcase } from './Curiosity/GamingShowcase';
-import { NFSWidget } from './Curiosity/NFSWidget';
-import { Hobbies } from './Curiosity/Hobbies';
-import { Roadmap } from './sections/Roadmap';
-import { DailyVerse } from './formal/DailyVerse';
-import { ContactCuriosity } from './Curiosity/ContactCuriosity';
-import { AnimatedBg } from './svg/AnimatedBg';
-import { FloatingElements } from './svg/FloatingElements';
-import { HeroCuriosity } from './sections/HeroCuriosity';
-import { FadeInOnScroll } from './animations/FadeInOnScroll';
-import { DuolingoFireWidget } from '../features/duolingo/components/DuolingoFireWidget';
-import { profile } from '../content/profile';
-import { LanguageMindMap } from './Curiosity/LanguageMindMap';
+import { About } from '@/features/curiosity/components/About';
+import { GraphicDesign } from '@/features/curiosity/components/GraphicDesign';
+import { MultimediaManagement } from '@/features/curiosity/components/MultimediaManagement';
+import { Contributions } from '@/features/curiosity/components/Contributions';
+import { GamingShowcase } from '@/features/curiosity/components/GamingShowcase';
+import { NFSWidget } from '@/features/curiosity/components/NFSWidget';
+import { Hobbies } from '@/features/curiosity/components/Hobbies';
+import { Roadmap } from '@/features/curiosity/components/Roadmap';
+import { DailyVerse } from '@/features/formal/components/DailyVerse';
+import { ContactCuriosity } from '@/features/curiosity/components/ContactCuriosity';
+import { AnimatedBg } from '@/components/svg/AnimatedBg';
+import { FloatingElements } from '@/components/svg/FloatingElements';
+import { HeroCuriosity } from '@/features/curiosity/components/HeroCuriosity';
+import { FadeInOnScroll } from '@/components/animations/FadeInOnScroll';
+import { DuolingoFireWidget } from '@/features/duolingo/components/DuolingoFireWidget';
+import { profile } from '@/content/profile';
+import { LanguageMindMap } from '@/features/curiosity/components/LanguageMindMap';
 
 export function CuriosityView(): JSX.Element {
   return (

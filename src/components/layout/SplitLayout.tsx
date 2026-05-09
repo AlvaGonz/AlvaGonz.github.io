@@ -1,9 +1,9 @@
 import { useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { PortfolioSelector } from './PortfolioSelector';
+import { PortfolioSelector } from '@/components/layout/PortfolioSelector';
 import { usePortfolioSide } from '@/hooks/usePortfolioSide';
-import { Navbar } from './Navbar';
-import { SpotifyNowPlaying } from '../Curiosity/SpotifyNowPlaying';
+import { Navbar } from '@/components/layout/Navbar';
+import { SpotifyNowPlaying } from '@/features/curiosity/components/SpotifyNowPlaying';
 
 interface SplitLayoutProps {
   Curiosity: React.ReactNode;

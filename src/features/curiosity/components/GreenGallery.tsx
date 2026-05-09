@@ -1,5 +1,5 @@
-import { useFetch } from '../../hooks/useFetch';
-import { getGreenGalleryUrl, UnsplashPhoto } from '../../services/unsplash';
+import { useFetch } from '@/hooks/useFetch';
+import { getGreenGalleryUrl, UnsplashPhoto } from '@/services/unsplash';
 
 export function GreenGallery() {
   const { data, loading, error } = useFetch<{ results: UnsplashPhoto[] }>(getGreenGalleryUrl());
@@ -14,7 +14,7 @@ export function GreenGallery() {
         Aesthetic
       </h3>
       <div className="columns-2 md:columns-3 gap-4 space-y-4">
-        {data.results.map((photo) => (
+        {data.results.map((photo: UnsplashPhoto) => (
           <div
             key={photo.id}
             className="break-inside-avoid relative group rounded-lg overflow-hidden"

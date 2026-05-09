@@ -1,5 +1,5 @@
 // Implemented from DESIGN.md — Curiosity scope
-import { favoriteGames } from '../../content/games';
+import { favoriteGames, Game } from '@/content/games';
 import { motion } from 'framer-motion';
 
 export function GamingShowcase() {
@@ -14,7 +14,7 @@ export function GamingShowcase() {
       </h3>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {favoriteGames.map((game, index) => (
+        {favoriteGames.map((game: Game, index: number) => (
           <motion.div
             key={game.id}
             initial={{ opacity: 0, y: 20 }}

@@ -6,8 +6,8 @@ import {
   useTransform,
   AnimatePresence,
 } from 'framer-motion';
-import { useGitHubStats } from '../../features/github/hooks/useGitHubStats';
-import { LanguageIcon } from '../ui/LanguageIcon';
+import { useGitHubStats } from '@/features/github/hooks/useGitHubStats';
+import { LanguageIcon } from '@/components/ui/LanguageIcon';
 
 interface NodeData {
   id: string;

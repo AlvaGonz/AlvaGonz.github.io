@@ -1,5 +1,5 @@
-import { useFetch } from '../../hooks/useFetch';
-import { getDailyVerseUrl, getBibleHeaders, BibleVerse } from '../../services/bible';
+import { useFetch } from '@/hooks/useFetch';
+import { getDailyVerseUrl, getBibleHeaders, BibleVerse } from '@/services/bible';
 
 export function DailyVerse() {
   const { data, loading, error } = useFetch<BibleVerse>(getDailyVerseUrl(), {

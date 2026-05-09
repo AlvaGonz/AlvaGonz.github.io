@@ -1,25 +1,25 @@
-import { ProjectCard } from './ui/ProjectCard';
-import { profile } from '../content/profile';
-import { skills } from '../content/skills';
+import { ProjectCard } from '@/components/ui/ProjectCard';
+import { profile } from '@/content/profile';
+import { skills } from '@/content/skills';
 
-import { SkillPills } from './ui/SkillPills';
-import { ExperienceTimeline } from './sections/ExperienceTimeline';
-import { EducationSection } from './sections/EducationSection';
-import { CertificationsSection } from './sections/CertificationsSection';
-import { OrganizationsSection } from './sections/OrganizationsSection';
-import { Contact } from './sections/Contact';
-import { AboutFormal } from './sections/AboutFormal';
-import { GithubActivity } from '../features/github/components/GithubActivity';
-import { DailyVerse } from './formal/DailyVerse';
-import { TopLanguages } from '../features/github/components/TopLanguages';
-import { DuolingoWidget } from '../features/duolingo/components/DuolingoWidget';
+import { SkillPills } from '@/components/ui/SkillPills';
+import { ExperienceTimeline } from '@/components/sections/ExperienceTimeline';
+import { EducationSection } from '@/components/sections/EducationSection';
+import { CertificationsSection } from '@/components/sections/CertificationsSection';
+import { OrganizationsSection } from '@/components/sections/OrganizationsSection';
+import { Contact } from '@/components/sections/Contact';
+import { AboutFormal } from '@/components/sections/AboutFormal';
+import { GithubActivity } from '@/features/github/components/GithubActivity';
+import { DailyVerse } from '@/features/formal/components/DailyVerse';
+import { TopLanguages } from '@/features/github/components/TopLanguages';
+import { DuolingoWidget } from '@/features/duolingo/components/DuolingoWidget';
 import { useEffect, useState } from 'react';
 import {
   fetchPinnedProjects,
   fetchAllPublicRepos,
   validateToken,
   GitHubRepository,
-} from '../lib/github-client';
+} from '@/lib/github-client';
 
 export function FormalView(): JSX.Element {
   const [projects, setProjects] = useState<GitHubRepository[]>([]);
