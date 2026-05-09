@@ -11,7 +11,7 @@ export function GraphicDesign() {
     <section id="graphic-design" className="py-12 md:py-20">
       <FadeInOnScroll variant="fadeUp">
         {/* Section header uses Gradient 2 (Periwinkle → Lime) as per DESIGN.md */}
-        <h2 className="text-3xl md:text-4xl font-bold mb-8 text-Curiosity-primary border-b-2 border-Curiosity-secondary/30 pb-2 inline-block">
+        <h2 className="text-3xl md:text-4xl font-bold font-curiosity-display mb-8 text-Curiosity-primary border-b-2 border-Curiosity-secondary/30 pb-2 inline-block">
           Graphic Design
         </h2>
       </FadeInOnScroll>
@@ -29,7 +29,7 @@ export function GraphicDesign() {
                 className="w-full h-auto transform group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-Curiosity-bg/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                <p className="text-Curiosity-text font-medium">Demasiado Hipster ¿No?</p>
+                <p className="text-Curiosity-text font-curiosity-body font-medium">Demasiado Hipster ¿No?</p>
               </div>
             </div>
           </div>
@@ -37,8 +37,8 @@ export function GraphicDesign() {
 
         <FadeInOnScroll variant="slideLeft">
           <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-theme-text">Visual Storytelling</h3>
-            <p className="text-lg text-theme-text-secondary leading-relaxed">
+            <h3 className="text-2xl font-bold font-curiosity-display text-theme-text">Visual Storytelling</h3>
+            <p className="text-lg text-theme-text-secondary font-curiosity-body leading-relaxed">
               Design is more than just making things look good—it's about communication. My work in
               graphic design focuses on creating impactful visuals for community events, church
               gatherings, and brand identity.
@@ -50,7 +50,7 @@ export function GraphicDesign() {
                   <span className="text-2xl">{item.icon}</span>
                   <div>
                     <h4 className="font-bold text-theme-text">{item.title}</h4>
-                    <p className="text-theme-text-secondary">{item.desc}</p>
+                    <p className="text-theme-text-secondary font-curiosity-body">{item.desc}</p>
                   </div>
                 </div>
               ))}

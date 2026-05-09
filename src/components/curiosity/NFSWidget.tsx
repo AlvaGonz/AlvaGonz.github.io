@@ -244,7 +244,7 @@ export function NFSWidget() {
               />
             </div>
 
-            <h3 className="text-2xl font-bold text-Curiosity-text mb-2 flex items-center gap-2">
+            <h3 className="text-2xl font-bold font-curiosity-display text-Curiosity-text mb-2 flex items-center gap-2">
               BMW M3 GTR
               {isPlaying && (
                 <span className="flex h-3 w-3 relative">
@@ -254,7 +254,7 @@ export function NFSWidget() {
               )}
             </h3>
 
-            <p className="text-Curiosity-text-secondary text-sm mb-4">
+            <p className="text-Curiosity-text-secondary font-curiosity-body text-sm mb-4">
               The straight-cut gears. The V8 whine. The most iconic car in racing game history.
               Click to hear the beast roar.
             </p>

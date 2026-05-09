@@ -34,8 +34,8 @@ export function RandomUserGreeting() {
         />
       )}
       <div className="flex-1">
-        <p className="text-Curiosity-text font-semibold">{greeting}</p>
-        <p className="text-sm text-Curiosity-text-secondary">
+        <p className="text-Curiosity-text font-curiosity-body font-semibold">{greeting}</p>
+        <p className="text-sm font-curiosity-body text-Curiosity-text-secondary">
           From {user.location.city}, {user.location.country}
         </p>
       </div>

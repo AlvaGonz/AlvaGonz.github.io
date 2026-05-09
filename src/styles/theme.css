@@ -68,6 +68,10 @@
   --theme-text: var(--c-Curiosity-text);
   --theme-text-secondary: var(--c-Curiosity-text-secondary);
   --theme-border: rgba(199, 206, 232, 0.2);
+
+  /* ── Curiosity Typography Override ── */
+  --font-curiosity-display: 'Notable', system-ui, sans-serif;
+  --font-curiosity-body: 'Notable', system-ui, sans-serif;
 }
 
 /* Dynamic updates based on scroll progress */

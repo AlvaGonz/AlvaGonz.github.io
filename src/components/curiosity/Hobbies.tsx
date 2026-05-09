@@ -67,15 +67,15 @@ export function Hobbies() {
               <div className="space-y-8">
                 <div className="text-7xl md:text-9xl font-light mb-12">:(</div>
                 <div className="space-y-6">
-                  <h2 className="text-xl md:text-3xl font-light leading-relaxed max-w-2xl">
+                  <h2 className="text-xl md:text-3xl font-curiosity-display font-light leading-relaxed max-w-2xl">
                     Your PC ran into a problem and needs to restart. We're just collecting some
                     error info, and then we'll restart for you.
                   </h2>
-                  <p className="text-lg md:text-2xl font-light">0% complete</p>
+                  <p className="text-lg md:text-2xl font-curiosity-body font-light">0% complete</p>
                 </div>
                 <div className="mt-12 space-y-2 text-sm md:text-base font-light">
-                  <p>Stop code: CRITICAL_PROCESS_DIED</p>
-                  <p>What failed: user_patience.sys</p>
+                  <p className="font-curiosity-body">Stop code: CRITICAL_PROCESS_DIED</p>
+                  <p className="font-curiosity-body">What failed: user_patience.sys</p>
                 </div>
               </div>
             </div>
@@ -84,7 +84,7 @@ export function Hobbies() {
       </AnimatePresence>
 
       <FadeInOnScroll variant="fadeUp">
-        <h2 className="text-3xl md:text-4xl font-bold mb-8 text-Curiosity-primary border-b-2 border-Curiosity-primary/30 pb-2 inline-block">
+        <h2 className="text-3xl md:text-4xl font-bold font-curiosity-display mb-8 text-Curiosity-primary border-b-2 border-Curiosity-primary/30 pb-2 inline-block">
           Hobbies &amp; Interests
         </h2>
       </FadeInOnScroll>
@@ -102,8 +102,8 @@ export function Hobbies() {
                 <div className={`absolute inset-0 transition-colors ${'glowClass' in hobby ? hobby.glowClass : ''}`} />
                 <div className="relative z-10">
                   <div className="text-4xl mb-4">{hobby.icon}</div>
-                  <h3 className="text-xl font-bold text-Curiosity-text mb-2">{hobby.label}</h3>
-                  <p className="text-Curiosity-text-secondary text-sm leading-relaxed">
+                  <h3 className="text-xl font-bold font-curiosity-display text-Curiosity-text mb-2">{hobby.label}</h3>
+                  <p className="text-Curiosity-text-secondary font-curiosity-body text-sm leading-relaxed">
                     {hobby.desc}
                     {'hint' in hobby && (
                       <>
@@ -125,8 +125,8 @@ export function Hobbies() {
                 className={`bg-[#282e45] p-6 rounded-2xl border ${hobby.borderClass} shadow-2xl h-full`}
               >
                 <div className="text-4xl mb-4">{hobby.icon}</div>
-                <h3 className="text-xl font-bold text-Curiosity-text mb-2">{hobby.label}</h3>
-                <p className="text-Curiosity-text-secondary text-sm leading-relaxed">{hobby.desc}</p>
+                <h3 className="text-xl font-bold font-curiosity-display text-Curiosity-text mb-2">{hobby.label}</h3>
+                <p className="text-Curiosity-text-secondary font-curiosity-body text-sm leading-relaxed">{hobby.desc}</p>
               </motion.div>
             </FadeInOnScroll>
           ),

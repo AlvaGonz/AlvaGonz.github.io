@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 export function GamingShowcase() {
   return (
     <div className="space-y-6">
-      <h3 className="text-2xl font-bold text-Curiosity-text flex items-center gap-3">
+      <h3 className="text-2xl font-bold font-curiosity-display text-Curiosity-text flex items-center gap-3">
         <span className="i-lucide-gamepad-2 text-Curiosity-primary"></span>
         {/* Gradient 1: Cloud Grey → Periwinkle from DESIGN.md */}
         <span className="bg-clip-text text-transparent bg-gradient-to-r from-Curiosity-highlight to-Curiosity-secondary">

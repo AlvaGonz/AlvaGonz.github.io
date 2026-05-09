@@ -166,7 +166,7 @@ export const DuolingoFireWidget: React.FC<DuolingoFireWidgetProps> = ({
         <div className="flex flex-col flex-grow">
           <div className="flex justify-between items-center mb-1">
             <h3
-              className={`font-bold text-[1.73rem] ${isFireActive ? 'text-white' : 'text-[#4B4B4B]'}`}
+              className={`font-bold text-[1.73rem] font-curiosity-display ${isFireActive ? 'text-white' : 'text-[#4B4B4B]'}`}
             >
               {displayStats?.username}
             </h3>
@@ -245,7 +245,7 @@ export const DuolingoFireWidget: React.FC<DuolingoFireWidgetProps> = ({
       {/* Hint Text (Only visible when not active) */}
       {!isFireActive && (
         <div className="absolute -bottom-6 left-0 w-full text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-          <span className="text-[0.86rem] text-gray-400 font-medium">
+          <span className="text-[0.86rem] text-gray-400 font-curiosity-body font-medium">
             ✨ Haz click para activar 🔥
           </span>
         </div>

@@ -25,15 +25,15 @@ export function About() {
               transition={{ duration: 4, repeat: Infinity }}
             />
             <div className="relative bg-theme-surface p-8 rounded-3xl border border-theme-border shadow-2xl">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-Curiosity-primary">
+              <h2 className="text-3xl md:text-4xl font-bold font-curiosity-display mb-6 text-Curiosity-primary">
                 🌱 The Person Behind the Code
               </h2>
-              <p className="text-lg text-theme-text-secondary leading-relaxed mb-4">
+              <p className="text-lg text-theme-text-secondary font-curiosity-body leading-relaxed mb-4">
                 Beyond the terminal and the commits, I'm a person driven by{' '}
                 <strong className="text-Curiosity-primary">faith, community, and Curiosity</strong>. I
                 believe that technology is best used when it serves a purpose greater than itself.
               </p>
-              <p className="text-lg text-theme-text-secondary leading-relaxed mb-4">
+              <p className="text-lg text-theme-text-secondary font-curiosity-body leading-relaxed mb-4">
                 My world isn't just binary. It's colored by my love for{' '}
                 <span className="text-Curiosity-primary">green</span> (obviously), the adrenaline of{' '}
                 <span className="text-Curiosity-highlight">gaming</span>, and the discipline of{' '}
@@ -41,7 +41,7 @@ export function About() {
                 my church or tinkering with a new framework, I bring the same level of passion and
                 dedication.
               </p>
-              <p className="text-lg text-theme-text-secondary leading-relaxed">
+              <p className="text-lg text-theme-text-secondary font-curiosity-body leading-relaxed">
                 I'm motivated by the logic of code, but grounded by the values of my faith. For me,
                 every bug fixed and every system built is a small act of stewardship.
               </p>

@@ -306,7 +306,7 @@ export function LanguageMindMap() {
                 <LanguageIcon language={hoveredNode.name} />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-white">{hoveredNode.name}</h3>
+                <h3 className="text-xl font-bold font-curiosity-display text-white">{hoveredNode.name}</h3>
                 <div className="flex items-center gap-2">
                   <span
                     className="w-3 h-3 rounded-full"
@@ -338,7 +338,7 @@ export function LanguageMindMap() {
 
               {/* Curious Fact */}
               <div className="pt-3 border-t border-white/10">
-                <p className="text-white/70 text-xs italic leading-relaxed">"{hoveredNode.fact}"</p>
+                <p className="text-white/70 font-curiosity-body text-xs italic leading-relaxed">"{hoveredNode.fact}"</p>
               </div>
             </div>
           </motion.div>
@@ -346,8 +346,8 @@ export function LanguageMindMap() {
       </AnimatePresence>
 
       <div className="absolute top-6 right-6 text-white/30 text-xs text-right pointer-events-none">
-        <p>Click the core to unleash energy</p>
-        <p>Hover to analyze matter</p>
+        <p className="font-curiosity-body">Click the core to unleash energy</p>
+        <p className="font-curiosity-body">Hover to analyze matter</p>
       </div>
     </div>
   );
