@@ -84,7 +84,7 @@ export function Hobbies() {
       </AnimatePresence>
 
       <FadeInOnScroll variant="fadeUp">
-        <h2 className="text-3xl md:text-4xl font-bold font-curiosity-display mb-8 text-Curiosity-primary border-b-2 border-Curiosity-primary/30 pb-2 inline-block">
+        <h2 className="text-3xl md:text-4xl font-curiosity-display mb-8 text-Curiosity-primary border-b-2 border-Curiosity-primary/30 pb-2 inline-block">
           Hobbies &amp; Interests
         </h2>
       </FadeInOnScroll>
@@ -102,7 +102,7 @@ export function Hobbies() {
                 <div className={`absolute inset-0 transition-colors ${'glowClass' in hobby ? hobby.glowClass : ''}`} />
                 <div className="relative z-10">
                   <div className="text-4xl mb-4">{hobby.icon}</div>
-                  <h3 className="text-xl font-bold font-curiosity-display text-Curiosity-text mb-2">{hobby.label}</h3>
+                  <h3 className="text-xl font-curiosity-display text-Curiosity-text mb-2">{hobby.label}</h3>
                   <p className="text-Curiosity-text-secondary font-curiosity-body text-sm leading-relaxed">
                     {hobby.desc}
                     {'hint' in hobby && (
@@ -125,7 +125,7 @@ export function Hobbies() {
                 className={`bg-[#282e45] p-6 rounded-2xl border ${hobby.borderClass} shadow-2xl h-full`}
               >
                 <div className="text-4xl mb-4">{hobby.icon}</div>
-                <h3 className="text-xl font-bold font-curiosity-display text-Curiosity-text mb-2">{hobby.label}</h3>
+                <h3 className="text-xl font-curiosity-display text-Curiosity-text mb-2">{hobby.label}</h3>
                 <p className="text-Curiosity-text-secondary font-curiosity-body text-sm leading-relaxed">{hobby.desc}</p>
               </motion.div>
             </FadeInOnScroll>

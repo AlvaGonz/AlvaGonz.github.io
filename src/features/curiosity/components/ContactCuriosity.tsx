@@ -49,7 +49,7 @@ export function ContactCuriosity({ profile }: ContactCuriosityProps): JSX.Elemen
   return (
     <section id="contact" className="py-12 md:py-20">
       <FadeInOnScroll variant="fadeUp">
-        <h2 className="text-3xl md:text-4xl font-bold font-curiosity-display mb-8 text-Curiosity-primary border-b-2 border-Curiosity-secondary/30 pb-2 inline-block">
+        <h2 className="text-3xl md:text-4xl font-curiosity-display mb-8 text-Curiosity-primary border-b-2 border-Curiosity-secondary/30 pb-2 inline-block">
           Let's Connect! 🚀
         </h2>
       </FadeInOnScroll>

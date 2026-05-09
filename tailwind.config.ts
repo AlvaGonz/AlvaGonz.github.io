@@ -10,7 +10,7 @@ export default {
       fontFamily: {
         sans: ['Outfit', 'system-ui', 'sans-serif'],
         outfit: ['Outfit', 'sans-serif'],
-        'curiosity-display': ['var(--font-curiosity-display)', 'system-ui', 'sans-serif'],
+        'curiosity-display': ['Notable', 'var(--font-curiosity-display)', 'system-ui', 'sans-serif'],
         'curiosity-body': ['var(--font-curiosity-body)', 'system-ui', 'sans-serif'],
       },
       colors: {

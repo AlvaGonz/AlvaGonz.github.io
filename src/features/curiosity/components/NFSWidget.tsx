@@ -244,7 +244,7 @@ export function NFSWidget() {
               />
             </div>
 
-            <h3 className="text-2xl font-bold font-curiosity-display text-Curiosity-text mb-2 flex items-center gap-2">
+            <h3 className="text-2xl font-curiosity-display text-Curiosity-text mb-2 flex items-center gap-2">
               BMW M3 GTR
               {isPlaying && (
                 <span className="flex h-3 w-3 relative">

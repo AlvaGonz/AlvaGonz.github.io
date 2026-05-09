@@ -5,7 +5,7 @@ export function Contributions() {
   return (
     <section id="contributions" className="py-12 md:py-20">
       <FadeInOnScroll variant="fadeUp">
-        <h2 className="text-3xl md:text-4xl font-bold font-curiosity-display mb-8 text-Curiosity-accent border-b-2 border-Curiosity-accent/30 pb-2 inline-block">
+        <h2 className="text-3xl md:text-4xl font-curiosity-display mb-8 text-Curiosity-accent border-b-2 border-Curiosity-accent/30 pb-2 inline-block">
           Contributions
         </h2>
       </FadeInOnScroll>
@@ -37,7 +37,7 @@ export function Contributions() {
               className="bg-theme-surface p-6 rounded-xl border border-theme-border hover:border-Curiosity-accent/50 transition-colors h-full"
             >
               <div className="text-4xl mb-4">{item.icon}</div>
-              <h3 className="text-xl font-bold font-curiosity-display text-theme-text mb-2">{item.title}</h3>
+              <h3 className="text-xl font-curiosity-display text-theme-text mb-2">{item.title}</h3>
               <span className="inline-block px-2 py-1 rounded bg-Curiosity-accent/10 text-Curiosity-accent text-xs font-bold mb-3">
                 {item.role}
               </span>

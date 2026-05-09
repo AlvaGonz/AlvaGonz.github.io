@@ -25,7 +25,7 @@ export function About() {
               transition={{ duration: 4, repeat: Infinity }}
             />
             <div className="relative bg-theme-surface p-8 rounded-3xl border border-theme-border shadow-2xl">
-              <h2 className="text-3xl md:text-4xl font-bold font-curiosity-display mb-6 text-Curiosity-primary">
+              <h2 className="text-3xl md:text-4xl font-curiosity-display mb-6 text-Curiosity-primary">
                 🌱 The Person Behind the Code
               </h2>
               <p className="text-lg text-theme-text-secondary font-curiosity-body leading-relaxed mb-4">

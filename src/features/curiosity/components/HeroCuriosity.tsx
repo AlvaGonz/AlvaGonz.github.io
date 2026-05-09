@@ -30,7 +30,7 @@ export function HeroCuriosity() {
         <ParallaxSection offset={-20}>
           <motion.h1
             variants={fadeInUp}
-            className="text-5xl md:text-7xl font-bold font-curiosity-display mb-4 bg-clip-text text-transparent bg-gradient-to-r from-Curiosity-primary via-Curiosity-highlight to-Curiosity-secondary"
+            className="text-5xl md:text-7xl font-curiosity-display mb-4 bg-clip-text text-transparent bg-gradient-to-r from-Curiosity-primary via-Curiosity-highlight to-Curiosity-secondary"
           >
             Curious Developer
           </motion.h1>

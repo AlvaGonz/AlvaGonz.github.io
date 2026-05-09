@@ -1,10 +1,10 @@
-import type { Profile } from '../../content/types';
+import type { Profile } from '@/content/types';
 
 interface ContactProps {
   profile: Profile;
 }
 
-export function Contact({ profile }: ContactProps): JSX.Element {
+export function ContactFormal({ profile }: ContactProps): JSX.Element {
   return (
     <div className="bg-formal-primary-dark-green rounded-xl p-8 border border-formal-secondary-pine">
       <h2 className="text-3xl md:text-4xl font-bold mb-6 text-formal-primary-anti-flash-white border-b-2 border-formal-primary-mountain-meadow pb-2">

@@ -1,5 +1,5 @@
-import { experience } from '../../content/experience';
-import { FadeInOnScroll } from '../animations/FadeInOnScroll';
+import { experience } from '@/content/experience';
+import { FadeInOnScroll } from '@/components/animations/FadeInOnScroll';
 
 interface ExperienceItem {
   id: string;

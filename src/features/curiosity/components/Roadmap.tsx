@@ -61,7 +61,7 @@ export function Roadmap({ variant = 'formal' }: RoadmapProps) {
 
   return (
     <section id="roadmap" className="space-y-8">
-      <h2 className="text-4xl font-bold font-curiosity-display text-formal-primary-anti-flash-white">{title}</h2>
+      <h2 className="text-4xl font-curiosity-display text-formal-primary-anti-flash-white">{title}</h2>
       <Timeline phases={phases} />
     </section>
   );

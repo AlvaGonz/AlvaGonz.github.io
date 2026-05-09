@@ -14,7 +14,7 @@ export function MultimediaManagement() {
   return (
     <section id="multimedia" className="py-12 md:py-20">
       <FadeInOnScroll variant="fadeUp">
-        <h2 className="text-3xl md:text-4xl font-bold font-curiosity-display mb-8 text-Curiosity-secondary border-b-2 border-Curiosity-primary/30 pb-2 inline-block">
+        <h2 className="text-3xl md:text-4xl font-curiosity-display mb-8 text-Curiosity-secondary border-b-2 border-Curiosity-primary/30 pb-2 inline-block">
           Multimedia Management
         </h2>
       </FadeInOnScroll>
@@ -22,7 +22,7 @@ export function MultimediaManagement() {
       <div className="grid md:grid-cols-2 gap-12 items-center md:flex-row-reverse">
         <FadeInOnScroll variant="slideRight" className="order-2 md:order-1">
           <div className="space-y-6">
-            <h3 className="text-2xl font-bold font-curiosity-display text-theme-text">Production &amp; Direction</h3>
+            <h3 className="text-2xl font-curiosity-display text-theme-text">Production &amp; Direction</h3>
             <p className="text-lg text-theme-text-secondary font-curiosity-body leading-relaxed">
               Orchestrating audio, video, and live streams is where technical precision meets
               creative flow. I manage multimedia production for large-scale church services and

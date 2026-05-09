@@ -11,7 +11,7 @@ export function GraphicDesign() {
     <section id="graphic-design" className="py-12 md:py-20">
       <FadeInOnScroll variant="fadeUp">
         {/* Section header uses Gradient 2 (Periwinkle → Lime) as per DESIGN.md */}
-        <h2 className="text-3xl md:text-4xl font-bold font-curiosity-display mb-8 text-Curiosity-primary border-b-2 border-Curiosity-secondary/30 pb-2 inline-block">
+        <h2 className="text-3xl md:text-4xl font-curiosity-display mb-8 text-Curiosity-primary border-b-2 border-Curiosity-secondary/30 pb-2 inline-block">
           Graphic Design
         </h2>
       </FadeInOnScroll>
@@ -37,7 +37,7 @@ export function GraphicDesign() {
 
         <FadeInOnScroll variant="slideLeft">
           <div className="space-y-6">
-            <h3 className="text-2xl font-bold font-curiosity-display text-theme-text">Visual Storytelling</h3>
+            <h3 className="text-2xl font-curiosity-display text-theme-text">Visual Storytelling</h3>
             <p className="text-lg text-theme-text-secondary font-curiosity-body leading-relaxed">
               Design is more than just making things look good—it's about communication. My work in
               graphic design focuses on creating impactful visuals for community events, church
@@ -49,7 +49,7 @@ export function GraphicDesign() {
                 <div key={item.title} className="flex items-center gap-4">
                   <span className="text-2xl">{item.icon}</span>
                   <div>
-                    <h4 className="font-bold font-curiosity-display text-theme-text">{item.title}</h4>
+                    <h4 className="font-curiosity-display text-theme-text">{item.title}</h4>
                     <p className="text-theme-text-secondary font-curiosity-body">{item.desc}</p>
                   </div>
                 </div>

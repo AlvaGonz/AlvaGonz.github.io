@@ -3,12 +3,12 @@ import { profile } from '@/content/profile';
 import { skills } from '@/content/skills';
 
 import { SkillPills } from '@/components/ui/SkillPills';
-import { ExperienceTimeline } from '@/components/sections/ExperienceTimeline';
-import { EducationSection } from '@/components/sections/EducationSection';
-import { CertificationsSection } from '@/components/sections/CertificationsSection';
-import { OrganizationsSection } from '@/components/sections/OrganizationsSection';
-import { Contact } from '@/components/sections/Contact';
-import { AboutFormal } from '@/components/sections/AboutFormal';
+import { ExperienceTimeline } from '@/features/formal/components/ExperienceTimeline';
+import { EducationSection } from '@/features/formal/components/EducationSection';
+import { CertificationsSection } from '@/features/formal/components/CertificationsSection';
+import { OrganizationsSection } from '@/features/formal/components/OrganizationsSection';
+import { ContactFormal as Contact } from '@/features/formal/components/ContactFormal';
+import { AboutFormal } from '@/features/formal/components/AboutFormal';
 import { GithubActivity } from '@/features/github/components/GithubActivity';
 import { DailyVerse } from '@/features/formal/components/DailyVerse';
 import { TopLanguages } from '@/features/github/components/TopLanguages';

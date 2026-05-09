@@ -39,7 +39,7 @@ export function CuriosityView(): JSX.Element {
           {/* Gaming Section */}
           <section id="gaming">
             <FadeInOnScroll variant="fadeUp">
-              <h2 className="text-3xl md:text-4xl font-bold font-curiosity-display mb-8 text-Curiosity-primary border-b-2 border-Curiosity-secondary/30 pb-2 inline-block">
+              <h2 className="text-3xl md:text-4xl font-curiosity-display mb-8 text-Curiosity-primary border-b-2 border-Curiosity-secondary/30 pb-2 inline-block">
                 Gaming
               </h2>
             </FadeInOnScroll>
@@ -52,7 +52,7 @@ export function CuriosityView(): JSX.Element {
           {/* Learning Section */}
           <section id="learning" className="space-y-8">
             <FadeInOnScroll variant="fadeUp">
-              <h2 className="text-3xl md:text-4xl font-bold font-curiosity-display mb-8 text-Curiosity-secondary border-b-2 border-Curiosity-primary/30 pb-2 inline-block">
+              <h2 className="text-3xl md:text-4xl font-curiosity-display mb-8 text-Curiosity-secondary border-b-2 border-Curiosity-primary/30 pb-2 inline-block">
                 Learning
               </h2>
             </FadeInOnScroll>
@@ -68,7 +68,7 @@ export function CuriosityView(): JSX.Element {
                       <div>
                         <div className="flex items-center gap-3 mb-4">
                           <span className="text-4xl">🇩🇴</span>
-                          <h3 className="text-2xl font-bold font-curiosity-display text-Curiosity-text">Spanish</h3>
+                          <h3 className="text-2xl font-curiosity-display text-Curiosity-text">Spanish</h3>
                         </div>
                         <p className="text-Curiosity-text-secondary font-curiosity-body">
                           My mother tongue. The language of my thoughts, passion, and culture.
@@ -92,7 +92,7 @@ export function CuriosityView(): JSX.Element {
           {/* Code Universe Section */}
           <section id="code-universe" className="space-y-8">
             <FadeInOnScroll variant="fadeUp">
-              <h2 className="text-3xl md:text-4xl font-bold font-curiosity-display mb-8 text-Curiosity-primary border-b-2 border-Curiosity-secondary/30 pb-2 inline-block">
+              <h2 className="text-3xl md:text-4xl font-curiosity-display mb-8 text-Curiosity-primary border-b-2 border-Curiosity-secondary/30 pb-2 inline-block">
                 Code Universe
               </h2>
             </FadeInOnScroll>

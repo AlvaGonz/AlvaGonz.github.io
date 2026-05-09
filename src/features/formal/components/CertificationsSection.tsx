@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { certifications } from '../../content/education';
+import { certifications } from '@/content/education';
 
 const getCertIcon = (name: string, issuer: string): JSX.Element => {
   const iconSize = 'w-10 h-10 rounded-md';

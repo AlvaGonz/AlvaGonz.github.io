@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { organizations } from '../../content/education';
+import { organizations } from '@/content/education';
 
 export function EducationSection(): JSX.Element {
   return (

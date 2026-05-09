@@ -9,7 +9,7 @@ export function GreenGallery() {
 
   return (
     <div className="space-y-4">
-      <h3 className="text-xl font-bold font-curiosity-display text-Curiosity-text flex items-center gap-2">
+      <h3 className="text-xl font-curiosity-display text-Curiosity-text flex items-center gap-2">
         <span className="i-lucide-image"></span>
         Aesthetic
       </h3>
