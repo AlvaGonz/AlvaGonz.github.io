@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import { GitHubRepository } from '../lib/github-client';
+import { GitHubRepository } from '../../lib/github-client';
 
 interface ProjectModalProps {
   project: GitHubRepository;
@@ -76,7 +76,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
         {project.repositoryTopics.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-6">
-            {project.repositoryTopics.map((topic) => (
+            {project.repositoryTopics.map((topic: any) => (
               <span
                 key={topic.topic.name}
                 className="px-3 py-1 bg-formal-primary-mountain-meadow/20 text-formal-primary-mountain-meadow text-xs rounded-md"

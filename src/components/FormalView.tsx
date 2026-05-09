@@ -1,18 +1,18 @@
-import { ProjectCard } from './ProjectCard';
+import { ProjectCard } from './ui/ProjectCard';
 import { profile } from '../content/profile';
 import { skills } from '../content/skills';
 
-import { SkillPills } from './SkillPills';
-import { ExperienceTimeline } from './ExperienceTimeline';
-import { EducationSection } from './EducationSection';
-import { CertificationsSection } from './CertificationsSection';
-import { OrganizationsSection } from './OrganizationsSection';
-import { Contact } from './Contact';
+import { SkillPills } from './ui/SkillPills';
+import { ExperienceTimeline } from './sections/ExperienceTimeline';
+import { EducationSection } from './sections/EducationSection';
+import { CertificationsSection } from './sections/CertificationsSection';
+import { OrganizationsSection } from './sections/OrganizationsSection';
+import { Contact } from './sections/Contact';
 import { AboutFormal } from './sections/AboutFormal';
-import { GithubActivity } from './Formal/GithubActivity';
-import { DailyVerse } from './Formal/DailyVerse';
-import { TopLanguages } from './GitHub/TopLanguages';
-import { DuolingoWidget } from './Formal/DuolingoWidget';
+import { GithubActivity } from '../features/github/components/GithubActivity';
+import { DailyVerse } from './formal/DailyVerse';
+import { TopLanguages } from '../features/github/components/TopLanguages';
+import { DuolingoWidget } from '../features/duolingo/components/DuolingoWidget';
 import { useEffect, useState } from 'react';
 import {
   fetchPinnedProjects,

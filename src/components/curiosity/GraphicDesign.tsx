@@ -49,7 +49,7 @@ export function GraphicDesign() {
                 <div key={item.title} className="flex items-center gap-4">
                   <span className="text-2xl">{item.icon}</span>
                   <div>
-                    <h4 className="font-bold text-theme-text">{item.title}</h4>
+                    <h4 className="font-bold font-curiosity-display text-theme-text">{item.title}</h4>
                     <p className="text-theme-text-secondary font-curiosity-body">{item.desc}</p>
                   </div>
                 </div>

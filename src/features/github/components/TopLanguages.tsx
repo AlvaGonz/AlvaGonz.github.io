@@ -1,4 +1,4 @@
-import { useGitHubStats } from '@/hooks/useGitHubStats';
+import { useGitHubStats } from '../hooks/useGitHubStats';
 import { motion } from 'framer-motion';
 import { LanguageIcon } from '@/components/ui/LanguageIcon';
 

@@ -7,6 +7,7 @@ interface GitHubStatsData {
   };
   topLanguages: Array<{ name: string; count: number; color: string }>;
   allLanguages: Array<{ name: string; count: number; color: string; bytes: number }>;
+  repos: any[];
 }
 
 const languageColors: Record<string, string> = {
@@ -72,6 +73,7 @@ export const useGitHubStats = () => {
           },
           topLanguages,
           allLanguages: sortedLanguages,
+          repos: repos.slice(0, 6),
         });
       } catch (err) {
         setError(err instanceof Error ? err : new Error('An unknown error occurred'));

@@ -1,4 +1,4 @@
-import type { Profile } from '../content/types';
+import type { Profile } from '../../content/types';
 
 interface ContactProps {
   profile: Profile;

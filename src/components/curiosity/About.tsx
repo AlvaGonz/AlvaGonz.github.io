@@ -61,7 +61,7 @@ export function About() {
                   className={`p-4 rounded-2xl border ${interest.color} flex flex-col items-center justify-center gap-2`}
                 >
                   <span className="text-3xl">{interest.icon}</span>
-                  <span className="font-bold text-sm">{interest.label}</span>
+                  <span className="font-bold font-curiosity-display text-sm">{interest.label}</span>
                 </motion.div>
               ))}
             </div>

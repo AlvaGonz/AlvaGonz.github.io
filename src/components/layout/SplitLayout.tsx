@@ -2,8 +2,8 @@ import { useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PortfolioSelector } from './PortfolioSelector';
 import { usePortfolioSide } from '@/hooks/usePortfolioSide';
-import { Navbar } from './layout/Navbar';
-import { SpotifyNowPlaying } from './Curiosity/SpotifyNowPlaying';
+import { Navbar } from './Navbar';
+import { SpotifyNowPlaying } from '../Curiosity/SpotifyNowPlaying';
 
 interface SplitLayoutProps {
   Curiosity: React.ReactNode;
@@ -56,6 +56,7 @@ export function SplitLayout({ Curiosity, Formal }: SplitLayoutProps): JSX.Elemen
               exit={{ opacity: 0, filter: 'blur(10px)' }}
               transition={{ duration: 0.5, ease: 'easeInOut' }}
               className="w-full"
+              data-theme="Curiosity"
             >
               {Curiosity}
             </motion.div>
@@ -67,6 +68,7 @@ export function SplitLayout({ Curiosity, Formal }: SplitLayoutProps): JSX.Elemen
               exit={{ opacity: 0, filter: 'blur(10px)' }}
               transition={{ duration: 0.5, ease: 'easeInOut' }}
               className="w-full"
+              data-theme="formal"
             >
               {Formal}
             </motion.div>

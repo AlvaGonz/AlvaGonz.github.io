@@ -37,7 +37,7 @@ export function GamingShowcase() {
             {/* Content */}
             <div className="absolute bottom-0 left-0 p-5 w-full transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
               <div className="flex justify-between items-start mb-1">
-                <h4 className="font-bold text-Curiosity-text text-xl leading-tight max-w-[80%] drop-shadow-md">
+                <h4 className="font-bold font-curiosity-display text-Curiosity-text text-xl leading-tight max-w-[80%] drop-shadow-md">
                   {game.title}
                 </h4>
                 <span className="text-xs font-mono text-Curiosity-primary bg-Curiosity-primary/10 px-2 py-1 rounded border border-Curiosity-primary/20 backdrop-blur-sm">

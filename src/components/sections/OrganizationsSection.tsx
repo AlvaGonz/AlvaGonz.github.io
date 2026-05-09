@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion';
-import { organizations } from '../content/education';
+import { organizations } from '../../content/education';
 
 export function OrganizationsSection(): JSX.Element {
   if (organizations.length === 0) return <></>;
 
   return (
     <div className="grid gap-4">
-      {organizations.map((org) => (
+      {organizations.map((org: { id: string; name: string; period: string }) => (
         <motion.div
           key={org.id}
           initial={{ opacity: 0, y: 10 }}

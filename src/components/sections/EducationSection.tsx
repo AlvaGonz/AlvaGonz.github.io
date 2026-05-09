@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { education } from '../content/education';
+import { organizations } from '../../content/education';
 
 export function EducationSection(): JSX.Element {
   return (
@@ -7,7 +7,7 @@ export function EducationSection(): JSX.Element {
       {/* Education */}
       <div>
         <div className="space-y-8 border-l-2 border-formal-primary-mountain-meadow/20 ml-3 py-2">
-          {education.map((item, index) => (
+          {organizations.map((item: any, index: number) => (
             <motion.div
               key={item.id}
               initial={{ opacity: 0, x: -20 }}
@@ -31,7 +31,7 @@ export function EducationSection(): JSX.Element {
                 </div>
                 {item.skills && (
                   <div className="flex flex-wrap gap-2 mt-4">
-                    {item.skills.map((skill) => (
+                    {item.skills.map((skill: string) => (
                       <span
                         key={skill}
                         className="text-xs px-2 py-1 rounded bg-formal-primary-dark-green text-formal-primary-mountain-meadow border border-formal-primary-mountain-meadow/20"

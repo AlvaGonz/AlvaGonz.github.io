@@ -1,7 +1,7 @@
-import type { Skill } from '../content/types';
+import type { Skill } from '../../content/types';
 import { motion } from 'framer-motion';
-import { staggerContainer, scaleIn } from '@/lib/animation-variants';
-import { FadeInOnScroll } from './animations/FadeInOnScroll';
+import { staggerContainer, scaleIn } from '../../lib/animation-variants';
+import { FadeInOnScroll } from '../animations/FadeInOnScroll';
 
 interface SkillPillsProps {
   skills: Skill[];
@@ -18,7 +18,7 @@ const categoryColors: Record<Skill['category'], string> = {
 
 export function SkillPills({ skills, animate = true }: SkillPillsProps): JSX.Element {
   const groupedSkills = skills.reduce(
-    (acc, skill) => {
+    (acc: Record<Skill['category'], Skill[]>, skill: Skill) => {
       if (!acc[skill.category]) {
         acc[skill.category] = [];
       }
@@ -33,7 +33,7 @@ export function SkillPills({ skills, animate = true }: SkillPillsProps): JSX.Ele
 
   return (
     <div className="space-y-8">
-      {(Object.keys(groupedSkills) as Skill['category'][]).map((category, catIndex) => (
+      {(Object.keys(groupedSkills) as Skill['category'][]).map((category: Skill['category'], catIndex: number) => (
         <FadeInOnScroll key={category} delay={catIndex * 0.1} variant="fadeUp">
           <div className="relative">
             <h3 className="text-xl font-bold text-theme-primary mb-4 capitalize flex items-center gap-2">
@@ -48,7 +48,7 @@ export function SkillPills({ skills, animate = true }: SkillPillsProps): JSX.Ele
               whileInView={animate ? 'visible' : undefined}
               viewport={animate ? { once: true } : undefined}
             >
-              {groupedSkills[category].map((skill) => (
+              {groupedSkills[category].map((skill: Skill) => (
                 <Item
                   key={skill.name}
                   variants={animate ? scaleIn : undefined}

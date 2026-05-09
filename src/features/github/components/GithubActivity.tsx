@@ -1,5 +1,5 @@
-import { useFetch } from '../../hooks/useFetch';
-import { getGithubActivityUrl, GitHubEvent } from '../../services/github';
+import { useFetch } from '../../../hooks/useFetch';
+import { getGithubActivityUrl, GitHubEvent } from '../../../services/github';
 
 export function GithubActivity() {
   const { data: events, loading, error } = useFetch<GitHubEvent[]>(getGithubActivityUrl());
@@ -8,7 +8,7 @@ export function GithubActivity() {
   if (error) return null; // Hide silently on error
 
   const pushEvents = events
-    ?.filter((e) => e.type === 'PushEvent' || e.type === 'CreateEvent')
+    ?.filter((e: any) => e.type === 'PushEvent' || e.type === 'CreateEvent')
     .slice(0, 4);
 
   if (!pushEvents?.length) return null;
@@ -20,7 +20,7 @@ export function GithubActivity() {
         Recent Activity
       </h3>
       <div className="space-y-3">
-        {pushEvents.map((event) => (
+        {pushEvents.map((event: any) => (
           <div
             key={event.id}
             className="flex gap-3 text-sm border-l-2 border-gray-200/20 pl-3 py-1"

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import duolingoData from '../data/generated/duolingo.json';
+import duolingoData from '../../../data/generated/duolingo.json';
 
 export interface DuolingoCourse {
   title: string;

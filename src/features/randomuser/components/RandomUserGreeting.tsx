@@ -1,4 +1,4 @@
-import { useRandomUser } from '@/hooks/useRandomUser';
+import { useRandomUser } from '../hooks/useRandomUser';
 import { motion } from 'framer-motion';
 
 export function RandomUserGreeting() {

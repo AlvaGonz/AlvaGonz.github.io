@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Notable&display=swap');
 
 
 /* Primary Colors from Palette 1 */
@@ -56,6 +57,10 @@
   --shadow-modern: 0 4px 6px -1px rgb(0 0 0 / 0.1);
   --blur-modern: 0px;
   --gradient-intensity: 0;
+
+  /* Curiosity Typography */
+  --font-curiosity-display: 'Notable', sans-serif;
+  --font-curiosity-body: 'Outfit', sans-serif;
 }
 
 /* Curiosity Theme Override */
@@ -68,10 +73,18 @@
   --theme-text: var(--c-Curiosity-text);
   --theme-text-secondary: var(--c-Curiosity-text-secondary);
   --theme-border: rgba(199, 206, 232, 0.2);
+  
+  font-family: var(--font-curiosity-body);
+}
 
-  /* ── Curiosity Typography Override ── */
-  --font-curiosity-display: 'Notable', system-ui, sans-serif;
-  --font-curiosity-body: 'Notable', system-ui, sans-serif;
+[data-theme='Curiosity'] h1,
+[data-theme='Curiosity'] h2,
+[data-theme='Curiosity'] h3,
+[data-theme='Curiosity'] h4,
+[data-theme='Curiosity'] h5,
+[data-theme='Curiosity'] h6 {
+  font-family: var(--font-curiosity-display);
+  letter-spacing: 0.05em;
 }
 
 /* Dynamic updates based on scroll progress */

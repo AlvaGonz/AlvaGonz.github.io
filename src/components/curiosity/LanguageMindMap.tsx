@@ -6,7 +6,7 @@ import {
   useTransform,
   AnimatePresence,
 } from 'framer-motion';
-import { useGitHubStats } from '@/hooks/useGitHubStats';
+import { useGitHubStats } from '../../features/github/hooks/useGitHubStats';
 import { LanguageIcon } from '../ui/LanguageIcon';
 
 interface NodeData {
@@ -190,7 +190,7 @@ export function LanguageMindMap() {
   useEffect(() => {
     if (!data?.allLanguages) return;
 
-    const newNodes: NodeData[] = data.allLanguages.map((lang, i) => {
+    const newNodes: NodeData[] = data.allLanguages.map((lang: any, i: number) => {
       // Orbit parameters
       const initialAngle = (i / data.allLanguages.length) * Math.PI * 2; // Distribute evenly
       const radius = 150 + Math.random() * 150; // Random distance from black hole

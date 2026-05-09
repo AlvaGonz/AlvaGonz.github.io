@@ -7,13 +7,13 @@ import { GamingShowcase } from './Curiosity/GamingShowcase';
 import { NFSWidget } from './Curiosity/NFSWidget';
 import { Hobbies } from './Curiosity/Hobbies';
 import { Roadmap } from './sections/Roadmap';
-import { DailyVerse } from './Formal/DailyVerse';
+import { DailyVerse } from './formal/DailyVerse';
 import { ContactCuriosity } from './Curiosity/ContactCuriosity';
 import { AnimatedBg } from './svg/AnimatedBg';
 import { FloatingElements } from './svg/FloatingElements';
 import { HeroCuriosity } from './sections/HeroCuriosity';
 import { FadeInOnScroll } from './animations/FadeInOnScroll';
-import { DuolingoFireWidget } from './Curiosity/DuolingoFireWidget';
+import { DuolingoFireWidget } from '../features/duolingo/components/DuolingoFireWidget';
 import { profile } from '../content/profile';
 import { LanguageMindMap } from './Curiosity/LanguageMindMap';
 

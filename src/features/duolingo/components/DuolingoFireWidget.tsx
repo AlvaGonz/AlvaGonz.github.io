@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './DuolingoFireWidget.css';
-import { useDuolingoStats } from '@/hooks/useDuolingoStats';
+import duolingoData from '../../../data/generated/duolingo.json';
 
 interface DuolingoFireWidgetProps {
   username?: string;
@@ -13,8 +13,7 @@ export const DuolingoFireWidget: React.FC<DuolingoFireWidgetProps> = ({
 }) => {
   const [isFireActive, setIsFireActive] = useState<boolean>(false);
 
-  // Fallback data
-  const fallbackStats = {
+  const stats = (duolingoData && (duolingoData as any).username === username) ? (duolingoData as any) : {
     username: username,
     streak: 452,
     totalXp: 30705,
@@ -28,17 +27,6 @@ export const DuolingoFireWidget: React.FC<DuolingoFireWidgetProps> = ({
     motivation: 'serious',
   };
 
-  const {
-    stats: hookStats,
-    loading,
-    error,
-  } = useDuolingoStats({
-    username,
-    fallbackData: fallbackStats,
-  });
-
-  const displayStats = hookStats;
-
   const handleWidgetClick = () => {
     if (isFireActive) return;
     setIsFireActive(true);
@@ -47,14 +35,6 @@ export const DuolingoFireWidget: React.FC<DuolingoFireWidgetProps> = ({
       if (onFireComplete) onFireComplete();
     }, 3000);
   };
-
-  if (loading) {
-    return (
-      <div className="w-full h-48 rounded-2xl bg-theme-surface animate-pulse flex items-center justify-center border border-theme-border">
-        <div className="w-8 h-8 border-4 border-Curiosity-primary border-t-transparent rounded-full animate-spin"></div>
-      </div>
-    );
-  }
 
   return (
     <div
@@ -67,7 +47,6 @@ export const DuolingoFireWidget: React.FC<DuolingoFireWidgetProps> = ({
         shadow-[0_4px_12px_rgba(88,204,2,0.1)]
         hover:shadow-[0_8px_24px_rgba(88,204,2,0.2)] hover:-translate-y-0.5
         ${isFireActive ? 'fire-active' : ''}
-        ${error && !isFireActive ? 'border-[#FF4B4B]' : ''}
       `}
       onClick={handleWidgetClick}
       role="button"
@@ -145,7 +124,7 @@ export const DuolingoFireWidget: React.FC<DuolingoFireWidgetProps> = ({
         {/* Avatar */}
         <div className="relative shrink-0">
           <img
-            src={displayStats?.avatar || '/images/duo-face.png'}
+            src={stats?.avatar || '/images/duo-face.png'}
             alt={`${username}'s avatar`}
             className={`
               duo-avatar w-20 h-20 rounded-full object-cover border-4 border-white
@@ -158,7 +137,7 @@ export const DuolingoFireWidget: React.FC<DuolingoFireWidgetProps> = ({
             }}
           />
           <div className="absolute -bottom-1 -right-1 bg-[#58CC02] text-white text-sm font-bold px-2 py-1 rounded-md border-2 border-white">
-            {displayStats?.level}
+            {stats?.level}
           </div>
         </div>
 
@@ -168,7 +147,7 @@ export const DuolingoFireWidget: React.FC<DuolingoFireWidgetProps> = ({
             <h3
               className={`font-bold text-[1.73rem] font-curiosity-display ${isFireActive ? 'text-white' : 'text-[#4B4B4B]'}`}
             >
-              {displayStats?.username}
+              {stats?.username}
             </h3>
           </div>
 
@@ -183,7 +162,7 @@ export const DuolingoFireWidget: React.FC<DuolingoFireWidgetProps> = ({
                 <span
                   className={`streak-count text-[2.88rem] font-black leading-none ${isFireActive ? 'text-white' : 'text-[#F49000]'}`}
                 >
-                  {displayStats?.streak}
+                  {stats?.streak}
                 </span>
                 <img
                   src="/images/streak-flame-updated-v0-3n46sx7a0e9b1.webp"
@@ -202,7 +181,7 @@ export const DuolingoFireWidget: React.FC<DuolingoFireWidgetProps> = ({
               <span
                 className={`font-bold text-[1.44rem] ${isFireActive ? 'text-white' : 'text-[#4B4B4B]'}`}
               >
-                {displayStats?.totalXp.toLocaleString()}
+                {stats?.totalXp.toLocaleString()}
               </span>
             </div>
           </div>
@@ -222,7 +201,7 @@ export const DuolingoFireWidget: React.FC<DuolingoFireWidgetProps> = ({
         </div>
 
         <div className="space-y-2">
-          {displayStats?.courses.slice(0, 3).map((course, idx) => (
+          {stats.courses.map((course: any, idx: number) => (
             <div key={idx} className="flex justify-between items-center text-[1.15rem]">
               <div className="flex items-center gap-2">
                 <span className={`font-medium ${isFireActive ? 'text-white' : 'text-[#4B4B4B]'}`}>

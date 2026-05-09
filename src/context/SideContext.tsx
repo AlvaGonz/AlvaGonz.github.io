@@ -1,4 +1,4 @@
-import { createContext, useState, useCallback, useContext, ReactNode } from 'react';
+import { createContext, useState, useCallback, useContext, ReactNode, useEffect } from 'react';
 
 export type Side = 'Curiosity' | 'formal';
 
@@ -26,6 +26,14 @@ const getInitialSide = (): Side | null => {
 
 export function SideProvider({ children }: { children: ReactNode }) {
   const [side, setSideState] = useState<Side | null>(getInitialSide);
+
+  useEffect(() => {
+    if (side) {
+      document.body.setAttribute('data-theme', side);
+    } else {
+      document.body.removeAttribute('data-theme');
+    }
+  }, [side]);
 
   const setSide = useCallback((newSide: Side | null) => {
     setSideState(newSide);

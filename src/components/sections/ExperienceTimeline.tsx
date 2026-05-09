@@ -1,10 +1,19 @@
-import { experience } from '../content/experience';
-import { FadeInOnScroll } from './animations/FadeInOnScroll';
+import { experience } from '../../content/experience';
+import { FadeInOnScroll } from '../animations/FadeInOnScroll';
+
+interface ExperienceItem {
+  id: string;
+  role: string;
+  company: string;
+  period: string;
+  description: string | string[];
+  skills?: string[];
+}
 
 export function ExperienceTimeline(): JSX.Element {
   return (
     <div className="relative border-l-2 border-theme-primary/30 ml-3 space-y-12 py-4">
-      {experience.map((item, index) => (
+      {experience.map((item: ExperienceItem, index: number) => (
         <FadeInOnScroll
           key={item.id}
           delay={index * 0.1}
@@ -25,7 +34,7 @@ export function ExperienceTimeline(): JSX.Element {
 
           {Array.isArray(item.description) ? (
             <ul className="list-disc list-outside ml-4 mb-4 space-y-2 text-theme-text-secondary max-w-2xl">
-              {item.description.map((point, i) => (
+              {item.description.map((point: any, i: number) => (
                 <li key={i} className="leading-relaxed">
                   {point}
                 </li>
@@ -39,7 +48,7 @@ export function ExperienceTimeline(): JSX.Element {
 
           {item.skills && (
             <div className="flex flex-wrap gap-2">
-              {item.skills.map((skill) => (
+              {item.skills.map((skill: string) => (
                 <span
                   key={skill}
                   className="text-xs font-medium px-2.5 py-0.5 rounded-full bg-theme-primary/10 text-theme-primary border border-theme-primary/20"

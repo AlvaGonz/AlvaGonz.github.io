@@ -83,7 +83,7 @@ export function ContactCuriosity({ profile }: ContactCuriosityProps): JSX.Elemen
                       className={`w-10 h-10 group-hover:scale-110 transition-transform ${card.iconClass}`}
                     />
                   </div>
-                  <span className="text-Curiosity-text font-bold text-lg">{card.label}</span>
+                  <span className="text-Curiosity-text font-bold font-curiosity-display text-lg">{card.label}</span>
                   <span className="text-Curiosity-text-secondary text-sm">{card.subtext}</span>
                 </div>
               </a>
@@ -106,7 +106,7 @@ export function ContactCuriosity({ profile }: ContactCuriosityProps): JSX.Elemen
                     className="w-10 h-10 group-hover:scale-110 transition-transform"
                   />
                 </div>
-                <span className="text-Curiosity-text font-bold text-lg">Email</span>
+                <span className="text-Curiosity-text font-bold font-curiosity-display text-lg">Email</span>
                 <span className="text-Curiosity-text-secondary text-sm">Drop a message</span>
               </div>
             </a>

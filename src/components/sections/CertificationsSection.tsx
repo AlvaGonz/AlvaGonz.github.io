@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { certifications } from '../content/education';
+import { certifications } from '../../content/education';
 
 const getCertIcon = (name: string, issuer: string): JSX.Element => {
   const iconSize = 'w-10 h-10 rounded-md';
@@ -30,7 +30,7 @@ const getCertIcon = (name: string, issuer: string): JSX.Element => {
 export function CertificationsSection(): JSX.Element {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {certifications.map((cert, index) => (
+      {certifications.map((cert: { id: string, url: string, name: string, issuer: string, date: string, credentialId?: string, skills?: string[] }, index: number) => (
         <a
           key={cert.id}
           href={cert.url}
@@ -67,7 +67,7 @@ export function CertificationsSection(): JSX.Element {
 
             {cert.skills && (
               <div className="flex flex-wrap gap-1.5">
-                {cert.skills.slice(0, 4).map((skill) => (
+                {cert.skills.slice(0, 4).map((skill: string) => (
                   <span
                     key={skill}
                     className="text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-formal-secondary-pistachio border border-white/10"
