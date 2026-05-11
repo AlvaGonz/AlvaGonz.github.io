@@ -54,9 +54,16 @@ export function FormalView(): JSX.Element {
         } else {
           setError('No repositories found');
         }
-      } catch (err) {
-        const errorMsg = err instanceof Error ? err.message : 'Unknown error';
-        setError(`Failed to load projects: ${errorMsg}`);
+      } catch (err: any) {
+        let errorMsg = err instanceof Error ? err.message : 'Unknown error';
+        
+        // Handle GraphQL specific 401 errors
+        if (errorMsg.includes('401') || (err.response && err.response.status === 401)) {
+          errorMsg = 'GitHub Authentication failed (401). Your token might be expired, invalid, or revoked.';
+          console.warn('❌ GitHub 401: Token revoked or invalid. Make sure to generate a new token and update .env.local');
+        }
+
+        setError(errorMsg);
         console.error('❌ Error loading projects:', err);
       } finally {
         setLoading(false);

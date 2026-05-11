@@ -1,7 +1,9 @@
 import { Octokit } from '@octokit/rest';
 
+const token = import.meta.env.VITE_GITHUB_TOKEN?.trim();
+
 const octokit = new Octokit({
-  auth: import.meta.env.VITE_GITHUB_TOKEN,
+  auth: token,
 });
 
 export async function getTopLanguages() {

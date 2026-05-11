@@ -1,23 +1,31 @@
 import { GraphQLClient, gql } from 'graphql-request';
 
 // Validar que token existe
-const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
-const GITHUB_USER = 'AlvaGonz';
+// Validar que token existe y limpiarlo
+const RAW_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
+const GITHUB_TOKEN = RAW_TOKEN ? RAW_TOKEN.trim() : null;
+const GITHUB_USER = import.meta.env.VITE_GITHUB_USERNAME || 'AlvaGonz';
 
 if (!GITHUB_TOKEN) {
   console.warn('⚠️ VITE_GITHUB_TOKEN not found in .env.local');
   console.warn('GitHub API requests will be rate-limited (60/hour)');
 } else {
-  console.log(`✅ GitHub Token detected (Length: ${GITHUB_TOKEN.length})`);
+  // Solo logueamos longitud y los primeros caracteres para debug seguro
+  console.log(
+    `✅ GitHub Token detected (Length: ${GITHUB_TOKEN.length}, Starts with: ${GITHUB_TOKEN.substring(0, 4)}...)`
+  );
 }
 
-// Cliente GraphQL con autenticación
-const graphqlClient = new GraphQLClient('https://api.github.com/graphql', {
-  headers: {
-    Authorization: `Bearer ${GITHUB_TOKEN || ''}`,
-    'Content-Type': 'application/json',
-  },
-});
+// Cliente GraphQL con autenticación (Lazy initialization or dynamic headers)
+const getGraphqlClient = () => {
+  return new GraphQLClient('https://api.github.com/graphql', {
+    headers: {
+      ...(GITHUB_TOKEN ? { Authorization: `Bearer ${GITHUB_TOKEN}` } : {}),
+      'Content-Type': 'application/json',
+      'X-GitHub-Api-Version': '2022-11-28',
+    },
+  });
+};
 
 // ==================== QUERIES ====================
 
@@ -210,7 +218,8 @@ export interface GitHubUserStats {
  */
 export async function fetchPinnedProjects(): Promise<GitHubRepository[]> {
   // Remove try-catch to let the component handle the error
-  const data: any = await graphqlClient.request(PINNED_REPOS_QUERY, {
+  const client = getGraphqlClient();
+  const data: any = await client.request(PINNED_REPOS_QUERY, {
     userName: GITHUB_USER,
   });
 
@@ -242,7 +251,8 @@ export async function fetchPinnedProjects(): Promise<GitHubRepository[]> {
  */
 export async function fetchAllPublicRepos(limit: number = 20): Promise<GitHubRepository[]> {
   // Remove try-catch to let the component handle the error
-  const data: any = await graphqlClient.request(ALL_REPOS_QUERY, {
+  const client = getGraphqlClient();
+  const data: any = await client.request(ALL_REPOS_QUERY, {
     userName: GITHUB_USER,
     first: limit,
   });
@@ -275,7 +285,8 @@ export async function fetchAllPublicRepos(limit: number = 20): Promise<GitHubRep
  */
 export async function fetchUserStats(): Promise<GitHubUserStats | null> {
   try {
-    const data: any = await graphqlClient.request(USER_STATS_QUERY, {
+    const client = getGraphqlClient();
+    const data: any = await client.request(USER_STATS_QUERY, {
       userName: GITHUB_USER,
     });
 
@@ -327,7 +338,8 @@ export async function fetchRepositoryByName(repoName: string): Promise<GitHubRep
   `;
 
   try {
-    const data: any = await graphqlClient.request(REPO_QUERY, {
+    const client = getGraphqlClient();
+    const data: any = await client.request(REPO_QUERY, {
       owner: GITHUB_USER,
       name: repoName,
     });
@@ -368,7 +380,8 @@ export async function validateToken(): Promise<boolean> {
   }
 
   try {
-    const data: any = await graphqlClient.request(gql`
+    const client = getGraphqlClient();
+    const data: any = await client.request(gql`
       query {
         viewer {
           login
