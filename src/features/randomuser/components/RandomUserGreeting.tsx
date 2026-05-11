@@ -1,5 +1,6 @@
 import { useRandomUser } from '../hooks/useRandomUser';
 import { motion } from 'framer-motion';
+import { WavingHandIcon } from '@/components/icons/CustomIcons';
 
 export function RandomUserGreeting() {
   const { data, loading, error } = useRandomUser();
@@ -17,7 +18,6 @@ export function RandomUserGreeting() {
   }
 
   const user = data.results[0];
-  const greeting = `Hello, I'm ${user.name.first}! 👋`;
 
   return (
     <motion.div
@@ -29,12 +29,15 @@ export function RandomUserGreeting() {
       {user.picture && (
         <img
           src={user.picture.medium}
-          alt={greeting}
+          alt={`Profile of ${user.name.first}`}
           className="w-16 h-16 rounded-full border-2 border-curiosity-primary"
         />
       )}
       <div className="flex-1">
-        <p className="text-curiosity-text font-curiosity-body font-semibold">{greeting}</p>
+        <p className="text-curiosity-text font-curiosity-body font-semibold flex items-center gap-2">
+          Hello, I'm {user.name.first}!{' '}
+          <WavingHandIcon className="w-5 h-5 text-curiosity-accent animate-bounce" />
+        </p>
         <p className="text-sm font-curiosity-body text-curiosity-text-secondary">
           From {user.location.city}, {user.location.country}
         </p>

@@ -2,34 +2,35 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FadeInOnScroll } from '@/components/animations/FadeInOnScroll';
+import { Dumbbell, Hammer, BookOpen, Music } from 'lucide-react';
 
 const hobbies = [
   {
-    icon: '💪',
+    icon: Dumbbell,
     label: 'Working Out',
     desc: 'Building discipline through fitness. Calisthenics, weightlifting, and nutrition.',
     borderClass: 'border-curiosity-highlight/30',
     interactive: false,
   },
   {
-    icon: '🔨',
+    icon: Hammer,
     label: 'Tech Tinkering',
-    desc: "Building PCs, fixing hardware, and breaking things just to see how they work.",
-    hint: '(Warning: Don\'t click too many times...)',
+    desc: 'Building PCs, fixing hardware, and breaking things just to see how they work.',
+    hint: "(Warning: Don't click too many times...)",
     borderClass: 'border-curiosity-primary/30',
     glowClass: 'bg-curiosity-primary/5 group-hover:bg-curiosity-primary/10',
     hintClass: 'text-curiosity-primary/70',
     interactive: true,
   },
   {
-    icon: '📚',
+    icon: BookOpen,
     label: 'Reading',
     desc: 'Sci-fi, Theology, and Tech documentation. Always learning something new.',
     borderClass: 'border-curiosity-secondary/30',
     interactive: false,
   },
   {
-    icon: '🎵',
+    icon: Music,
     label: 'Music',
     desc: 'Appreciating everything from Lo-Fi beats to Worship music.',
     borderClass: 'border-curiosity-accent/30',
@@ -99,16 +100,22 @@ export function Hobbies() {
                 onClick={handleTinkeringClick}
                 className={`bg-[#282e45] p-6 rounded-2xl border ${hobby.borderClass} shadow-2xl cursor-pointer group h-full relative overflow-hidden`}
               >
-                <div className={`absolute inset-0 transition-colors ${'glowClass' in hobby ? hobby.glowClass : ''}`} />
+                <div
+                  className={`absolute inset-0 transition-colors ${'glowClass' in hobby ? hobby.glowClass : ''}`}
+                />
                 <div className="relative z-10">
-                  <div className="text-4xl mb-4">{hobby.icon}</div>
-                  <h3 className="text-xl font-curiosity-display text-curiosity-text mb-2">{hobby.label}</h3>
+                  <hobby.icon className="w-10 h-10 mb-4 text-curiosity-primary" />
+                  <h3 className="text-xl font-curiosity-display text-curiosity-text mb-2">
+                    {hobby.label}
+                  </h3>
                   <p className="text-curiosity-text-secondary font-curiosity-body text-sm leading-relaxed">
                     {hobby.desc}
                     {'hint' in hobby && (
                       <>
                         <br />
-                        <span className={`text-xs mt-2 block italic ${'hintClass' in hobby ? hobby.hintClass : ''}`}>
+                        <span
+                          className={`text-xs mt-2 block italic ${'hintClass' in hobby ? hobby.hintClass : ''}`}
+                        >
                           {hobby.hint}
                         </span>
                       </>
@@ -124,9 +131,13 @@ export function Hobbies() {
                 transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                 className={`bg-[#282e45] p-6 rounded-2xl border ${hobby.borderClass} shadow-2xl h-full`}
               >
-                <div className="text-4xl mb-4">{hobby.icon}</div>
-                <h3 className="text-xl font-curiosity-display text-curiosity-text mb-2">{hobby.label}</h3>
-                <p className="text-curiosity-text-secondary font-curiosity-body text-sm leading-relaxed">{hobby.desc}</p>
+                <hobby.icon className="w-10 h-10 mb-4 text-curiosity-primary" />
+                <h3 className="text-xl font-curiosity-display text-curiosity-text mb-2">
+                  {hobby.label}
+                </h3>
+                <p className="text-curiosity-text-secondary font-curiosity-body text-sm leading-relaxed">
+                  {hobby.desc}
+                </p>
               </motion.div>
             </FadeInOnScroll>
           ),

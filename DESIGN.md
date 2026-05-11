@@ -166,6 +166,17 @@ Both themes expose a unified set of CSS custom properties that shared components
 
 ---
 
+## 4.6 Icon System & Decorative Elements
+
+To ensure visual consistency, high fidelity, and theme-appropriate coloring, the portfolio avoids the use of standard text emojis for decorative elements. Instead, it utilizes an SVG-based icon system:
+
+- **Lucide Icons:** Used for primary functional and decorative iconography (e.g., `Star`, `GitFork`, `Gamepad2`, `Clock`, `Sparkles`, `Flame`).
+- **Thematic Consistency:** Icons are tinted using theme-specific colors (e.g., `text-curiosity-primary` for stars in the Curiosity theme).
+- **Interactive Elements:** Symbols like arrows and bullet points are rendered as SVGs (`ArrowRight`, `Circle`) to maintain crispness across all zoom levels and devices.
+- **Custom Icons:** Unique thematic elements (e.g., the Dominican Flag in Curiosity view) are implemented as custom SVG components.
+
+---
+
 ## 5. Layout Principles
 
 ### Responsive Grid

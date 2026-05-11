@@ -87,7 +87,7 @@ export function useFetch<T>(url: string, options?: FetchOptions): ApiState<T> {
       const interval = setInterval(fetchData, options.interval);
       return () => clearInterval(interval);
     }
-    
+
     return undefined;
   }, [url, options?.interval, options?.skip]);
 

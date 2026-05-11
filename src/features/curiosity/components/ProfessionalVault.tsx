@@ -30,10 +30,15 @@ export function ProfessionalVault() {
                   <h4 className="text-sm font-curiosity-display text-curiosity-text group-hover:text-curiosity-primary transition-colors">
                     {exp.role}
                   </h4>
-                  <p className="text-[15px] text-curiosity-text-secondary font-mono opacity-60 mb-2">@ {exp.company}</p>
+                  <p className="text-[15px] text-curiosity-text-secondary font-mono opacity-60 mb-2">
+                    @ {exp.company}
+                  </p>
                   <div className="flex flex-wrap gap-1">
-                    {exp.skills?.slice(0, 3).map(skill => (
-                      <span key={skill} className="text-[12px] px-1.5 py-0.5 rounded bg-white/5 text-curiosity-text-secondary border border-white/5">
+                    {exp.skills?.slice(0, 3).map((skill) => (
+                      <span
+                        key={skill}
+                        className="text-[12px] px-1.5 py-0.5 rounded bg-white/5 text-curiosity-text-secondary border border-white/5"
+                      >
                         {skill}
                       </span>
                     ))}
@@ -57,8 +62,12 @@ export function ProfessionalVault() {
                   <h4 className="text-sm font-curiosity-display text-curiosity-text group-hover:text-curiosity-secondary transition-colors leading-tight">
                     {edu.school}
                   </h4>
-                  <p className="text-[15px] text-curiosity-text-secondary font-curiosity-body mt-1">{edu.degree}</p>
-                  <p className="text-[12px] font-mono text-curiosity-text-secondary/40 mt-2 italic">{edu.period}</p>
+                  <p className="text-[15px] text-curiosity-text-secondary font-curiosity-body mt-1">
+                    {edu.degree}
+                  </p>
+                  <p className="text-[12px] font-mono text-curiosity-text-secondary/40 mt-2 italic">
+                    {edu.period}
+                  </p>
                 </div>
               </FadeInOnScroll>
             ))}
@@ -72,15 +81,18 @@ export function ProfessionalVault() {
             Project Satellites
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {loading ? (
-              Array.from({ length: 4 }).map((_, i) => (
-                <div key={i} className="h-[200px] bg-curiosity-bg/20 animate-pulse rounded-2xl border border-white/5" />
-              ))
-            ) : (
-              projects.slice(0, 4).map((project, i) => (
-                <ProjectSatellite key={project.id} project={project} index={i} />
-              ))
-            )}
+            {loading
+              ? Array.from({ length: 4 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className="h-[200px] bg-curiosity-bg/20 animate-pulse rounded-2xl border border-white/5"
+                  />
+                ))
+              : projects
+                  .slice(0, 4)
+                  .map((project, i) => (
+                    <ProjectSatellite key={project.id} project={project} index={i} />
+                  ))}
           </div>
           {projects.length > 4 && (
             <div className="flex justify-center mt-4">
@@ -124,7 +136,9 @@ export function ProfessionalVault() {
             {organizations.map((org, i) => (
               <FadeInOnScroll key={org.id} delay={i * 0.1} variant="scale">
                 <div className="bg-curiosity-bg/20 backdrop-blur-sm p-3 rounded-lg border border-white/5 hover:bg-white/5 transition-all">
-                  <p className="text-[15px] font-curiosity-display text-curiosity-text-secondary">{org.name}</p>
+                  <p className="text-[15px] font-curiosity-display text-curiosity-text-secondary">
+                    {org.name}
+                  </p>
                   <p className="text-[12px] font-mono text-white/20">{org.period}</p>
                 </div>
               </FadeInOnScroll>

@@ -8,6 +8,7 @@ import {
 } from 'framer-motion';
 import { useGitHubStats } from '@/features/github/hooks/useGitHubStats';
 import { LanguageIcon } from '@/components/ui/LanguageIcon';
+import { CelestialIcon } from '@/components/icons/CustomIcons';
 
 interface NodeData {
   id: string;
@@ -270,12 +271,12 @@ export function LanguageMindMap() {
           {/* Accretion Disk - Inner */}
           <div className="absolute inset-4 rounded-full border-2 border-b-purple-400/80 border-l-transparent border-t-blue-400/80 border-r-transparent animate-spin-reverse-slow blur-[1px]"></div>
 
-          {/* Black Hole Core */}
           <div className="relative w-24 h-24 bg-black rounded-full shadow-[0_0_60px_rgba(139,92,246,0.6)] border border-white/5 flex items-center justify-center overflow-hidden z-20 group-active:scale-95 transition-transform">
             <div className="absolute inset-0 bg-gradient-to-br from-black via-purple-900/20 to-black"></div>
-            <span className="text-3xl z-30 opacity-80 group-hover:scale-110 transition-transform">
-              🌌
-            </span>
+            <CelestialIcon
+              size={40}
+              className="z-30 text-purple-400 opacity-80 group-hover:scale-110 transition-transform"
+            />
           </div>
         </div>
         <span className="mt-6 text-white/60 font-mono text-sm tracking-[0.2em] uppercase glow-text group-hover:text-white transition-colors">
@@ -338,7 +339,9 @@ export function LanguageMindMap() {
 
               {/* Curious Fact */}
               <div className="pt-3 border-t border-white/10">
-                <p className="text-white/70 font-curiosity-body text-xs italic leading-relaxed">"{hoveredNode.fact}"</p>
+                <p className="text-white/70 font-curiosity-body text-xs italic leading-relaxed">
+                  "{hoveredNode.fact}"
+                </p>
               </div>
             </div>
           </motion.div>

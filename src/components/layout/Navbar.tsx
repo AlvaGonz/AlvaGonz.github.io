@@ -158,7 +158,13 @@ export function Navbar() {
                       : 'bg-formal-primary-dark-green text-formal-primary-mountain-meadow border border-formal-primary-mountain-meadow/30'
                   }`}
                 >
-                  <span>{side === 'curiosity' ? <Sparkles className="w-3.5 h-3.5" /> : <Briefcase className="w-3.5 h-3.5" />}</span>
+                  <span>
+                    {side === 'curiosity' ? (
+                      <Sparkles className="w-3.5 h-3.5" />
+                    ) : (
+                      <Briefcase className="w-3.5 h-3.5" />
+                    )}
+                  </span>
                   <span className="capitalize">{side}</span>
                 </div>
               </div>
@@ -169,4 +175,3 @@ export function Navbar() {
     </nav>
   );
 }
-

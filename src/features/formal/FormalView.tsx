@@ -15,6 +15,8 @@ import { TopLanguages } from '@/features/github/components/TopLanguages';
 import { DuolingoWidget } from '@/features/duolingo/components/DuolingoWidget';
 import { useGithubProjects } from '@/hooks/useGithubProjects';
 
+import { DominicanFlagIcon } from '@/components/icons/FlagIcons';
+
 export function FormalView(): JSX.Element {
   const { projects, loading, error } = useGithubProjects();
 
@@ -35,7 +37,9 @@ export function FormalView(): JSX.Element {
             <h1 className="text-4xl md:text-5xl font-bold mb-2 text-formal-primary-anti-flash-white">
               {profile.name}
             </h1>
-            <p className="text-xl md:text-2xl text-formal-primary-mountain-meadow mb-4">{profile.role}</p>
+            <p className="text-xl md:text-2xl text-formal-primary-mountain-meadow mb-4">
+              {profile.role}
+            </p>
             <p className="text-lg text-formal-secondary-pistachio max-w-2xl">{profile.tagline}</p>
             <div className="flex items-center gap-2 mt-2 text-md text-formal-secondary-stone justify-center md:justify-start">
               <img
@@ -94,7 +98,7 @@ export function FormalView(): JSX.Element {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="bg-formal-primary-rich-black/50 p-4 rounded-xl border border-white/5 flex items-center justify-between hover:bg-white/5 transition-colors">
               <div className="flex items-center gap-3">
-                <span className="text-2xl">🇩🇴</span>
+                <DominicanFlagIcon size={24} className="rounded-sm" />
                 <div>
                   <h3 className="font-bold text-white">Spanish</h3>
                   <p className="text-sm text-formal-secondary-stone">Native</p>

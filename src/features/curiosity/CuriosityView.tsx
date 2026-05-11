@@ -11,6 +11,7 @@ import { ContactCuriosity } from '@/features/curiosity/components/ContactCuriosi
 import { AnimatedBg } from '@/components/svg/AnimatedBg';
 import { FloatingElements } from '@/components/svg/FloatingElements';
 import { HeroCuriosity } from '@/features/curiosity/components/HeroCuriosity';
+import { DominicanFlagIcon } from '@/components/icons/FlagIcons';
 import { FadeInOnScroll } from '@/components/animations/FadeInOnScroll';
 import { DuolingoFireWidget } from '@/features/duolingo/components/DuolingoFireWidget';
 import { profile } from '@/content/profile';
@@ -67,8 +68,10 @@ export function CuriosityView(): JSX.Element {
                     <div className="relative z-10 flex flex-col h-full justify-between">
                       <div>
                         <div className="flex items-center gap-3 mb-4">
-                          <span className="text-4xl">🇩🇴</span>
-                          <h3 className="text-2xl font-curiosity-display text-curiosity-text">Spanish</h3>
+                          <DominicanFlagIcon size={36} className="rounded-sm shadow-sm" />
+                          <h3 className="text-2xl font-curiosity-display text-curiosity-text">
+                            Spanish
+                          </h3>
                         </div>
                         <p className="text-curiosity-text-secondary font-curiosity-body">
                           My mother tongue. The language of my thoughts, passion, and culture.

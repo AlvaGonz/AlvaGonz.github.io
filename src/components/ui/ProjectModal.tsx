@@ -1,4 +1,5 @@
 import { useRef, useEffect } from 'react';
+import { Star, GitFork, X } from 'lucide-react';
 import { GitHubRepository } from '../../lib/github-client';
 
 interface ProjectModalProps {
@@ -41,9 +42,11 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
           onClick={onClose}
           className="absolute top-4 right-4 text-formal-primary-anti-flash-white hover:text-red-500 text-2xl font-bold transition-colors"
         >
-          &times;
+          <X size={24} />
         </button>
-        <h2 className="text-3xl font-bold text-formal-primary-anti-flash-white mb-4">{project.name}</h2>
+        <h2 className="text-3xl font-bold text-formal-primary-anti-flash-white mb-4">
+          {project.name}
+        </h2>
         <p className="text-formal-secondary-stone mb-6">
           {project.description || 'No description provided.'}
         </p>
@@ -63,13 +66,13 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
           {project.stargazerCount > 0 && (
             <span className="flex items-center gap-1.5 text-formal-secondary-pistachio text-md">
-              ⭐ {project.stargazerCount} Stars
+              <Star size={16} fill="currentColor" /> {project.stargazerCount} Stars
             </span>
           )}
 
           {project.forkCount > 0 && (
             <span className="flex items-center gap-1.5 text-formal-secondary-pistachio text-md">
-              🍴 {project.forkCount} Forks
+              <GitFork size={16} /> {project.forkCount} Forks
             </span>
           )}
         </div>

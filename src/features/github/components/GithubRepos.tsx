@@ -1,3 +1,4 @@
+import { Star } from 'lucide-react';
 import { useGitHubStats } from '../hooks/useGitHubStats';
 
 export function GithubRepos() {
@@ -31,8 +32,8 @@ export function GithubRepos() {
               <h4 className="font-semibold group-hover:text-formal-primary-400 transition-colors">
                 {repo.name}
               </h4>
-              <span className="text-xs bg-gray-100/10 px-2 py-1 rounded text-gray-400">
-                ⭐ {repo.stargazerCount}
+              <span className="text-xs bg-gray-100/10 px-2 py-1 rounded text-gray-400 flex items-center gap-1">
+                <Star className="w-3 h-3 text-yellow-500" /> {repo.stargazerCount}
               </span>
             </div>
             <p className="text-sm text-gray-400 line-clamp-2 mb-3 h-10">

@@ -1,4 +1,5 @@
 import { usePortfolioSide } from '@/hooks/usePortfolioSide';
+import { Briefcase, Search } from 'lucide-react';
 
 export function SideToggle() {
   const { side, setSide } = usePortfolioSide();
@@ -13,7 +14,7 @@ export function SideToggle() {
             : 'text-formal-secondary-stone hover:text-formal-primary-anti-flash-white'
         }`}
       >
-        <span>💼</span>
+        <Briefcase className="w-3.5 h-3.5" />
         <span className="hidden sm:inline">Formal</span>
       </button>
 
@@ -25,7 +26,7 @@ export function SideToggle() {
             : 'text-formal-secondary-stone hover:text-formal-primary-anti-flash-white'
         }`}
       >
-        <span>🔍</span>
+        <Search className="w-3.5 h-3.5" />
         <span className="hidden sm:inline">Curiosity</span>
       </button>
     </div>

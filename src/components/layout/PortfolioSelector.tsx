@@ -46,8 +46,12 @@ export function PortfolioSelector({ onSelect }: PortfolioSelectorProps): JSX.Ele
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h2 className="text-3xl font-bold text-formal-primary-anti-flash-white mb-2">Formal</h2>
-              <p className="text-formal-primary-mountain-meadow font-medium mb-6">Professional & Clean</p>
+              <h2 className="text-3xl font-bold text-formal-primary-anti-flash-white mb-2">
+                Formal
+              </h2>
+              <p className="text-formal-primary-mountain-meadow font-medium mb-6">
+                Professional & Clean
+              </p>
               <p className="text-formal-secondary-pistachio leading-relaxed">
                 Minimalist design showcasing career achievements, skills, and professional timeline.
               </p>

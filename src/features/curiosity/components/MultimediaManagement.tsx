@@ -1,5 +1,5 @@
-// Implemented from DESIGN.md — Curiosity scope
 import { FadeInOnScroll } from '@/components/animations/FadeInOnScroll';
+import { Clapperboard, Play } from 'lucide-react';
 
 const skills = [
   'Live Stream Architecture & Management',
@@ -22,7 +22,9 @@ export function MultimediaManagement() {
       <div className="grid md:grid-cols-2 gap-12 items-center md:flex-row-reverse">
         <FadeInOnScroll variant="slideRight" className="order-2 md:order-1">
           <div className="space-y-6">
-            <h3 className="text-2xl font-curiosity-display text-theme-text">Production &amp; Direction</h3>
+            <h3 className="text-2xl font-curiosity-display text-theme-text">
+              Production &amp; Direction
+            </h3>
             <p className="text-lg text-theme-text-secondary font-curiosity-body leading-relaxed">
               Orchestrating audio, video, and live streams is where technical precision meets
               creative flow. I manage multimedia production for large-scale church services and
@@ -32,7 +34,7 @@ export function MultimediaManagement() {
             <ul className="space-y-3">
               {skills.map((item) => (
                 <li key={item} className="flex items-center gap-3 text-theme-text-secondary">
-                  <span className="text-curiosity-secondary">▶</span>
+                  <Play className="w-4 h-4 text-curiosity-secondary" fill="currentColor" />
                   {item}
                 </li>
               ))}
@@ -57,8 +59,10 @@ export function MultimediaManagement() {
             <div className="absolute -inset-2 bg-gradient-to-r from-curiosity-secondary to-curiosity-accent rounded-xl opacity-30 blur-lg group-hover:opacity-50 transition-opacity duration-500" />
             <div className="relative overflow-hidden rounded-xl border border-theme-border shadow-2xl bg-curiosity-bg/80 aspect-video flex items-center justify-center">
               <div className="text-center p-8">
-                <span className="text-6xl mb-4 block">🎬</span>
-                <p className="text-curiosity-text-secondary font-curiosity-body font-medium">Live Production Workflow</p>
+                <Clapperboard className="w-16 h-16 mb-4 mx-auto text-curiosity-secondary" />
+                <p className="text-curiosity-text-secondary font-curiosity-body font-medium">
+                  Live Production Workflow
+                </p>
               </div>
             </div>
           </div>

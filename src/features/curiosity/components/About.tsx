@@ -1,12 +1,29 @@
 // Implemented from DESIGN.md — Curiosity scope
+import { Sprout, Heart, Gamepad2, Palette, BookOpen } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { FadeInOnScroll } from '@/components/animations/FadeInOnScroll';
 
 const interests = [
-  { label: 'Faith', icon: '✝️', color: 'bg-curiosity-primary/10 text-curiosity-primary border-curiosity-primary/20' },
-  { label: 'Gaming', icon: '🎮', color: 'bg-curiosity-secondary/10 text-curiosity-secondary border-curiosity-secondary/20' },
-  { label: 'Design', icon: '🎨', color: 'bg-curiosity-accent/10 text-curiosity-accent border-curiosity-accent/20' },
-  { label: 'Learning', icon: '📚', color: 'bg-curiosity-highlight/10 text-curiosity-highlight border-curiosity-highlight/20' },
+  {
+    label: 'Faith',
+    icon: Heart,
+    color: 'bg-curiosity-primary/10 text-curiosity-primary border-curiosity-primary/20',
+  },
+  {
+    label: 'Gaming',
+    icon: Gamepad2,
+    color: 'bg-curiosity-secondary/10 text-curiosity-secondary border-curiosity-secondary/20',
+  },
+  {
+    label: 'Design',
+    icon: Palette,
+    color: 'bg-curiosity-accent/10 text-curiosity-accent border-curiosity-accent/20',
+  },
+  {
+    label: 'Learning',
+    icon: BookOpen,
+    color: 'bg-curiosity-highlight/10 text-curiosity-highlight border-curiosity-highlight/20',
+  },
 ] as const;
 
 export function About() {
@@ -25,21 +42,21 @@ export function About() {
               transition={{ duration: 4, repeat: Infinity }}
             />
             <div className="relative bg-theme-surface p-8 rounded-3xl border border-theme-border shadow-2xl">
-              <h2 className="text-3xl md:text-4xl font-curiosity-display mb-6 text-curiosity-primary">
-                🌱 The Person Behind the Code
+              <h2 className="text-3xl md:text-4xl font-curiosity-display mb-6 text-curiosity-primary flex items-center gap-3">
+                <Sprout className="w-8 h-8" /> The Person Behind the Code
               </h2>
               <p className="text-lg text-theme-text-secondary font-curiosity-body leading-relaxed mb-4">
                 Beyond the terminal and the commits, I'm a person driven by{' '}
-                <strong className="text-curiosity-primary">faith, community, and Curiosity</strong>. I
-                believe that technology is best used when it serves a purpose greater than itself.
+                <strong className="text-curiosity-primary">faith, community, and Curiosity</strong>.
+                I believe that technology is best used when it serves a purpose greater than itself.
               </p>
               <p className="text-lg text-theme-text-secondary font-curiosity-body leading-relaxed mb-4">
                 My world isn't just binary. It's colored by my love for{' '}
                 <span className="text-curiosity-primary">green</span> (obviously), the adrenaline of{' '}
                 <span className="text-curiosity-highlight">gaming</span>, and the discipline of{' '}
-                <span className="text-curiosity-accent">design</span>. Whether I'm managing multimedia for
-                my church or tinkering with a new framework, I bring the same level of passion and
-                dedication.
+                <span className="text-curiosity-accent">design</span>. Whether I'm managing
+                multimedia for my church or tinkering with a new framework, I bring the same level
+                of passion and dedication.
               </p>
               <p className="text-lg text-theme-text-secondary font-curiosity-body leading-relaxed">
                 I'm motivated by the logic of code, but grounded by the values of my faith. For me,
@@ -60,8 +77,10 @@ export function About() {
                   transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                   className={`p-4 rounded-2xl border ${interest.color} flex flex-col items-center justify-center gap-2`}
                 >
-                  <span className="text-3xl">{interest.icon}</span>
-                  <span className="font-curiosity-display text-xs uppercase tracking-wider">{interest.label}</span>
+                  <interest.icon className="w-8 h-8" />
+                  <span className="font-curiosity-display text-xs uppercase tracking-wider">
+                    {interest.label}
+                  </span>
                 </motion.div>
               ))}
             </div>

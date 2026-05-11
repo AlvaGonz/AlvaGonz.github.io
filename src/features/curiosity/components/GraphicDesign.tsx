@@ -1,9 +1,11 @@
 // Implemented from DESIGN.md — Curiosity scope
 import { FadeInOnScroll } from '@/components/animations/FadeInOnScroll';
 
+import { Palette, Sparkles } from 'lucide-react';
+
 const toolsList = [
-  { icon: '🎨', title: 'Tools of Choice', desc: 'Figma, Canva, Adobe Creative Suite' },
-  { icon: '✨', title: 'Focus', desc: 'Event Flyers, Social Media Assets, Video Creation' },
+  { icon: Palette, title: 'Tools of Choice', desc: 'Figma, Canva, Adobe Creative Suite' },
+  { icon: Sparkles, title: 'Focus', desc: 'Event Flyers, Social Media Assets, Video Creation' },
 ] as const;
 
 export function GraphicDesign() {
@@ -29,7 +31,9 @@ export function GraphicDesign() {
                 className="w-full h-auto transform group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-curiosity-bg/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                <p className="text-curiosity-text font-curiosity-body font-medium">Demasiado Hipster ¿No?</p>
+                <p className="text-curiosity-text font-curiosity-body font-medium">
+                  Demasiado Hipster ¿No?
+                </p>
               </div>
             </div>
           </div>
@@ -47,7 +51,7 @@ export function GraphicDesign() {
             <div className="space-y-4">
               {toolsList.map((item) => (
                 <div key={item.title} className="flex items-center gap-4">
-                  <span className="text-2xl">{item.icon}</span>
+                  <item.icon className="w-6 h-6 text-curiosity-primary" />
                   <div>
                     <h4 className="font-curiosity-display text-theme-text">{item.title}</h4>
                     <p className="text-theme-text-secondary font-curiosity-body">{item.desc}</p>

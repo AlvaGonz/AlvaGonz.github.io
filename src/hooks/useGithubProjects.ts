@@ -27,21 +27,22 @@ export function useGithubProjects() {
 
         // 3. Si no hay pinneados, obtener todos los repos
         if (repos.length === 0) {
-          console.log('ℹ️ No pinned repositories found, fetching all public repos...');
+          console.log('[INFO] No pinned repositories found, fetching all public repos...');
           repos = await fetchAllPublicRepos(6);
         }
 
         setProjects(repos);
       } catch (err: any) {
         let errorMsg = err instanceof Error ? err.message : 'Unknown error';
-        
+
         // Handle GraphQL specific 401 errors
         if (errorMsg.includes('401') || (err.response && err.response.status === 401)) {
-          errorMsg = 'GitHub Authentication failed (401). Your token might be expired, invalid, or revoked.';
+          errorMsg =
+            'GitHub Authentication failed (401). Your token might be expired, invalid, or revoked.';
         }
 
         setError(errorMsg);
-        console.error('❌ Error loading projects:', err);
+        console.error('[ERROR] Error loading projects:', err);
       } finally {
         setLoading(false);
       }

@@ -1,4 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { Sparkles, Circle } from 'lucide-react';
 import { useRef } from 'react';
 import { FadeInOnScroll } from '../animations/FadeInOnScroll';
 import { useTheme } from '@/hooks/useTheme';
@@ -86,11 +87,15 @@ export function Timeline({ phases }: TimelineProps) {
               {milestone.items.map((item, i) => (
                 <li key={i} className="text-theme-text-secondary flex items-start gap-2.5">
                   <span
-                    className={`mt-1.5 text-xs ${
+                    className={`mt-1.5 flex-shrink-0 ${
                       theme === 'curiosity' ? 'text-curiosity-secondary' : 'text-theme-primary'
                     }`}
                   >
-                    {theme === 'curiosity' ? '✨' : '✦'}
+                    {theme === 'curiosity' ? (
+                      <Sparkles size={12} />
+                    ) : (
+                      <Circle size={8} fill="currentColor" />
+                    )}
                   </span>
                   <span className="leading-relaxed">{item}</span>
                 </li>

@@ -1,11 +1,10 @@
+import { Star, GitFork, ArrowRight } from 'lucide-react';
 import { GitHubRepository } from '../../lib/github-client';
 
 // Componente para mostrar cada proyecto
 export function ProjectCard({ project }: { project: GitHubRepository }) {
   return (
-    <div
-      className="p-6 bg-formal-primary-dark-green rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border border-formal-secondary-basil/20 hover:border-formal-primary-mountain-meadow/50 group relative"
-    >
+    <div className="p-6 bg-formal-primary-dark-green rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border border-formal-secondary-basil/20 hover:border-formal-primary-mountain-meadow/50 group relative">
       <h3 className="text-xl font-bold text-formal-primary-anti-flash-white mb-2 transition-colors">
         <a
           href={project.url}
@@ -35,13 +34,13 @@ export function ProjectCard({ project }: { project: GitHubRepository }) {
 
         {project.stargazerCount > 0 && (
           <span className="flex items-center gap-1 text-formal-secondary-pistachio">
-            ⭐ {project.stargazerCount}
+            <Star size={14} fill="currentColor" /> {project.stargazerCount}
           </span>
         )}
 
         {project.forkCount > 0 && (
           <span className="flex items-center gap-1 text-formal-secondary-pistachio">
-            🍴 {project.forkCount}
+            <GitFork size={14} /> {project.forkCount}
           </span>
         )}
       </div>
@@ -67,7 +66,7 @@ export function ProjectCard({ project }: { project: GitHubRepository }) {
             rel="noopener noreferrer"
             className="inline-flex items-center text-formal-secondary-frog hover:underline text-sm font-medium"
           >
-            Live Demo →
+            Live Demo <ArrowRight className="w-4 h-4 ml-1" />
           </a>
         </div>
       )}

@@ -3,7 +3,7 @@ export interface Game {
   title: string;
   image: string;
   platform: 'Steam' | 'Origin' | 'Xbox' | 'PlayStation' | 'Nintendo' | 'Other';
-  rating?: string;
+  rating?: number;
   year?: string;
   playtime?: string;
 }
@@ -15,7 +15,7 @@ export const favoriteGames: Game[] = [
     image:
       'https://cdn-www.bluestacks.com/bs-images/featured_com.kurogame.wutheringwaves.global.jpg',
     platform: 'Steam',
-    rating: '⭐⭐⭐⭐⭐',
+    rating: 5,
     year: '2024',
     playtime: '200.7 hrs',
   },
@@ -24,7 +24,7 @@ export const favoriteGames: Game[] = [
     title: 'The Legend of Zelda: Breath of the Wild',
     image: 'https://i.blogs.es/15da49/zelda00/1366_2000.jpg',
     platform: 'Nintendo',
-    rating: '⭐⭐⭐⭐⭐',
+    rating: 5,
     year: '2017',
     playtime: 'Played',
   },
@@ -34,7 +34,7 @@ export const favoriteGames: Game[] = [
     image:
       'https://monstervine.com/wp-content/uploads/2020/12/hyrule-warriors-age-of-calamity-switch-hero.jpg',
     platform: 'Nintendo',
-    rating: '⭐⭐⭐⭐⭐',
+    rating: 5,
     year: '2020',
     playtime: 'Played',
   },
@@ -43,7 +43,7 @@ export const favoriteGames: Game[] = [
     title: 'Need for Speed™ Most Wanted',
     image: '/images/bmw-m3-gtr-nfs-hd-02.jpg',
     platform: 'Other',
-    rating: '⭐⭐⭐⭐⭐',
+    rating: 5,
     year: '2005',
     playtime: '∞ hrs',
   },
@@ -52,7 +52,7 @@ export const favoriteGames: Game[] = [
     title: 'American Truck Simulator',
     image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/270880/header.jpg',
     platform: 'Steam',
-    rating: '⭐⭐⭐⭐⭐',
+    rating: 5,
     year: '2016',
     playtime: '46 hrs',
   },
@@ -61,7 +61,7 @@ export const favoriteGames: Game[] = [
     title: 'Brawlhalla',
     image: 'https://cdn.cloudflare.steamstatic.com/steam/apps/291550/header.jpg',
     platform: 'Steam',
-    rating: '⭐⭐⭐⭐',
+    rating: 4,
     year: '2017',
     playtime: '3.5 hrs',
   },

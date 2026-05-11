@@ -53,7 +53,9 @@ export function TopLanguages() {
                 <LanguageIcon language={lang.name} className="w-5 h-5" />
                 <p className="font-medium text-formal-secondary-pistachio">{lang.name}</p>
               </div>
-              <p className="text-sm font-mono text-formal-secondary-stone">{percentage.toFixed(1)}%</p>
+              <p className="text-sm font-mono text-formal-secondary-stone">
+                {percentage.toFixed(1)}%
+              </p>
             </div>
             <div className="w-full bg-formal-primary-dark-green/50 rounded-full h-2.5 overflow-hidden border border-white/5">
               <motion.div

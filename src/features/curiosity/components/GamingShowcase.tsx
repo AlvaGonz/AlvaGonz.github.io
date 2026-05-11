@@ -1,6 +1,6 @@
 import { favoriteGames, Game } from '@/content/games';
 import { motion } from 'framer-motion';
-import { Gamepad2, Clock } from 'lucide-react';
+import { Gamepad2, Clock, Star } from 'lucide-react';
 
 export function GamingShowcase() {
   return (
@@ -51,7 +51,18 @@ export function GamingShowcase() {
                   {game.playtime}
                 </span>
                 {/* Rating uses curiosity-primary (Lime) for stars */}
-                <span className="text-curiosity-primary text-sm tracking-widest">{game.rating}</span>
+                <div className="flex items-center gap-0.5">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star
+                      key={i}
+                      className={`w-3 h-3 ${
+                        i < (game.rating || 0)
+                          ? 'text-curiosity-primary fill-curiosity-primary'
+                          : 'text-curiosity-text-secondary/20'
+                      }`}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           </motion.div>

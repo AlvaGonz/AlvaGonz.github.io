@@ -33,47 +33,49 @@ export function SkillPills({ skills, animate = true }: SkillPillsProps): JSX.Ele
 
   return (
     <div className="space-y-8">
-      {(Object.keys(groupedSkills) as Skill['category'][]).map((category: Skill['category'], catIndex: number) => (
-        <FadeInOnScroll key={category} delay={catIndex * 0.1} variant="fadeUp">
-          <div className="relative">
-            <h3 className="text-xl font-bold text-theme-primary mb-4 capitalize flex items-center gap-2">
-              {category}
-              <span className="h-px flex-1 bg-theme-border" />
-            </h3>
+      {(Object.keys(groupedSkills) as Skill['category'][]).map(
+        (category: Skill['category'], catIndex: number) => (
+          <FadeInOnScroll key={category} delay={catIndex * 0.1} variant="fadeUp">
+            <div className="relative">
+              <h3 className="text-xl font-bold text-theme-primary mb-4 capitalize flex items-center gap-2">
+                {category}
+                <span className="h-px flex-1 bg-theme-border" />
+              </h3>
 
-            <Container
-              className="flex flex-wrap gap-3"
-              variants={animate ? staggerContainer : undefined}
-              initial={animate ? 'hidden' : undefined}
-              whileInView={animate ? 'visible' : undefined}
-              viewport={animate ? { once: true } : undefined}
-            >
-              {groupedSkills[category].map((skill: Skill) => (
-                <Item
-                  key={skill.name}
-                  variants={animate ? scaleIn : undefined}
-                  whileHover={animate ? { scale: 1.05, y: -2 } : undefined}
-                  className={`pl-2 pr-4 py-2 rounded-full text-sm font-medium ${categoryColors[category]} transition-all flex items-center gap-2 border shadow-sm hover:shadow-md`}
-                >
-                  {(skill.iconUrl || skill.iconId) && (
-                    <img
-                      src={
-                        skill.iconUrl
-                          ? skill.iconUrl
-                          : `https://skillicons.dev/icons?i=${skill.iconId}`
-                      }
-                      alt=""
-                      className="w-5 h-5 rounded-sm opacity-90"
-                      loading="lazy"
-                    />
-                  )}
-                  {skill.name}
-                </Item>
-              ))}
-            </Container>
-          </div>
-        </FadeInOnScroll>
-      ))}
+              <Container
+                className="flex flex-wrap gap-3"
+                variants={animate ? staggerContainer : undefined}
+                initial={animate ? 'hidden' : undefined}
+                whileInView={animate ? 'visible' : undefined}
+                viewport={animate ? { once: true } : undefined}
+              >
+                {groupedSkills[category].map((skill: Skill) => (
+                  <Item
+                    key={skill.name}
+                    variants={animate ? scaleIn : undefined}
+                    whileHover={animate ? { scale: 1.05, y: -2 } : undefined}
+                    className={`pl-2 pr-4 py-2 rounded-full text-sm font-medium ${categoryColors[category]} transition-all flex items-center gap-2 border shadow-sm hover:shadow-md`}
+                  >
+                    {(skill.iconUrl || skill.iconId) && (
+                      <img
+                        src={
+                          skill.iconUrl
+                            ? skill.iconUrl
+                            : `https://skillicons.dev/icons?i=${skill.iconId}`
+                        }
+                        alt=""
+                        className="w-5 h-5 rounded-sm opacity-90"
+                        loading="lazy"
+                      />
+                    )}
+                    {skill.name}
+                  </Item>
+                ))}
+              </Container>
+            </div>
+          </FadeInOnScroll>
+        ),
+      )}
     </div>
   );
 }

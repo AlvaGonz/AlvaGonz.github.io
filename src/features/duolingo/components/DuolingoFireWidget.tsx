@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Sparkles, Flame } from 'lucide-react';
 import './DuolingoFireWidget.css';
 import duolingoData from '../../../data/generated/duolingo.json';
 
@@ -13,19 +14,22 @@ export const DuolingoFireWidget: React.FC<DuolingoFireWidgetProps> = ({
 }) => {
   const [isFireActive, setIsFireActive] = useState<boolean>(false);
 
-  const stats = (duolingoData && (duolingoData as any).username === username) ? (duolingoData as any) : {
-    username: username,
-    streak: 452,
-    totalXp: 30705,
-    level: 'B2',
-    learningLanguage: 'en',
-    avatar: '/images/duo-face.png',
-    courses: [
-      { title: 'English', learningLanguage: 'en', xp: 12500 },
-      { title: 'Japanese', learningLanguage: 'ja', xp: 2920 },
-    ],
-    motivation: 'serious',
-  };
+  const stats =
+    duolingoData && (duolingoData as any).username === username
+      ? (duolingoData as any)
+      : {
+          username: username,
+          streak: 452,
+          totalXp: 30705,
+          level: 'B2',
+          learningLanguage: 'en',
+          avatar: '/images/duo-face.png',
+          courses: [
+            { title: 'English', learningLanguage: 'en', xp: 12500 },
+            { title: 'Japanese', learningLanguage: 'ja', xp: 2920 },
+          ],
+          motivation: 'serious',
+        };
 
   const handleWidgetClick = () => {
     if (isFireActive) return;
@@ -224,8 +228,10 @@ export const DuolingoFireWidget: React.FC<DuolingoFireWidgetProps> = ({
       {/* Hint Text (Only visible when not active) */}
       {!isFireActive && (
         <div className="absolute -bottom-6 left-0 w-full text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-          <span className="text-[0.86rem] text-gray-400 font-curiosity-body font-medium">
-            ✨ Haz click para activar 🔥
+          <span className="text-[0.86rem] text-gray-400 font-curiosity-body font-medium flex items-center justify-center gap-1.5">
+            <Sparkles size={14} className="text-curiosity-primary" />
+            Haz click para activar
+            <Flame size={14} className="text-[#F49000]" />
           </span>
         </div>
       )}

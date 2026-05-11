@@ -7,12 +7,12 @@ const GITHUB_TOKEN = RAW_TOKEN ? RAW_TOKEN.trim() : null;
 const GITHUB_USER = import.meta.env.VITE_GITHUB_USERNAME || 'AlvaGonz';
 
 if (!GITHUB_TOKEN) {
-  console.warn('⚠️ VITE_GITHUB_TOKEN not found in .env.local');
+  console.warn('[WARN] VITE_GITHUB_TOKEN not found in .env.local');
   console.warn('GitHub API requests will be rate-limited (60/hour)');
 } else {
   // Solo logueamos longitud y los primeros caracteres para debug seguro
   console.log(
-    `✅ GitHub Token detected (Length: ${GITHUB_TOKEN.length}, Starts with: ${GITHUB_TOKEN.substring(0, 4)}...)`
+    `[OK] GitHub Token detected (Length: ${GITHUB_TOKEN.length}, Starts with: ${GITHUB_TOKEN.substring(0, 4)}...)`,
   );
 }
 
@@ -292,7 +292,7 @@ export async function fetchUserStats(): Promise<GitHubUserStats | null> {
 
     return data.user;
   } catch (error) {
-    console.error('❌ Error fetching user stats:', error);
+    console.error('[ERROR] Error fetching user stats:', error);
     return null;
   }
 }
@@ -365,7 +365,7 @@ export async function fetchRepositoryByName(repoName: string): Promise<GitHubRep
       pushedAt: repo.pushedAt,
     };
   } catch (error) {
-    console.error(`❌ Error fetching repository ${repoName}:`, error);
+    console.error(`[ERROR] Error fetching repository ${repoName}:`, error);
     return null;
   }
 }
@@ -375,7 +375,7 @@ export async function fetchRepositoryByName(repoName: string): Promise<GitHubRep
  */
 export async function validateToken(): Promise<boolean> {
   if (!GITHUB_TOKEN) {
-    console.warn('⚠️ No GitHub token provided');
+    console.warn('[WARN] No GitHub token provided');
     return false;
   }
 
@@ -389,10 +389,10 @@ export async function validateToken(): Promise<boolean> {
       }
     `);
 
-    console.log('✅ GitHub token valid - Authenticated as:', data.viewer.login);
+    console.log('[OK] GitHub token valid - Authenticated as:', data.viewer.login);
     return true;
   } catch (error) {
-    console.error('❌ GitHub token validation failed:', error);
+    console.error('[ERROR] GitHub token validation failed:', error);
     return false;
   }
 }

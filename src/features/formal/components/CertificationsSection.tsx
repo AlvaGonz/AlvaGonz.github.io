@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { certifications } from '@/content/education';
+import { Globe, FileText } from 'lucide-react';
 
 const getCertIcon = (name: string, issuer: string): JSX.Element => {
   const iconSize = 'w-10 h-10 rounded-md';
@@ -22,69 +23,85 @@ const getCertIcon = (name: string, issuer: string): JSX.Element => {
     );
   if (issuer.includes('freeCodeCamp'))
     return <img src="https://skillicons.dev/icons?i=github" alt="FCC" className={iconSize} />; // FCC often associated with GitHub repo activities or simple code icon
-  if (name.includes('Remote Work')) return <span className="text-3xl">🌐</span>;
+  if (name.includes('Remote Work'))
+    return <Globe className="w-10 h-10 text-formal-primary-mountain-meadow" />;
 
-  return <span className="text-3xl">📜</span>;
+  return <FileText className="w-10 h-10 text-formal-secondary-pistachio" />;
 };
 
 export function CertificationsSection(): JSX.Element {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {certifications.map((cert: { id: string, url: string, name: string, issuer: string, date: string, credentialId?: string, skills?: string[] }, index: number) => (
-        <a
-          key={cert.id}
-          href={cert.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="no-underline"
-        >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.1 }}
-            className="bg-formal-primary-rich-black/60 p-6 rounded-xl border border-white/10 hover:border-formal-primary-mountain-meadow/50 transition-all group flex flex-col h-full"
+      {certifications.map(
+        (
+          cert: {
+            id: string;
+            url: string;
+            name: string;
+            issuer: string;
+            date: string;
+            credentialId?: string;
+            skills?: string[];
+          },
+          index: number,
+        ) => (
+          <a
+            key={cert.id}
+            href={cert.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="no-underline"
           >
-            <div className="flex items-start justify-between mb-4">
-              <div className="pr-4">
-                <h4 className="text-lg font-bold text-formal-primary-anti-flash-white group-hover:text-formal-primary-mountain-meadow transition-colors">
-                  {cert.name}
-                </h4>
-                <p className="text-formal-secondary-pistachio">{cert.issuer}</p>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="bg-formal-primary-rich-black/60 p-6 rounded-xl border border-white/10 hover:border-formal-primary-mountain-meadow/50 transition-all group flex flex-col h-full"
+            >
+              <div className="flex items-start justify-between mb-4">
+                <div className="pr-4">
+                  <h4 className="text-lg font-bold text-formal-primary-anti-flash-white group-hover:text-formal-primary-mountain-meadow transition-colors">
+                    {cert.name}
+                  </h4>
+                  <p className="text-formal-secondary-pistachio">{cert.issuer}</p>
+                </div>
+                <div className="shrink-0 opacity-80 group-hover:opacity-100 transition-opacity">
+                  {getCertIcon(cert.name, cert.issuer)}
+                </div>
               </div>
-              <div className="shrink-0 opacity-80 group-hover:opacity-100 transition-opacity">
-                {getCertIcon(cert.name, cert.issuer)}
-              </div>
-            </div>
 
-            <div className="text-sm text-formal-secondary-stone mb-4 font-mono mt-auto">{cert.date}</div>
-
-            {cert.credentialId && (
-              <div className="text-xs text-formal-secondary-stone/70 mb-4">
-                Credential ID: {cert.credentialId}
+              <div className="text-sm text-formal-secondary-stone mb-4 font-mono mt-auto">
+                {cert.date}
               </div>
-            )}
 
-            {cert.skills && (
-              <div className="flex flex-wrap gap-1.5">
-                {cert.skills.slice(0, 4).map((skill: string) => (
-                  <span
-                    key={skill}
-                    className="text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-formal-secondary-pistachio border border-white/10"
-                  >
-                    {skill}
-                  </span>
-                ))}
-                {cert.skills.length > 4 && (
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-formal-secondary-stone">
-                    +{cert.skills.length - 4} more
-                  </span>
-                )}
-              </div>
-            )}
-          </motion.div>
-        </a>
-      ))}
+              {cert.credentialId && (
+                <div className="text-xs text-formal-secondary-stone/70 mb-4">
+                  Credential ID: {cert.credentialId}
+                </div>
+              )}
+
+              {cert.skills && (
+                <div className="flex flex-wrap gap-1.5">
+                  {cert.skills.slice(0, 4).map((skill: string) => (
+                    <span
+                      key={skill}
+                      className="text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-formal-secondary-pistachio border border-white/10"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                  {cert.skills.length > 4 && (
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-formal-secondary-stone">
+                      +{cert.skills.length - 4} more
+                    </span>
+                  )}
+                </div>
+              )}
+            </motion.div>
+          </a>
+        ),
+      )}
     </div>
   );
 }
