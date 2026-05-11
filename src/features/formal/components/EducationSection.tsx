@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { organizations } from '@/content/education';
+import { education } from '@/content/education';
 
 export function EducationSection(): JSX.Element {
   return (
@@ -7,7 +7,7 @@ export function EducationSection(): JSX.Element {
       {/* Education */}
       <div>
         <div className="space-y-8 border-l-2 border-formal-primary-mountain-meadow/20 ml-3 py-2">
-          {organizations.map((item: any, index: number) => (
+          {education.map((item: any, index: number) => (
             <motion.div
               key={item.id}
               initial={{ opacity: 0, x: -20 }}

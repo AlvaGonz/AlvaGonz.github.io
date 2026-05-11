@@ -11,7 +11,7 @@ export function GraphicDesign() {
     <section id="graphic-design" className="py-12 md:py-20">
       <FadeInOnScroll variant="fadeUp">
         {/* Section header uses Gradient 2 (Periwinkle → Lime) as per DESIGN.md */}
-        <h2 className="text-3xl md:text-4xl font-curiosity-display mb-8 text-Curiosity-primary border-b-2 border-Curiosity-secondary/30 pb-2 inline-block">
+        <h2 className="text-3xl md:text-4xl font-curiosity-display mb-8 text-curiosity-primary border-b-2 border-curiosity-secondary/30 pb-2 inline-block">
           Graphic Design
         </h2>
       </FadeInOnScroll>
@@ -20,7 +20,7 @@ export function GraphicDesign() {
         <FadeInOnScroll variant="scale">
           <div className="relative group">
             {/* Ambient glow — Gradient 2: Periwinkle → Lime from DESIGN.md */}
-            <div className="absolute -inset-2 bg-gradient-to-r from-Curiosity-secondary to-Curiosity-primary rounded-xl opacity-30 blur-lg group-hover:opacity-50 transition-opacity duration-500" />
+            <div className="absolute -inset-2 bg-gradient-to-r from-curiosity-secondary to-curiosity-primary rounded-xl opacity-30 blur-lg group-hover:opacity-50 transition-opacity duration-500" />
             <div className="relative overflow-hidden rounded-2xl border border-theme-border shadow-2xl">
               <img
                 src="/images/hipters.png"
@@ -28,8 +28,8 @@ export function GraphicDesign() {
                 loading="lazy"
                 className="w-full h-auto transform group-hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-Curiosity-bg/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                <p className="text-Curiosity-text font-curiosity-body font-medium">Demasiado Hipster ¿No?</p>
+              <div className="absolute inset-0 bg-gradient-to-t from-curiosity-bg/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                <p className="text-curiosity-text font-curiosity-body font-medium">Demasiado Hipster ¿No?</p>
               </div>
             </div>
           </div>

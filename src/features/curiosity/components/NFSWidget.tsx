@@ -1,6 +1,7 @@
 // Implemented from DESIGN.md — Curiosity scope
 import { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { Gauge, Zap } from 'lucide-react';
 import { FadeInOnScroll } from '@/components/animations/FadeInOnScroll';
 
 // Global flag to prevent multiple script injections
@@ -217,7 +218,7 @@ export function NFSWidget() {
       <FadeInOnScroll variant="scale">
         <motion.div
           whileHover={{ scale: 1.02 }}
-          className="relative overflow-hidden rounded-2xl bg-[#282e45] border border-Curiosity-secondary/30 hover:border-Curiosity-secondary/60 shadow-2xl hover:shadow-[0_0_20px_rgba(199,206,232,0.2)] group cursor-pointer transition-all duration-300"
+          className="relative overflow-hidden rounded-2xl bg-[#282e45] border border-curiosity-secondary/30 hover:border-curiosity-secondary/60 shadow-2xl hover:shadow-[0_0_20px_rgba(199,206,232,0.2)] group cursor-pointer transition-all duration-300"
           onClick={playSound}
         >
           {/* Background Image */}
@@ -228,13 +229,13 @@ export function NFSWidget() {
               className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500"
             />
             {/* Gradient 5: Emerald → Night Blue from DESIGN.md */}
-            <div className="absolute inset-0 bg-gradient-to-t from-Curiosity-bg/90 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-curiosity-bg/90 via-transparent to-transparent" />
           </div>
 
           {/* Content */}
           <div className="relative z-10 p-6 h-full flex flex-col justify-end min-h-[300px]">
             <div className="mb-auto flex items-start justify-between w-full">
-              <span className="inline-block px-3 py-1 rounded-full bg-Curiosity-secondary/20 text-Curiosity-secondary text-xs font-bold border border-Curiosity-secondary/30">
+              <span className="inline-block px-3 py-1 rounded-full bg-curiosity-secondary/20 text-curiosity-secondary text-xs font-bold border border-curiosity-secondary/30">
                 NFS MW'S LEGENDARY RIDE
               </span>
               <img
@@ -244,27 +245,27 @@ export function NFSWidget() {
               />
             </div>
 
-            <h3 className="text-2xl font-curiosity-display text-Curiosity-text mb-2 flex items-center gap-2">
+            <h3 className="text-2xl font-curiosity-display text-curiosity-text mb-2 flex items-center gap-2">
               BMW M3 GTR
               {isPlaying && (
                 <span className="flex h-3 w-3 relative">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-Curiosity-primary opacity-75" />
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-Curiosity-primary" />
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-curiosity-primary opacity-75" />
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-curiosity-primary" />
                 </span>
               )}
             </h3>
 
-            <p className="text-Curiosity-text-secondary font-curiosity-body text-sm mb-4">
+            <p className="text-curiosity-text-secondary font-curiosity-body text-sm mb-4">
               The straight-cut gears. The V8 whine. The most iconic car in racing game history.
               Click to hear the beast roar.
             </p>
 
-            <div className="flex items-center gap-4 text-xs text-Curiosity-secondary font-mono">
+            <div className="flex items-center gap-4 text-xs text-curiosity-secondary font-mono">
               <span className="flex items-center gap-1">
-                <span className="i-lucide-gauge" /> 380 km/h
+                <Gauge className="w-3.5 h-3.5" /> 380 km/h
               </span>
               <span className="flex items-center gap-1">
-                <span className="i-lucide-zap" /> 4.0L V8
+                <Zap className="w-3.5 h-3.5" /> 4.0L V8
               </span>
             </div>
           </div>

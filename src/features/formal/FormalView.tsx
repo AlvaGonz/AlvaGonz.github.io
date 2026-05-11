@@ -13,83 +13,12 @@ import { GithubActivity } from '@/features/github/components/GithubActivity';
 import { DailyVerse } from '@/features/formal/components/DailyVerse';
 import { TopLanguages } from '@/features/github/components/TopLanguages';
 import { DuolingoWidget } from '@/features/duolingo/components/DuolingoWidget';
-import { useEffect, useState } from 'react';
-import {
-  fetchPinnedProjects,
-  fetchAllPublicRepos,
-  validateToken,
-  GitHubRepository,
-} from '@/lib/github-client';
+import { useGithubProjects } from '@/hooks/useGithubProjects';
 
 export function FormalView(): JSX.Element {
-  const [projects, setProjects] = useState<GitHubRepository[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { projects, loading, error } = useGithubProjects();
 
-  useEffect(() => {
-    async function loadProjects() {
-      try {
-        setLoading(true);
-        setError(null);
-
-        // 1. Validar token (solo en desarrollo)
-        if (import.meta.env.DEV) {
-          await validateToken();
-        }
-
-        // 2. Intentar obtener repos pinneados
-        let repos = await fetchPinnedProjects();
-
-        // 3. Si no hay pinneados, obtener todos los repos
-        if (repos.length === 0) {
-          console.log('ℹ️ No pinned repositories found, fetching all public repos...');
-          repos = await fetchAllPublicRepos(6);
-        }
-
-        setProjects(repos);
-
-        // Log éxito
-        if (repos.length > 0) {
-          console.log(`✅ Loaded ${repos.length} repositories from GitHub`);
-        } else {
-          setError('No repositories found');
-        }
-      } catch (err: any) {
-        let errorMsg = err instanceof Error ? err.message : 'Unknown error';
-        
-        // Handle GraphQL specific 401 errors
-        if (errorMsg.includes('401') || (err.response && err.response.status === 401)) {
-          errorMsg = 'GitHub Authentication failed (401). Your token might be expired, invalid, or revoked.';
-          console.warn('❌ GitHub 401: Token revoked or invalid. Make sure to generate a new token and update .env.local');
-        }
-
-        setError(errorMsg);
-        console.error('❌ Error loading projects:', err);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    loadProjects();
-  }, []);
-
-  // Rendering logic
-  if (loading) {
-    return <div className="projects-loading">Loading projects...</div>;
-  }
-
-  if (error) {
-    return (
-      <div className="projects-error">
-        <p>{error}</p>
-        <p className="text-sm">Make sure VITE_GITHUB_TOKEN is set in .env.local</p>
-      </div>
-    );
-  }
-
-  if (projects.length === 0) {
-    return <div className="projects-empty">No projects available</div>;
-  }
+  // Rendering logic removed from top level to prevent blocking the entire view
 
   return (
     <div className="min-h-screen p-8 md:p-16 bg-formal-primary-rich-black">

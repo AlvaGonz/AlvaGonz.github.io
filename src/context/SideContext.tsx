@@ -1,6 +1,6 @@
 import { createContext, useState, useCallback, useContext, ReactNode, useEffect } from 'react';
 
-export type Side = 'Curiosity' | 'formal';
+export type Side = 'curiosity' | 'formal';
 
 interface SideContextType {
   side: Side | null;
@@ -10,28 +10,44 @@ interface SideContextType {
 
 const SideContext = createContext<SideContextType | undefined>(undefined);
 
-// Helper to get initial state synchronously
+// Helper to get initial state
 const getInitialSide = (): Side | null => {
   if (typeof window === 'undefined') return null;
 
+  // 1. Try URL param
   const urlParams = new URLSearchParams(window.location.search);
-  const sideParam = urlParams.get('side'); // 'formal' | 'Curiosity' | null
-
-  if (sideParam === 'formal' || sideParam === 'Curiosity') {
-    return sideParam;
+  const sideParam = urlParams.get('side')?.toLowerCase();
+  if (sideParam === 'formal' || sideParam === 'curiosity') {
+    return sideParam as Side;
   }
 
-  return null; // Default fallback to show selector
+  // 2. Try localStorage
+  const savedSide = localStorage.getItem('portfolio-side')?.toLowerCase();
+  if (savedSide === 'formal' || savedSide === 'curiosity') {
+    return savedSide as Side;
+  }
+
+  return null;
 };
 
 export function SideProvider({ children }: { children: ReactNode }) {
-  const [side, setSideState] = useState<Side | null>(getInitialSide);
+  // Use a safer initialization pattern
+  const [side, setSideState] = useState<Side | null>(null);
+
+  useEffect(() => {
+    // Initialize on mount to avoid hydration/SSR issues and rule of hooks errors
+    const initial = getInitialSide();
+    if (initial) {
+      setSideState(initial);
+      document.documentElement.setAttribute('data-theme', initial);
+    }
+  }, []);
 
   useEffect(() => {
     if (side) {
-      document.body.setAttribute('data-theme', side);
+      document.documentElement.setAttribute('data-theme', side);
     } else {
-      document.body.removeAttribute('data-theme');
+      document.documentElement.removeAttribute('data-theme');
     }
   }, [side]);
 
@@ -52,7 +68,7 @@ export function SideProvider({ children }: { children: ReactNode }) {
 
   const toggleSide = useCallback(() => {
     setSideState((prev) => {
-      const newSide = prev === 'Curiosity' ? 'formal' : 'Curiosity';
+      const newSide = prev === 'curiosity' ? 'formal' : 'curiosity';
       const url = new URL(window.location.href);
       url.searchParams.set('side', newSide);
       window.history.replaceState({}, '', url);

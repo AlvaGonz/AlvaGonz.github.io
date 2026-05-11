@@ -6,7 +6,6 @@ import { Contributions } from '@/features/curiosity/components/Contributions';
 import { GamingShowcase } from '@/features/curiosity/components/GamingShowcase';
 import { NFSWidget } from '@/features/curiosity/components/NFSWidget';
 import { Hobbies } from '@/features/curiosity/components/Hobbies';
-import { Roadmap } from '@/features/curiosity/components/Roadmap';
 import { DailyVerse } from '@/features/formal/components/DailyVerse';
 import { ContactCuriosity } from '@/features/curiosity/components/ContactCuriosity';
 import { AnimatedBg } from '@/components/svg/AnimatedBg';
@@ -16,6 +15,7 @@ import { FadeInOnScroll } from '@/components/animations/FadeInOnScroll';
 import { DuolingoFireWidget } from '@/features/duolingo/components/DuolingoFireWidget';
 import { profile } from '@/content/profile';
 import { LanguageMindMap } from '@/features/curiosity/components/LanguageMindMap';
+import { ProfessionalVault } from '@/features/curiosity/components/ProfessionalVault';
 
 export function CuriosityView(): JSX.Element {
   return (
@@ -39,7 +39,7 @@ export function CuriosityView(): JSX.Element {
           {/* Gaming Section */}
           <section id="gaming">
             <FadeInOnScroll variant="fadeUp">
-              <h2 className="text-3xl md:text-4xl font-curiosity-display mb-8 text-Curiosity-primary border-b-2 border-Curiosity-secondary/30 pb-2 inline-block">
+              <h2 className="text-3xl md:text-4xl font-curiosity-display mb-8 text-curiosity-primary border-b-2 border-curiosity-secondary/30 pb-2 inline-block">
                 Gaming
               </h2>
             </FadeInOnScroll>
@@ -52,15 +52,15 @@ export function CuriosityView(): JSX.Element {
           {/* Learning Section */}
           <section id="learning" className="space-y-8">
             <FadeInOnScroll variant="fadeUp">
-              <h2 className="text-3xl md:text-4xl font-curiosity-display mb-8 text-Curiosity-secondary border-b-2 border-Curiosity-primary/30 pb-2 inline-block">
+              <h2 className="text-3xl md:text-4xl font-curiosity-display mb-8 text-curiosity-secondary border-b-2 border-curiosity-primary/30 pb-2 inline-block">
                 Learning
               </h2>
             </FadeInOnScroll>
             <FadeInOnScroll variant="fadeUp">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Spanish — Gradient 4: Lime → Night Blue border per DESIGN.md */}
-                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-Curiosity-primary to-Curiosity-highlight p-1 shadow-xl transform hover:scale-[1.02] transition-transform duration-300">
-                  <div className="bg-Curiosity-bg h-full w-full rounded-xl p-6 relative overflow-hidden">
+                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-curiosity-primary to-curiosity-highlight p-1 shadow-xl transform hover:scale-[1.02] transition-transform duration-300">
+                  <div className="bg-curiosity-bg h-full w-full rounded-xl p-6 relative overflow-hidden">
                     <div className="absolute top-0 right-0 p-4 opacity-20">
                       <span className="text-9xl">ñ</span>
                     </div>
@@ -68,14 +68,14 @@ export function CuriosityView(): JSX.Element {
                       <div>
                         <div className="flex items-center gap-3 mb-4">
                           <span className="text-4xl">🇩🇴</span>
-                          <h3 className="text-2xl font-curiosity-display text-Curiosity-text">Spanish</h3>
+                          <h3 className="text-2xl font-curiosity-display text-curiosity-text">Spanish</h3>
                         </div>
-                        <p className="text-Curiosity-text-secondary font-curiosity-body">
+                        <p className="text-curiosity-text-secondary font-curiosity-body">
                           My mother tongue. The language of my thoughts, passion, and culture.
                         </p>
                       </div>
                       <div className="mt-6">
-                        <div className="inline-block px-4 py-2 rounded-full bg-Curiosity-primary/20 text-Curiosity-primary font-bold border border-Curiosity-primary/30">
+                        <div className="inline-block px-4 py-2 rounded-full bg-curiosity-primary/20 text-curiosity-primary font-bold border border-curiosity-primary/30">
                           Native Speaker
                         </div>
                       </div>
@@ -92,7 +92,7 @@ export function CuriosityView(): JSX.Element {
           {/* Code Universe Section */}
           <section id="code-universe" className="space-y-8">
             <FadeInOnScroll variant="fadeUp">
-              <h2 className="text-3xl md:text-4xl font-curiosity-display mb-8 text-Curiosity-primary border-b-2 border-Curiosity-secondary/30 pb-2 inline-block">
+              <h2 className="text-3xl md:text-4xl font-curiosity-display mb-8 text-curiosity-primary border-b-2 border-curiosity-secondary/30 pb-2 inline-block">
                 Code Universe
               </h2>
             </FadeInOnScroll>
@@ -100,6 +100,9 @@ export function CuriosityView(): JSX.Element {
               <LanguageMindMap />
             </FadeInOnScroll>
           </section>
+
+          {/* Professional Vault (Integrated Formal Sections) */}
+          <ProfessionalVault />
 
           {/* Graphic Design Section */}
           <GraphicDesign />
@@ -112,9 +115,6 @@ export function CuriosityView(): JSX.Element {
 
           {/* Contributions Section */}
           <Contributions />
-
-          {/* Roadmap Section */}
-          <Roadmap variant="Curiosity" />
 
           {/* Contact Section */}
           <ContactCuriosity profile={profile} />

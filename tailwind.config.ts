@@ -29,7 +29,7 @@ export default {
         },
 
         // Curiosity Specific Colors (Palette 2)
-        Curiosity: {
+        curiosity: {
           bg: '#21263a',
           primary: '#d0d34d',
           secondary: '#c7cee8',

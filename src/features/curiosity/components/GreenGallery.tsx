@@ -1,5 +1,6 @@
 import { useFetch } from '@/hooks/useFetch';
 import { getGreenGalleryUrl, UnsplashPhoto } from '@/services/unsplash';
+import { Image as ImageIcon } from 'lucide-react';
 
 export function GreenGallery() {
   const { data, loading, error } = useFetch<{ results: UnsplashPhoto[] }>(getGreenGalleryUrl());
@@ -9,8 +10,8 @@ export function GreenGallery() {
 
   return (
     <div className="space-y-4">
-      <h3 className="text-xl font-curiosity-display text-Curiosity-text flex items-center gap-2">
-        <span className="i-lucide-image"></span>
+      <h3 className="text-xl font-curiosity-display text-curiosity-text flex items-center gap-2">
+        <ImageIcon className="w-5 h-5 text-curiosity-accent" />
         Aesthetic
       </h3>
       <div className="columns-2 md:columns-3 gap-4 space-y-4">

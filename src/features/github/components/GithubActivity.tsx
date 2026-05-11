@@ -1,5 +1,6 @@
 import { useFetch } from '../../../hooks/useFetch';
 import { getGithubActivityUrl, GitHubEvent } from '../../../services/github';
+import { Activity } from 'lucide-react';
 
 export function GithubActivity() {
   const { data: events, loading, error } = useFetch<GitHubEvent[]>(getGithubActivityUrl());
@@ -16,7 +17,7 @@ export function GithubActivity() {
   return (
     <div className="space-y-4">
       <h3 className="text-lg font-bold flex items-center gap-2">
-        <span className="i-lucide-activity"></span>
+        <Activity className="w-5 h-5 text-formal-primary-400" />
         Recent Activity
       </h3>
       <div className="space-y-3">

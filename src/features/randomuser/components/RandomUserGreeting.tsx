@@ -6,7 +6,7 @@ export function RandomUserGreeting() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-24 text-Curiosity-text-secondary animate-pulse">
+      <div className="flex items-center justify-center h-24 text-curiosity-text-secondary animate-pulse">
         Loading greeting...
       </div>
     );
@@ -30,12 +30,12 @@ export function RandomUserGreeting() {
         <img
           src={user.picture.medium}
           alt={greeting}
-          className="w-16 h-16 rounded-full border-2 border-Curiosity-primary"
+          className="w-16 h-16 rounded-full border-2 border-curiosity-primary"
         />
       )}
       <div className="flex-1">
-        <p className="text-Curiosity-text font-curiosity-body font-semibold">{greeting}</p>
-        <p className="text-sm font-curiosity-body text-Curiosity-text-secondary">
+        <p className="text-curiosity-text font-curiosity-body font-semibold">{greeting}</p>
+        <p className="text-sm font-curiosity-body text-curiosity-text-secondary">
           From {user.location.city}, {user.location.country}
         </p>
       </div>

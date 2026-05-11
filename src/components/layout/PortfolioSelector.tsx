@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 
 interface PortfolioSelectorProps {
-  onSelect: (side: 'Curiosity' | 'formal') => void;
+  onSelect: (side: 'curiosity' | 'formal') => void;
 }
 
 export function PortfolioSelector({ onSelect }: PortfolioSelectorProps): JSX.Element {
@@ -9,7 +9,7 @@ export function PortfolioSelector({ onSelect }: PortfolioSelectorProps): JSX.Ele
     <div className="min-h-screen flex flex-col items-center justify-center p-8 bg-formal-primary-rich-black relative overflow-hidden">
       {/* Ambient background elements */}
       <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-formal-primary-mountain-meadow/10 rounded-full blur-[120px]" />
-      <div className="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] bg-Curiosity-primary/10 rounded-full blur-[120px]" />
+      <div className="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] bg-curiosity-primary/10 rounded-full blur-[120px]" />
 
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -65,33 +65,33 @@ export function PortfolioSelector({ onSelect }: PortfolioSelectorProps): JSX.Ele
 
         {/* Curiosity Card */}
         <motion.button
-          onClick={() => onSelect('Curiosity')}
+          onClick={() => onSelect('curiosity')}
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.4, duration: 0.5 }}
           whileHover={{ y: -10, scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          className="text-left relative group overflow-hidden rounded-3xl p-1 bg-Curiosity-bg border border-white/5 shadow-2xl"
+          className="text-left relative group overflow-hidden rounded-3xl p-1 bg-curiosity-bg border border-white/5 shadow-2xl"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-Curiosity-primary to-Curiosity-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          <div className="relative h-full bg-[#282e45] rounded-[20px] p-8 md:p-12 flex flex-col justify-between z-10 transition-colors duration-300 group-hover:bg-Curiosity-bg/90">
+          <div className="absolute inset-0 bg-gradient-to-r from-curiosity-primary to-curiosity-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="relative h-full bg-[#282e45] rounded-[20px] p-8 md:p-12 flex flex-col justify-between z-10 transition-colors duration-300 group-hover:bg-curiosity-bg/90">
             <div>
-              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-Curiosity-primary to-Curiosity-secondary mb-6 flex items-center justify-center overflow-hidden shadow-[0_0_15px_rgba(208,211,77,0.4)]">
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-curiosity-primary to-curiosity-secondary mb-6 flex items-center justify-center overflow-hidden shadow-[0_0_15px_rgba(208,211,77,0.4)]">
                 <img
                   src="/images/hipters.png"
                   alt="Curiosity"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h2 className="text-3xl font-bold text-Curiosity-text mb-2">Curiosity</h2>
-              <p className="text-Curiosity-primary font-medium mb-6">Curious & Interactive</p>
-              <p className="text-Curiosity-text-secondary leading-relaxed">
+              <h2 className="text-3xl font-bold text-curiosity-text mb-2">Curiosity</h2>
+              <p className="text-curiosity-primary font-medium mb-6">Curious & Interactive</p>
+              <p className="text-curiosity-text-secondary leading-relaxed">
                 Vibrant, animated experience exploring coding, passions, and experiments.
               </p>
             </div>
             <div className="mt-8 h-1 w-full bg-white/10 rounded-full overflow-hidden">
               <motion.div
-                className="h-full bg-gradient-to-r from-Curiosity-primary to-Curiosity-secondary"
+                className="h-full bg-gradient-to-r from-curiosity-primary to-curiosity-secondary"
                 initial={{ width: '0%' }}
                 whileHover={{ width: '100%' }}
                 transition={{ duration: 0.3 }}

@@ -5,14 +5,14 @@ export function HeroIcon() {
     <div className="relative w-32 h-32 mx-auto flex items-center justify-center">
       {/* Outer rotating ring */}
       <motion.div
-        className="absolute inset-0 border-2 border-dashed border-Curiosity-primary/30 rounded-full"
+        className="absolute inset-0 border-2 border-dashed border-curiosity-primary/30 rounded-full"
         animate={{ rotate: 360 }}
         transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
       />
 
       {/* Inner counter-rotating ring */}
       <motion.div
-        className="absolute inset-4 border-2 border-dotted border-Curiosity-secondary/30 rounded-full"
+        className="absolute inset-4 border-2 border-dotted border-curiosity-secondary/30 rounded-full"
         animate={{ rotate: -360 }}
         transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
       />
@@ -24,7 +24,7 @@ export function HeroIcon() {
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        className="text-Curiosity-primary relative z-10"
+        className="text-curiosity-primary relative z-10"
       >
         <motion.path
           d="M7 8l-4 4 4 4"
@@ -55,7 +55,7 @@ export function HeroIcon() {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="text-Curiosity-secondary"
+          className="text-curiosity-secondary"
           initial={{ pathLength: 0, opacity: 0 }}
           animate={{ pathLength: 1, opacity: 1 }}
           transition={{ duration: 1.5, repeat: Infinity, repeatType: 'reverse', repeatDelay: 2 }}
@@ -63,7 +63,7 @@ export function HeroIcon() {
       </svg>
 
       {/* Glow effect */}
-      <div className="absolute inset-0 bg-Curiosity-primary/20 blur-xl rounded-full animate-pulse" />
+      <div className="absolute inset-0 bg-curiosity-primary/20 blur-xl rounded-full animate-pulse" />
     </div>
   );
 }

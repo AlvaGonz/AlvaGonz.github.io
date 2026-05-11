@@ -14,7 +14,7 @@ export function MultimediaManagement() {
   return (
     <section id="multimedia" className="py-12 md:py-20">
       <FadeInOnScroll variant="fadeUp">
-        <h2 className="text-3xl md:text-4xl font-curiosity-display mb-8 text-Curiosity-secondary border-b-2 border-Curiosity-primary/30 pb-2 inline-block">
+        <h2 className="text-3xl md:text-4xl font-curiosity-display mb-8 text-curiosity-secondary border-b-2 border-curiosity-primary/30 pb-2 inline-block">
           Multimedia Management
         </h2>
       </FadeInOnScroll>
@@ -32,7 +32,7 @@ export function MultimediaManagement() {
             <ul className="space-y-3">
               {skills.map((item) => (
                 <li key={item} className="flex items-center gap-3 text-theme-text-secondary">
-                  <span className="text-Curiosity-secondary">▶</span>
+                  <span className="text-curiosity-secondary">▶</span>
                   {item}
                 </li>
               ))}
@@ -42,7 +42,7 @@ export function MultimediaManagement() {
               {tools.map((tool) => (
                 <span
                   key={tool}
-                  className="px-3 py-1 rounded-full bg-Curiosity-secondary/10 text-Curiosity-secondary text-sm font-medium border border-Curiosity-secondary/20"
+                  className="px-3 py-1 rounded-full bg-curiosity-secondary/10 text-curiosity-secondary text-sm font-medium border border-curiosity-secondary/20"
                 >
                   {tool}
                 </span>
@@ -54,11 +54,11 @@ export function MultimediaManagement() {
         <FadeInOnScroll variant="scale" className="order-1 md:order-2">
           <div className="relative group">
             {/* Gradient 3: Periwinkle → Emerald from DESIGN.md */}
-            <div className="absolute -inset-2 bg-gradient-to-r from-Curiosity-secondary to-Curiosity-accent rounded-xl opacity-30 blur-lg group-hover:opacity-50 transition-opacity duration-500" />
-            <div className="relative overflow-hidden rounded-xl border border-theme-border shadow-2xl bg-Curiosity-bg/80 aspect-video flex items-center justify-center">
+            <div className="absolute -inset-2 bg-gradient-to-r from-curiosity-secondary to-curiosity-accent rounded-xl opacity-30 blur-lg group-hover:opacity-50 transition-opacity duration-500" />
+            <div className="relative overflow-hidden rounded-xl border border-theme-border shadow-2xl bg-curiosity-bg/80 aspect-video flex items-center justify-center">
               <div className="text-center p-8">
                 <span className="text-6xl mb-4 block">🎬</span>
-                <p className="text-Curiosity-text-secondary font-curiosity-body font-medium">Live Production Workflow</p>
+                <p className="text-curiosity-text-secondary font-curiosity-body font-medium">Live Production Workflow</p>
               </div>
             </div>
           </div>

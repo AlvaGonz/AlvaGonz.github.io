@@ -3,10 +3,10 @@ import { motion } from 'framer-motion';
 import { FadeInOnScroll } from '@/components/animations/FadeInOnScroll';
 
 const interests = [
-  { label: 'Faith', icon: '✝️', color: 'bg-Curiosity-primary/10 text-Curiosity-primary border-Curiosity-primary/20' },
-  { label: 'Gaming', icon: '🎮', color: 'bg-Curiosity-secondary/10 text-Curiosity-secondary border-Curiosity-secondary/20' },
-  { label: 'Design', icon: '🎨', color: 'bg-Curiosity-accent/10 text-Curiosity-accent border-Curiosity-accent/20' },
-  { label: 'Learning', icon: '📚', color: 'bg-Curiosity-highlight/10 text-Curiosity-highlight border-Curiosity-highlight/20' },
+  { label: 'Faith', icon: '✝️', color: 'bg-curiosity-primary/10 text-curiosity-primary border-curiosity-primary/20' },
+  { label: 'Gaming', icon: '🎮', color: 'bg-curiosity-secondary/10 text-curiosity-secondary border-curiosity-secondary/20' },
+  { label: 'Design', icon: '🎨', color: 'bg-curiosity-accent/10 text-curiosity-accent border-curiosity-accent/20' },
+  { label: 'Learning', icon: '📚', color: 'bg-curiosity-highlight/10 text-curiosity-highlight border-curiosity-highlight/20' },
 ] as const;
 
 export function About() {
@@ -17,7 +17,7 @@ export function About() {
           <div className="relative">
             {/* Ambient glow — Curiosity gradient system (Gradient 3: Periwinkle → Emerald) */}
             <motion.div
-              className="absolute -inset-4 rounded-xl opacity-20 blur-xl bg-gradient-to-r from-Curiosity-secondary to-Curiosity-accent"
+              className="absolute -inset-4 rounded-xl opacity-20 blur-xl bg-gradient-to-r from-curiosity-secondary to-curiosity-accent"
               animate={{
                 scale: [1, 1.05, 1],
                 opacity: [0.2, 0.3, 0.2],
@@ -25,19 +25,19 @@ export function About() {
               transition={{ duration: 4, repeat: Infinity }}
             />
             <div className="relative bg-theme-surface p-8 rounded-3xl border border-theme-border shadow-2xl">
-              <h2 className="text-3xl md:text-4xl font-curiosity-display mb-6 text-Curiosity-primary">
+              <h2 className="text-3xl md:text-4xl font-curiosity-display mb-6 text-curiosity-primary">
                 🌱 The Person Behind the Code
               </h2>
               <p className="text-lg text-theme-text-secondary font-curiosity-body leading-relaxed mb-4">
                 Beyond the terminal and the commits, I'm a person driven by{' '}
-                <strong className="text-Curiosity-primary">faith, community, and Curiosity</strong>. I
+                <strong className="text-curiosity-primary">faith, community, and Curiosity</strong>. I
                 believe that technology is best used when it serves a purpose greater than itself.
               </p>
               <p className="text-lg text-theme-text-secondary font-curiosity-body leading-relaxed mb-4">
                 My world isn't just binary. It's colored by my love for{' '}
-                <span className="text-Curiosity-primary">green</span> (obviously), the adrenaline of{' '}
-                <span className="text-Curiosity-highlight">gaming</span>, and the discipline of{' '}
-                <span className="text-Curiosity-accent">design</span>. Whether I'm managing multimedia for
+                <span className="text-curiosity-primary">green</span> (obviously), the adrenaline of{' '}
+                <span className="text-curiosity-highlight">gaming</span>, and the discipline of{' '}
+                <span className="text-curiosity-accent">design</span>. Whether I'm managing multimedia for
                 my church or tinkering with a new framework, I bring the same level of passion and
                 dedication.
               </p>

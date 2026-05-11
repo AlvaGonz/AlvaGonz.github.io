@@ -33,23 +33,23 @@
   --c-gradient-5-to: #21263a;
 
   /* Palette 2 (Curiosity) Base Colors */
-  --c-Curiosity-bg: #21263a;
-  --c-Curiosity-primary: #d0d34d;
-  --c-Curiosity-secondary: #c7cee8;
-  --c-Curiosity-accent: #157954;
-  --c-Curiosity-highlight: #d6d9d8;
-  --c-Curiosity-text: #f1f5f9;
-  --c-Curiosity-text-secondary: #94a3b8;
+  --c-curiosity-bg: #21263a;
+  --c-curiosity-primary: #d0d34d;
+  --c-curiosity-secondary: #c7cee8;
+  --c-curiosity-accent: #157954;
+  --c-curiosity-highlight: #d6d9d8;
+  --c-curiosity-text: #f1f5f9;
+  --c-curiosity-text-secondary: #94a3b8;
 
-  /* Semantic Theme Variables (Defaults to Formal) */
-  --theme-background: var(--c-primary-rich-black);
-  --theme-surface: var(--c-primary-dark-green);
-  --theme-primary: var(--c-primary-mountain-meadow);
-  --theme-secondary: var(--c-secondary-stone);
-  --theme-accent: var(--c-primary-caribbean-green);
-  --theme-text: var(--c-primary-anti-flash-white);
-  --theme-text-secondary: var(--c-secondary-pistachio);
-  --theme-border: var(--c-secondary-basil);
+  /* Neutral Semantic Defaults (Selection Screen) */
+  --theme-background: #0c1214;
+  --theme-surface: #1a1f21;
+  --theme-primary: #2cc295;
+  --theme-secondary: #707d7d;
+  --theme-accent: #00df81;
+  --theme-text: #f1f7f6;
+  --theme-text-secondary: #aacbc4;
+  --theme-border: rgba(255, 255, 255, 0.05);
 
   /* Scroll Modernization Variables */
   --scroll-progress: 0;
@@ -63,28 +63,40 @@
   --font-curiosity-body: 'Outfit', sans-serif;
 }
 
-/* Curiosity Theme Override */
-[data-theme='Curiosity'] {
-  --theme-background: var(--c-Curiosity-bg);
+/* curiosity Theme Override */
+[data-theme='curiosity'] {
+  --theme-background: var(--c-curiosity-bg);
   --theme-surface: rgba(33, 38, 58, 0.8);
-  --theme-primary: var(--c-Curiosity-primary);
-  --theme-secondary: var(--c-Curiosity-secondary);
-  --theme-accent: var(--c-Curiosity-accent);
-  --theme-text: var(--c-Curiosity-text);
-  --theme-text-secondary: var(--c-Curiosity-text-secondary);
+  --theme-primary: var(--c-curiosity-primary);
+  --theme-secondary: var(--c-curiosity-secondary);
+  --theme-accent: var(--c-curiosity-accent);
+  --theme-text: var(--c-curiosity-text);
+  --theme-text-secondary: var(--c-curiosity-text-secondary);
   --theme-border: rgba(199, 206, 232, 0.2);
   
   font-family: var(--font-curiosity-body);
 }
 
-[data-theme='Curiosity'] h1,
-[data-theme='Curiosity'] h2,
-[data-theme='Curiosity'] h3,
-[data-theme='Curiosity'] h4,
-[data-theme='Curiosity'] h5,
-[data-theme='Curiosity'] h6 {
+[data-theme='curiosity'] h1,
+[data-theme='curiosity'] h2,
+[data-theme='curiosity'] h3,
+[data-theme='curiosity'] h4,
+[data-theme='curiosity'] h5,
+[data-theme='curiosity'] h6 {
   font-family: var(--font-curiosity-display);
   letter-spacing: 0.05em;
+}
+
+/* Formal Theme Override */
+[data-theme='formal'] {
+  --theme-background: var(--c-primary-rich-black);
+  --theme-surface: var(--c-primary-dark-green);
+  --theme-primary: var(--c-primary-mountain-meadow);
+  --theme-secondary: var(--c-secondary-stone);
+  --theme-accent: var(--c-primary-caribbean-green);
+  --theme-text: var(--c-primary-anti-flash-white);
+  --theme-text-secondary: var(--c-secondary-pistachio);
+  --theme-border: var(--c-secondary-basil);
 }
 
 /* Dynamic updates based on scroll progress */

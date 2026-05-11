@@ -8,7 +8,7 @@ const hobbies = [
     icon: '💪',
     label: 'Working Out',
     desc: 'Building discipline through fitness. Calisthenics, weightlifting, and nutrition.',
-    borderClass: 'border-Curiosity-highlight/30',
+    borderClass: 'border-curiosity-highlight/30',
     interactive: false,
   },
   {
@@ -16,23 +16,23 @@ const hobbies = [
     label: 'Tech Tinkering',
     desc: "Building PCs, fixing hardware, and breaking things just to see how they work.",
     hint: '(Warning: Don\'t click too many times...)',
-    borderClass: 'border-Curiosity-primary/30',
-    glowClass: 'bg-Curiosity-primary/5 group-hover:bg-Curiosity-primary/10',
-    hintClass: 'text-Curiosity-primary/70',
+    borderClass: 'border-curiosity-primary/30',
+    glowClass: 'bg-curiosity-primary/5 group-hover:bg-curiosity-primary/10',
+    hintClass: 'text-curiosity-primary/70',
     interactive: true,
   },
   {
     icon: '📚',
     label: 'Reading',
     desc: 'Sci-fi, Theology, and Tech documentation. Always learning something new.',
-    borderClass: 'border-Curiosity-secondary/30',
+    borderClass: 'border-curiosity-secondary/30',
     interactive: false,
   },
   {
     icon: '🎵',
     label: 'Music',
     desc: 'Appreciating everything from Lo-Fi beats to Worship music.',
-    borderClass: 'border-Curiosity-accent/30',
+    borderClass: 'border-curiosity-accent/30',
     interactive: false,
   },
 ] as const;
@@ -84,7 +84,7 @@ export function Hobbies() {
       </AnimatePresence>
 
       <FadeInOnScroll variant="fadeUp">
-        <h2 className="text-3xl md:text-4xl font-curiosity-display mb-8 text-Curiosity-primary border-b-2 border-Curiosity-primary/30 pb-2 inline-block">
+        <h2 className="text-3xl md:text-4xl font-curiosity-display mb-8 text-curiosity-primary border-b-2 border-curiosity-primary/30 pb-2 inline-block">
           Hobbies &amp; Interests
         </h2>
       </FadeInOnScroll>
@@ -102,8 +102,8 @@ export function Hobbies() {
                 <div className={`absolute inset-0 transition-colors ${'glowClass' in hobby ? hobby.glowClass : ''}`} />
                 <div className="relative z-10">
                   <div className="text-4xl mb-4">{hobby.icon}</div>
-                  <h3 className="text-xl font-curiosity-display text-Curiosity-text mb-2">{hobby.label}</h3>
-                  <p className="text-Curiosity-text-secondary font-curiosity-body text-sm leading-relaxed">
+                  <h3 className="text-xl font-curiosity-display text-curiosity-text mb-2">{hobby.label}</h3>
+                  <p className="text-curiosity-text-secondary font-curiosity-body text-sm leading-relaxed">
                     {hobby.desc}
                     {'hint' in hobby && (
                       <>
@@ -125,8 +125,8 @@ export function Hobbies() {
                 className={`bg-[#282e45] p-6 rounded-2xl border ${hobby.borderClass} shadow-2xl h-full`}
               >
                 <div className="text-4xl mb-4">{hobby.icon}</div>
-                <h3 className="text-xl font-curiosity-display text-Curiosity-text mb-2">{hobby.label}</h3>
-                <p className="text-Curiosity-text-secondary font-curiosity-body text-sm leading-relaxed">{hobby.desc}</p>
+                <h3 className="text-xl font-curiosity-display text-curiosity-text mb-2">{hobby.label}</h3>
+                <p className="text-curiosity-text-secondary font-curiosity-body text-sm leading-relaxed">{hobby.desc}</p>
               </motion.div>
             </FadeInOnScroll>
           ),
