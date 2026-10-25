@@ -117,7 +117,7 @@ export const DuolingoFireWidget = () => {
             className="absolute -bottom-1 -right-1 bg-[#58CC02] text-white text-sm font-bold px-2 py-1 rounded-md border-2 border-white"
             title="Estimated from course XP"
           >
-            {primaryLevel} est.
+            {primaryLevel}
           </div>
         </div>
 
@@ -202,7 +202,7 @@ export const DuolingoFireWidget = () => {
               <span
                 className={`font-mono text-[0.9rem] ${isFireActive ? 'text-white/80' : 'text-gray-500'}`}
               >
-                {course.level} est. · {course.xp.toLocaleString()} XP
+                {course.level} · {course.xp.toLocaleString()} XP
               </span>
             </div>
           ))}

@@ -15,7 +15,7 @@ export function DuolingoWidget() {
         <div>
           <h3 className="font-bold text-white">English</h3>
           <p className="text-sm text-formal-secondary-stone">
-            {english.level} est. · {english.xp.toLocaleString()} XP
+            {english.level} · {english.xp.toLocaleString()} XP
             {stats.activity ? ` · ${stats.activity.totalXp.toLocaleString()} XP (30d)` : ''}
           </p>
         </div>
