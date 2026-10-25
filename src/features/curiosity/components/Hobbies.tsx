@@ -1,5 +1,6 @@
 // Implemented from DESIGN.md — Curiosity scope
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FadeInOnScroll } from '@/components/animations/FadeInOnScroll';
 import { Dumbbell, Hammer, BookOpen, Music } from 'lucide-react';
@@ -49,40 +50,72 @@ export function Hobbies() {
     if (newCount >= 5) {
       setShowBSOD(true);
       setClickCount(0);
-      setTimeout(() => setShowBSOD(false), 4000);
     }
   };
 
-  return (
-    <section id="hobbies" className="py-12 md:py-20 relative">
-      <AnimatePresence>
-        {showBSOD && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[9999] bg-[#0078d7] text-white font-['Segoe_UI',_sans-serif] overflow-hidden flex items-center justify-center"
-            style={{ cursor: 'none' }}
-          >
-            <div className="w-full max-w-4xl px-8 md:px-20">
-              <div className="space-y-8">
-                <div className="text-7xl md:text-9xl font-light mb-12">:(</div>
-                <div className="space-y-6">
-                  <h2 className="text-xl md:text-3xl font-curiosity-display font-light leading-relaxed max-w-2xl">
-                    Your PC ran into a problem and needs to restart. We're just collecting some
-                    error info, and then we'll restart for you.
-                  </h2>
-                  <p className="text-lg md:text-2xl font-curiosity-body font-light">0% complete</p>
-                </div>
-                <div className="mt-12 space-y-2 text-sm md:text-base font-light">
-                  <p className="font-curiosity-body">Stop code: CRITICAL_PROCESS_DIED</p>
-                  <p className="font-curiosity-body">What failed: user_patience.sys</p>
-                </div>
+  useEffect(() => {
+    if (!showBSOD) return;
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    const timer = setTimeout(() => {
+      setShowBSOD(false);
+    }, 4000);
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setShowBSOD(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [showBSOD]);
+
+  const bsodOverlay = (
+    <AnimatePresence>
+      {showBSOD && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.15 }}
+          className="fixed inset-0 top-0 left-0 w-screen h-screen z-[99999] bg-[#0078d7] text-white font-['Segoe_UI',_sans-serif] overflow-hidden flex items-center justify-center p-6 md:p-12 select-none"
+          style={{ cursor: 'none' }}
+          role="alert"
+          aria-live="assertive"
+          onClick={() => setShowBSOD(false)}
+        >
+          <div className="w-full max-w-4xl px-8 md:px-20">
+            <div className="space-y-8">
+              <div className="text-7xl md:text-9xl font-light mb-12">:(</div>
+              <div className="space-y-6">
+                <h2 className="text-xl md:text-3xl font-curiosity-display font-light leading-relaxed max-w-2xl">
+                  Your PC ran into a problem and needs to restart. We're just collecting some error
+                  info, and then we'll restart for you.
+                </h2>
+                <p className="text-lg md:text-2xl font-curiosity-body font-light">0% complete</p>
+              </div>
+              <div className="mt-12 space-y-2 text-sm md:text-base font-light">
+                <p className="font-curiosity-body">Stop code: CRITICAL_PROCESS_DIED</p>
+                <p className="font-curiosity-body">What failed: user_patience.sys</p>
               </div>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+
+  return (
+    <section id="hobbies" className="py-12 md:py-20 relative">
+      {typeof document !== 'undefined' ? createPortal(bsodOverlay, document.body) : null}
 
       <FadeInOnScroll variant="fadeUp">
         <h2 className="text-3xl md:text-4xl font-curiosity-display mb-8 text-curiosity-primary border-b-2 border-curiosity-primary/30 pb-2 inline-block">
