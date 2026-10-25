@@ -1,26 +1,35 @@
 {
   "username": "AlvaGonz",
-  "streak": 462,
-  "totalXp": 32015,
-  "level": "B2",
-  "learningLanguage": "en",
-  "avatar": "https://simg-ssl.duolingo.com/ssr-avatars/478388255/SSR-DKgKrF3cE-/xxlarge",
+  "streak": 776,
+  "totalXp": 72937,
+  "learningLanguage": "pt",
+  "avatar": "https://d3gq3s1iyyx31w.cloudfront.net/static/render/bg/BackgroundColor-13/Body-1/ClothingColor-3/CostumeArtboard-14/Expression-1/EyeColor-1/FacialHair-4/FacialHairColor-1/Glasses-1/GlassesColor-7/HasCostume-0/Headwear-0/HeadwearColor-1/MainHair-57/MainHairColor-1/Nose%20Piercing-0/Piercings-0/SkinTone-8/Wrinkles-0/xxlarge",
   "courses": [
     {
       "title": "English",
       "learningLanguage": "en",
-      "xp": 29364
+      "xp": 43277,
+      "level": "C1"
+    },
+    {
+      "title": "Portuguese",
+      "learningLanguage": "pt",
+      "xp": 15584,
+      "level": "B2"
     },
     {
       "title": "Japanese",
       "learningLanguage": "ja",
-      "xp": 2286
+      "xp": 2765,
+      "level": "A2"
     },
     {
       "title": "Haitian Creole",
       "learningLanguage": "ht",
-      "xp": 365
+      "xp": 365,
+      "level": "A1"
     }
   ],
-  "motivation": "brain"
+  "motivation": "brain",
+  "lastUpdated": "2026-10-25T00:45:29.107Z"
 }

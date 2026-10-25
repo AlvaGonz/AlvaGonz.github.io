@@ -22,7 +22,7 @@ const getInitialSide = (): Side | null => {
   }
 
   // 2. Try localStorage
-  const savedSide = localStorage.getItem('portfolio-side')?.toLowerCase();
+  const savedSide = window.localStorage.getItem('portfolio-side')?.toLowerCase();
   if (savedSide === 'formal' || savedSide === 'curiosity') {
     return savedSide as Side;
   }
@@ -57,10 +57,10 @@ export function SideProvider({ children }: { children: ReactNode }) {
 
     if (newSide) {
       url.searchParams.set('side', newSide);
-      localStorage.setItem('portfolio-side', newSide);
+      window.localStorage.setItem('portfolio-side', newSide);
     } else {
       url.searchParams.delete('side');
-      localStorage.removeItem('portfolio-side');
+      window.localStorage.removeItem('portfolio-side');
     }
 
     window.history.replaceState({}, '', url);
@@ -72,7 +72,7 @@ export function SideProvider({ children }: { children: ReactNode }) {
       const url = new URL(window.location.href);
       url.searchParams.set('side', newSide);
       window.history.replaceState({}, '', url);
-      localStorage.setItem('portfolio-side', newSide);
+      window.localStorage.setItem('portfolio-side', newSide);
       return newSide;
     });
   }, []);

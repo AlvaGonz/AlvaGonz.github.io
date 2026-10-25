@@ -7,6 +7,7 @@ import { GamingShowcase } from '@/features/curiosity/components/GamingShowcase';
 import { NFSWidget } from '@/features/curiosity/components/NFSWidget';
 import { Hobbies } from '@/features/curiosity/components/Hobbies';
 import { DailyVerse } from '@/features/formal/components/DailyVerse';
+import { LazyKeyboardContact } from '@/features/keyboard/LazyKeyboardContact';
 import { ContactCuriosity } from '@/features/curiosity/components/ContactCuriosity';
 import { AnimatedBg } from '@/components/svg/AnimatedBg';
 import { FloatingElements } from '@/components/svg/FloatingElements';
@@ -121,6 +122,9 @@ export function CuriosityView(): JSX.Element {
 
           {/* Contact Section */}
           <ContactCuriosity profile={profile} />
+
+          {/* 3D Keyboard Contact */}
+          <LazyKeyboardContact />
 
           {/* Daily Verse */}
           <DailyVerse />

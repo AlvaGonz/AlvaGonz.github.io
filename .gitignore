@@ -38,7 +38,7 @@ coverage
 .env.*.local
 
 # Generated data
-
+graphify-out/
 
 # Proprietary Fonts
 public/fonts/axiforma/*.otf

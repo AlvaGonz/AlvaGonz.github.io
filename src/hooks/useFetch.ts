@@ -29,7 +29,7 @@ export function useFetch<T>(url: string, options?: FetchOptions): ApiState<T> {
     const fetchData = async () => {
       // Check local storage cache first
       const cacheKey = `cache_${url}`;
-      const cached = localStorage.getItem(cacheKey);
+      const cached = window.localStorage.getItem(cacheKey);
 
       if (cached) {
         const { data, timestamp } = JSON.parse(cached);

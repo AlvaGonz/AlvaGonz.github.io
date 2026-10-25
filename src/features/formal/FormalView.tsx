@@ -11,6 +11,7 @@ import { ContactFormal as Contact } from '@/features/formal/components/ContactFo
 import { AboutFormal } from '@/features/formal/components/AboutFormal';
 import { GithubActivity } from '@/features/github/components/GithubActivity';
 import { DailyVerse } from '@/features/formal/components/DailyVerse';
+import { LazyKeyboardContact } from '@/features/keyboard/LazyKeyboardContact';
 import { TopLanguages } from '@/features/github/components/TopLanguages';
 import { DuolingoWidget } from '@/features/duolingo/components/DuolingoWidget';
 import { useGithubProjects } from '@/hooks/useGithubProjects';
@@ -165,6 +166,7 @@ export function FormalView(): JSX.Element {
         {/* Contact Section */}
         <section id="contact" className="mb-16">
           <Contact profile={profile} />
+          <LazyKeyboardContact />
           <DailyVerse />
         </section>
       </div>

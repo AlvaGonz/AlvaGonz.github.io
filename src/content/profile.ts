@@ -8,6 +8,9 @@ export const profile: Profile = {
   about:
     "I'm a passionate software engineer who believes in the power of clean, efficient code to solve real-world problems. My journey spans from quality assurance to full-stack development, always with an eye for detail and user experience.",
   location: 'Dominican Republic',
+  email: 'adrian.aalvarezgonz@gmail.com',
+  whatsapp: '18299247374',
+  telegram: '18299247374',
   linkedin: 'https://www.linkedin.com/in/adrian-alexander-a-4a8842217/',
   github: 'https://github.com/AlvaGonz',
   instagram: 'https://www.instagram.com/adrianalv.gon/',

@@ -1,101 +1,94 @@
-import { writeFileSync, mkdirSync } from 'fs';
+import { existsSync, mkdirSync, writeFileSync } from 'fs';
 import { join } from 'path';
+import { estimateCefr } from '../src/features/duolingo/level';
+import type { DuolingoStats } from '../src/features/duolingo/types';
 
 const USERNAME = 'AlvaGonz';
 const DUOLINGO_API_URL = `https://www.duolingo.com/2017-06-30/users?username=${USERNAME}`;
 
-interface DuolingoCourse {
-    title: string;
-    learningLanguage: string;
-    xp: number;
+interface RawCourse {
+  title?: string;
+  learningLanguage?: string;
+  xp?: number;
 }
 
-interface DuolingoStats {
-    username: string;
-    streak: number;
-    totalXp: number;
-    level: string;
-    learningLanguage: string;
-    avatar?: string;
-    courses: DuolingoCourse[];
-    motivation: string;
+interface RawUser {
+  username?: string;
+  streak?: number;
+  totalXp?: number;
+  learningLanguage?: string;
+  picture?: string;
+  motivation?: string;
+  courses?: RawCourse[];
 }
-
-// Fallback data in case the API fails or changes
-const FALLBACK_DATA: DuolingoStats = {
-    username: USERNAME,
-    streak: 452,
-    totalXp: 30705,
-    level: "B2",
-    learningLanguage: "en",
-    avatar: "/images/duo-face.png",
-    courses: [
-        { title: "English", learningLanguage: "en", xp: 12500 },
-        { title: "Japanese", learningLanguage: "ja", xp: 2920 }
-    ],
-    motivation: "serious"
-};
 
 async function fetchDuolingoStats(): Promise<DuolingoStats> {
-    try {
-        console.log(`Fetching Duolingo stats for ${USERNAME}...`);
+  const response = await fetch(DUOLINGO_API_URL, {
+    headers: {
+      'User-Agent':
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36',
+    },
+  });
 
-        // Duolingo API requires a user-agent to avoid 403s
-        const response = await fetch(DUOLINGO_API_URL, {
-            headers: {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-            }
-        });
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+  }
 
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-        }
+  const data = (await response.json()) as { users?: RawUser[] };
+  const user = data.users?.[0];
 
-        const data = await response.json();
+  if (!user) {
+    throw new Error('User not found in response');
+  }
 
-        if (!data.users || data.users.length === 0) {
-            throw new Error('User not found in response');
-        }
+  const courses = (user.courses ?? [])
+    .filter(
+      (course): course is RawCourse & { title: string; learningLanguage: string; xp: number } =>
+        Boolean(course.title && course.learningLanguage) &&
+        typeof course.xp === 'number' &&
+        Number.isFinite(course.xp),
+    )
+    .map((course) => ({
+      title: course.title,
+      learningLanguage: course.learningLanguage,
+      xp: course.xp,
+      level: estimateCefr(course.xp),
+    }))
+    .sort((a, b) => b.xp - a.xp);
 
-        const user = data.users[0];
-
-        // Map API response to our interface
-        const stats: DuolingoStats = {
-            username: user.username || USERNAME,
-            streak: user.streak || 0,
-            totalXp: user.totalXp || 0,
-            level: "B2", // Level is not directly available in this endpoint, keeping static
-            learningLanguage: user.learningLanguage || 'en',
-            avatar: user.picture ? `https:${user.picture}/xxlarge` : undefined,
-            courses: (user.courses || []).map((c: any) => ({
-                title: c.title,
-                learningLanguage: c.learningLanguage,
-                xp: c.xp
-            })),
-            motivation: user.motivation || "serious"
-        };
-
-        return stats;
-
-    } catch (error) {
-        console.warn('Failed to fetch Duolingo stats, using fallback data:', error);
-        return FALLBACK_DATA;
-    }
+  return {
+    username: user.username ?? USERNAME,
+    streak: user.streak ?? 0,
+    totalXp: user.totalXp ?? 0,
+    learningLanguage: user.learningLanguage ?? 'en',
+    avatar: user.picture ? `https:${user.picture}/xxlarge` : undefined,
+    courses,
+    motivation: user.motivation ?? 'serious',
+    lastUpdated: new Date().toISOString(),
+  };
 }
 
 async function main() {
+  const outputDir = join(process.cwd(), 'src', 'data', 'generated');
+  const outputPath = join(outputDir, 'duolingo.json');
+
+  try {
+    console.log(`Fetching Duolingo stats for ${USERNAME}...`);
     const stats = await fetchDuolingoStats();
-
-    const outputDir = join(process.cwd(), 'src', 'data', 'generated');
     mkdirSync(outputDir, { recursive: true });
-
-    const outputPath = join(outputDir, 'duolingo.json');
-
-    writeFileSync(outputPath, JSON.stringify(stats, null, 2), 'utf-8');
+    writeFileSync(outputPath, JSON.stringify(stats, null, 2) + '\n', 'utf-8');
     console.log(`✅ Wrote Duolingo stats to ${outputPath}`);
+  } catch (error) {
+    if (existsSync(outputPath)) {
+      console.warn('Failed to fetch Duolingo stats. Keeping previous data.', error);
+      return;
+    }
+    console.error('Failed to fetch Duolingo stats and no previous data exists.', error);
+    process.exit(1);
+  }
 }
 
-main().catch(err => {
-    console.error('Script failed:', err);
-    process.exit(1);
+main().catch((error) => {
+  console.error('Script failed:', error);
+  process.exit(1);
 });

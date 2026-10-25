@@ -18,6 +18,9 @@ export interface Profile {
   about: string;
   location: string;
   email?: string;
+  whatsapp?: string;
+  telegram?: string;
+  cefr?: Partial<Record<string, string>>;
   linkedin: string;
   github: string;
   instagram?: string;
