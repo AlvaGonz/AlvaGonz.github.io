@@ -9,6 +9,11 @@ describe('keyboard-theme', () => {
     expect(theme.canvasBg).toBe(formalKeyboardTheme.canvasBg);
     expect(theme.chassis.baseColor).toBe('#06302b'); // Pine
     expect(theme.keys.primary.base).toBe('#2cc295'); // Mountain Meadow
+    expect(theme.keys.accent.base).toBe('#00df81'); // Caribbean Green
+    expect(theme.keys.secondary.base).toBe('#17876d'); // Frog
+    expect(theme.keys.shift.base).toBe('#03624c'); // Bangladesh Green
+    expect(theme.keys.modifier.base).toBe('#06302b'); // Pine
+    expect(theme.keys.function.base).toBe('#0b453a'); // Basil
     expect(theme.keys.alphanumeric.base).toBe('#032221'); // Dark Green
   });
 
@@ -19,6 +24,8 @@ describe('keyboard-theme', () => {
     expect(theme.chassis.baseColor).toBe('#21263A'); // Night Blue-Grey
     expect(theme.keys.primary.base).toBe('#D0D34D'); // Lime Chartreuse
     expect(theme.keys.secondary.base).toBe('#157954'); // Deep Emerald
+    expect(theme.keys.accent.base).toBe('#D6D9D8'); // Cloud Grey
+    expect(theme.keys.shift.base).toBe('#C7CEE8'); // Periwinkle Mist
   });
 
   it('defaults to formal theme when side is null or undefined', () => {
@@ -27,7 +34,16 @@ describe('keyboard-theme', () => {
   });
 
   it('ensures all keys in KEYBOARD_LAYOUT have valid semantic roles', () => {
-    const validRoles = ['alphanumeric', 'modifier', 'primary', 'secondary', 'accent', 'space'];
+    const validRoles = [
+      'alphanumeric',
+      'primary',
+      'secondary',
+      'accent',
+      'shift',
+      'modifier',
+      'function',
+      'space',
+    ];
 
     KEYBOARD_LAYOUT.forEach((row) => {
       row.forEach((key) => {
@@ -37,16 +53,20 @@ describe('keyboard-theme', () => {
     });
   });
 
-  it('verifies Enter key is primary and Esc key is accent', () => {
+  it('verifies Enter, Esc, Bksp, Shift, and Space roles', () => {
     const allKeys = KEYBOARD_LAYOUT.flat();
     const enterKey = allKeys.find((k) => k.code === 'Enter');
     const escKey = allKeys.find((k) => k.code === 'Escape');
     const bkspKey = allKeys.find((k) => k.code === 'Backspace');
+    const shiftKey = allKeys.find((k) => k.code === 'ShiftLeft');
+    const tabKey = allKeys.find((k) => k.code === 'Tab');
     const spaceKey = allKeys.find((k) => k.code === 'Space');
 
     expect(enterKey?.role).toBe('primary');
     expect(escKey?.role).toBe('accent');
     expect(bkspKey?.role).toBe('secondary');
+    expect(shiftKey?.role).toBe('shift');
+    expect(tabKey?.role).toBe('function');
     expect(spaceKey?.role).toBe('space');
   });
 });

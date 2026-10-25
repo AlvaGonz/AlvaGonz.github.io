@@ -1,5 +1,6 @@
 import type { Side } from '@/context/SideContext';
 import { colorSystem } from '@/lib/color-system';
+import type { KeyRole } from './keyboard-layout';
 
 export interface KeyColorSet {
   base: string;
@@ -31,14 +32,7 @@ export interface KeyboardTheme {
     shadowColor: string;
     shadowOpacity: number;
   };
-  keys: {
-    alphanumeric: KeyColorSet;
-    modifier: KeyColorSet;
-    primary: KeyColorSet; // Enter
-    secondary: KeyColorSet; // Backspace
-    accent: KeyColorSet; // Escape
-    space: KeyColorSet; // Spacebar
-  };
+  keys: Record<KeyRole, KeyColorSet>;
   terminal: {
     containerBorder: string;
     containerBg: string;
@@ -89,34 +83,50 @@ export const formalKeyboardTheme: KeyboardTheme = {
       active: colorSystem.formal.primary.bangladeshGreen, // #03624c
       text: colorSystem.formal.primary.antiFlashWhite, // #f1f7f6
     },
-    modifier: {
-      base: colorSystem.formal.secondary.pine, // #06302b
-      hover: colorSystem.formal.secondary.basil, // #0b453a
-      active: colorSystem.formal.secondary.frog, // #17876d
-      text: colorSystem.formal.secondary.pistachio, // #aacbc4
-    },
     primary: {
-      // Enter key
-      base: colorSystem.formal.primary.mountainMeadow, // #2cc295 (Hero accent)
+      // Enter key - Vibrant Hero Accent
+      base: colorSystem.formal.primary.mountainMeadow, // #2cc295
       hover: '#3be0b0',
       active: colorSystem.formal.primary.caribbeanGreen, // #00df81
       text: colorSystem.formal.primary.richBlack, // #002f1a
     },
     secondary: {
-      // Backspace
-      base: colorSystem.formal.primary.bangladeshGreen, // #03624c
-      hover: colorSystem.formal.secondary.frog, // #17876d
-      active: colorSystem.formal.secondary.mint, // #2fa98c
+      // Backspace key - Frog green distinct accent
+      base: colorSystem.formal.secondary.frog, // #17876d
+      hover: colorSystem.formal.secondary.mint, // #2fa98c
+      active: colorSystem.formal.primary.caribbeanGreen, // #00df81
       text: colorSystem.formal.primary.antiFlashWhite, // #f1f7f6
     },
     accent: {
-      // Escape
+      // Escape key - Caribbean Green pop
+      base: colorSystem.formal.primary.caribbeanGreen, // #00df81
+      hover: '#34eea0',
+      active: colorSystem.formal.primary.mountainMeadow, // #2cc295
+      text: colorSystem.formal.primary.richBlack, // #002f1a
+    },
+    shift: {
+      // Shift keys - Rich Bangladesh Green accent
+      base: colorSystem.formal.primary.bangladeshGreen, // #03624c
+      hover: colorSystem.formal.secondary.forest, // #095544
+      active: colorSystem.formal.secondary.frog, // #17876d
+      text: colorSystem.formal.primary.antiFlashWhite, // #f1f7f6
+    },
+    modifier: {
+      // Ctrl, Alt, Win, Fn - Deep Pine with Pistachio text
+      base: colorSystem.formal.secondary.pine, // #06302b
+      hover: colorSystem.formal.secondary.basil, // #0b453a
+      active: colorSystem.formal.primary.bangladeshGreen, // #03624c
+      text: colorSystem.formal.secondary.pistachio, // #aacbc4
+    },
+    function: {
+      // Tab, CapsLock - Basil accent
       base: colorSystem.formal.secondary.basil, // #0b453a
-      hover: colorSystem.formal.secondary.frog, // #17876d
-      active: colorSystem.formal.primary.darkGreen, // #032221
+      hover: colorSystem.formal.secondary.forest, // #095544
+      active: colorSystem.formal.secondary.frog, // #17876d
       text: colorSystem.formal.primary.antiFlashWhite, // #f1f7f6
     },
     space: {
+      // Spacebar
       base: colorSystem.formal.primary.darkGreen, // #032221
       hover: colorSystem.formal.secondary.forest, // #095544
       active: colorSystem.formal.primary.mountainMeadow, // #2cc295
@@ -174,34 +184,50 @@ export const curiosityKeyboardTheme: KeyboardTheme = {
       active: colorSystem.curiosity.surface, // #157954 (Deep Emerald)
       text: colorSystem.curiosity.text, // #f1f5f9
     },
-    modifier: {
-      base: colorSystem.curiosity.background, // #21263a
-      hover: '#2d344e',
-      active: colorSystem.curiosity.surface, // #157954
-      text: colorSystem.curiosity.secondary, // #c7cee8
-    },
     primary: {
-      // Enter key
-      base: colorSystem.curiosity.primary, // #d0d34d (Lime Chartreuse)
+      // Enter key - Lime Chartreuse
+      base: colorSystem.curiosity.primary, // #d0d34d
       hover: '#e2e55a',
       active: colorSystem.curiosity.surface, // #157954
       text: colorSystem.curiosity.background, // #21263a
     },
     secondary: {
-      // Backspace
-      base: colorSystem.curiosity.surface, // #157954 (Deep Emerald)
+      // Backspace key - Deep Emerald
+      base: colorSystem.curiosity.surface, // #157954
       hover: '#1b9a6b',
       active: colorSystem.curiosity.primary, // #d0d34d
       text: colorSystem.curiosity.text, // #f1f5f9
     },
     accent: {
-      // Escape
-      base: colorSystem.curiosity.secondary, // #c7cee8 (Periwinkle Mist)
-      hover: colorSystem.curiosity.highlight, // #d6d9d8
+      // Escape key - Cloud Grey
+      base: colorSystem.curiosity.highlight, // #d6d9d8
+      hover: '#ffffff',
       active: colorSystem.curiosity.primary, // #d0d34d
       text: colorSystem.curiosity.background, // #21263a
     },
+    shift: {
+      // Shift keys - Periwinkle Mist
+      base: colorSystem.curiosity.secondary, // #c7cee8
+      hover: colorSystem.curiosity.highlight, // #d6d9d8
+      active: colorSystem.curiosity.surface, // #157954
+      text: colorSystem.curiosity.background, // #21263a
+    },
+    modifier: {
+      // Ctrl, Alt, Win, Fn - Night Blue with Periwinkle text
+      base: colorSystem.curiosity.background, // #21263a
+      hover: '#2d344e',
+      active: colorSystem.curiosity.surface, // #157954
+      text: colorSystem.curiosity.secondary, // #c7cee8
+    },
+    function: {
+      // Tab, CapsLock - Slate Inky Blue
+      base: '#313752',
+      hover: '#3d4566',
+      active: colorSystem.curiosity.primary, // #d0d34d
+      text: colorSystem.curiosity.secondary, // #c7cee8
+    },
     space: {
+      // Spacebar
       base: '#282e45',
       hover: '#38405f',
       active: colorSystem.curiosity.primary, // #d0d34d

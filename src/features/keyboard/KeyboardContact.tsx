@@ -105,16 +105,16 @@ export default function KeyboardContact({ side: propSide }: KeyboardContactProps
   return (
     <div
       className={clsx(
-        'relative w-full h-[520px] rounded-3xl overflow-hidden border shadow-2xl transition-[background-color,border-color] duration-500',
+        'relative w-full h-[560px] sm:h-[520px] rounded-3xl overflow-hidden border shadow-2xl transition-[background-color,border-color] duration-500',
         theme.wrapperBorder,
         theme.wrapperBg,
       )}
     >
-      {/* Terminal HUD Interface */}
-      <div className="absolute top-3 left-1/2 z-10 w-[92%] max-w-2xl -translate-x-1/2 pointer-events-auto">
+      {/* Terminal HUD Interface - Mobile Optimized */}
+      <div className="absolute top-3 left-1/2 z-10 w-[94%] sm:w-[92%] max-w-2xl -translate-x-1/2 pointer-events-auto">
         <div
           className={clsx(
-            'flex min-h-[150px] max-h-[200px] flex-col overflow-auto rounded-2xl border p-4 font-mono shadow-2xl backdrop-blur-md transition-[background-color,border-color,color] duration-500',
+            'flex min-h-[140px] max-h-[230px] sm:max-h-[200px] flex-col overflow-y-auto overflow-x-hidden rounded-2xl border p-3 sm:p-4 font-mono shadow-2xl backdrop-blur-md transition-[background-color,border-color,color] duration-500',
             theme.terminal.containerBorder,
             theme.terminal.containerBg,
             theme.terminal.textColor,
@@ -128,14 +128,29 @@ export default function KeyboardContact({ side: propSide }: KeyboardContactProps
               theme.terminal.headerBorder,
             )}
           >
-            <div className="flex gap-2">
-              <div className={clsx('h-3 w-3 rounded-full opacity-80', theme.terminal.dots[0])} />
-              <div className={clsx('h-3 w-3 rounded-full opacity-80', theme.terminal.dots[1])} />
-              <div className={clsx('h-3 w-3 rounded-full opacity-80', theme.terminal.dots[2])} />
+            <div className="flex gap-1.5 sm:gap-2">
+              <div
+                className={clsx(
+                  'h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full opacity-80',
+                  theme.terminal.dots[0],
+                )}
+              />
+              <div
+                className={clsx(
+                  'h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full opacity-80',
+                  theme.terminal.dots[1],
+                )}
+              />
+              <div
+                className={clsx(
+                  'h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full opacity-80',
+                  theme.terminal.dots[2],
+                )}
+              />
             </div>
             <span
               className={clsx(
-                'text-xs font-semibold uppercase tracking-widest',
+                'text-[10px] sm:text-xs font-semibold uppercase tracking-wider',
                 theme.terminal.headerTitleColor,
               )}
             >
@@ -145,7 +160,12 @@ export default function KeyboardContact({ side: propSide }: KeyboardContactProps
 
           {/* Instructions and Status Message */}
           <div className="flex-1 space-y-1 text-sm">
-            <p className={clsx('text-xs opacity-80', theme.terminal.secondaryTextColor)}>
+            <p
+              className={clsx(
+                'text-xs opacity-80 leading-relaxed',
+                theme.terminal.secondaryTextColor,
+              )}
+            >
               Type a message below, then press Enter or dispatch via channel.
             </p>
             {status && (
@@ -153,65 +173,79 @@ export default function KeyboardContact({ side: propSide }: KeyboardContactProps
             )}
           </div>
 
-          {/* Prompt, Input, and Action Buttons */}
+          {/* Prompt, Input, and Action Buttons - Responsive Row/Column Layout */}
           <div
             className={clsx(
-              'mt-2 flex items-center gap-2 border-t pt-2',
+              'mt-2 flex flex-col gap-2 border-t pt-2 sm:flex-row sm:items-center sm:gap-2',
               theme.terminal.headerBorder,
             )}
           >
-            <span className={clsx('select-none font-bold', theme.terminal.promptColor)}>&gt;</span>
-            <input
-              ref={inputRef}
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              onKeyDown={handleKeyDown}
-              onKeyUp={handleKeyUp}
-              placeholder="Type your message..."
-              className={clsx(
-                'flex-1 bg-transparent text-sm outline-none transition-colors duration-200',
-                theme.terminal.inputColor,
-                theme.terminal.inputPlaceholderColor,
-                theme.terminal.inputCaretColor,
-              )}
-              aria-label="Contact message input"
-            />
-            <button
-              type="button"
-              onClick={() => send('email')}
-              disabled={!canSend}
-              className={clsx(
-                'rounded-full px-3 py-1 text-xs font-medium transition-[background-color,border-color,color,box-shadow,transform] duration-200 active:scale-95',
-                theme.terminal.buttonClass,
-                !canSend && theme.terminal.buttonDisabledClass,
-              )}
-            >
-              Email
-            </button>
-            <button
-              type="button"
-              onClick={() => send('whatsapp')}
-              disabled={!canSend}
-              className={clsx(
-                'rounded-full px-3 py-1 text-xs font-medium transition-[background-color,border-color,color,box-shadow,transform] duration-200 active:scale-95',
-                theme.terminal.buttonClass,
-                !canSend && theme.terminal.buttonDisabledClass,
-              )}
-            >
-              WhatsApp
-            </button>
-            <button
-              type="button"
-              onClick={() => send('telegram')}
-              disabled={!canSend}
-              className={clsx(
-                'rounded-full px-3 py-1 text-xs font-medium transition-[background-color,border-color,color,box-shadow,transform] duration-200 active:scale-95',
-                theme.terminal.buttonClass,
-                !canSend && theme.terminal.buttonDisabledClass,
-              )}
-            >
-              Telegram
-            </button>
+            {/* Input Row */}
+            <div className="flex flex-1 items-center gap-2 min-w-0">
+              <span
+                className={clsx(
+                  'select-none font-bold text-sm sm:text-base',
+                  theme.terminal.promptColor,
+                )}
+              >
+                &gt;
+              </span>
+              <input
+                ref={inputRef}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                onKeyDown={handleKeyDown}
+                onKeyUp={handleKeyUp}
+                placeholder="Type your message..."
+                className={clsx(
+                  'w-full min-w-0 bg-transparent text-base sm:text-sm outline-none transition-colors duration-200',
+                  theme.terminal.inputColor,
+                  theme.terminal.inputPlaceholderColor,
+                  theme.terminal.inputCaretColor,
+                )}
+                aria-label="Contact message input"
+              />
+            </div>
+
+            {/* Action Buttons Row - Touch friendly and never truncated */}
+            <div className="flex items-center gap-1.5 sm:gap-2 justify-end shrink-0">
+              <button
+                type="button"
+                onClick={() => send('email')}
+                disabled={!canSend}
+                className={clsx(
+                  'rounded-full px-3 py-1.5 sm:py-1 text-xs font-medium transition-[background-color,border-color,color,box-shadow,transform] duration-200 active:scale-95 touch-manipulation',
+                  theme.terminal.buttonClass,
+                  !canSend && theme.terminal.buttonDisabledClass,
+                )}
+              >
+                Email
+              </button>
+              <button
+                type="button"
+                onClick={() => send('whatsapp')}
+                disabled={!canSend}
+                className={clsx(
+                  'rounded-full px-3 py-1.5 sm:py-1 text-xs font-medium transition-[background-color,border-color,color,box-shadow,transform] duration-200 active:scale-95 touch-manipulation',
+                  theme.terminal.buttonClass,
+                  !canSend && theme.terminal.buttonDisabledClass,
+                )}
+              >
+                WhatsApp
+              </button>
+              <button
+                type="button"
+                onClick={() => send('telegram')}
+                disabled={!canSend}
+                className={clsx(
+                  'rounded-full px-3 py-1.5 sm:py-1 text-xs font-medium transition-[background-color,border-color,color,box-shadow,transform] duration-200 active:scale-95 touch-manipulation',
+                  theme.terminal.buttonClass,
+                  !canSend && theme.terminal.buttonDisabledClass,
+                )}
+              >
+                Telegram
+              </button>
+            </div>
           </div>
         </div>
       </div>

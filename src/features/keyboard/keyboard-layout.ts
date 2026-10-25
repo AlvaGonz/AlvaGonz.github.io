@@ -1,9 +1,11 @@
 export type KeyRole =
   | 'alphanumeric'
-  | 'modifier'
   | 'primary' // Enter (Send)
   | 'secondary' // Backspace
   | 'accent' // Escape
+  | 'shift' // Shift keys
+  | 'modifier' // Ctrl, Alt, Meta, Fn
+  | 'function' // Tab, CapsLock
   | 'space'; // Spacebar
 
 export interface KeyData {
@@ -48,7 +50,7 @@ export const KEYBOARD_LAYOUT: KeyData[][] = [
     },
   ],
   [
-    { label: 'Tab', code: 'Tab', role: 'modifier', width: 1.5, fontSize: 0.2, align: 'left' },
+    { label: 'Tab', code: 'Tab', role: 'function', width: 1.5, fontSize: 0.2, align: 'left' },
     { label: 'Q', code: 'KeyQ', role: 'alphanumeric' },
     { label: 'W', code: 'KeyW', role: 'alphanumeric' },
     { label: 'E', code: 'KeyE', role: 'alphanumeric' },
@@ -64,7 +66,7 @@ export const KEYBOARD_LAYOUT: KeyData[][] = [
     { label: '\\', code: 'Backslash', role: 'alphanumeric', width: 1.5 },
   ],
   [
-    { label: 'Caps', code: 'CapsLock', role: 'modifier', width: 1.8, fontSize: 0.2, align: 'left' },
+    { label: 'Caps', code: 'CapsLock', role: 'function', width: 1.8, fontSize: 0.2, align: 'left' },
     { label: 'A', code: 'KeyA', role: 'alphanumeric' },
     { label: 'S', code: 'KeyS', role: 'alphanumeric' },
     { label: 'D', code: 'KeyD', role: 'alphanumeric' },
@@ -89,7 +91,7 @@ export const KEYBOARD_LAYOUT: KeyData[][] = [
     {
       label: 'Shift',
       code: 'ShiftLeft',
-      role: 'modifier',
+      role: 'shift',
       width: 2.3,
       fontSize: 0.2,
       align: 'left',
@@ -107,7 +109,7 @@ export const KEYBOARD_LAYOUT: KeyData[][] = [
     {
       label: 'Shift',
       code: 'ShiftRight',
-      role: 'modifier',
+      role: 'shift',
       width: 2.7,
       fontSize: 0.2,
       align: 'right',
