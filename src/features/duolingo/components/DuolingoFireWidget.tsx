@@ -26,7 +26,7 @@ export const DuolingoFireWidget = () => {
         group relative w-full cursor-pointer select-none
         rounded-2xl border border-white/10 bg-white/[0.03]
         p-6 transition-colors duration-200
-        hover:bg-white/[0.06] focus-visible:outline-none
+        hover:bg-white/[0.06] active:bg-white/[0.1] focus-visible:outline-none
         focus-visible:ring-2 focus-visible:ring-curiosity-primary/60
         ${isFireActive ? 'fire-active' : ''}
       `}
@@ -126,9 +126,7 @@ export const DuolingoFireWidget = () => {
         </div>
 
         <div className="text-right">
-          <p className="text-[0.65rem] font-medium uppercase tracking-wide text-curiosity-text-secondary">
-            Streak
-          </p>
+          <p className="text-[0.65rem] font-medium text-curiosity-text-secondary">Streak</p>
           <p className="flex items-center justify-end gap-1.5 text-2xl font-black leading-none text-curiosity-primary">
             {stats.streak}
             <Flame className="h-5 w-5 text-orange-400" aria-hidden="true" />
@@ -139,16 +137,12 @@ export const DuolingoFireWidget = () => {
       {/* XP summary */}
       <div className="relative z-10 flex items-baseline justify-between border-t border-white/10 pt-4">
         <div>
-          <p className="text-[0.65rem] font-medium uppercase tracking-wide text-curiosity-text-secondary">
-            Total XP
-          </p>
+          <p className="text-[0.65rem] font-medium  text-curiosity-text-secondary">Total XP</p>
           <p className="text-xl font-bold text-curiosity-text">{stats.totalXp.toLocaleString()}</p>
         </div>
         {stats.activity && (
           <div className="text-right">
-            <p className="text-[0.65rem] font-medium uppercase tracking-wide text-curiosity-text-secondary">
-              30-day XP
-            </p>
+            <p className="text-[0.65rem] font-medium  text-curiosity-text-secondary">30-day XP</p>
             <p className="text-sm font-semibold text-curiosity-text-secondary">
               {stats.activity.totalXp.toLocaleString()} · {stats.activity.activeDays} active
             </p>
@@ -158,9 +152,7 @@ export const DuolingoFireWidget = () => {
 
       {/* Courses */}
       <div className="relative z-10 border-t border-white/10 pt-4">
-        <p className="mb-2 text-[0.65rem] font-medium uppercase tracking-wide text-curiosity-text-secondary">
-          Courses
-        </p>
+        <p className="mb-2 text-[0.65rem] font-medium  text-curiosity-text-secondary">Courses</p>
         <ul className="space-y-1.5">
           {stats.courses.map((course) => (
             <li key={course.learningLanguage} className="flex items-center justify-between text-sm">
@@ -170,7 +162,7 @@ export const DuolingoFireWidget = () => {
                   {course.learningLanguage.toUpperCase()}
                 </span>
               </span>
-              <span className="font-mono text-xs text-curiosity-text-secondary">
+              <span className="text-xs text-curiosity-text-secondary">
                 {course.level} · {course.xp.toLocaleString()} XP
               </span>
             </li>
