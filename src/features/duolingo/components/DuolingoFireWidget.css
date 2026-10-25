@@ -16,13 +16,13 @@
     box-shadow: 0 0 0 rgba(244, 144, 0, 0);
     border-color: rgba(255, 255, 255, 0.1);
   }
-  20% {
-    box-shadow: 0 0 24px rgba(244, 144, 0, 0.5), 0 0 48px rgba(255, 199, 21, 0.25);
-    border-color: rgba(255, 199, 21, 0.6);
+  15% {
+    box-shadow: 0 0 30px rgba(244, 144, 0, 0.7), 0 0 60px rgba(255, 199, 21, 0.4);
+    border-color: rgba(255, 199, 21, 0.8);
   }
-  60% {
-    box-shadow: 0 0 16px rgba(244, 144, 0, 0.3), 0 0 32px rgba(255, 199, 21, 0.15);
-    border-color: rgba(255, 199, 21, 0.4);
+  40% {
+    box-shadow: 0 0 20px rgba(244, 144, 0, 0.4), 0 0 40px rgba(255, 199, 21, 0.2);
+    border-color: rgba(255, 199, 21, 0.5);
   }
   100% {
     box-shadow: 0 0 0 rgba(244, 144, 0, 0);
@@ -33,19 +33,19 @@
 @keyframes flame-burst {
   0% {
     opacity: 0;
-    transform: translateY(0) scale(0.3) rotate(-15deg);
+    transform: translateY(0) scale(0.2) rotate(-20deg);
   }
-  15% {
+  10% {
     opacity: 1;
-    transform: translateY(-20%) scale(1.1) rotate(5deg);
+    transform: translateY(-10%) scale(1.2) rotate(8deg);
   }
-  50% {
-    opacity: 0.9;
-    transform: translateY(-60%) scale(0.9) rotate(-3deg);
+  40% {
+    opacity: 0.95;
+    transform: translateY(-50%) scale(1) rotate(-4deg);
   }
   100% {
     opacity: 0;
-    transform: translateY(-180px) scale(0.4) rotate(8deg);
+    transform: translateY(-220px) scale(0.3) rotate(12deg);
   }
 }
 

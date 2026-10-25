@@ -43,30 +43,27 @@ export const DuolingoFireWidget = () => {
     >
       {/* Fire effect layer */}
       {isFireActive && (
-        <div
-          className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl"
-          aria-hidden="true"
-        >
-          <div className="fire-flames-container absolute inset-x-0 bottom-0 h-3/4">
+        <div className="pointer-events-none absolute -inset-4 z-50" aria-hidden="true">
+          <div className="fire-flames-container absolute inset-x-0 bottom-0 h-full">
             <img
               src="/images/streak-flame-updated-v0-3n46sx7a0e9b1.webp"
               alt=""
               className="flame flame-large absolute bottom-0"
-              style={{ left: '18%', '--delay': '0s' } as CSSProperties}
+              style={{ left: '15%', '--delay': '0s' } as CSSProperties}
             />
             <img
               src="/images/streak-flame-updated-v0-3n46sx7a0e9b1.webp"
               alt=""
               className="flame flame-large absolute bottom-0"
-              style={{ left: '48%', '--delay': '0.12s' } as CSSProperties}
+              style={{ left: '45%', '--delay': '0.1s' } as CSSProperties}
             />
             <img
               src="/images/streak-flame-updated-v0-3n46sx7a0e9b1.webp"
               alt=""
               className="flame flame-large absolute bottom-0"
-              style={{ left: '76%', '--delay': '0.24s' } as CSSProperties}
+              style={{ left: '72%', '--delay': '0.2s' } as CSSProperties}
             />
-            {[...Array(5)].map((_, i) => (
+            {[...Array(4)].map((_, i) => (
               <img
                 key={`med-${i}`}
                 src="/images/streak-flame-updated-v0-3n46sx7a0e9b1.webp"
@@ -74,20 +71,20 @@ export const DuolingoFireWidget = () => {
                 className="flame flame-medium absolute bottom-0"
                 style={
                   {
-                    left: `${12 + i * 17}%`,
-                    '--delay': `${0.05 + i * 0.08}s`,
+                    left: `${10 + i * 20}%`,
+                    '--delay': `${0.05 + i * 0.1}s`,
                   } as CSSProperties
                 }
               />
             ))}
-            {[...Array(8)].map((_, i) => (
+            {[...Array(10)].map((_, i) => (
               <div
                 key={`sp-${i}`}
                 className="sparkle absolute bottom-0"
                 style={
                   {
-                    left: `${8 + i * 11}%`,
-                    '--delay': `${i * 0.12}s`,
+                    left: `${5 + i * 9}%`,
+                    '--delay': `${i * 0.1}s`,
                   } as CSSProperties
                 }
               />
