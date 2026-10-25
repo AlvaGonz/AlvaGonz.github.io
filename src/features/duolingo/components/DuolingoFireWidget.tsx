@@ -178,6 +178,13 @@ export const DuolingoFireWidget = () => {
           </span>
         </div>
 
+        {stats.activity && (
+          <div className="mb-2 text-[0.85rem] text-gray-500">
+            Last {stats.activity.windowDays} days: {stats.activity.totalXp.toLocaleString()} XP ·{' '}
+            {stats.activity.activeDays} active days
+          </div>
+        )}
+
         <div className="space-y-2">
           {stats.courses.map((course) => (
             <div

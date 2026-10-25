@@ -7,8 +7,16 @@ export interface DuolingoCourse {
   level: EstimatedCefr;
 }
 
+export interface DuolingoActivity {
+  windowDays: number;
+  totalXp: number;
+  activeDays: number;
+  streakExtendedDays: number;
+}
+
 export interface DuolingoStats {
   username: string;
+  userId?: number;
   streak: number;
   totalXp: number;
   learningLanguage: string;
@@ -16,4 +24,5 @@ export interface DuolingoStats {
   courses: DuolingoCourse[];
   motivation: string;
   lastUpdated: string;
+  activity?: DuolingoActivity;
 }

@@ -1,5 +1,6 @@
 {
   "username": "AlvaGonz",
+  "userId": 478388255,
   "streak": 776,
   "totalXp": 72937,
   "learningLanguage": "pt",
@@ -31,5 +32,11 @@
     }
   ],
   "motivation": "brain",
-  "lastUpdated": "2026-10-25T00:45:29.107Z"
+  "lastUpdated": "2026-10-25T01:12:27.883Z",
+  "activity": {
+    "windowDays": 30,
+    "totalXp": 818,
+    "activeDays": 29,
+    "streakExtendedDays": 29
+  }
 }

@@ -40,4 +40,6 @@ No free Anakin action returns CEFR. The public profile HTML does not expose `ski
 
 ## Decision
 
-Fetch the public endpoint daily in CI. Derive an estimated CEFR level from course XP and label it `est.`. Do not add Anakin: it would add a secret and a paid dependency without producing a real level.
+Fetch the public endpoint daily in CI. Derive an estimated CEFR level from course XP and label it `est.`. Anakin cannot return CEFR (no action exposes language levels), so it is not used for levels.
+
+Anakin is still wired optionally: `act_duolingo_user_xp_summaries` runs when `ANAKIN_API_KEY` is set, refreshing a 30-day activity summary (XP, active days, streak-extended days) into `duolingo.json` under `activity`. It costs 3 credits per run and is fail-soft. The connected-account actions (`course_progress_scores`) need a `DUOLINGO_CREDENTIAL_ID` plus per-course `skill_tree_id`, which are not available, so they are not wired.
