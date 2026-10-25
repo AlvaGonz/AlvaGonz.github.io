@@ -166,7 +166,7 @@ export function FormalView(): JSX.Element {
         {/* Contact Section */}
         <section id="contact" className="mb-16">
           <Contact profile={profile} />
-          <LazyKeyboardContact />
+          <LazyKeyboardContact side="formal" />
           <DailyVerse />
         </section>
       </div>

@@ -1,7 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
 import { ContactShadows, PerspectiveCamera } from '@react-three/drei';
+import clsx from 'clsx';
+import { useSideContext, type Side } from '@/context/SideContext';
 import { Keyboard3D } from './Keyboard3D';
+import { getKeyboardTheme } from './keyboard-theme';
 import {
   CONTACT,
   TELEGRAM_NOTE,
@@ -12,7 +15,15 @@ import {
   prepareMessage,
 } from './contact';
 
-export default function KeyboardContact() {
+interface KeyboardContactProps {
+  side?: Side;
+}
+
+export default function KeyboardContact({ side: propSide }: KeyboardContactProps) {
+  const sideContext = useSideContext();
+  const currentSide: Side = propSide || sideContext.side || 'formal';
+  const theme = getKeyboardTheme(currentSide);
+
   const [message, setMessage] = useState('');
   const [activeKeys, setActiveKeys] = useState<Set<string>>(new Set());
   const [status, setStatus] = useState<string | null>(null);
@@ -92,40 +103,88 @@ export default function KeyboardContact() {
   const canSend = trimmed.length > 0;
 
   return (
-    <div className="relative w-full h-[520px] rounded-xl overflow-hidden border border-white/10 bg-black">
+    <div
+      className={clsx(
+        'relative w-full h-[520px] rounded-3xl overflow-hidden border shadow-2xl transition-[background-color,border-color] duration-500',
+        theme.wrapperBorder,
+        theme.wrapperBg,
+      )}
+    >
+      {/* Terminal HUD Interface */}
       <div className="absolute top-3 left-1/2 z-10 w-[92%] max-w-2xl -translate-x-1/2 pointer-events-auto">
-        <div className="flex min-h-[150px] max-h-[200px] flex-col overflow-auto rounded-lg border border-white/10 bg-black/80 p-4 font-mono text-green-400 shadow-2xl backdrop-blur-md">
-          <div className="mb-2 flex items-center justify-between border-b border-white/10 pb-2">
+        <div
+          className={clsx(
+            'flex min-h-[150px] max-h-[200px] flex-col overflow-auto rounded-2xl border p-4 font-mono shadow-2xl backdrop-blur-md transition-[background-color,border-color,color] duration-500',
+            theme.terminal.containerBorder,
+            theme.terminal.containerBg,
+            theme.terminal.textColor,
+            theme.terminal.containerShadow,
+          )}
+        >
+          {/* Terminal Window Header */}
+          <div
+            className={clsx(
+              'mb-2 flex items-center justify-between border-b pb-2',
+              theme.terminal.headerBorder,
+            )}
+          >
             <div className="flex gap-2">
-              <div className="h-3 w-3 rounded-full bg-red-500/50" />
-              <div className="h-3 w-3 rounded-full bg-yellow-500/50" />
-              <div className="h-3 w-3 rounded-full bg-green-500/50" />
+              <div className={clsx('h-3 w-3 rounded-full opacity-80', theme.terminal.dots[0])} />
+              <div className={clsx('h-3 w-3 rounded-full opacity-80', theme.terminal.dots[1])} />
+              <div className={clsx('h-3 w-3 rounded-full opacity-80', theme.terminal.dots[2])} />
             </div>
-            <span className="text-xs uppercase tracking-widest text-white/30">Contact</span>
+            <span
+              className={clsx(
+                'text-xs font-semibold uppercase tracking-widest',
+                theme.terminal.headerTitleColor,
+              )}
+            >
+              Contact Console · {currentSide}
+            </span>
           </div>
 
+          {/* Instructions and Status Message */}
           <div className="flex-1 space-y-1 text-sm">
-            <p className="opacity-70">Type a message, then press Enter or pick a channel.</p>
-            {status && <p className="text-yellow-400">{status}</p>}
+            <p className={clsx('text-xs opacity-80', theme.terminal.secondaryTextColor)}>
+              Type a message below, then press Enter or dispatch via channel.
+            </p>
+            {status && (
+              <p className={clsx('text-xs font-medium', theme.terminal.statusColor)}>{status}</p>
+            )}
           </div>
 
-          <div className="mt-2 flex items-center gap-2 border-t border-white/10 pt-2">
-            <span className="select-none opacity-70">&gt;</span>
+          {/* Prompt, Input, and Action Buttons */}
+          <div
+            className={clsx(
+              'mt-2 flex items-center gap-2 border-t pt-2',
+              theme.terminal.headerBorder,
+            )}
+          >
+            <span className={clsx('select-none font-bold', theme.terminal.promptColor)}>&gt;</span>
             <input
               ref={inputRef}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               onKeyDown={handleKeyDown}
               onKeyUp={handleKeyUp}
-              placeholder="your message..."
-              className="flex-1 bg-transparent text-green-400 outline-none placeholder:text-green-700"
-              aria-label="Contact message"
+              placeholder="Type your message..."
+              className={clsx(
+                'flex-1 bg-transparent text-sm outline-none transition-colors duration-200',
+                theme.terminal.inputColor,
+                theme.terminal.inputPlaceholderColor,
+                theme.terminal.inputCaretColor,
+              )}
+              aria-label="Contact message input"
             />
             <button
               type="button"
               onClick={() => send('email')}
               disabled={!canSend}
-              className="rounded bg-green-500/20 px-2 py-1 text-xs text-green-300 disabled:opacity-40"
+              className={clsx(
+                'rounded-full px-3 py-1 text-xs font-medium transition-[background-color,border-color,color,box-shadow,transform] duration-200 active:scale-95',
+                theme.terminal.buttonClass,
+                !canSend && theme.terminal.buttonDisabledClass,
+              )}
             >
               Email
             </button>
@@ -133,7 +192,11 @@ export default function KeyboardContact() {
               type="button"
               onClick={() => send('whatsapp')}
               disabled={!canSend}
-              className="rounded bg-green-500/20 px-2 py-1 text-xs text-green-300 disabled:opacity-40"
+              className={clsx(
+                'rounded-full px-3 py-1 text-xs font-medium transition-[background-color,border-color,color,box-shadow,transform] duration-200 active:scale-95',
+                theme.terminal.buttonClass,
+                !canSend && theme.terminal.buttonDisabledClass,
+              )}
             >
               WhatsApp
             </button>
@@ -141,7 +204,11 @@ export default function KeyboardContact() {
               type="button"
               onClick={() => send('telegram')}
               disabled={!canSend}
-              className="rounded bg-green-500/20 px-2 py-1 text-xs text-green-300 disabled:opacity-40"
+              className={clsx(
+                'rounded-full px-3 py-1 text-xs font-medium transition-[background-color,border-color,color,box-shadow,transform] duration-200 active:scale-95',
+                theme.terminal.buttonClass,
+                !canSend && theme.terminal.buttonDisabledClass,
+              )}
             >
               Telegram
             </button>
@@ -149,20 +216,53 @@ export default function KeyboardContact() {
         </div>
       </div>
 
+      {/* 3D WebGL Canvas */}
       <Canvas shadows dpr={[1, 2]}>
         <PerspectiveCamera makeDefault position={[0, 8, 12]} fov={45} />
         <ResponsiveCamera />
-        <color attach="background" args={['#111']} />
-        <ambientLight intensity={0.5} />
-        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
-        <pointLight position={[-10, -10, -10]} intensity={0.5} />
-        <Keyboard3D activeKeys={activeKeys} onKeyPress={handleKeyPress} />
-        <ContactShadows position={[0, -1.5, 0]} opacity={0.4} scale={40} blur={2} far={4} />
+        <color attach="background" args={[theme.canvasBg]} />
+        <ambientLight
+          color={theme.lighting.ambientColor}
+          intensity={theme.lighting.ambientIntensity}
+        />
+        <spotLight
+          position={[10, 12, 10]}
+          angle={0.18}
+          penumbra={1}
+          color={theme.lighting.spotLightColor}
+          intensity={theme.lighting.spotLightIntensity}
+          castShadow
+        />
+        <pointLight
+          position={[-10, 8, -5]}
+          color={theme.lighting.fillLightColor}
+          intensity={theme.lighting.fillLightIntensity}
+        />
+        <pointLight
+          position={[0, -0.2, 0]}
+          color={theme.lighting.glowLightColor}
+          intensity={theme.lighting.glowLightIntensity}
+        />
+        <Keyboard3D activeKeys={activeKeys} onKeyPress={handleKeyPress} theme={theme} />
+        <ContactShadows
+          position={[0, -1.5, 0]}
+          opacity={theme.lighting.shadowOpacity}
+          color={theme.lighting.shadowColor}
+          scale={40}
+          blur={2.2}
+          far={4}
+        />
       </Canvas>
 
+      {/* Accessibility / Interactive Hint */}
       <div className="pointer-events-none absolute bottom-3 left-0 w-full text-center">
-        <p className="font-mono text-xs text-white/20">
-          Type on your keyboard or click the 3D keys
+        <p
+          className={clsx(
+            'font-mono text-xs opacity-70 transition-colors duration-500',
+            theme.terminal.hintTextColor,
+          )}
+        >
+          Type on your physical keyboard or click the 3D keys
         </p>
       </div>
     </div>

@@ -1,8 +1,13 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react';
+import type { Side } from '@/context/SideContext';
 
 const KeyboardContact = lazy(() => import('./KeyboardContact'));
 
-export function LazyKeyboardContact() {
+interface LazyKeyboardContactProps {
+  side?: Side;
+}
+
+export function LazyKeyboardContact({ side }: LazyKeyboardContactProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -27,8 +32,12 @@ export function LazyKeyboardContact() {
   return (
     <div ref={ref} className="min-h-[520px]">
       {visible ? (
-        <Suspense fallback={<div className="h-[520px] animate-pulse rounded-xl bg-black/10" />}>
-          <KeyboardContact />
+        <Suspense
+          fallback={
+            <div className="h-[520px] animate-pulse rounded-3xl border border-white/10 bg-white/5" />
+          }
+        >
+          <KeyboardContact side={side} />
         </Suspense>
       ) : null}
     </div>

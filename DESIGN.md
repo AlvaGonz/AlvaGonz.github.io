@@ -177,6 +177,64 @@ To ensure visual consistency, high fidelity, and theme-appropriate coloring, the
 
 ---
 
+## 4.7 3D Interactive Keyboard & Terminal HUD
+
+A dual-personality interactive 3D contact interface that bridges WebGL mechanics (Three.js / React Three Fiber) with actual communication channels (Email, WhatsApp, Telegram). The component dynamically adapts its geometry materials, keycaps, 3D lighting, and terminal HUD overlay to match the active theme.
+
+### 4.7.1 Theme Adaptation & Token Matrix
+
+| Element / Role | Formal ("Midnight Canopy") | Curiosity ("Neon Observatory") | Notes |
+|---|---|---|---|
+| **Canvas Background** | Deep Rich Black `#012415` | Deep Inky Navy `#181c2d` | Scene backdrop matching ground tone |
+| **Container Border** | Basil `#0b453a`/80 | Periwinkle Mist `#c7cee8`/20 | 1px border on outer rounded capsule |
+| **Chassis Plate** | Pine `#06302b` (metalness 0.6, roughness 0.35) | Night Blue-Grey `#21263a` (metalness 0.5, roughness 0.25) | Heavy weighted base plate |
+| **Chassis Bezel** | Basil `#0b453a` | Inky Rim `#2d354e` | Surrounding frame lip |
+| **Alphanumeric Keys** | Dark Green `#032221` (Hover `#095544`, Press `#03624c`) | Inky Surface `#282e45` (Hover `#38405f`, Press `#157954`) | Letters, numbers, and symbols |
+| **Alphanumeric Text** | Anti-Flash White `#f1f7f6` | Slate White `#f1f5f9` | High contrast SDF typography |
+| **Modifier Keys** | Pine `#06302b` with Pistachio `#aacbc4` text | Night Blue `#21263a` with Periwinkle `#c7cee8` text | Shift, Ctrl, Alt, Tab, Caps, Fn |
+| **Primary Action (Enter)** | Mountain Meadow `#2cc295` (Hero accent) with Rich Black text | Lime Chartreuse `#d0d34d` (Primary accent) with Night Blue text | Triggers message dispatch / send |
+| **Secondary Action (Bksp)** | Bangladesh Green `#03624c` with Anti-Flash White text | Deep Emerald `#157954` with Slate White text | Deletes trailing character |
+| **Accent Action (Esc)** | Basil `#0b453a` with Anti-Flash White text | Periwinkle Mist `#c7cee8` with Night Blue text | Clears terminal input |
+| **Spacebar Key** | Dark Green `#032221` with Mountain Meadow active flash | `#282e45` with Lime Chartreuse active flash | Width 6.5u, smooth spring lerp |
+
+### 4.7.2 3D Lighting & Shadows
+
+- **Formal:**
+  - Ambient Light: Dark Green `#032221` (intensity `0.75`).
+  - Key / Spotlight: Anti-Flash White `#f1f7f6` (intensity `1.25`, position `[10, 12, 10]`, penumbra `1`).
+  - Fill Light: Bangladesh Green `#03624c` (intensity `0.8`, position `[-10, 8, -5]`).
+  - Bioluminescent Underglow: Caribbean Green `#00df81` (intensity `0.65`, position `[0, -0.2, 0]`).
+  - Contact Shadow: `#00180d` with opacity `0.55` and blur `2.2`.
+- **Curiosity:**
+  - Ambient Light: Night Blue `#21263a` (intensity `0.8`).
+  - Key / Spotlight: Slate White `#f1f5f9` (intensity `1.25`, position `[10, 12, 10]`, penumbra `1`).
+  - Fill / Rim Light: Periwinkle Mist `#c7cee8` (intensity `0.85`, position `[-10, 8, -5]`).
+  - Neon Underglow: Lime Chartreuse `#d0d34d` (intensity `0.9`, position `[0, -0.2, 0]`).
+  - Contact Shadow: `#0d1019` with opacity `0.5` and blur `2.2`.
+
+### 4.7.3 Terminal HUD & Dispatch Console
+
+- **Glassmorphism Overlay:** Floating rounded console (`rounded-2xl`, `backdrop-blur-md`, 90% opacity) positioned over the 3D scene.
+- **Window Controls (Dots):**
+  - Formal: Tonal emerald sequence (`#03624c`, `#2fa98c`, `#00df81`).
+  - Curiosity: Electric spectrum sequence (`#157954`, `#c7cee8`, `#d0d34d`).
+- **Prompt & Input:**
+  - Formal: Mountain Meadow `>` prompt with `#2cc295` text and Caribbean Green caret.
+  - Curiosity: Lime Chartreuse `>` prompt with `#d0d34d` text and `#d0d34d` caret.
+- **Channel Dispatch Buttons:**
+  - Form: Pill-shaped (`rounded-full px-3 py-1 text-xs font-medium`), with focus-visible rings (`focus-visible:ring-2`).
+  - Formal: Mountain Meadow fill on hover (`hover:bg-[#2cc295] hover:text-[#002f1a]`).
+  - Curiosity: Lime glow on hover (`hover:bg-[#d0d34d] hover:text-[#21263a] hover:shadow-[0_0_15px_rgba(208,211,77,0.4)]`).
+
+### 4.7.4 Behavioral & Accessibility Rules
+
+- **Kinetic Feedback:** Key press down triggers `-0.15` unit displacement with smooth lerp (`MathUtils.lerp(y, targetY, 0.45)`).
+- **Dual Input:** Physical keystrokes and virtual 3D mesh clicks synchronize bi-directionally with key flash feedback (`activeKeys` Set).
+- **Responsive Camera:** Dynamic field of view and focal distance adjustments on viewports under 768px.
+- **Reduced Motion:** Adheres to `@media (prefers-reduced-motion: reduce)` without rendering blocking animations.
+
+---
+
 ## 5. Layout Principles
 
 ### Responsive Grid
@@ -325,6 +383,10 @@ Global `@media (prefers-reduced-motion: reduce)` rule disables all animations an
 - `src/lib/color-system.ts` — TypeScript color constants and semantic mapping
 - `src/lib/animation-variants.ts` — Framer Motion variant presets
 - `src/context/SideContext.tsx` — Theme state management
+- `src/features/keyboard/keyboard-theme.ts` — 3D keyboard & terminal theme token definitions
+- `src/features/keyboard/keyboard-layout.ts` — Semantic key layout & role definitions
+- `src/features/keyboard/Keyboard3D.tsx` — WebGL 3D keyboard mesh & material renderer
+- `src/features/keyboard/KeyboardContact.tsx` — Dual-personality contact terminal & canvas
 - `tailwind.config.ts` — Tailwind token extensions
 
 ---

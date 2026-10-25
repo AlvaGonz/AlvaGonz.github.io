@@ -124,7 +124,7 @@ export function CuriosityView(): JSX.Element {
           <ContactCuriosity profile={profile} />
 
           {/* 3D Keyboard Contact */}
-          <LazyKeyboardContact />
+          <LazyKeyboardContact side="curiosity" />
 
           {/* Daily Verse */}
           <DailyVerse />
