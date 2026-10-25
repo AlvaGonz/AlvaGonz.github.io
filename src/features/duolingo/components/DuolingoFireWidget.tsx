@@ -47,26 +47,26 @@ export const DuolingoFireWidget = () => {
           className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl"
           aria-hidden="true"
         >
-          <div className="fire-flames-container absolute inset-x-0 bottom-0 h-1/2">
+          <div className="fire-flames-container absolute inset-x-0 bottom-0 h-3/4">
             <img
               src="/images/streak-flame-updated-v0-3n46sx7a0e9b1.webp"
               alt=""
               className="flame flame-large absolute bottom-0"
-              style={{ left: '20%', '--delay': '0s' } as CSSProperties}
+              style={{ left: '18%', '--delay': '0s' } as CSSProperties}
             />
             <img
               src="/images/streak-flame-updated-v0-3n46sx7a0e9b1.webp"
               alt=""
               className="flame flame-large absolute bottom-0"
-              style={{ left: '50%', '--delay': '0.1s' } as CSSProperties}
+              style={{ left: '48%', '--delay': '0.12s' } as CSSProperties}
             />
             <img
               src="/images/streak-flame-updated-v0-3n46sx7a0e9b1.webp"
               alt=""
               className="flame flame-large absolute bottom-0"
-              style={{ left: '80%', '--delay': '0.2s' } as CSSProperties}
+              style={{ left: '76%', '--delay': '0.24s' } as CSSProperties}
             />
-            {[...Array(6)].map((_, i) => (
+            {[...Array(5)].map((_, i) => (
               <img
                 key={`med-${i}`}
                 src="/images/streak-flame-updated-v0-3n46sx7a0e9b1.webp"
@@ -74,24 +74,20 @@ export const DuolingoFireWidget = () => {
                 className="flame flame-medium absolute bottom-0"
                 style={
                   {
-                    left: `${15 + i * 14}%`,
-                    '--delay': `${i * 0.05}s`,
-                    '--rotation': `${i * 60}deg`,
+                    left: `${12 + i * 17}%`,
+                    '--delay': `${0.05 + i * 0.08}s`,
                   } as CSSProperties
                 }
               />
             ))}
             {[...Array(8)].map((_, i) => (
-              <img
-                key={`sm-${i}`}
-                src="/images/streak-flame-updated-v0-3n46sx7a0e9b1.webp"
-                alt=""
-                className="flame flame-small absolute bottom-0"
+              <div
+                key={`sp-${i}`}
+                className="sparkle absolute bottom-0"
                 style={
                   {
-                    left: `${10 + i * 11}%`,
-                    '--delay': `${i * 0.08}s`,
-                    '--rotation': `${i * 45}deg`,
+                    left: `${8 + i * 11}%`,
+                    '--delay': `${i * 0.12}s`,
                   } as CSSProperties
                 }
               />

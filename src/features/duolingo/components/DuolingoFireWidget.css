@@ -8,113 +8,109 @@
   --duo-yellow-fire: #ffd000;
   --duo-yellow-light: #ffa500;
   --duo-red: #ff4b4b;
-  --duo-text: #4b4b4b;
 }
 
 /* Keyframes */
-@keyframes flameFloat {
+@keyframes ignite-glow {
   0% {
+    box-shadow: 0 0 0 rgba(244, 144, 0, 0);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  20% {
+    box-shadow: 0 0 24px rgba(244, 144, 0, 0.5), 0 0 48px rgba(255, 199, 21, 0.25);
+    border-color: rgba(255, 199, 21, 0.6);
+  }
+  60% {
+    box-shadow: 0 0 16px rgba(244, 144, 0, 0.3), 0 0 32px rgba(255, 199, 21, 0.15);
+    border-color: rgba(255, 199, 21, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 0 rgba(244, 144, 0, 0);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+@keyframes flame-burst {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.3) rotate(-15deg);
+  }
+  15% {
     opacity: 1;
-    transform: translateY(0px) scale(1) rotate(0deg);
+    transform: translateY(-20%) scale(1.1) rotate(5deg);
   }
-
   50% {
-    transform: translateY(-50%) scale(0.95);
+    opacity: 0.9;
+    transform: translateY(-60%) scale(0.9) rotate(-3deg);
   }
-
   100% {
     opacity: 0;
-    transform: translateY(-150px) scale(0.5);
+    transform: translateY(-180px) scale(0.4) rotate(8deg);
   }
 }
 
-@keyframes streakFire {
-
-  0%,
-  100% {
-    color: white;
-    text-shadow: none;
-  }
-
-  50% {
-    color: var(--duo-yellow-fire);
-    text-shadow: 0 0 10px var(--duo-orange-fire);
-  }
-}
-
-@keyframes fireBounce {
+@keyframes streak-bounce {
   0% {
     transform: scale(1);
   }
-
-  50% {
-    transform: scale(1.5);
+  25% {
+    transform: scale(1.35);
   }
-
+  50% {
+    transform: scale(0.9);
+  }
+  75% {
+    transform: scale(1.1);
+  }
   100% {
     transform: scale(1);
+  }
+}
+
+@keyframes sparkle-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(-20%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-140px) scale(0.3);
   }
 }
 
 /* Widget Container */
 .duo-widget-container {
-  font-family:
-    'Feather Bold',
-    'Poppins',
-    -apple-system,
-    BlinkMacSystemFont,
-    sans-serif;
-  letter-spacing: 0.5px;
-  transition: all 0.3s cubic-bezier(0.25, 1.8, 0.25, 1.8);
   position: relative;
   overflow: visible;
-  /* Allow fire to overflow */
 }
 
 /* Fire Active State */
 .duo-widget-container.fire-active {
-  background: linear-gradient(135deg,
-      var(--duo-green-primary),
-      var(--duo-green-secondary)) !important;
-  transform: scale(1.05);
-  box-shadow:
-    0 0 30px rgba(244, 144, 0, 0.6),
-    0 0 60px rgba(88, 204, 2, 0.3) !important;
-  border-color: var(--duo-yellow-fire) !important;
+  animation: ignite-glow 3s ease-out forwards;
 }
 
 .duo-widget-container.fire-active .streak-count {
-  animation: streakFire 1.5s ease-in-out infinite;
-}
-
-.duo-widget-container.fire-active .fire-icon {
-  animation: fireBounce 1.5s ease-in-out infinite;
-}
-
-.duo-widget-container.fire-active .duo-avatar {
-  box-shadow: 0 0 15px rgba(255, 199, 21, 0.6);
-  border-color: var(--duo-yellow-fire);
+  animation: streak-bounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 /* Fire Effect Wrapper */
 .fire-effect-wrapper {
   position: absolute;
-  inset: -20px;
+  inset: -16px;
   pointer-events: none;
   z-index: 50;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
 }
 
-/* Contenedor de las llamas */
 .fire-flames-container {
   position: absolute;
   bottom: 0;
-  left: 50%;
+  left: 0;
   width: 100%;
-  height: 200px;
-  transform: translateX(-50%);
+  height: 220px;
   pointer-events: none;
   z-index: 60;
 }
@@ -124,27 +120,52 @@
   bottom: 0;
   width: var(--size, 60px);
   height: var(--size, 60px);
-
-  /* Image-based flame */
   object-fit: contain;
-
-  /* Glow suave */
-  filter: drop-shadow(0 0 12px rgba(255, 208, 0, 0.5));
-
-  /* Animación */
-  animation: flameFloat 3s ease-out forwards;
+  filter: drop-shadow(0 0 10px rgba(255, 208, 0, 0.45));
+  animation: flame-burst 2.8s ease-out forwards;
   animation-delay: var(--delay, 0s);
+  transform-origin: bottom center;
 }
 
-/* Tamaños variables */
 .flame-large {
-  --size: 80px;
+  --size: 72px;
 }
 
 .flame-medium {
-  --size: 50px;
+  --size: 44px;
 }
 
 .flame-small {
-  --size: 30px;
+  --size: 28px;
+}
+
+/* Sparkles */
+.sparkle {
+  position: absolute;
+  bottom: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffd000 0%, #f49000 60%, transparent 100%);
+  box-shadow: 0 0 6px rgba(255, 208, 0, 0.6);
+  animation: sparkle-rise 2.4s ease-out forwards;
+  animation-delay: var(--delay, 0s);
+  pointer-events: none;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .flame,
+  .sparkle {
+    animation: none;
+    opacity: 0;
+  }
+
+  .duo-widget-container.fire-active {
+    animation: none;
+  }
+
+  .duo-widget-container.fire-active .streak-count {
+    animation: none;
+  }
 }
