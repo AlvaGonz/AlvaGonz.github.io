@@ -22,13 +22,12 @@ export const DuolingoFireWidget = () => {
   return (
     <div
       className={`
-        duo-widget-container 
-        w-full p-5 rounded-2xl cursor-pointer select-none
-        flex flex-col gap-4
-        bg-gradient-to-r from-green-50 to-green-100
-        border-2 border-[#58CC02]
-        shadow-[0_4px_12px_rgba(88,204,2,0.1)]
-        hover:shadow-[0_8px_24px_rgba(88,204,2,0.2)] hover:-translate-y-0.5
+        duo-widget-container
+        group relative w-full cursor-pointer select-none
+        rounded-2xl border border-white/10 bg-white/[0.03]
+        p-6 transition-colors duration-200
+        hover:bg-white/[0.06] focus-visible:outline-none
+        focus-visible:ring-2 focus-visible:ring-curiosity-primary/60
         ${isFireActive ? 'fire-active' : ''}
       `}
       onClick={handleWidgetClick}
@@ -37,38 +36,42 @@ export const DuolingoFireWidget = () => {
       aria-label={`Duolingo stats for ${stats.username}. Click to activate fire effect.`}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
           handleWidgetClick();
         }
       }}
     >
+      {/* Fire effect layer */}
       {isFireActive && (
-        <div className="fire-effect-wrapper">
-          <div className="fire-flames-container">
+        <div
+          className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl"
+          aria-hidden="true"
+        >
+          <div className="fire-flames-container absolute inset-x-0 bottom-0 h-1/2">
             <img
               src="/images/streak-flame-updated-v0-3n46sx7a0e9b1.webp"
-              alt="flame"
-              className="flame flame-large"
+              alt=""
+              className="flame flame-large absolute bottom-0"
               style={{ left: '20%', '--delay': '0s' } as CSSProperties}
             />
             <img
               src="/images/streak-flame-updated-v0-3n46sx7a0e9b1.webp"
-              alt="flame"
-              className="flame flame-large"
+              alt=""
+              className="flame flame-large absolute bottom-0"
               style={{ left: '50%', '--delay': '0.1s' } as CSSProperties}
             />
             <img
               src="/images/streak-flame-updated-v0-3n46sx7a0e9b1.webp"
-              alt="flame"
-              className="flame flame-large"
+              alt=""
+              className="flame flame-large absolute bottom-0"
               style={{ left: '80%', '--delay': '0.2s' } as CSSProperties}
             />
-
             {[...Array(6)].map((_, i) => (
               <img
-                src="/images/streak-flame-updated-v0-3n46sx7a0e9b1.webp"
-                alt="flame"
                 key={`med-${i}`}
-                className="flame flame-medium"
+                src="/images/streak-flame-updated-v0-3n46sx7a0e9b1.webp"
+                alt=""
+                className="flame flame-medium absolute bottom-0"
                 style={
                   {
                     left: `${15 + i * 14}%`,
@@ -78,13 +81,12 @@ export const DuolingoFireWidget = () => {
                 }
               />
             ))}
-
             {[...Array(8)].map((_, i) => (
               <img
-                src="/images/streak-flame-updated-v0-3n46sx7a0e9b1.webp"
-                alt="flame"
                 key={`sm-${i}`}
-                className="flame flame-small"
+                src="/images/streak-flame-updated-v0-3n46sx7a0e9b1.webp"
+                alt=""
+                className="flame flame-small absolute bottom-0"
                 style={
                   {
                     left: `${10 + i * 11}%`,
@@ -98,125 +100,90 @@ export const DuolingoFireWidget = () => {
         </div>
       )}
 
-      <div className="relative z-10 flex items-center gap-4 w-full">
+      {/* Header: avatar + identity */}
+      <div className="relative z-10 flex items-center gap-4">
         <div className="relative shrink-0">
           <img
             src={stats.avatar || '/images/duo-face.png'}
             alt={`${stats.username}'s avatar`}
-            className={`
-              duo-avatar w-20 h-20 rounded-full object-cover border-4 border-white
-              transition-all duration-300
-              ${isFireActive ? 'border-[#FFC715]' : ''}
-            `}
+            className="h-16 w-16 rounded-full border-2 border-white/20 object-cover"
             loading="lazy"
             onError={(e) => {
               e.currentTarget.src = '/images/duo-face.png';
             }}
           />
-          <div
-            className="absolute -bottom-1 -right-1 bg-[#58CC02] text-white text-sm font-bold px-2 py-1 rounded-md border-2 border-white"
+          <span
+            className="absolute -bottom-1 -right-1 rounded-md border border-white/20 bg-curiosity-primary px-1.5 py-0.5 text-[0.65rem] font-bold text-curiosity-bg"
             title="Estimated from course XP"
           >
             {primaryLevel}
-          </div>
-        </div>
-
-        <div className="flex flex-col flex-grow">
-          <div className="flex justify-between items-center mb-1">
-            <h3
-              className={`font-bold text-[1.73rem] font-curiosity-display ${isFireActive ? 'text-white' : 'text-[#4B4B4B]'}`}
-            >
-              {stats.username}
-            </h3>
-          </div>
-
-          <div className="flex justify-between items-end">
-            <div className="flex flex-col">
-              <span
-                className={`text-[0.8rem] font-bold uppercase tracking-wider ${isFireActive ? 'text-white/90' : 'text-gray-500'}`}
-              >
-                Streak
-              </span>
-              <div className="flex items-center gap-2">
-                <span
-                  className={`streak-count text-[2.88rem] font-black leading-none ${isFireActive ? 'text-white' : 'text-[#F49000]'}`}
-                >
-                  {stats.streak}
-                </span>
-                <img
-                  src="/images/streak-flame-updated-v0-3n46sx7a0e9b1.webp"
-                  alt="Fire streak"
-                  className="w-10 h-10 object-contain fire-icon"
-                />
-              </div>
-            </div>
-
-            <div className="flex flex-col items-end">
-              <span
-                className={`text-[0.8rem] font-bold uppercase tracking-wider ${isFireActive ? 'text-white/90' : 'text-gray-500'}`}
-              >
-                Total XP
-              </span>
-              <span
-                className={`font-bold text-[1.44rem] ${isFireActive ? 'text-white' : 'text-[#4B4B4B]'}`}
-              >
-                {stats.totalXp.toLocaleString()}
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div
-        className={`relative z-10 border-t ${isFireActive ? 'border-white/20' : 'border-gray-200'} pt-3 mt-1`}
-      >
-        <div className="flex justify-between items-center mb-2">
-          <span
-            className={`text-[0.8rem] font-bold uppercase ${isFireActive ? 'text-white/90' : 'text-gray-500'}`}
-          >
-            Active Courses
           </span>
         </div>
 
+        <div className="min-w-0 flex-1">
+          <h3 className="truncate font-bold text-lg text-curiosity-text">{stats.username}</h3>
+          <p className="text-xs text-curiosity-text-secondary">Duolingo</p>
+        </div>
+
+        <div className="text-right">
+          <p className="text-[0.65rem] font-medium uppercase tracking-wide text-curiosity-text-secondary">
+            Streak
+          </p>
+          <p className="flex items-center justify-end gap-1.5 text-2xl font-black leading-none text-curiosity-primary">
+            {stats.streak}
+            <Flame className="h-5 w-5 text-orange-400" aria-hidden="true" />
+          </p>
+        </div>
+      </div>
+
+      {/* XP summary */}
+      <div className="relative z-10 flex items-baseline justify-between border-t border-white/10 pt-4">
+        <div>
+          <p className="text-[0.65rem] font-medium uppercase tracking-wide text-curiosity-text-secondary">
+            Total XP
+          </p>
+          <p className="text-xl font-bold text-curiosity-text">{stats.totalXp.toLocaleString()}</p>
+        </div>
         {stats.activity && (
-          <div className="mb-2 text-[0.85rem] text-gray-500">
-            Last {stats.activity.windowDays} days: {stats.activity.totalXp.toLocaleString()} XP ·{' '}
-            {stats.activity.activeDays} active days
+          <div className="text-right">
+            <p className="text-[0.65rem] font-medium uppercase tracking-wide text-curiosity-text-secondary">
+              30-day XP
+            </p>
+            <p className="text-sm font-semibold text-curiosity-text-secondary">
+              {stats.activity.totalXp.toLocaleString()} · {stats.activity.activeDays} active
+            </p>
           </div>
         )}
-
-        <div className="space-y-2">
-          {stats.courses.map((course) => (
-            <div
-              key={course.learningLanguage}
-              className="flex justify-between items-center text-[1.15rem]"
-            >
-              <div className="flex items-center gap-2">
-                <span className={`font-medium ${isFireActive ? 'text-white' : 'text-[#4B4B4B]'}`}>
-                  {course.title}{' '}
-                  <span className="text-gray-400 text-[0.9rem]">
-                    ({course.learningLanguage.toUpperCase()})
-                  </span>
-                </span>
-              </div>
-              <span
-                className={`font-mono text-[0.9rem] ${isFireActive ? 'text-white/80' : 'text-gray-500'}`}
-              >
-                {course.level} · {course.xp.toLocaleString()} XP
-              </span>
-            </div>
-          ))}
-        </div>
       </div>
 
+      {/* Courses */}
+      <div className="relative z-10 border-t border-white/10 pt-4">
+        <p className="mb-2 text-[0.65rem] font-medium uppercase tracking-wide text-curiosity-text-secondary">
+          Courses
+        </p>
+        <ul className="space-y-1.5">
+          {stats.courses.map((course) => (
+            <li key={course.learningLanguage} className="flex items-center justify-between text-sm">
+              <span className="text-curiosity-text">
+                {course.title}
+                <span className="ml-1.5 text-xs text-curiosity-text-secondary">
+                  {course.learningLanguage.toUpperCase()}
+                </span>
+              </span>
+              <span className="font-mono text-xs text-curiosity-text-secondary">
+                {course.level} · {course.xp.toLocaleString()} XP
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Hint */}
       {!isFireActive && (
-        <div className="absolute -bottom-6 left-0 w-full text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-          <span className="text-[0.86rem] text-gray-400 font-curiosity-body font-medium flex items-center justify-center gap-1.5">
-            <Sparkles size={14} className="text-curiosity-primary" />
-            Haz click para activar
-            <Flame size={14} className="text-[#F49000]" />
-          </span>
-        </div>
+        <p className="relative z-10 text-center text-[0.7rem] text-curiosity-text-secondary opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <Sparkles className="mr-1 inline h-3 w-3 text-curiosity-primary" aria-hidden="true" />
+          Click to ignite
+        </p>
       )}
     </div>
   );
