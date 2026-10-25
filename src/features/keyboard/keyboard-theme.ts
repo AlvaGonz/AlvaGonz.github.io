@@ -65,72 +65,73 @@ export const formalKeyboardTheme: KeyboardTheme = {
     metalness: 0.6,
   },
   lighting: {
-    ambientColor: colorSystem.formal.primary.darkGreen, // #032221
-    ambientIntensity: 0.75,
+    ambientColor: '#ffffff', // Pure white ambient illumination for true color fidelity
+    ambientIntensity: 1.8,
     spotLightColor: colorSystem.formal.primary.antiFlashWhite, // #f1f7f6
-    spotLightIntensity: 1.25,
-    fillLightColor: colorSystem.formal.primary.bangladeshGreen, // #03624c
-    fillLightIntensity: 0.8,
+    spotLightIntensity: 2.5,
+    fillLightColor: colorSystem.formal.primary.mountainMeadow, // #2cc295
+    fillLightIntensity: 1.0,
     glowLightColor: colorSystem.formal.primary.caribbeanGreen, // #00df81
-    glowLightIntensity: 0.65,
+    glowLightIntensity: 1.2,
     shadowColor: '#00180d',
-    shadowOpacity: 0.55,
+    shadowOpacity: 0.45,
   },
   keys: {
     alphanumeric: {
-      base: colorSystem.formal.primary.darkGreen, // #032221
-      hover: colorSystem.formal.secondary.forest, // #095544
-      active: colorSystem.formal.primary.bangladeshGreen, // #03624c
-      text: colorSystem.formal.primary.antiFlashWhite, // #f1f7f6
+      // High-contrast Anti-Flash White keycaps with Rich Black text
+      base: colorSystem.formal.primary.antiFlashWhite, // #f1f7f6
+      hover: '#e2ece9',
+      active: colorSystem.formal.primary.mountainMeadow, // #2cc295
+      text: colorSystem.formal.primary.richBlack, // #002f1a
     },
     primary: {
-      // Enter key - Vibrant Hero Accent
+      // Enter key - Mountain Meadow (Vivid Hero Emerald)
       base: colorSystem.formal.primary.mountainMeadow, // #2cc295
       hover: '#3be0b0',
       active: colorSystem.formal.primary.caribbeanGreen, // #00df81
       text: colorSystem.formal.primary.richBlack, // #002f1a
     },
     secondary: {
-      // Backspace key - Frog green distinct accent
+      // Backspace key - Frog Green distinct accent
       base: colorSystem.formal.secondary.frog, // #17876d
       hover: colorSystem.formal.secondary.mint, // #2fa98c
       active: colorSystem.formal.primary.caribbeanGreen, // #00df81
-      text: colorSystem.formal.primary.antiFlashWhite, // #f1f7f6
+      text: '#ffffff',
     },
     accent: {
-      // Escape key - Caribbean Green pop
+      // Escape key - Caribbean Green High-Energy Highlight
       base: colorSystem.formal.primary.caribbeanGreen, // #00df81
       hover: '#34eea0',
       active: colorSystem.formal.primary.mountainMeadow, // #2cc295
       text: colorSystem.formal.primary.richBlack, // #002f1a
     },
     shift: {
-      // Shift keys - Rich Bangladesh Green accent
+      // Shift keys - Bangladesh Green distinct accent
       base: colorSystem.formal.primary.bangladeshGreen, // #03624c
       hover: colorSystem.formal.secondary.forest, // #095544
       active: colorSystem.formal.secondary.frog, // #17876d
-      text: colorSystem.formal.primary.antiFlashWhite, // #f1f7f6
+      text: '#ffffff',
     },
     modifier: {
-      // Ctrl, Alt, Win, Fn - Deep Pine with Pistachio text
-      base: colorSystem.formal.secondary.pine, // #06302b
-      hover: colorSystem.formal.secondary.basil, // #0b453a
-      active: colorSystem.formal.primary.bangladeshGreen, // #03624c
+      // Ctrl, Alt, Win, Fn - Basil with Pistachio text
+      base: colorSystem.formal.secondary.basil, // #0b453a
+      hover: colorSystem.formal.secondary.frog, // #17876d
+      active: colorSystem.formal.primary.caribbeanGreen, // #00df81
       text: colorSystem.formal.secondary.pistachio, // #aacbc4
     },
     function: {
-      // Tab, CapsLock - Basil accent
-      base: colorSystem.formal.secondary.basil, // #0b453a
-      hover: colorSystem.formal.secondary.forest, // #095544
-      active: colorSystem.formal.secondary.frog, // #17876d
+      // Tab, CapsLock - Deep Pine
+      base: colorSystem.formal.secondary.pine, // #06302b
+      hover: colorSystem.formal.secondary.basil, // #0b453a
+      active: colorSystem.formal.primary.mountainMeadow, // #2cc295
       text: colorSystem.formal.primary.antiFlashWhite, // #f1f7f6
     },
     space: {
-      // Spacebar
-      base: colorSystem.formal.primary.darkGreen, // #032221
-      hover: colorSystem.formal.secondary.forest, // #095544
+      // Spacebar - Anti-Flash White
+      base: colorSystem.formal.primary.antiFlashWhite, // #f1f7f6
+      hover: '#e2ece9',
       active: colorSystem.formal.primary.mountainMeadow, // #2cc295
-      text: colorSystem.formal.primary.antiFlashWhite, // #f1f7f6
+      text: colorSystem.formal.primary.richBlack, // #002f1a
     },
   },
   terminal: {
@@ -166,58 +167,59 @@ export const curiosityKeyboardTheme: KeyboardTheme = {
     metalness: 0.5,
   },
   lighting: {
-    ambientColor: colorSystem.curiosity.background, // #21263a
-    ambientIntensity: 0.8,
+    ambientColor: '#ffffff', // Pure white ambient illumination for true color fidelity
+    ambientIntensity: 1.8,
     spotLightColor: colorSystem.curiosity.text, // #f1f5f9
-    spotLightIntensity: 1.25,
-    fillLightColor: colorSystem.curiosity.secondary, // #c7cee8 (Periwinkle)
-    fillLightIntensity: 0.85,
-    glowLightColor: colorSystem.curiosity.primary, // #d0d34d (Lime underglow)
-    glowLightIntensity: 0.9,
+    spotLightIntensity: 2.5,
+    fillLightColor: colorSystem.curiosity.secondary, // #c7cee8
+    fillLightIntensity: 1.0,
+    glowLightColor: colorSystem.curiosity.primary, // #d0d34d
+    glowLightIntensity: 1.2,
     shadowColor: '#0d1019',
-    shadowOpacity: 0.5,
+    shadowOpacity: 0.45,
   },
   keys: {
     alphanumeric: {
-      base: '#282e45', // Inky surface
-      hover: '#38405f',
-      active: colorSystem.curiosity.surface, // #157954 (Deep Emerald)
-      text: colorSystem.curiosity.text, // #f1f5f9
+      // High-contrast Slate White keycaps with Night Blue text
+      base: colorSystem.curiosity.text, // #f1f5f9
+      hover: '#e2e8f0',
+      active: colorSystem.curiosity.primary, // #d0d34d
+      text: colorSystem.curiosity.background, // #21263a
     },
     primary: {
-      // Enter key - Lime Chartreuse
+      // Enter key - Lime Chartreuse (Electric Accent)
       base: colorSystem.curiosity.primary, // #d0d34d
       hover: '#e2e55a',
       active: colorSystem.curiosity.surface, // #157954
       text: colorSystem.curiosity.background, // #21263a
     },
     secondary: {
-      // Backspace key - Deep Emerald
+      // Backspace key - Deep Emerald Accent
       base: colorSystem.curiosity.surface, // #157954
       hover: '#1b9a6b',
       active: colorSystem.curiosity.primary, // #d0d34d
-      text: colorSystem.curiosity.text, // #f1f5f9
+      text: '#ffffff',
     },
     accent: {
-      // Escape key - Cloud Grey
-      base: colorSystem.curiosity.highlight, // #d6d9d8
-      hover: '#ffffff',
+      // Escape key - Vivid Coral Accent (like default Red Esc!)
+      base: '#f87171',
+      hover: '#fca5a5',
       active: colorSystem.curiosity.primary, // #d0d34d
-      text: colorSystem.curiosity.background, // #21263a
+      text: '#ffffff',
     },
     shift: {
-      // Shift keys - Periwinkle Mist
+      // Shift keys - Periwinkle Mist Accent
       base: colorSystem.curiosity.secondary, // #c7cee8
       hover: colorSystem.curiosity.highlight, // #d6d9d8
       active: colorSystem.curiosity.surface, // #157954
       text: colorSystem.curiosity.background, // #21263a
     },
     modifier: {
-      // Ctrl, Alt, Win, Fn - Night Blue with Periwinkle text
-      base: colorSystem.curiosity.background, // #21263a
-      hover: '#2d344e',
-      active: colorSystem.curiosity.surface, // #157954
-      text: colorSystem.curiosity.secondary, // #c7cee8
+      // Ctrl, Alt, Win, Fn - Cloud Grey
+      base: colorSystem.curiosity.highlight, // #d6d9d8
+      hover: '#e2e8f0',
+      active: colorSystem.curiosity.primary, // #d0d34d
+      text: colorSystem.curiosity.background, // #21263a
     },
     function: {
       // Tab, CapsLock - Slate Inky Blue
@@ -227,11 +229,11 @@ export const curiosityKeyboardTheme: KeyboardTheme = {
       text: colorSystem.curiosity.secondary, // #c7cee8
     },
     space: {
-      // Spacebar
-      base: '#282e45',
-      hover: '#38405f',
+      // Spacebar - Slate White
+      base: colorSystem.curiosity.text, // #f1f5f9
+      hover: '#e2e8f0',
       active: colorSystem.curiosity.primary, // #d0d34d
-      text: colorSystem.curiosity.text,
+      text: colorSystem.curiosity.background, // #21263a
     },
   },
   terminal: {

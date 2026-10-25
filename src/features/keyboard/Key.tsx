@@ -49,7 +49,7 @@ export function Key({ data, position, isPressed, onPress, colors }: KeyProps) {
     >
       <mesh castShadow receiveShadow position={[0, height / 2, 0]}>
         <boxGeometry args={[width * 0.92, height, depth * 0.92]} />
-        <meshStandardMaterial color={materialColor} roughness={0.35} metalness={0.15} />
+        <meshStandardMaterial color={materialColor} roughness={0.3} metalness={0.05} />
       </mesh>
 
       <Text

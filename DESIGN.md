@@ -187,31 +187,23 @@ Each major key cluster carries distinct, contrasting accent colors derived from 
 
 | Key Cluster / Role | Formal ("Midnight Canopy") | Curiosity ("Neon Observatory") | Function & Notes |
 |---|---|---|---|
+| **Alphanumeric Keys** | Anti-Flash White `#f1f7f6` · Rich Black `#002f1a` text | Slate White `#f1f5f9` · Night Blue `#21263a` text | High-contrast PBT keycaps |
 | **Primary Action (Enter)** | Mountain Meadow `#2cc295` (Hero accent) · Rich Black text | Lime Chartreuse `#d0d34d` (Primary accent) · Night Blue text | Primary send trigger |
-| **Secondary Action (Bksp)** | Frog Green `#17876d` (Vibrant secondary) · White text | Deep Emerald `#157954` · Slate White text | Delete character |
-| **Accent Action (Esc)** | Caribbean Green `#00df81` (High-energy pop) · Rich Black text | Cloud Grey `#d6d9d8` (Bright highlight) · Night Blue text | Clear input buffer |
-| **Shift Keys** | Bangladesh Green `#03624c` · Anti-Flash White text | Periwinkle Mist `#c7cee8` · Night Blue text | ShiftLeft & ShiftRight |
-| **Bottom Modifiers** | Pine `#06302b` · Pistachio `#aacbc4` text | Night Blue `#21263a` · Periwinkle `#c7cee8` text | Ctrl, Win/Meta, Alt, Fn |
-| **Function Keys** | Basil `#0b453a` · Anti-Flash White text | Slate Inky Blue `#313752` · Periwinkle text | Tab, CapsLock |
-| **Spacebar Key** | Dark Green `#032221` with Mountain Meadow active flash | `#282e45` with Lime Chartreuse active flash | Width 6.5u, spring lerp |
-| **Alphanumeric Keys** | Dark Green `#032221` (Hover `#095544`, Press `#03624c`) · White text | Inky Surface `#282e45` (Hover `#38405f`, Press `#157954`) · White text | Standard typing keys |
+| **Secondary Action (Bksp)** | Frog Green `#17876d` (Vibrant secondary) · White text | Deep Emerald `#157954` · White text | Delete character |
+| **Accent Action (Esc)** | Caribbean Green `#00df81` (High-energy pop) · Rich Black text | Vivid Coral `#f87171` (Punchy alert accent) · White text | Clear input buffer |
+| **Shift Keys** | Bangladesh Green `#03624c` · White text | Periwinkle Mist `#c7cee8` · Night Blue text | ShiftLeft & ShiftRight |
+| **Bottom Modifiers** | Basil `#0b453a` · Pistachio `#aacbc4` text | Cloud Grey `#d6d9d8` · Night Blue text | Ctrl, Win/Meta, Alt, Fn |
+| **Function Keys** | Pine `#06302b` · Anti-Flash White text | Slate Inky Blue `#313752` · Periwinkle text | Tab, CapsLock |
+| **Spacebar Key** | Anti-Flash White `#f1f7f6` with Mountain Meadow active flash | Slate White `#f1f5f9` with Lime Chartreuse active flash | Width 6.5u, spring lerp |
 | **Chassis Plate & Bezel** | Pine `#06302b` base with Basil `#0b453a` bezel (metalness 0.6, roughness 0.35) | Night Blue `#21263a` base with Inky Rim `#2d354e` (metalness 0.5, roughness 0.25) | Outer mechanical casing |
 | **Canvas Background** | Deep Rich Black `#012415` | Deep Inky Navy `#181c2d` | Scene backdrop matching ground tone |
 
 ### 4.7.2 3D Lighting & Shadows
 
-- **Formal:**
-  - Ambient Light: Dark Green `#032221` (intensity `0.75`).
-  - Key / Spotlight: Anti-Flash White `#f1f7f6` (intensity `1.25`, position `[10, 12, 10]`, penumbra `1`).
-  - Fill Light: Bangladesh Green `#03624c` (intensity `0.8`, position `[-10, 8, -5]`).
-  - Bioluminescent Underglow: Caribbean Green `#00df81` (intensity `0.65`, position `[0, -0.2, 0]`).
-  - Contact Shadow: `#00180d` with opacity `0.55` and blur `2.2`.
-- **Curiosity:**
-  - Ambient Light: Night Blue `#21263a` (intensity `0.8`).
-  - Key / Spotlight: Slate White `#f1f5f9` (intensity `1.25`, position `[10, 12, 10]`, penumbra `1`).
-  - Fill / Rim Light: Periwinkle Mist `#c7cee8` (intensity `0.85`, position `[-10, 8, -5]`).
-  - Neon Underglow: Lime Chartreuse `#d0d34d` (intensity `0.9`, position `[0, -0.2, 0]`).
-  - Contact Shadow: `#0d1019` with opacity `0.5` and blur `2.2`.
+- **True Color Studio Setup:** Ambient light uses clean white (`#ffffff` at intensity `1.8`) to ensure all material and accent colors render with pure fidelity rather than getting crushed to dark tones.
+- **Top-Front Directional Key Light:** Overhead directional light (`[0, 15, 12]` at intensity `2.5`) directly illuminates keycap faces without distance falloff.
+- **Bi-lateral Fill Lights:** Dual angle lights (`[-10, 10, 6]` and `[10, 8, -4]`) fill shadows and illuminate side chamfers.
+- **Bioluminescent/Neon Underglow:** Point light above the board brings the accent glow into the key matrix (`#00df81` Caribbean Green for Formal, `#d0d34d` Lime Chartreuse for Curiosity).
 
 ### 4.7.3 Mobile-First Terminal HUD Principles
 

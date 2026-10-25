@@ -255,27 +255,28 @@ export default function KeyboardContact({ side: propSide }: KeyboardContactProps
         <PerspectiveCamera makeDefault position={[0, 8, 12]} fov={45} />
         <ResponsiveCamera />
         <color attach="background" args={[theme.canvasBg]} />
+        {/* Studio Lighting Setup for True Color Fidelity */}
         <ambientLight
           color={theme.lighting.ambientColor}
           intensity={theme.lighting.ambientIntensity}
         />
-        <spotLight
-          position={[10, 12, 10]}
-          angle={0.18}
-          penumbra={1}
-          color={theme.lighting.spotLightColor}
+        <directionalLight
+          position={[0, 15, 12]}
           intensity={theme.lighting.spotLightIntensity}
+          color={theme.lighting.spotLightColor}
           castShadow
         />
-        <pointLight
-          position={[-10, 8, -5]}
+        <directionalLight
+          position={[-10, 10, 6]}
           color={theme.lighting.fillLightColor}
           intensity={theme.lighting.fillLightIntensity}
         />
+        <directionalLight position={[10, 8, -4]} color="#ffffff" intensity={0.9} />
         <pointLight
-          position={[0, -0.2, 0]}
+          position={[0, 2, 1]}
           color={theme.lighting.glowLightColor}
           intensity={theme.lighting.glowLightIntensity}
+          distance={15}
         />
         <Keyboard3D activeKeys={activeKeys} onKeyPress={handleKeyPress} theme={theme} />
         <ContactShadows

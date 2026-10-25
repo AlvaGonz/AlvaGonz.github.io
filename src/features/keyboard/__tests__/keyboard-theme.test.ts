@@ -12,9 +12,9 @@ describe('keyboard-theme', () => {
     expect(theme.keys.accent.base).toBe('#00df81'); // Caribbean Green
     expect(theme.keys.secondary.base).toBe('#17876d'); // Frog
     expect(theme.keys.shift.base).toBe('#03624c'); // Bangladesh Green
-    expect(theme.keys.modifier.base).toBe('#06302b'); // Pine
-    expect(theme.keys.function.base).toBe('#0b453a'); // Basil
-    expect(theme.keys.alphanumeric.base).toBe('#032221'); // Dark Green
+    expect(theme.keys.modifier.base).toBe('#0b453a'); // Basil
+    expect(theme.keys.function.base).toBe('#06302b'); // Pine
+    expect(theme.keys.alphanumeric.base).toBe('#f1f7f6'); // Anti-Flash White
   });
 
   it('returns curiosity theme for curiosity side', () => {
@@ -24,8 +24,10 @@ describe('keyboard-theme', () => {
     expect(theme.chassis.baseColor).toBe('#21263A'); // Night Blue-Grey
     expect(theme.keys.primary.base).toBe('#D0D34D'); // Lime Chartreuse
     expect(theme.keys.secondary.base).toBe('#157954'); // Deep Emerald
-    expect(theme.keys.accent.base).toBe('#D6D9D8'); // Cloud Grey
+    expect(theme.keys.accent.base).toBe('#f87171'); // Vivid Coral
     expect(theme.keys.shift.base).toBe('#C7CEE8'); // Periwinkle Mist
+    expect(theme.keys.modifier.base).toBe('#D6D9D8'); // Cloud Grey
+    expect(theme.keys.alphanumeric.base).toBe('#F1F5F9'); // Slate White
   });
 
   it('defaults to formal theme when side is null or undefined', () => {
