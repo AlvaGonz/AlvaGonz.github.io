@@ -10,8 +10,7 @@ import {
 import { useGitHubStats } from '@/features/github/hooks/useGitHubStats';
 import { FALLBACK_GITHUB_STATS } from '@/features/github/data/fallbackGitHubStats';
 import { LanguageIcon } from '@/components/ui/LanguageIcon';
-import { CelestialIcon } from '@/components/icons/CustomIcons';
-import { Zap, Sparkles, X, Orbit } from 'lucide-react';
+import { Brain, Zap, X, Orbit } from 'lucide-react';
 
 interface NodeData {
   id: string;
@@ -531,9 +530,9 @@ export function LanguageMindMap(): JSX.Element {
           animate={
             isPulsing
               ? {
-                scale: [1, 0.82, 1.28, 0.96, 1],
-                filter: ['brightness(1)', 'brightness(2.2)', 'brightness(1.6)', 'brightness(1)'],
-              }
+                  scale: [1, 0.82, 1.28, 0.96, 1],
+                  filter: ['brightness(1)', 'brightness(2.2)', 'brightness(1.6)', 'brightness(1)'],
+                }
               : { scale: 1 }
           }
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -542,28 +541,44 @@ export function LanguageMindMap(): JSX.Element {
           {/* Gravitational Lens Aura */}
           <div className="absolute inset-0 rounded-full bg-curiosity-primary/10 blur-2xl group-hover:bg-curiosity-primary/25 transition-colors duration-500" />
 
-          {/* Outer Accretion Disk (Lime Chartreuse) */}
-          <div
-            className="absolute inset-1 rounded-full border-4 border-t-curiosity-primary/90 border-r-transparent border-b-curiosity-accent/70 border-l-transparent animate-spin-slow blur-[1px]"
+          {/* Outer Accretion Disk (Lime Chartreuse) — Rotating Clockwise around the Core */}
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{
+              repeat: Infinity,
+              duration: 9,
+              ease: 'linear',
+            }}
+            className="absolute inset-1 rounded-full border-4 border-t-curiosity-primary/90 border-r-transparent border-b-curiosity-accent/70 border-l-transparent pointer-events-none"
             style={{
               filter: 'drop-shadow(0 0 12px rgba(208, 211, 77, 0.6))',
             }}
-          />
+          >
+            <span className="absolute top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-curiosity-primary shadow-[0_0_8px_#d0d34d]" />
+          </motion.div>
 
-          {/* Counter-rotating Inner Accretion Disk (Emerald) */}
-          <div
-            className="absolute inset-5 rounded-full border-2 border-b-curiosity-primary/80 border-l-transparent border-t-curiosity-secondary/70 border-r-transparent animate-spin-reverse-slow"
+          {/* Counter-rotating Inner Accretion Disk (Emerald & Periwinkle) */}
+          <motion.div
+            animate={{ rotate: -360 }}
+            transition={{
+              repeat: Infinity,
+              duration: 12,
+              ease: 'linear',
+            }}
+            className="absolute inset-5 rounded-full border-2 border-b-curiosity-primary/80 border-l-transparent border-t-curiosity-secondary/70 border-r-transparent pointer-events-none"
             style={{
               filter: 'drop-shadow(0 0 8px rgba(21, 121, 84, 0.7))',
             }}
-          />
+          >
+            <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-curiosity-secondary shadow-[0_0_8px_#c7cee8]" />
+          </motion.div>
 
           {/* Event Horizon Lens */}
           <div className="relative w-28 h-28 bg-[#0c0f17] rounded-full shadow-[0_0_50px_rgba(208,211,77,0.4)] border border-curiosity-secondary/20 flex flex-col items-center justify-center overflow-hidden z-20 group-hover:scale-105 group-active:scale-95 transition-transform duration-300">
             <div className="absolute inset-0 bg-gradient-to-br from-[#121624] via-curiosity-primary/10 to-[#0c0f17]" />
-            <CelestialIcon
-              size={42}
-              className="z-30 text-curiosity-primary opacity-90 group-hover:scale-110 transition-transform duration-300"
+            <Brain
+              size={44}
+              className="z-30 text-curiosity-primary opacity-90 group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_12px_rgba(208,211,77,0.5)]"
             />
           </div>
         </motion.div>
@@ -573,6 +588,9 @@ export function LanguageMindMap(): JSX.Element {
           <span className="text-xs font-mono tracking-widest text-curiosity-text-secondary group-hover:text-curiosity-primary transition-colors uppercase">
             Programming Logic
           </span>
+          <p className="text-[11px] font-curiosity-body text-curiosity-secondary/70 mt-0.5">
+            The core and foundation of it all
+          </p>
         </div>
       </div>
 
@@ -680,12 +698,12 @@ export function LanguageMindMap(): JSX.Element {
               className="bg-[#161a29]/80 backdrop-blur-md border border-curiosity-secondary/20 rounded-2xl p-4 shadow-xl pointer-events-auto"
             >
               <div className="flex items-center gap-2 mb-2 text-xs font-mono text-curiosity-primary">
-                <Sparkles className="w-3.5 h-3.5" />
+                <Brain className="w-3.5 h-3.5" />
                 <span className="uppercase tracking-wider">Galaxy Inspector</span>
               </div>
               <p className="text-xs font-curiosity-body text-curiosity-text-secondary leading-relaxed">
-                Click the central core to fire a gravitational pulse, or click any planet to lock
-                telemetry.
+                Programming logic is the core and foundation of it all. Click the central brain to
+                unleash a gravitational pulse, or select any planet to lock telemetry.
               </p>
               <div className="mt-3 flex flex-wrap gap-1.5 pt-2 border-t border-white/10">
                 {nodes.slice(0, 4).map((n) => (

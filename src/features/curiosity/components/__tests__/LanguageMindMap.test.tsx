@@ -25,8 +25,8 @@ describe('LanguageMindMap (Code Universe)', () => {
 
     expect(screen.getByText('Neon Observatory')).toBeInTheDocument();
     expect(screen.getByText('Local Archive')).toBeInTheDocument();
-    expect(screen.getByText('Singularity')).toBeInTheDocument();
-    expect(screen.getByText('Quantum Core')).toBeInTheDocument();
+    expect(screen.getByText('Programming Logic')).toBeInTheDocument();
+    expect(screen.getAllByText(/The core and foundation of it all/i).length).toBeGreaterThan(0);
     expect(screen.getByText('Pulse Core')).toBeInTheDocument();
 
     // Verify key languages are loaded
