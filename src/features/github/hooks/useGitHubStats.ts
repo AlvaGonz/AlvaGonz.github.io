@@ -1,14 +1,11 @@
 import { useState, useEffect } from 'react';
 import { fetchUserStats, fetchAllPublicRepos } from '@/lib/github-client';
+import {
+  FALLBACK_GITHUB_STATS,
+  type GitHubStatsData,
+} from '@/features/github/data/fallbackGitHubStats';
 
-interface GitHubStatsData {
-  user: {
-    publicRepos: number;
-  };
-  topLanguages: Array<{ name: string; count: number; color: string }>;
-  allLanguages: Array<{ name: string; count: number; color: string; bytes: number }>;
-  repos: any[];
-}
+export type { GitHubStatsData };
 
 const languageColors: Record<string, string> = {
   TypeScript: '#3178c6',
@@ -36,13 +33,15 @@ export const useGitHubStats = () => {
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
+    let isMounted = true;
+
     const getStats = async () => {
       try {
         setLoading(true);
         const userStats = await fetchUserStats();
         const repos = await fetchAllPublicRepos(100); // Fetch enough to get accurate language stats
 
-        if (!userStats || !repos) {
+        if (!userStats || !repos || repos.length === 0) {
           throw new Error('Failed to fetch GitHub stats or repositories.');
         }
 
@@ -67,22 +66,37 @@ export const useGitHubStats = () => {
 
         const topLanguages = sortedLanguages.slice(0, 5);
 
-        setData({
-          user: {
-            publicRepos: userStats.repositories.totalCount,
-          },
-          topLanguages,
-          allLanguages: sortedLanguages,
-          repos: repos.slice(0, 6),
-        });
+        if (isMounted) {
+          setData({
+            user: {
+              publicRepos: userStats.repositories.totalCount,
+            },
+            topLanguages,
+            allLanguages: sortedLanguages,
+            repos: repos.slice(0, 6),
+            isFallback: false,
+          });
+        }
       } catch (err) {
-        setError(err instanceof Error ? err : new Error('An unknown error occurred'));
+        if (isMounted) {
+          console.warn(
+            '[useGitHubStats] Live GitHub API unavailable (missing VITE_GITHUB_TOKEN, rate-limit, or network). Using local preview stats.',
+          );
+          setData(FALLBACK_GITHUB_STATS);
+          setError(err instanceof Error ? err : new Error('An unknown error occurred'));
+        }
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     };
 
     getStats();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return { data, loading, error };
