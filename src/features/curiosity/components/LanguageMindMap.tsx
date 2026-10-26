@@ -1,5 +1,5 @@
 // Implemented from DESIGN.md — Curiosity scope (Neon Observatory)
-import { useState, useRef, useMemo, useCallback } from 'react';
+import { useState, useRef, useMemo, useCallback, useEffect } from 'react';
 import {
   motion,
   useAnimationFrame,
@@ -10,7 +10,12 @@ import {
 import { useGitHubStats } from '@/features/github/hooks/useGitHubStats';
 import { FALLBACK_GITHUB_STATS } from '@/features/github/data/fallbackGitHubStats';
 import { LanguageIcon } from '@/components/ui/LanguageIcon';
-import { Brain, Zap, X, Orbit } from 'lucide-react';
+import { Brain, Zap, X, Orbit, Compass, Sparkles } from 'lucide-react';
+import {
+  useCelestialSky,
+  type ProjectedConstellation,
+  type ProjectedStar,
+} from '../hooks/useCelestialSky';
 
 interface NodeData {
   id: string;
@@ -97,39 +102,143 @@ const LANGUAGE_FACTS: Record<string, { fact: string; category: string }> = {
   },
 };
 
-// Deterministic static stars matching Curiosity color palette (white, periwinkle, pale chartreuse)
-const STATIC_STARS = Array.from({ length: 60 }).map((_, i) => ({
-  id: i,
-  top: `${((i * 17 + 23) % 96) + 2}%`,
-  left: `${((i * 31 + 47) % 96) + 2}%`,
-  size: ((i * 7) % 3) + 1,
-  delay: ((i * 11) % 40) / 10,
-  duration: 2.5 + ((i * 13) % 30) / 10,
-  color: i % 5 === 0 ? 'bg-[#d0d34d]' : i % 4 === 0 ? 'bg-[#c7cee8]' : 'bg-white',
-  opacity: 0.25 + ((i * 9) % 55) / 100,
-}));
+// Dynamic Celestial Sky Component rendering real astronomical constellations aligned to the date and moving slowly
+function CelestialConstellationSky({
+  constellations,
+  ambientStars,
+  hoveredConstellationId,
+  onHoverConstellation,
+}: {
+  constellations: ProjectedConstellation[];
+  ambientStars: ProjectedStar[];
+  hoveredConstellationId: string | null;
+  onHoverConstellation: (id: string | null) => void;
+}) {
+  const prefersReducedMotion =
+    typeof window !== 'undefined' &&
+    window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
 
-const Starfield = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {STATIC_STARS.map((star) => (
-        <div
-          key={star.id}
-          className={`absolute rounded-full animate-pulse ${star.color}`}
-          style={{
-            top: star.top,
-            left: star.left,
-            width: star.size,
-            height: star.size,
-            opacity: star.opacity,
-            animationDelay: `${star.delay}s`,
-            animationDuration: `${star.duration}s`,
-          }}
-        />
-      ))}
+      <svg
+        className="absolute inset-0 w-full h-full"
+        viewBox="-500 -340 1000 680"
+        preserveAspectRatio="xMidYMid slice"
+      >
+        <defs>
+          <radialGradient id="star-burst" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#ffffff" stopOpacity="0.9" />
+            <stop offset="40%" stopColor="#d0d34d" stopOpacity="0.3" />
+            <stop offset="100%" stopColor="transparent" stopOpacity="0" />
+          </radialGradient>
+        </defs>
+
+        {/* Slow celestial sidereal rotation (280s full circle) around celestial north */}
+        <motion.g
+          animate={prefersReducedMotion ? { rotate: 0 } : { rotate: 360 }}
+          transition={
+            prefersReducedMotion
+              ? { duration: 0 }
+              : { repeat: Infinity, duration: 280, ease: 'linear' }
+          }
+        >
+          {/* Ambient background stars */}
+          {ambientStars.map((star) => (
+            <circle
+              key={star.id}
+              cx={star.x}
+              cy={star.y}
+              r={star.size}
+              fill={star.color || '#ffffff'}
+              opacity={0.3 + (star.mag % 1) * 0.4}
+            />
+          ))}
+
+          {/* Constellation Asterism Lines */}
+          {constellations.map((c) => {
+            const isHovered = hoveredConstellationId === c.id;
+            return (
+              <g key={`constellation-lines-${c.id}`}>
+                {c.lines.map((line) => (
+                  <line
+                    key={line.id}
+                    x1={line.x1}
+                    y1={line.y1}
+                    x2={line.x2}
+                    y2={line.y2}
+                    stroke={isHovered ? '#d0d34d' : '#c7cee8'}
+                    strokeWidth={isHovered ? 1.5 : 0.75}
+                    strokeOpacity={isHovered ? 0.95 : 0.22}
+                    strokeDasharray={isHovered ? 'none' : '3 5'}
+                    className="transition-[stroke,stroke-width,stroke-opacity] duration-300"
+                  />
+                ))}
+              </g>
+            );
+          })}
+
+          {/* Constellation Stars and Interactive Labels */}
+          {constellations.map((c) => {
+            const isHovered = hoveredConstellationId === c.id;
+            return (
+              <g
+                key={`constellation-group-${c.id}`}
+                className="pointer-events-auto cursor-pointer"
+                onMouseEnter={() => onHoverConstellation(c.id)}
+                onMouseLeave={() => onHoverConstellation(null)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onHoverConstellation(hoveredConstellationId === c.id ? null : c.id);
+                }}
+              >
+                {/* Constellation Latin label */}
+                <text
+                  x={c.center.x}
+                  y={c.center.y - 12}
+                  textAnchor="middle"
+                  className="font-mono text-[9px] tracking-widest select-none transition-[fill,fill-opacity] duration-300 pointer-events-none"
+                  fill={isHovered ? '#d0d34d' : '#c7cee8'}
+                  fillOpacity={isHovered ? 0.95 : 0.35}
+                  fontWeight={isHovered ? 'bold' : 'normal'}
+                >
+                  {c.latinName.toUpperCase()}
+                </text>
+
+                {/* Stars belonging to this constellation */}
+                {c.stars.map((star) => {
+                  const isMajorStar = star.mag <= 1.5;
+                  return (
+                    <g key={star.id}>
+                      {/* Aura glow for prominent major navigational stars */}
+                      {isMajorStar && (
+                        <circle
+                          cx={star.x}
+                          cy={star.y}
+                          r={star.size * 2.5}
+                          fill={isHovered ? '#d0d34d' : star.color || '#ffffff'}
+                          opacity={isHovered ? 0.45 : 0.18}
+                          className="transition-opacity duration-300"
+                        />
+                      )}
+                      <circle
+                        cx={star.x}
+                        cy={star.y}
+                        r={isHovered ? star.size * 1.3 : star.size}
+                        fill={isHovered ? '#d0d34d' : star.color || '#ffffff'}
+                        opacity={isHovered ? 1 : 0.85}
+                        className="transition-[r,fill,opacity] duration-300"
+                      />
+                    </g>
+                  );
+                })}
+              </g>
+            );
+          })}
+        </motion.g>
+      </svg>
     </div>
   );
-};
+}
 
 // Orbital tracks in SVG format
 const OrbitalTracks = ({ scale = 1 }: { scale?: number }) => {
@@ -154,7 +263,7 @@ const OrbitalTracks = ({ scale = 1 }: { scale?: number }) => {
           stroke="#c7cee8"
           strokeWidth="1"
           strokeDasharray="4 8"
-          className="transition-all"
+          className="transition-[r] duration-500"
         />
       ))}
     </svg>
@@ -206,14 +315,15 @@ function Planet({
     }
   });
 
+  const visualRadius = node.r * (scaleFactor < 0.75 ? 0.78 : 1);
   const effectiveRadius = node.radius * scaleFactor;
   const x = useTransform([angle, radiusOffset], (values) => {
     const [a, rOff] = values as number[];
-    return Math.cos(a) * (effectiveRadius + rOff) - node.r;
+    return Math.cos(a) * (effectiveRadius + rOff) - visualRadius;
   });
   const y = useTransform([angle, radiusOffset], (values) => {
     const [a, rOff] = values as number[];
-    return Math.sin(a) * (effectiveRadius + rOff) - node.r;
+    return Math.sin(a) * (effectiveRadius + rOff) - visualRadius;
   });
 
   return (
@@ -235,7 +345,7 @@ function Planet({
         e.stopPropagation();
         onSelect(node);
       }}
-      className="absolute rounded-full cursor-pointer flex items-center justify-center group focus:outline-none"
+      className="absolute rounded-full cursor-pointer flex items-center justify-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-curiosity-primary min-w-[44px] min-h-[44px]"
       role="button"
       tabIndex={0}
       aria-label={`Inspect ${node.name} telemetry (${node.percentage}%)`}
@@ -258,8 +368,8 @@ function Planet({
 
       <div
         style={{
-          width: node.r * 2,
-          height: node.r * 2,
+          width: visualRadius * 2,
+          height: visualRadius * 2,
           backgroundColor: '#161a29',
           border: `2px solid ${node.color}`,
           boxShadow: isSelected
@@ -310,6 +420,46 @@ export function LanguageMindMap(): JSX.Element {
   const [shockwaveTime, setShockwaveTime] = useState<number>(0);
   const [isPulsing, setIsPulsing] = useState<boolean>(false);
   const [sparks, setSparks] = useState<Spark[]>([]);
+
+  // Measure container width for responsive scaling of orbits and planetary bodies on mobile
+  const [containerWidth, setContainerWidth] = useState<number>(1000);
+
+  useEffect(() => {
+    const updateWidth = () => {
+      if (containerRef.current) {
+        setContainerWidth(containerRef.current.clientWidth);
+      } else if (typeof window !== 'undefined') {
+        setContainerWidth(window.innerWidth);
+      }
+    };
+
+    updateWidth();
+    window.addEventListener('resize', updateWidth);
+    return () => window.removeEventListener('resize', updateWidth);
+  }, []);
+
+  const scaleFactor = useMemo(() => {
+    if (containerWidth < 380) return 0.52;
+    if (containerWidth < 480) return 0.62;
+    if (containerWidth < 640) return 0.74;
+    if (containerWidth < 768) return 0.88;
+    return 1;
+  }, [containerWidth]);
+
+  // Astronomical sky tracking real constellations moving slowly for current day
+  const {
+    todayFormatted,
+    isLiveFetched,
+    constellations,
+    ambientStars,
+    hoveredConstellationId,
+    selectConstellation,
+  } = useCelestialSky(undefined, Math.max(200, 340 * scaleFactor));
+
+  const activeConstellation = useMemo(() => {
+    if (!hoveredConstellationId) return null;
+    return constellations.find((c) => c.id === hoveredConstellationId) || null;
+  }, [constellations, hoveredConstellationId]);
 
   // Choose active dataset: live data if available, fallback data for local dev / preview
   const activeDataset = useMemo(() => {
@@ -381,55 +531,83 @@ export function LanguageMindMap(): JSX.Element {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-[620px] md:h-[680px] rounded-3xl overflow-hidden border border-curiosity-secondary/20 shadow-2xl select-none"
+      className="relative w-full h-[580px] sm:h-[620px] md:h-[680px] rounded-2xl sm:rounded-3xl overflow-hidden border border-curiosity-secondary/20 shadow-2xl select-none"
       style={{
         background:
           'radial-gradient(circle at 50% 50%, rgba(208, 211, 77, 0.07) 0%, rgba(21, 121, 84, 0.12) 32%, rgba(33, 38, 58, 0.88) 65%, #151928 100%)',
       }}
       onClick={() => setSelectedNode(null)}
     >
-      {/* Background Starfield */}
-      <Starfield />
+      {/* Background Celestial Stars & Constellations moving slowly at sidereal speed */}
+      <CelestialConstellationSky
+        constellations={constellations}
+        ambientStars={ambientStars}
+        hoveredConstellationId={hoveredConstellationId}
+        onHoverConstellation={selectConstellation}
+      />
 
       {/* Orbital Guides */}
-      <OrbitalTracks scale={1} />
+      <OrbitalTracks scale={scaleFactor} />
 
       {/* Top Observatory Control Bar */}
-      <div className="absolute top-5 left-6 right-6 z-40 flex items-center justify-between pointer-events-none">
-        <div className="flex items-center gap-2.5 bg-[#161a29]/80 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-curiosity-secondary/20 shadow-sm pointer-events-auto">
-          <span className="w-2 h-2 rounded-full bg-curiosity-primary animate-pulse" />
-          <span className="text-xs font-mono text-curiosity-text uppercase tracking-wider">
+      <div className="absolute top-3 left-3 right-3 sm:top-5 sm:left-6 sm:right-6 z-40 flex items-center justify-between gap-1.5 sm:gap-2 pointer-events-none">
+        <div className="flex items-center gap-1.5 sm:gap-2.5 bg-[#161a29]/85 backdrop-blur-md px-2.5 py-1 sm:px-3.5 sm:py-1.5 rounded-full border border-curiosity-secondary/20 shadow-sm pointer-events-auto">
+          <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-curiosity-primary animate-pulse" />
+          <span className="text-[11px] sm:text-xs font-mono text-curiosity-text uppercase tracking-wider">
             Neon Observatory
           </span>
-          <span className="text-[10px] font-mono text-curiosity-text-secondary border-l border-white/10 pl-2">
-            RA 14h 29m // DEC -62°40'
+          <span className="text-[10px] font-mono text-curiosity-text-secondary border-l border-white/10 pl-2 hidden md:inline">
+            Sky {todayFormatted} // RA 14h 29m // DEC -62°40'
+          </span>
+          <span className="text-[10px] font-mono text-curiosity-text-secondary border-l border-white/10 pl-1.5 inline md:hidden">
+            {todayFormatted}
           </span>
         </div>
 
-        <div className="flex items-center gap-2 pointer-events-auto">
+        <div className="flex items-center gap-1.5 sm:gap-2 pointer-events-auto">
           <button
             type="button"
             onClick={(e) => {
               e.stopPropagation();
               triggerShockwave();
             }}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono bg-curiosity-primary/10 hover:bg-curiosity-primary/20 text-curiosity-primary border border-curiosity-primary/30 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-curiosity-primary/50"
+            aria-label="Pulse Core"
+            className="flex items-center gap-1 sm:gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-mono bg-curiosity-primary/10 hover:bg-curiosity-primary/20 text-curiosity-primary border border-curiosity-primary/30 transition-colors shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-curiosity-primary"
             title="Unleash cosmic gravitational pulse"
           >
-            <Zap className="w-3.5 h-3.5" />
-            <span>Pulse Core</span>
+            <Zap className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+            <span className="hidden xs:inline">Pulse Core</span>
+            <span className="inline xs:hidden">Pulse</span>
           </button>
+
+          {isLiveFetched ? (
+            <span
+              className="text-[9px] sm:text-[10px] font-mono px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-curiosity-primary/15 text-curiosity-primary border border-curiosity-primary/30 hidden xs:flex items-center gap-1"
+              title="Real constellation geometry synchronized from web ephemeris"
+            >
+              <Sparkles className="w-2.5 h-2.5" />
+              <span>Live Web Sky</span>
+            </span>
+          ) : (
+            <span
+              className="text-[9px] sm:text-[10px] font-mono px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-curiosity-secondary/10 text-curiosity-secondary border border-curiosity-secondary/30 hidden xs:flex items-center gap-1"
+              title={`Astronomical constellations calculated for today (${todayFormatted})`}
+            >
+              <Compass className="w-2.5 h-2.5" />
+              <span>Sky ({todayFormatted})</span>
+            </span>
+          )}
 
           {data?.isFallback !== false ? (
             <span
-              className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-curiosity-secondary/10 text-curiosity-secondary border border-curiosity-secondary/30"
+              className="text-[9px] sm:text-[10px] font-mono px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-curiosity-secondary/10 text-curiosity-secondary border border-curiosity-secondary/30"
               title="Running with curated local telemetry archive (activates live GitHub sync when VITE_GITHUB_TOKEN is configured)"
             >
               Local Archive
             </span>
           ) : (
             <span
-              className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-curiosity-accent/20 text-curiosity-text border border-curiosity-accent/40"
+              className="text-[9px] sm:text-[10px] font-mono px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-curiosity-accent/20 text-curiosity-text border border-curiosity-accent/40"
               title="Synchronized live with GitHub GraphQL API"
             >
               GitHub Live
@@ -437,6 +615,31 @@ export function LanguageMindMap(): JSX.Element {
           )}
         </div>
       </div>
+
+      {/* Floating Constellation Telemetry Card */}
+      <AnimatePresence>
+        {activeConstellation && (
+          <motion.div
+            initial={{ opacity: 0, y: -8, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -8, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+            className="absolute top-14 sm:top-16 left-1/2 -translate-x-1/2 z-30 w-[calc(100%-1.5rem)] max-w-sm bg-[#161a29]/95 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-curiosity-primary/40 shadow-xl pointer-events-auto text-center"
+          >
+            <div className="flex items-center gap-2 justify-center text-xs font-mono text-curiosity-primary">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span className="font-bold">{activeConstellation.latinName}</span>
+              <span className="text-curiosity-text-secondary">({activeConstellation.name})</span>
+            </div>
+            <p className="text-[10px] sm:text-[11px] font-curiosity-body text-curiosity-secondary/90 mt-0.5 max-w-sm">
+              {activeConstellation.description} Brightest:{' '}
+              <span className="text-white font-mono font-medium">
+                {activeConstellation.brightestStar}
+              </span>
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Dynamic Gravitational Wave Pulses */}
       <AnimatePresence>
@@ -511,7 +714,7 @@ export function LanguageMindMap(): JSX.Element {
 
       {/* Singularity Core (Clickable Black Hole Engine) */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center justify-center cursor-pointer group focus:outline-none"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center justify-center cursor-pointer group focus:outline-none focus-visible:ring-2 focus-visible:ring-curiosity-primary rounded-full p-1"
         onClick={(e) => {
           e.stopPropagation();
           triggerShockwave();
@@ -530,13 +733,13 @@ export function LanguageMindMap(): JSX.Element {
           animate={
             isPulsing
               ? {
-                  scale: [1, 0.82, 1.28, 0.96, 1],
-                  filter: ['brightness(1)', 'brightness(2.2)', 'brightness(1.6)', 'brightness(1)'],
-                }
+                scale: [1, 0.82, 1.28, 0.96, 1],
+                filter: ['brightness(1)', 'brightness(2.2)', 'brightness(1.6)', 'brightness(1)'],
+              }
               : { scale: 1 }
           }
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-44 h-44 flex items-center justify-center"
+          className="relative w-32 h-32 sm:w-44 sm:h-44 flex items-center justify-center"
         >
           {/* Gravitational Lens Aura */}
           <div className="absolute inset-0 rounded-full bg-curiosity-primary/10 blur-2xl group-hover:bg-curiosity-primary/25 transition-colors duration-500" />
@@ -549,7 +752,7 @@ export function LanguageMindMap(): JSX.Element {
               duration: 9,
               ease: 'linear',
             }}
-            className="absolute inset-1 rounded-full border-4 border-t-curiosity-primary/90 border-r-transparent border-b-curiosity-accent/70 border-l-transparent pointer-events-none"
+            className="absolute inset-0 sm:inset-1 rounded-full border-2 sm:border-4 border-t-curiosity-primary/90 border-r-transparent border-b-curiosity-accent/70 border-l-transparent pointer-events-none"
             style={{
               filter: 'drop-shadow(0 0 12px rgba(208, 211, 77, 0.6))',
             }}
@@ -565,7 +768,7 @@ export function LanguageMindMap(): JSX.Element {
               duration: 12,
               ease: 'linear',
             }}
-            className="absolute inset-5 rounded-full border-2 border-b-curiosity-primary/80 border-l-transparent border-t-curiosity-secondary/70 border-r-transparent pointer-events-none"
+            className="absolute inset-3 sm:inset-5 rounded-full border sm:border-2 border-b-curiosity-primary/80 border-l-transparent border-t-curiosity-secondary/70 border-r-transparent pointer-events-none"
             style={{
               filter: 'drop-shadow(0 0 8px rgba(21, 121, 84, 0.7))',
             }}
@@ -574,21 +777,18 @@ export function LanguageMindMap(): JSX.Element {
           </motion.div>
 
           {/* Event Horizon Lens */}
-          <div className="relative w-28 h-28 bg-[#0c0f17] rounded-full shadow-[0_0_50px_rgba(208,211,77,0.4)] border border-curiosity-secondary/20 flex flex-col items-center justify-center overflow-hidden z-20 group-hover:scale-105 group-active:scale-95 transition-transform duration-300">
+          <div className="relative w-20 h-20 sm:w-28 sm:h-28 bg-[#0c0f17] rounded-full shadow-[0_0_40px_rgba(208,211,77,0.35)] sm:shadow-[0_0_50px_rgba(208,211,77,0.4)] border border-curiosity-secondary/20 flex flex-col items-center justify-center overflow-hidden z-20 group-hover:scale-105 group-active:scale-95 transition-transform duration-300">
             <div className="absolute inset-0 bg-gradient-to-br from-[#121624] via-curiosity-primary/10 to-[#0c0f17]" />
-            <Brain
-              size={44}
-              className="z-30 text-curiosity-primary opacity-90 group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_12px_rgba(208,211,77,0.5)]"
-            />
+            <Brain className="w-8 h-8 sm:w-11 sm:h-11 z-30 text-curiosity-primary opacity-90 group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_12px_rgba(208,211,77,0.5)]" />
           </div>
         </motion.div>
 
         {/* Core Prompt */}
-        <div className="mt-3 text-center">
-          <span className="text-xs font-mono tracking-widest text-curiosity-text-secondary group-hover:text-curiosity-primary transition-colors uppercase">
+        <div className="mt-2 sm:mt-3 text-center px-2">
+          <span className="text-[10px] sm:text-xs font-mono tracking-widest text-curiosity-text-secondary group-hover:text-curiosity-primary transition-colors uppercase">
             Programming Logic
           </span>
-          <p className="text-[11px] font-curiosity-body text-curiosity-secondary/70 mt-0.5">
+          <p className="text-[10px] sm:text-[11px] font-curiosity-body text-curiosity-secondary/70 mt-0.5">
             The core and foundation of it all
           </p>
         </div>
@@ -604,13 +804,14 @@ export function LanguageMindMap(): JSX.Element {
               onSelect={setSelectedNode}
               isSelected={selectedNode?.id === node.id}
               shockwaveTime={shockwaveTime}
+              scaleFactor={scaleFactor}
             />
           </div>
         ))}
       </div>
 
       {/* Telemetry Inspector HUD */}
-      <div className="absolute bottom-6 left-6 z-40 max-w-sm pointer-events-none">
+      <div className="absolute bottom-3 left-3 right-3 sm:bottom-6 sm:left-6 sm:right-auto sm:max-w-sm z-40 pointer-events-none">
         <AnimatePresence mode="wait">
           {activeInspectorNode ? (
             <motion.div
@@ -619,12 +820,12 @@ export function LanguageMindMap(): JSX.Element {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 16, scale: 0.95 }}
               transition={{ duration: 0.2 }}
-              className="bg-[#161a29]/90 backdrop-blur-xl border border-curiosity-secondary/30 rounded-2xl p-5 shadow-2xl pointer-events-auto"
+              className="bg-[#161a29]/92 backdrop-blur-xl border border-curiosity-secondary/30 rounded-2xl p-3.5 sm:p-5 shadow-2xl pointer-events-auto"
             >
-              <div className="flex items-start justify-between gap-3 mb-3">
-                <div className="flex items-center gap-3">
+              <div className="flex items-start justify-between gap-3 mb-2.5 sm:mb-3">
+                <div className="flex items-center gap-2.5 sm:gap-3">
                   <div
-                    className="w-12 h-12 rounded-xl p-2 border flex items-center justify-center shadow-inner"
+                    className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl p-1.5 sm:p-2 border flex items-center justify-center shadow-inner"
                     style={{
                       borderColor: `${activeInspectorNode.color}60`,
                       backgroundColor: `${activeInspectorNode.color}15`,
@@ -633,10 +834,10 @@ export function LanguageMindMap(): JSX.Element {
                     <LanguageIcon language={activeInspectorNode.name} />
                   </div>
                   <div>
-                    <h3 className="text-lg font-curiosity-display text-white font-semibold leading-tight">
+                    <h3 className="text-base sm:text-lg font-curiosity-display text-white font-semibold leading-tight">
                       {activeInspectorNode.name}
                     </h3>
-                    <span className="text-xs font-mono text-curiosity-text-secondary">
+                    <span className="text-[11px] sm:text-xs font-mono text-curiosity-text-secondary">
                       {activeInspectorNode.category}
                     </span>
                   </div>
@@ -657,15 +858,15 @@ export function LanguageMindMap(): JSX.Element {
                 )}
               </div>
 
-              <div className="space-y-3">
+              <div className="space-y-2 sm:space-y-3">
                 <div>
-                  <div className="flex justify-between items-center text-xs font-mono mb-1">
+                  <div className="flex justify-between items-center text-[11px] sm:text-xs font-mono mb-1">
                     <span className="text-curiosity-text-secondary">Codebase Share</span>
                     <span className="text-curiosity-primary font-bold">
                       {activeInspectorNode.percentage}%
                     </span>
                   </div>
-                  <div className="w-full bg-white/10 rounded-full h-2 overflow-hidden">
+                  <div className="w-full bg-white/10 rounded-full h-1.5 sm:h-2 overflow-hidden">
                     <motion.div
                       initial={{ width: 0 }}
                       animate={{ width: `${Math.max(activeInspectorNode.percentage, 4)}%` }}
@@ -675,15 +876,15 @@ export function LanguageMindMap(): JSX.Element {
                   </div>
                 </div>
 
-                <div className="flex justify-between items-center text-xs font-mono pt-2 border-t border-white/10">
+                <div className="flex justify-between items-center text-[11px] sm:text-xs font-mono pt-1.5 sm:pt-2 border-t border-white/10">
                   <span className="text-curiosity-text-secondary">Volume</span>
                   <span className="text-white">
                     {(activeInspectorNode.bytes / 1024).toFixed(1)} KB
                   </span>
                 </div>
 
-                <div className="pt-2 border-t border-white/10">
-                  <p className="text-xs font-curiosity-body text-curiosity-text-secondary leading-relaxed italic">
+                <div className="pt-1.5 sm:pt-2 border-t border-white/10">
+                  <p className="text-[11px] sm:text-xs font-curiosity-body text-curiosity-text-secondary leading-relaxed italic line-clamp-2 sm:line-clamp-none">
                     "{activeInspectorNode.fact}"
                   </p>
                 </div>
@@ -695,17 +896,17 @@ export function LanguageMindMap(): JSX.Element {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="bg-[#161a29]/80 backdrop-blur-md border border-curiosity-secondary/20 rounded-2xl p-4 shadow-xl pointer-events-auto"
+              className="bg-[#161a29]/85 backdrop-blur-md border border-curiosity-secondary/20 rounded-2xl p-3 sm:p-4 shadow-xl pointer-events-auto"
             >
-              <div className="flex items-center gap-2 mb-2 text-xs font-mono text-curiosity-primary">
+              <div className="flex items-center gap-2 mb-1.5 sm:mb-2 text-xs font-mono text-curiosity-primary">
                 <Brain className="w-3.5 h-3.5" />
-                <span className="uppercase tracking-wider">Galaxy Inspector</span>
+                <span className="uppercase tracking-wider">Programming Galaxy Inspector</span>
               </div>
-              <p className="text-xs font-curiosity-body text-curiosity-text-secondary leading-relaxed">
-                Programming logic is the core and foundation of it all. Click the central brain to
-                unleash a gravitational pulse, or select any planet to lock telemetry.
+              <p className="text-[11px] sm:text-xs font-curiosity-body text-curiosity-text-secondary leading-relaxed">
+                Programming logic is the core and foundation of it all. Background stars mimic real
+                constellations positioned according to today's date ({todayFormatted}).
               </p>
-              <div className="mt-3 flex flex-wrap gap-1.5 pt-2 border-t border-white/10">
+              <div className="mt-2.5 sm:mt-3 flex flex-wrap gap-1 sm:gap-1.5 pt-2 border-t border-white/10">
                 {nodes.slice(0, 4).map((n) => (
                   <button
                     key={n.id}
@@ -714,7 +915,7 @@ export function LanguageMindMap(): JSX.Element {
                       e.stopPropagation();
                       setSelectedNode(n);
                     }}
-                    className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white flex items-center gap-1 transition-colors"
+                    className="text-[10px] sm:text-[11px] font-mono px-2 py-0.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white flex items-center gap-1 transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-curiosity-primary/60"
                   >
                     <span
                       className="w-1.5 h-1.5 rounded-full"
@@ -734,9 +935,6 @@ export function LanguageMindMap(): JSX.Element {
         <p className="text-xs font-mono text-curiosity-secondary/70">
           <Orbit className="w-3.5 h-3.5 inline mr-1 text-curiosity-primary" />
           {nodes.length} Planetary Bodies in Orbit
-        </p>
-        <p className="text-[11px] font-curiosity-body text-curiosity-text-secondary/60">
-          Interactive WebGL-free CSS/Canvas Simulation
         </p>
       </div>
     </div>

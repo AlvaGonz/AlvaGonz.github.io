@@ -76,4 +76,36 @@ describe('LanguageMindMap (Code Universe)', () => {
 
     expect(screen.queryByTitle('Release target lock')).not.toBeInTheDocument();
   });
+
+  it('renders real astronomical constellations and sidereal sky telemetry for current date', () => {
+    render(<LanguageMindMap />);
+
+    // Sidereal sky header with date should be present
+    expect(screen.getByText(/Sky.*RA 14h 29m/i)).toBeInTheDocument();
+
+    // Check that real constellation labels are rendered in the celestial vault
+    expect(screen.getAllByText(/URSA MAJOR/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/ORION/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/CASSIOPEIA/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/CYGNUS/i).length).toBeGreaterThan(0);
+
+    // Verify footer indicates active constellations
+    expect(screen.getByText(/Real Constellations.*Sidereal Sky/i)).toBeInTheDocument();
+  });
+
+  it('displays constellation telemetry when a constellation button is clicked', () => {
+    render(<LanguageMindMap />);
+
+    // Find and click Orion constellation spotlight button in Galaxy Inspector HUD
+    const orionButtons = screen.getAllByRole('button', { name: /Orion/i });
+    expect(orionButtons.length).toBeGreaterThan(0);
+
+    act(() => {
+      fireEvent.click(orionButtons[0]);
+    });
+
+    // Constellation telemetry card should appear with lore and brightest star
+    expect(screen.getByText(/Orion the Hunter/i)).toBeInTheDocument();
+    expect(screen.getByText(/Rigel/i)).toBeInTheDocument();
+  });
 });
