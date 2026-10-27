@@ -25,8 +25,6 @@ jobs:
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 12
 
       - name: Install Node.js
         uses: actions/setup-node@v4
@@ -36,6 +34,11 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Validate Type Safety & Tests
+        run: |
+          pnpm type-check
+          pnpm test -- --run
 
       - name: Fetch Duolingo stats
         run: pnpm fetch-duolingo
