@@ -5,7 +5,7 @@ import {
   duolingoApiUrl,
   mapDuolingoUser,
   type DuolingoApiUser,
-} from '../src/lib/duolingo';
+} from '../src/features/duolingo/api';
 
 const OUTPUT_PATH = join(process.cwd(), 'src', 'data', 'generated', 'duolingo.json');
 const MAX_ATTEMPTS = 3;

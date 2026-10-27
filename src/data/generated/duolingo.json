@@ -1,8 +1,8 @@
 {
   "username": "AlvaGonz",
   "userId": 478388255,
-  "streak": 776,
-  "totalXp": 72937,
+  "streak": 779,
+  "totalXp": 73034,
   "learningLanguage": "pt",
   "avatar": "https://d3gq3s1iyyx31w.cloudfront.net/static/render/bg/BackgroundColor-13/Body-1/ClothingColor-3/CostumeArtboard-14/Expression-1/EyeColor-1/FacialHair-4/FacialHairColor-1/Glasses-1/GlassesColor-7/HasCostume-0/Headwear-0/HeadwearColor-1/MainHair-57/MainHairColor-1/Nose%20Piercing-0/Piercings-0/SkinTone-8/Wrinkles-0/xxlarge",
   "courses": [
@@ -15,7 +15,7 @@
     {
       "title": "Portuguese",
       "learningLanguage": "pt",
-      "xp": 15584,
+      "xp": 15681,
       "level": "B2"
     },
     {
@@ -32,11 +32,5 @@
     }
   ],
   "motivation": "brain",
-  "lastUpdated": "2026-10-25T01:12:27.883Z",
-  "activity": {
-    "windowDays": 30,
-    "totalXp": 818,
-    "activeDays": 29,
-    "streakExtendedDays": 29
-  }
+  "lastUpdated": "2026-10-27T01:07:51.322Z"
 }

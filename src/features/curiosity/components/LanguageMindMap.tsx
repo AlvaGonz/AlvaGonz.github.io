@@ -733,9 +733,9 @@ export function LanguageMindMap(): JSX.Element {
           animate={
             isPulsing
               ? {
-                scale: [1, 0.82, 1.28, 0.96, 1],
-                filter: ['brightness(1)', 'brightness(2.2)', 'brightness(1.6)', 'brightness(1)'],
-              }
+                  scale: [1, 0.82, 1.28, 0.96, 1],
+                  filter: ['brightness(1)', 'brightness(2.2)', 'brightness(1.6)', 'brightness(1)'],
+                }
               : { scale: 1 }
           }
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -925,6 +925,22 @@ export function LanguageMindMap(): JSX.Element {
                   </button>
                 ))}
               </div>
+              <div className="mt-2 flex flex-wrap gap-1 sm:gap-1.5 pt-1.5 border-t border-white/10">
+                {constellations.slice(0, 4).map((c) => (
+                  <button
+                    key={c.id}
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      selectConstellation(c.id);
+                    }}
+                    className="text-[10px] sm:text-[11px] font-mono px-2 py-0.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white flex items-center gap-1 transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-curiosity-primary/60"
+                  >
+                    <Compass className="w-2.5 h-2.5 text-curiosity-primary" />
+                    <span>{c.latinName}</span>
+                  </button>
+                ))}
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -935,6 +951,9 @@ export function LanguageMindMap(): JSX.Element {
         <p className="text-xs font-mono text-curiosity-secondary/70">
           <Orbit className="w-3.5 h-3.5 inline mr-1 text-curiosity-primary" />
           {nodes.length} Planetary Bodies in Orbit
+        </p>
+        <p className="text-[11px] font-curiosity-body text-curiosity-text-secondary/60">
+          Real Constellations · Sidereal Sky
         </p>
       </div>
     </div>

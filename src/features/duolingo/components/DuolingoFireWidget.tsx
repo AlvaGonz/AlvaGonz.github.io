@@ -4,7 +4,7 @@ import './DuolingoFireWidget.css';
 import duolingoData from '../../../data/generated/duolingo.json';
 import type { DuolingoStats } from '../types';
 
-const stats = duolingoData as DuolingoStats;
+const stats = duolingoData as unknown as DuolingoStats;
 const primaryLevel =
   stats.courses.find((course) => course.learningLanguage === stats.learningLanguage)?.level ??
   stats.courses[0]?.level ??

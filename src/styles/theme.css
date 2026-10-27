@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Notable&display=swap');
 
-
 /* Primary Colors from Palette 1 */
 :root {
   --c-primary-rich-black: #002f1a;
@@ -73,7 +72,7 @@
   --theme-text: var(--c-curiosity-text);
   --theme-text-secondary: var(--c-curiosity-text-secondary);
   --theme-border: rgba(199, 206, 232, 0.2);
-  
+
   font-family: var(--font-curiosity-body);
 }
 
@@ -138,7 +137,6 @@ html {
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   *,
   *::before,
   *::after {

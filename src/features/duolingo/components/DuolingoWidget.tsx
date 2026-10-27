@@ -3,7 +3,7 @@ import duolingoData from '../../../data/generated/duolingo.json';
 import type { DuolingoStats } from '../types';
 
 export function DuolingoWidget() {
-  const stats = duolingoData as DuolingoStats;
+  const stats = duolingoData as unknown as DuolingoStats;
   const english = stats.courses.find((course) => course.learningLanguage === 'en');
 
   if (!english) return null;

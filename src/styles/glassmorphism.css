@@ -39,7 +39,6 @@
 
 /* Fallbacks for browsers without backdrop-filter */
 @supports not (backdrop-filter: blur(1px)) {
-
   .glass,
   .glass-frosted {
     background: rgba(255, 255, 255, 0.9);
