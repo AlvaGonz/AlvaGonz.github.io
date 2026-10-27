@@ -35,16 +35,18 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
+
+      - name: Validate Type Safety & Tests
+        run: |
+          pnpm type-check
+          pnpm test -- --run
 
       - name: Fetch Duolingo stats
         run: pnpm fetch-duolingo
 
       - name: Build
         run: pnpm build
-        env:
-          VITE_GITHUB_TOKEN: ${{ secrets.VITE_GITHUB_TOKEN }}
-          VITE_GA_TRACKING_ID: ${{ secrets.VITE_GA_TRACKING_ID }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
